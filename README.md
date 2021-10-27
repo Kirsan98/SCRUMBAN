@@ -1,2 +1,2 @@
 # SCRUMBAN
-Créer une application web déstiné à la gestion de projet en ligne en mode SCRUMBAN 
+Créer une application web destinée à la gestion de projet en ligne en mode SCRUMBAN 
