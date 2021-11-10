@@ -1,0 +1,73 @@
+{
+  "Projets": [
+    {
+      "projet 1 (id proj)": {
+        "numero ID": "id1",
+        "titre": "eirbverf",
+        "date creation": "20/20/2020",
+        "liste sprints": [
+          {
+            "id sprint": "id sprint",
+            "date debut": "20/20/2020",
+            "date fin": "21/21/2021",
+            "liste taches": [
+              "id tache 1",
+              "id tache 2"
+            ],
+            "liste colonnes": [
+              {
+                "id colonne": "numero id",
+                "titre": "nom colonne",
+                "liste tache": [
+                  "id tache 1",
+                  "id tache 2"
+                ],
+                "ordre": "numero priorité",
+                "nb max tache": "2"
+              }
+            ],
+            "planning daily": [
+              "pop up pour alerter l'equipe que le daily scrum va avoir lieu"
+            ],
+            "nom": "nom sprint",
+            "nb max colonnes": "3"
+          },
+          {}
+        ],
+        "liste user": [
+          {
+            "users 1": "userid1"
+          },
+          {
+            "users 2": "users id 2"
+          }
+        ],
+        "Product backlog (taches)": [
+          {
+            "titre": "nom tache",
+            "couleur": "couleur tache",
+            "description": "eiyrfeoner",
+            "assignation": "user id",
+            "date creation": "20/20/2020",
+            "estimatioin": "5 jours",
+            "log changement colonnes": "yuezfif"
+          },
+          {}
+        ]
+      }
+    },
+    {
+      "projet 2": {}
+    }
+  ],
+  "Users": [
+    {
+      "numero id": "user id",
+      "nom": "ubolef",
+      "prenom": "zleeiifbeozb",
+      "mail": "erlfbe",
+      "mdp": "*********",
+      "user name": "kerube"
+    }
+  ]
+}
