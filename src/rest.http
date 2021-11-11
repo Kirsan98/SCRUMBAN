@@ -1,0 +1,34 @@
+### Default URL
+GET http://localhost:5000/
+
+### Default API URL
+GET http://localhost:5000/api/
+
+### getAllUser API URL
+GET http://localhost:5000/api/users/
+
+### getUserById API URL
+GET http://localhost:5000/api/user/618d66474ae5b330a9331d7c
+
+### Default updateUser URL
+PUT http://localhost:5000/api/updateUser/618d66474ae5b330a9331d7c
+content-type: application/json
+
+{
+    "first_name": "Jules"
+}
+
+### addUser API URL
+POST http://localhost:5000/api/addUser/
+content-type: application/json
+
+{
+    "first_name": "Contact Added",
+    "last_name": "Test",
+    "email": "sait-kik@hotmail.com",
+    "username": "Test",
+    "password": "test2"
+}
+
+### Default removeContact URL
+DELETE http://localhost:5000/api/removeUser/618d66474ae5b330a9331d7c
