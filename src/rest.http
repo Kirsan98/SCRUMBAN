@@ -11,7 +11,7 @@ GET http://localhost:5000/api/users/
 GET http://localhost:5000/api/user/618d66474ae5b330a9331d7c
 
 ### Default updateUser URL
-PUT http://localhost:5000/api/updateUser/618d66474ae5b330a9331d7c
+PUT http://localhost:5000/api/updateUser/618d6fcde8bdae86415cad58
 content-type: application/json
 
 {
