@@ -1,9 +1,9 @@
-//-------------------Board schema----------------------------------//
+//-------------------Project schema----------------------------------//
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 // created schema for Board
-const boardSchema = new Schema({
+const projectSchema = new Schema({
   title: {type: String, required: true},
   created_at: {Date, default: Date.now},
   updated_at: Date,
@@ -12,6 +12,6 @@ const boardSchema = new Schema({
   _sprints: [{type: mongoose.Schema.Types.ObjectId, ref:'Sprint'}]
 });
 
-const Board = mongoose.model('Board', boardSchema);
+const Board = mongoose.model('Project', boardSchema);
 
-module.exports = Board;
+module.exports = Project;

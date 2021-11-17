@@ -8,7 +8,7 @@ GET http://localhost:5000/api/
 GET http://localhost:5000/api/users/
 
 ### getUserById API URL
-GET http://localhost:5000/api/user/618d66474ae5b330a9331d7c
+GET http://localhost:5000/api/user/618d6fcde8bdae86415cad58
 
 ### Default updateUser URL
 PUT http://localhost:5000/api/updateUser/618d6fcde8bdae86415cad58
