@@ -66,3 +66,35 @@ content-type: application/json
 
 ### Default removeColumn URL
 DELETE http://localhost:5000/api/removeColumn/6195122b3c5dd1819f182277
+
+//***** LOG *****//
+
+### getAllLog API URL
+GET http://localhost:5000/api/logs/
+
+### getLogById API URL
+GET http://localhost:5000/api/log/61951d853d935eb947113033
+
+### addLog API URL
+POST http://localhost:5000/api/addLog/
+content-type: application/json
+
+{
+    "_userId": "618d6fcde8bdae86415cad58",
+    "_columnIdStart": "61951d1d3d935eb947113029",
+    "_columnIdEnd": "61951d4a3d935eb94711302d",
+    "updated_at": "2020-11-17"
+}
+
+### Default updateLog URL
+PUT http://localhost:5000/api/updateLog/61951d853d935eb947113033
+content-type: application/json
+
+{
+    "_columnIdStart": "61951d4a3d935eb94711302d",
+    "_columnIdEnd": "61951d1d3d935eb947113029",
+    "updated_at": "2020-11-18"
+}
+
+### Default removeLog URL
+DELETE http://localhost:5000/api/removeLog/61951d853d935eb947113033

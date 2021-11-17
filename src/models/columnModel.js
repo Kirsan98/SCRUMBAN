@@ -10,6 +10,6 @@ const columnSchema = new Schema({
   _tasks: [{type: mongoose.Schema.Types.ObjectId, ref:'Task'}],
 });
 
-const Column = mongoose.model('Project', columnSchema);
+const Column = mongoose.model('Column', columnSchema);
 
 module.exports = Column;
