@@ -31,7 +31,12 @@ const TaskSchema = new Schema({
   estimated_duration: {
     type: String,
   },
-  // columns_log: //TODO
+  _logs: [
+    {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref:'Log'
+    },
+  ]
 });
 
 const Task = mongoose.model('Task', TaskSchema);

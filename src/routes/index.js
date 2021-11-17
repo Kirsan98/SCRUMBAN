@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { getAllUsers, getUserById, updateUser, removeUser, addUser } = require('../controllers/userController');
 const { getAllColumns, getColumnById, updateColumn, removeColumn, addColumn } = require('../controllers/columnController');
+const { getAllLogs, getLogById, updateLog, removeLog, addLog } = require('../controllers/logController');
 
 router.get('/', function (req, res) {
     res.status(200).json({
@@ -94,6 +95,52 @@ router.route('/updateColumn/:id').put(async (req, res) => {
 
 router.route('/removeColumn/:id').delete(async (req, res) => {
     let response = await removeColumn(req.params.id);
+    if (response.success == true) {
+        res.status(200).json(response);
+    } else {
+        res.status(404).json(response);
+    }
+});
+
+// LOG // 
+router.route('/logs').get(async (req, res) => {
+    let response = await getAllLogs();
+    if (response.success == true) {
+        res.status(200).json(response);
+    } else {
+        res.status(404).json(response);
+    }
+});
+
+router.route('/log/:id').get(async (req, res) => {
+    let response = await getLogById(req.params.id);
+    if (response.success == true) {
+        res.status(200).json(response);
+    } else {
+        res.status(404).json(response);
+    }
+});
+
+router.route('/addLog/').post(async (req, res) => {
+    let response = await addLog(req.body);
+    if (response.success == true) {
+        res.status(200).json(response);
+    } else {
+        res.status(404).json(response);
+    }
+});
+
+router.route('/updateLog/:id').put(async (req, res) => {
+    let response = await updateLog(req.params.id, req.body);
+    if (response.success == true) {
+        res.status(200).json(response);
+    } else {
+        res.status(404).json(response);
+    }
+});
+
+router.route('/removeLog/:id').delete(async (req, res) => {
+    let response = await removeLog(req.params.id);
     if (response.success == true) {
         res.status(200).json(response);
     } else {
