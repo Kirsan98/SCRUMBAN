@@ -4,6 +4,8 @@ GET http://localhost:5000/
 ### Default API URL
 GET http://localhost:5000/api/
 
+//***** USER *****//
+
 ### getAllUser API URL
 GET http://localhost:5000/api/users/
 
@@ -32,3 +34,35 @@ content-type: application/json
 
 ### Default removeContact URL
 DELETE http://localhost:5000/api/removeUser/618d66474ae5b330a9331d7c
+
+//***** COLUMN *****//
+
+### getAllColumn API URL
+GET http://localhost:5000/api/columns/
+
+### getColumnById API URL
+GET http://localhost:5000/api/column/:id
+
+### addColumn API URL
+POST http://localhost:5000/api/addColumn/
+content-type: application/json
+
+{
+    "title": "Column test",
+    "index": 0,
+    "maxTask": 10,
+    "_tasks": ["618d6fcde8bdae86415cad58","618d6fcde8bdae86415cad58"]
+}
+
+### Default updateColumn URL
+PUT http://localhost:5000/api/updateColumn/6195122b3c5dd1819f182277
+content-type: application/json
+
+{
+    "title": "Jules",
+    "index": 10,
+    "maxTask": 1
+}
+
+### Default removeColumn URL
+DELETE http://localhost:5000/api/removeColumn/6195122b3c5dd1819f182277
