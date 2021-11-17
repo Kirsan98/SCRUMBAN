@@ -25,8 +25,8 @@ POST http://localhost:5000/api/addUser/
 content-type: application/json
 
 {
-    "first_name": "Contact Added",
-    "last_name": "Test",
+    "first_name": "Patrik",
+    "last_name": "Legrand",
     "email": "sait-kik@hotmail.com",
     "username": "Test",
     "password": "test2"
@@ -98,3 +98,10 @@ content-type: application/json
 
 ### Default removeLog URL
 DELETE http://localhost:5000/api/removeLog/61951d853d935eb947113033
+
+
+# PROJECTS
+
+### Get all projects
+GET http://localhost:5000/api/projects/
+
