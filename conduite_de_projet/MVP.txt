@@ -1,0 +1,20 @@
+MVP vu avec le client le 17/11/2021
+nouveau point le 24/11/2021
+
+
+Jalon 1 le 01/12/2021
+front/back liés
+
+
+possibilité de créer des projets
+creer des colonnes (pas forcement nb d'element, changer de places etc)
+creer des taches (lier la tache au proj et col)
+sprint pas encore indispensable
+log changement de tache
+user de base
+pas indispensable (authentification)
+
+
+(front mini : page d'accueil, connexion, inscription, création projet, accueil) 
+minimum d'orga front avec notion de colonne tache les une en dessous des autres, déplacements de taches avec drag and drop
+pas necessaire police couleur bordure etc

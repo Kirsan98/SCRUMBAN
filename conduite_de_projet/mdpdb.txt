@@ -1,0 +1,5 @@
+database:scrumban_db
+username:cdp
+mdp:BHdUDx2iU9gWcBOC
+
+url:mongodb+srv://cdp:BHdUDx2iU9gWcBOC@clusterscrumban.rsjdb.mongodb.net/scrumban_db?retryWrites=true&w=majority
