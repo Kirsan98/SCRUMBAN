@@ -8,7 +8,6 @@ const sprintSchema = new Schema({
   start_at: Date,
   end_at: Date,
   _user: [{ type: mongoose.Schema.Types.ObjectId, ref:'User'}],
-  _tasks: [{type: mongoose.Schema.Types.ObjectId, ref:'Task'}],
   maxColumns: {type: Number, required: true},
   // TODO columns, planningDaily
 });

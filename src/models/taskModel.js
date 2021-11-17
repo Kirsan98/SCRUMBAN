@@ -14,21 +14,19 @@ const TaskSchema = new Schema({
   desrciption: {
     type: String
   },
-  // owner: {
-  //   type: Number
-  // },
-  _users: [
+  _owner: 
     { 
       type: mongoose.Schema.Types.ObjectId, 
       ref:'User'
     }
-  ],
+  ,
   created_at: {
     type: Date,
     default: Date.now
   },
   updated_at: {
-    type: Date
+    type: String,
+
   },
   estimated_duration: {
     type: String,
