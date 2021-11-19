@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { getAllUsers, getUserById, updateUser, removeUser, addUser } = require('../controllers/userController');
 const { getAllColumns, getColumnById, updateColumn, removeColumn, addColumn } = require('../controllers/columnController');
 const { getAllLogs, getLogById, updateLog, removeLog, addLog } = require('../controllers/logController');
-const { addProject } = require('../controllers/projectsController');
+const { getAllProjects, addProject } = require('../controllers/projectsController');
 
 router.get('/', function (req, res) {
     res.status(200).json({
@@ -44,6 +44,7 @@ router.route('/updateUser/:id').put(async (req, res) => {
     if (response.success == true) {
         res.status(200).json(response);
     } else {
+        
         res.status(404).json(response);
     }
 });
@@ -160,7 +161,7 @@ router.route('/projects').get(async (req, res) => {
     }
 });
 
-outer.route('/addProject/').post(async (req, res) => {
+router.route('/addProject/').post(async (req, res) => {
     let response = await addProject(req.body);
     if (response.success == true) {
         res.status(200).json(response);

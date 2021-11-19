@@ -9,7 +9,7 @@ const db = {};
 db.mongoose = mongoose;
 db.user = require("./userModel.js");
 db.task = require("./taskModel.js");
-db.board = require("./projetModel.js");
+db.project = require("./projetModel.js");
 db.sprint = require("./sprintModel.js");
 
 module.exports = db;

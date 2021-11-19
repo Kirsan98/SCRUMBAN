@@ -38,7 +38,7 @@ DELETE http://localhost:5000/api/removeUser/618d66474ae5b330a9331d7c
 //***** COLUMN *****//
 
 ### getAllColumn API URL
-GET http://localhost:5000/api/columns/
+GET http://localhost:5000/api/columns
 
 ### getColumnById API URL
 GET http://localhost:5000/api/column/:id
@@ -105,3 +105,10 @@ DELETE http://localhost:5000/api/removeLog/61951d853d935eb947113033
 ### Get all projects
 GET http://localhost:5000/api/projects/
 
+### add project
+POST http://localhost:5000/api/addProject/
+content-type: application/json
+
+{
+   "title": "first project"
+}
