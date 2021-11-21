@@ -27,8 +27,8 @@
       </tr>
     </thead>
     <tbody *ngFor="let project of projects.slice().reverse();">
-      <tr  class="ligne"  (click)="onProjectClicked(project._id)" >
-        <td >{{ project.title }}</td>
+      <tr  class="ligne"   >
+        <td class="nameProject" (click)="onProjectClicked(project._id)">{{ project.title }}</td>
         <td>Otto</td>
         <td>XX</td>
         <td>

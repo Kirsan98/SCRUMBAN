@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Project } from '../models/project.model';
 
 
+
 @Injectable({  providedIn: 'root'})
 export class ProjectService{
 
@@ -31,7 +32,20 @@ export class ProjectService{
     
     deleteProject(id: string){
       return new Promise((resolve, reject) => {
-        this.http.delete('http://localhost:3000/api/projects/' + id).subscribe(
+        this.http.delete('http://localhost:5000/api/projects/' + id).subscribe(
+          (response) => {
+            resolve(response);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    }
+
+    getProjectById(id: string){
+      return new Promise((resolve,reject) => {
+        this.http.get('http://localhost:5000/api/projects/'+ id).subscribe(
           (response) => {
             resolve(response);
           },
