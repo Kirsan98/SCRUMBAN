@@ -161,8 +161,8 @@ router.get('/', function (req, res) {
         }
     });
 
-    router.route('/projects/:id').get(async (req,res) => {
-        let reponse = await getProjectById();
+    router.route('/projects/:id').get(async (req, res) => {
+        let response = await getProjectById(req.params.id);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -187,7 +187,7 @@ router.get('/', function (req, res) {
             res.status(404).json(response);
         }
     });
-
+    
     router.route('/removeProject/:id').delete(async (req, res) => {
         let response = await removeProject(req.params.id);
         if (response.success == true) {

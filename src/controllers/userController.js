@@ -4,7 +4,6 @@ const User = require('../models/userModel');
 module.exports.getAllUsers = async function() {
     let total = await User.countDocuments({});
     let limit = parseInt(total);
-
     try {
         const Users = await User.find().limit(limit);
         return {

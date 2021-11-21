@@ -19,10 +19,10 @@ module.exports.getAllProjects = async function(){
 //get project by id
 module.exports.getProjectById = async function(id){
     try{
-        const project = await Project.findById(id);
+        const Project = await Project.findById(id);
         return{
             success: true,
-            data: project,
+            data: Project,
         }
     }catch(err){
         return { success:false, message: "Project not found" +err};
@@ -91,4 +91,4 @@ module.exports.removeProject = async function(id) {
     } catch (error) {
         return { success: false, message: "User not removed " + error};
     }
-  }
+}
