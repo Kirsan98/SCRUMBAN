@@ -28,7 +28,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let project of projects; let index = index;" class="ligne" >
+      <tr *ngFor="let project of projects.slice().reverse(); let index = index;" class="ligne" >
         <th scope="row">{{index}}</th>
         <td>{{ project.title }}</td>
         <td>Otto</td>

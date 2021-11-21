@@ -5,16 +5,14 @@
     <div class="card-body">
       <h3  style="    text-align: -webkit-center;"> Nouveau projet</h3>
 
-      <section>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Titre du projet</label>
-            <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter titre">
-          </div>
+        <form [formGroup]="projectForm">
+          
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              <label for="title">Titre du projet</label>
+              <input type="text" class="form-control" id="title"  formControlName="title" placeholder="Enter titre du projet" name="title">
           </div>
-      </section>
+          
+        </form>
       <button
       style="
         margin-top: 3%;
@@ -24,10 +22,11 @@
         box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
       "
       type="button"
-      class="btn btn-primary btn-lg"
-    >
+      class="btn btn-primary btn-lg" (click)="onSubmit()" [disabled]="projectForm.invalid">
       + Nouveau projet
     </button>
+    <p class="alert-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
+
     </div>
   </div>
 </section>

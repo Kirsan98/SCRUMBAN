@@ -10,6 +10,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewProjectComponent } from './projects/new-project/new-project.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,8 @@ import { NewProjectComponent } from './projects/new-project/new-project.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [
