@@ -4,11 +4,11 @@ import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
-  selector: 'app-single-project',
-  templateUrl: './single-project.component.html',
-  styleUrls: ['./single-project.component.scss']
+  selector: 'app-delete-project',
+  templateUrl: './delete-project.component.html',
+  styleUrls: ['./delete-project.component.scss']
 })
-export class SingleProjectComponent implements OnInit {
+export class DeleteProjectComponent implements OnInit {
   public project!: Project;
 
   constructor(
@@ -27,6 +27,14 @@ export class SingleProjectComponent implements OnInit {
           );
         }
       );
+  }
+
+  onDelete(){
+    this.projectService.deleteProject(this.project._id).then(
+      () => {
+        this.router.navigate(['projects']);
+      }
+    )
   }
 
 }

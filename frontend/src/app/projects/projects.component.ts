@@ -34,12 +34,8 @@ export class ProjectsComponent implements OnInit {
      this.router.navigate(['/project/' + id]);
    }
 
-  //  onDelete(){
-  //    this.projectService.deleteProject("619a996d8616a2e8d5c083d3").then(
-  //      ()=>{
-  //       this.router.navigate(['projects']);
-  //      }
-  //    );
-  //  }
+   onDelete(id: string){
+    this.router.navigate(['/deleteProject/' + id]);
+   }
 
 }

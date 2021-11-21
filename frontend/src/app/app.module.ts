@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NewProjectComponent } from './projects/new-project/new-project.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SingleProjectComponent } from './projects/single-project/single-project.component';
+import { DeleteProjectComponent } from './projects/delete-project/delete-project.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SingleProjectComponent } from './projects/single-project/single-project
     AccueilComponent,
     ProjectsComponent,
     NewProjectComponent,
-    SingleProjectComponent
+    SingleProjectComponent,
+    DeleteProjectComponent
   ],
   imports: [
     BrowserModule,

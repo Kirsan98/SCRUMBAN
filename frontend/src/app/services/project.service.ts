@@ -17,7 +17,6 @@ export class ProjectService{
     }
 
     addProject(project: any){
-        //return this.http.post("http://localhost:5000/api/addProject/",project);
         return new Promise((resolve,reject) => {
             this.http.post('http://localhost:5000/api/addProject/',project).subscribe(
                 (response) => {
@@ -32,7 +31,7 @@ export class ProjectService{
     
     deleteProject(id: string){
       return new Promise((resolve, reject) => {
-        this.http.delete('http://localhost:5000/api/projects/' + id).subscribe(
+        this.http.delete('http://localhost:5000/api/removeProject/' + id).subscribe(
           (response) => {
             resolve(response);
           },
