@@ -1,3 +1,17 @@
-<p>delete-project works!</p>
 
-<button class="btn btn-danger m-1" (click)="onDelete()" >Supprimer</button>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <h6>Vous êtes absoluement sûr ?</h6>
+    <p>
+      This action cannot be undone. This will permanently delete
+      {{project.title}}
+      and remove all collaborator associations.
+    </p>
+
+    <p>Please type <b>{{project.title}}</b> to confirm.</p>
+
+    <input  style="width: 80%; margin-left: 10%;margin-right: 10%;" type="text" class="form-control"  placeholder="" >
+
+    <button class="btn btn-danger m-1" (click)="onDelete()" >Supprimer</button>
+  </div>
+</div>
