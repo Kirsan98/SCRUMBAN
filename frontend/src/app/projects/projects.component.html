@@ -1,1 +1,37 @@
-mettre la liste des projets et un bouton pour en ajouter 
+<section>
+  <button
+    style="
+      margin: 10%;
+      width: 80%;
+      box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
+    "
+    type="button"
+    class="btn btn-primary btn-lg"
+  >
+    + Nouveau projet
+  </button>
+</section>
+
+<section>
+  <h2 style="text-align: center">Vos Projets:</h2>
+
+  <table class="table" style="width: 80%; margin-left: 10%;; margin-right: 10%;">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Clé</th>
+        <th scope="col">Chef de projet</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of projects; let index = index;" class="ligne" >
+        <th scope="row">{{index}}</th>
+        <td>{{ project.title }}</td>
+        <td>Otto</td>
+        <td>XX</td>
+        <td>...</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

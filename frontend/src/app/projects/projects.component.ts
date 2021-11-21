@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Project } from '../models/project.model';
+import { ProjectService } from '../services/project.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-projects',
@@ -7,9 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
 
-  constructor() { }
+   projects:any[]= [];
+  // projects: Project[]= [];
 
-  ngOnInit(): void {
-  }
+  constructor(public projectService: ProjectService) { }
+
+   ngOnInit():void{
+    this.listProject();
+   }
+
+   listProject(): void{
+       this.projectService.getAllProjects().subscribe(
+       data => {
+        this.projects = data['data'];
+        console.log(this.projects);
+      });
+   }
 
 }
