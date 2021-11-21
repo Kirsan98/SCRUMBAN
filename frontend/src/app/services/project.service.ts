@@ -29,4 +29,16 @@ export class ProjectService{
               });
           }
     
+    deleteProject(id: string){
+      return new Promise((resolve, reject) => {
+        this.http.delete('http://localhost:3000/api/projects/' + id).subscribe(
+          (response) => {
+            resolve(response);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    }
 }

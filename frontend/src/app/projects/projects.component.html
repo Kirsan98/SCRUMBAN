@@ -26,29 +26,34 @@
         <th scope="col">Chef de projet</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let project of projects.slice().reverse();" class="ligne" >
-        <td>{{ project.title }}</td>
+    <tbody *ngFor="let project of projects.slice().reverse();">
+      <tr  class="ligne"  (click)="onProjectClicked(project._id)" >
+        <td >{{ project.title }}</td>
         <td>Otto</td>
         <td>XX</td>
         <td>
-            <div class="popover__wrapper">
-                <a href="#">
-                  <h2 class="hover_three_dots">...</h2>
-                </a>
-                <!-- <div class="popover__content">
-                    <div class="list-group popover__message">
-                        <a href="#" class="list-group-item list-group-item-action">Paramètres du projet</a>
-                        <a href="#" class="list-group-item list-group-item-action">Déplacer dans la corbeille</a>
-                      </div>
-                  
-                </div> -->
+          <div class="wrapper">
+            <details data-popover="down">
+              <summary>
+                <h2 class="hover_three_dots">...</h2>
+              </summary>
+              <div>
+                <div class="list-group popover__message">
+                  <a  href="accueil" class="list-group-item list-group-item-action">Paramètres du projet</a>
+                  <a  href="accueil" class="list-group-item list-group-item-action" >Déplacer dans la corbeille</a> 
+                  <!-- 
+                    TODO
+                    parametres du projet permet d'aller vers la page settingsProject
+                        et Déplacer dans la corbeille vers la page deleteProject qui va demander une confirmation (en ecrivant le nom du projet)
+                  -->
+                </div>
               </div>
+            </details>
+          </div>
         </td>
        
       </tr>
     </tbody>
   </table>
 </section>
-
 

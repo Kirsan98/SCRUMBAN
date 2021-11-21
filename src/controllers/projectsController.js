@@ -19,10 +19,10 @@ module.exports.getAllProjects = async function(){
 //get project by id
 module.exports.getProjectById = async function(id){
     try{
-        const Project = await Project.findById(id);
+        const project = await Project.findById(id);
         return{
             success: true,
-            data: Project,
+            data: project,
         }
     }catch(err){
         return { success:false, message: "Project not found" +err};

@@ -10,7 +10,7 @@ GET http://localhost:5000/api/
 GET http://localhost:5000/api/users/
 
 ### getUserById API URL
-GET http://localhost:5000/api/user/618d6fcde8bdae86415cad58
+GET http://localhost:5000/api/user/618d9e7e32456040a8f3250c
 
 ### Default updateUser URL
 PUT http://localhost:5000/api/updateUser/618d6fcde8bdae86415cad58
@@ -107,7 +107,7 @@ GET http://localhost:5000/api/projects/
 
 
 ### getProjectById API URL
-GET http://localhost:5000/api/projects/619a51675216e7d6105e0813
+GET http://localhost:5000/api/projects/619822118ac9dbbe86b8a13e
 
 ### add project
 POST http://localhost:5000/api/addProject/

@@ -11,6 +11,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewProjectComponent } from './projects/new-project/new-project.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SingleProjectComponent } from './projects/single-project/single-project.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     AccueilComponent,
     ProjectsComponent,
-    NewProjectComponent
+    NewProjectComponent,
+    SingleProjectComponent
   ],
   imports: [
     BrowserModule,
