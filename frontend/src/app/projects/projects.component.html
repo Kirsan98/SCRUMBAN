@@ -1,15 +1,18 @@
 <section>
-  <button
-    style="
-      margin: 10%;
-      width: 80%;
-      box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
-    "
-    type="button"
-    class="btn btn-primary btn-lg"
-  >
-    + Nouveau projet
-  </button>
+    <a href="newProject">
+        <button
+        style="
+          margin: 10%;
+          width: 80%;
+          box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
+        "
+        type="button"
+        class="btn btn-primary btn-lg"
+      >
+        + Nouveau projet
+      </button>
+    </a>
+ 
 </section>
 
 <section>
@@ -30,8 +33,24 @@
         <td>{{ project.title }}</td>
         <td>Otto</td>
         <td>XX</td>
-        <td>...</td>
+        <td>
+            <div class="popover__wrapper">
+                <a href="#">
+                  <h2 class="hover_three_dots">...</h2>
+                </a>
+                <!-- <div class="popover__content">
+                    <div class="list-group popover__message">
+                        <a href="#" class="list-group-item list-group-item-action">Paramètres du projet</a>
+                        <a href="#" class="list-group-item list-group-item-action">Déplacer dans la corbeille</a>
+                      </div>
+                  
+                </div> -->
+              </div>
+        </td>
+       
       </tr>
     </tbody>
   </table>
 </section>
+
+

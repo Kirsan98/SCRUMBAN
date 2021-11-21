@@ -110,5 +110,5 @@ POST http://localhost:5000/api/addProject/
 content-type: application/json
 
 {
-   "title": "first project"
+   "title": "test project"
 }
