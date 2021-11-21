@@ -33,7 +33,7 @@ content-type: application/json
 }
 
 ### Default removeContact URL
-DELETE http://localhost:5000/api/removeUser/618d66474ae5b330a9331d7c
+DELETE http://localhost:5000/api/removeUser/618d6fcde8bdae86415cad58
 
 //***** COLUMN *****//
 
@@ -125,4 +125,4 @@ content-type: application/json
 }
 
 ### Default removeColumn URL
-DELETE http://localhost:5000/api/removeProject/6195123c3c5dd1819f182279
+DELETE http://localhost:5000/api/removeProject/619a9dd68616a2e8d5c083db

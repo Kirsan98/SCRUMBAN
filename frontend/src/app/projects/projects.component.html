@@ -21,15 +21,13 @@
   <table class="table" style="width: 80%; margin-left: 10%;; margin-right: 10%;">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Nom</th>
         <th scope="col">Clé</th>
         <th scope="col">Chef de projet</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let project of projects.slice().reverse(); let index = index;" class="ligne" >
-        <th scope="row">{{index}}</th>
+      <tr *ngFor="let project of projects.slice().reverse();" class="ligne" >
         <td>{{ project.title }}</td>
         <td>Otto</td>
         <td>XX</td>

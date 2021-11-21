@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { getAllUsers, getUserById, updateUser, removeUser, addUser } = require('../controllers/userController');
 const { getAllColumns, getColumnById, updateColumn, removeColumn, addColumn } = require('../controllers/columnController');
 const { getAllLogs, getLogById, updateLog, removeLog, addLog } = require('../controllers/logController');
-const { getAllProjects, addProject, getProjectById, updateProject } = require('../controllers/projectsController');
+const { getAllProjects, addProject, getProjectById, updateProject, removeProject } = require('../controllers/projectsController');
 
 router.get('/', function (req, res) {
     res.status(200).json({
