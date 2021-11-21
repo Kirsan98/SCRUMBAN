@@ -16,6 +16,19 @@ module.exports.getAllProjects = async function(){
     }
 }
 
+//get project by id
+module.exports.getProjectById = async function(id){
+    try{
+        const project = await Project.findById(id);
+        return{
+            success: true,
+            data: project,
+        }
+    }catch(err){
+        return { success:false, message: "Project not found" +err};
+    }
+}
+
 //add new Project 
 module.exports.addProject = async function(body){
     const projectAdded = new Project();
@@ -23,16 +36,16 @@ module.exports.addProject = async function(body){
     return { success: false, message: "Project not added "};
     if (body.title!= null)
     projectAdded.title = body.title;
-    if (body.created_at != null)
-    projectAdded.created_at = body.created_at;
-    if (body.updated_at != null)
-    projectAdded.updated_at = body.updated_at;
-    if (body._members != null)
-    projectAdded._members = body._members;
-    if (body._tasks != null)
-    projectAdded._tasks = body._tasks;
-    if (body._sprints != null)
-    projectAdded._sprints = body._sprints;
+    // if (body.created_at != null)
+    // projectAdded.created_at = body.created_at;
+    // if (body.updated_at != null)
+    // projectAdded.updated_at = body.updated_at;
+    // if (body._members != null)
+    // projectAdded._members = body._members;
+    // if (body._tasks != null)
+    // projectAdded._tasks = body._tasks;
+    // if (body._sprints != null)
+    // projectAdded._sprints = body._sprints;
 
     try {
     await projectAdded.save();
@@ -45,3 +58,37 @@ module.exports.addProject = async function(body){
     }
 
 }
+
+//Update an existing Project
+module.exports.updateProject = async function(id,body){
+    const projectUpdated = await Project.findById(id)
+    if(projectUpdated == null)
+    return { success: false, message: "Project not updated"};
+    if (body.title != null)
+    projectUpdated.title = body.title;
+    //...
+    try{
+        await projectUpdated.save();
+        return{
+            success: true,
+            data: projectUpdated,
+            message: "Update successfully",
+        }
+    }catch(error){
+            return {success: false, message:"Fail to update"+ error};
+        }
+}
+
+//Remove an existing project
+module.exports.removeProject = async function(id) {
+    try { 
+      const project = await Project.findById(id)
+      project.remove();
+      return {
+        success: true,
+        data: project,
+      }
+    } catch (error) {
+        return { success: false, message: "User not removed " + error};
+    }
+  }
