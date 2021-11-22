@@ -13,6 +13,7 @@ import { NewProjectComponent } from './projects/new-project/new-project.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SingleProjectComponent } from './projects/single-project/single-project.component';
 import { DeleteProjectComponent } from './projects/delete-project/delete-project.component';
+import { NewSprintComponent } from './projects/new-sprint/new-sprint.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DeleteProjectComponent } from './projects/delete-project/delete-project
     ProjectsComponent,
     NewProjectComponent,
     SingleProjectComponent,
-    DeleteProjectComponent
+    DeleteProjectComponent,
+    NewSprintComponent
   ],
   imports: [
     BrowserModule,

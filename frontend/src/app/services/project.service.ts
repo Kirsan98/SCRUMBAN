@@ -54,4 +54,19 @@ export class ProjectService{
         );
       });
     }
+
+    addSprint(id: string,sprint: any){
+      return new Promise((resolve,reject) => {
+        this.http.post('http://localhost:5000/api/addSprint/'+ id,sprint).subscribe(
+          (response) => {
+            resolve(response);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    }
+
+    
 }

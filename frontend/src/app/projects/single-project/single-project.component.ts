@@ -13,6 +13,7 @@ export class SingleProjectComponent implements OnInit {
   public project!: Project;
   public sprints!: Sprint[];
 
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -32,5 +33,6 @@ export class SingleProjectComponent implements OnInit {
         }
       );
   }
+
 
 }
