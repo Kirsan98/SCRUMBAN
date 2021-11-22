@@ -36,16 +36,16 @@ module.exports.addProject = async function(body){
     return { success: false, message: "Project not added "};
     if (body.title!= null)
     projectAdded.title = body.title;
-    // if (body.created_at != null)
-    // projectAdded.created_at = body.created_at;
+    
+    projectAdded.created_at = Date.now();
     // if (body.updated_at != null)
     // projectAdded.updated_at = body.updated_at;
     // if (body._members != null)
     // projectAdded._members = body._members;
     // if (body._tasks != null)
     // projectAdded._tasks = body._tasks;
-    // if (body._sprints != null)
-    // projectAdded._sprints = body._sprints;
+    if (body._sprints != null)
+    projectAdded._sprints = body._sprints;
 
     try {
     await projectAdded.save();

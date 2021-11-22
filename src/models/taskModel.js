@@ -14,29 +14,27 @@ const TaskSchema = new Schema({
   desrciption: {
     type: String
   },
-  _owner: 
-    { 
-      type: mongoose.Schema.Types.ObjectId, 
-      ref:'User'
-    }
-  ,
+  // _owner: 
+  //   { 
+  //     type: mongoose.Schema.Types.ObjectId, 
+  //     ref:'User'
+  //   }
+  //,
   created_at: {
-    type: Date,
-    default: Date.now
+    type: Date
   },
-  updated_at: {
-    type: String,
-
-  },
+  // updated_at: {
+  //   type: String,
+  // },
   estimated_duration: {
     type: String,
   },
-  _logs: [
-    {
-      type: mongoose.Schema.Types.ObjectId, 
-      ref:'Log'
-    },
-  ]
+  // _logs: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId, 
+  //     ref:'Log'
+  //   },
+  // ]
 });
 
 const Task = mongoose.model('Task', TaskSchema);

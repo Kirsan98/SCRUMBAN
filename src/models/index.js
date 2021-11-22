@@ -11,5 +11,7 @@ db.user = require("./userModel.js");
 db.task = require("./taskModel.js");
 db.project = require("./projetModel.js");
 db.sprint = require("./sprintModel.js");
+db.column = require("./columnModel");
+db.log = require("./logModel");
 
 module.exports = db;
