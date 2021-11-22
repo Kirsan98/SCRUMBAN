@@ -1,2 +1,26 @@
-<p>{{project?.title}}</p>
-{{project?.created_at}}
+<h1>{{project?.title}}</h1>
+<p>{{project?.created_at}}</p>
+
+<p>{{project?._id}}</p>
+
+<section>
+    <div class="col-3 bg-light p-3 border">
+
+    <table class="table" style="width: 80%; margin-left: 10%;; margin-right: 10%;">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+
+          </tr>
+        </thead>
+        <tbody *ngFor="let sprint of sprints.slice().reverse();">
+          <tr  class="ligne"   >
+            <td class="nameProject">{{  sprint.title }}</td>
+
+           
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+</section>

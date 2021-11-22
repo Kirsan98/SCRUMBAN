@@ -1,4 +1,5 @@
 const Project = require('../models/projectModel');
+const Sprint = require('../models/sprintModel');
 
 //get all projects
 module.exports.getAllProjects = async function(){
@@ -16,19 +17,6 @@ module.exports.getAllProjects = async function(){
     }
 }
 
-//get project by id
-module.exports.getProjectById = async function(id){
-    try{
-        const project = await Project.findById(id);
-        return{
-            success: true,
-            data: project,
-        }
-    }catch(err){
-        return { success:false, message: "Project not found" +err};
-    }
-}
-
 //add new Project 
 module.exports.addProject = async function(body){
     const projectAdded = new Project();
@@ -42,11 +30,6 @@ module.exports.addProject = async function(body){
     // projectAdded.updated_at = body.updated_at;
     // if (body._members != null)
     // projectAdded._members = body._members;
-    // if (body._tasks != null)
-    // projectAdded._tasks = body._tasks;
-    if (body._sprints != null)
-    projectAdded._sprints = body._sprints;
-
     try {
     await projectAdded.save();
     return {
@@ -56,7 +39,6 @@ module.exports.addProject = async function(body){
     }} catch (error){
     return { success: false, message: "Fail to add" + error};
     }
-
 }
 
 //Update an existing Project
@@ -66,7 +48,8 @@ module.exports.updateProject = async function(id,body){
     return { success: false, message: "Project not updated"};
     if (body.title != null)
     projectUpdated.title = body.title;
-    //...
+    if (body.sprints != null)
+    projectUpdated.sprints = body.sprints;
     try{
         await projectUpdated.save();
         return{
@@ -92,3 +75,43 @@ module.exports.removeProject = async function(id) {
         return { success: false, message: "User not removed " + error};
     }
 }
+
+// create sprint
+module.exports.addSprint = async function(id,body){
+    const sprintAdded = new Sprint();
+    if(sprintAdded == null)
+    return { success: false, message: "Sprint not added "};
+    if (body.title!= null)
+    sprintAdded.title = body.title;
+    
+    try {
+    await sprintAdded.save();
+
+    const project = await Project.findByIdAndUpdate(id,
+       {$push: {sprints:sprintAdded} });
+    return {
+        success:  true,
+        data: project,
+
+        message: "Add successfully",
+    }} catch (error){
+    return { success: false, message: "Fail to add" + error};
+    }
+}
+
+
+//get project by id with sprints
+module.exports.getProjectById = async function(id){
+    try {
+    const project = await Project.findByIdAndUpdate(id).populate("sprints");
+    return {
+        success:  true,
+        data: project,
+
+        message: "Add successfully",
+    }} catch (error){
+    return { success: false, message: "Fail to add" + error};
+    }
+}
+
+

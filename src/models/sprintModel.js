@@ -5,10 +5,10 @@ const { Schema } = mongoose;
 // created schema for Sprint
 const sprintSchema = new Schema({
   title: {type: String, required: true},
-  start_at: {type: Date},
-  end_at: {type: Date},
+  // start_at: {type: Date},
+  // end_at: {type: Date},
   // _user: [{ type: mongoose.Schema.Types.ObjectId, ref:'User'}],
-  //maxColumns: {type: Number, required: true},
+  // maxColumns: {type: Number},
   // TODO columns, planningDaily
 });
 

@@ -2,8 +2,7 @@ const router = require('express').Router();
 const { getAllUsers, getUserById, updateUser, removeUser, addUser } = require('../controllers/userController');
 const { getAllColumns, getColumnById, updateColumn, removeColumn, addColumn } = require('../controllers/columnController');
 const { getAllLogs, getLogById, updateLog, removeLog, addLog } = require('../controllers/logController');
-const { getAllProjects, addProject, getProjectById, updateProject, removeProject } = require('../controllers/projectsController');
-const {getAllSprints, addSprint, getSprintById, removeSprint} = require('../controllers/sprintController');
+const { getAllProjects, addProject, addSprint ,getProjectById, updateProject, removeProject,getProjetAndSprint } = require('../controllers/projectsController');
 router.get('/', function (req, res) {
     res.status(200).json({
         status: 'API is Working',
@@ -174,8 +173,8 @@ router.get('/', function (req, res) {
         let response = await addProject(req.body);
         if (response.success == true) {
             res.status(200).json(response);
-        } else {
-            res.status(404).json(response);
+         } else {
+             res.status(404).json(response);
         }
     });
 
@@ -197,53 +196,14 @@ router.get('/', function (req, res) {
         }
     });
 
-
-// SPRINT
-router.route('/sprints').get(async (req, res) => {
-    let response = await getAllSprints();
-    if (response.success == true) {
-        res.status(200).json(response);
-    } else {
-        res.status(404).json(response);
-    }
-});
-
-router.route('/sprint/:id').get(async (req, res) => {
-    let response = await getSprintById(req.params.id);
-    if (response.success == true) {
-        res.status(200).json(response);
-    } else {
-        res.status(404).json(response);
-    }
-});
-
-router.route('/addSprint/').post(async (req, res) => {
-    let response = await addSprint(req.body);
-    if (response.success == true) {
-        res.status(200).json(response);
-    } else {
-        res.status(404).json(response);
-    }
-});
-
-// router.route('/updateProject/:id').put(async (req,res) => {
-//     let response = await updateProject(req.params.id, req.body);
-//     if (response.success == true) {
-//         res.status(200).json(response);
-//     } else {
-//         res.status(404).json(response);
-//     }
-// });
-
-router.route('/removeSprint/:id').delete(async (req, res) => {
-    let response = await removeSprint(req.params.id);
-    if (response.success == true) {
-        res.status(200).json(response);
-    } else {
-        res.status(404).json(response);
-    }
-});
-
+    router.route('/addSprint/:id').post(async (req, res) => {
+        let response = await addSprint(req.params.id, req.body);
+        if (response.success == true) {
+            res.status(200).json(response);
+         } else {
+             res.status(404).json(response);
+        }
+    });
 
 
 module.exports = router;

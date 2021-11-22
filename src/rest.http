@@ -107,46 +107,16 @@ GET http://localhost:5000/api/projects/
 
 
 ### getProjectById API URL
-GET http://localhost:5000/api/projects/619822118ac9dbbe86b8a13e
+GET http://localhost:5000/api/projects/619c0003bd1154bf4b51cbac
 
 ### add project
 POST http://localhost:5000/api/addProject/
 content-type: application/json
 
 {
-"title": "test project"
+    "title": "PPPE"
 }
 
-### Default updateProject URL
-PUT http://localhost:5000/api/updateProject/619a51675216e7d6105e0813
-content-type: application/json
-{
-    "title": "Jules",
-}
-
-### Default removeColumn URL
-DELETE http://localhost:5000/api/removeProject/619a9dd68616a2e8d5c083db
-
-
-
-# SPRINT
-
-### Get all projects
-GET http://localhost:5000/api/sprints/
-
-
-### getProjectById API URL
-GET http://localhost:5000/api/sprint/619822118ac9dbbe86b8a13e
-
-### add project
-POST http://localhost:5000/api/addSprint/
-content-type: application/json
-
-{
-"title": "test project",
-"start_at": "2020-11-17",
-"end_at": "2020-11-27"
-}
 
 # ### Default updateProject URL
 # PUT http://localhost:5000/api/updateProject/619a51675216e7d6105e0813
@@ -156,4 +126,14 @@ content-type: application/json
 # }
 
 ### Default removeColumn URL
-DELETE http://localhost:5000/api/removeSprint/619b84c4267314f3524ef674
+DELETE http://localhost:5000/api/removeProject/619a9dd68616a2e8d5c083db
+
+
+### create sprint
+POST http://localhost:5000/api/addSprint/619c0003bd1154bf4b51cbac
+content-type: application/json
+
+{
+    "title": "Sprint 0"
+}
+
