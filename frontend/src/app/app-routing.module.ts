@@ -7,6 +7,7 @@ import { NewProjectComponent } from './projects/new-project/new-project.componen
 import { NewSprintComponent } from './projects/new-sprint/new-sprint.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { SingleProjectComponent } from './projects/single-project/single-project.component';
+import { SingleSprintComponent } from './projects/single-sprint/single-sprint.component';
 
 const routes: Routes = [
   {path: 'accueil',component: AccueilComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'deleteProject/:id', component: DeleteProjectComponent},
   {path: 'newProject', component: NewProjectComponent},
   {path: 'newSprint/:id', component: NewSprintComponent},
+  {path: 'project/:id1/sprint/:id2', component: SingleSprintComponent},
 
   { path: '', pathMatch: 'full', redirectTo: 'accueil' },
   { path: '**', redirectTo: 'accueil' }];

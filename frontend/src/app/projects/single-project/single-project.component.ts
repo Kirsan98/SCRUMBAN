@@ -23,16 +23,18 @@ export class SingleProjectComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(
       (params: Params) => {
+        console.log(params)
         this.projectService.getProjectById(params.id).then(
           (project: any) => {
             this.project = project['data'];
             this.sprints = this.project.sprints;
-            console.log( this.sprints);
           }
           );
         }
       );
   }
 
-
+  onSprintClicked(id1: string, id2: string){
+    this.router.navigate(['project/'+id1+'/sprint/'+id2]);
+  }
 }

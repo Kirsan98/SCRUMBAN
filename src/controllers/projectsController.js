@@ -115,3 +115,18 @@ module.exports.getProjectById = async function(id){
 }
 
 
+// get sprint by id 
+module.exports.getSingleSprintByProject = async function(id1,id2){
+    // try {
+    //     const project = await Project.findByIdAndUpdate(id1).populate("sprints");
+
+    //     return {
+    //         success:  true,
+    //         data: project,
+    
+    //         message: "Add successfully",
+    //     }} catch (error){
+    //     return { success: false, message: "Fail to add" + error};
+    //     }
+}
+
