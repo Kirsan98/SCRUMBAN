@@ -7,11 +7,13 @@ import { NewProjectComponent } from './projects/new-project/new-project.componen
 import { NewSprintComponent } from './projects/new-sprint/new-sprint.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { SingleProjectComponent } from './projects/single-project/single-project.component';
+import { SettingsProjectComponent } from './projects/settings-project/settings-project.component';
 
 const routes: Routes = [
   {path: 'accueil',component: AccueilComponent},
   {path: 'projects',component: ProjectsComponent},
   {path: 'project/:id', component: SingleProjectComponent},
+  {path: 'projectSettings/:id', component: SettingsProjectComponent},
   {path: 'deleteProject/:id', component: DeleteProjectComponent},
   {path: 'newProject', component: NewProjectComponent},
   {path: 'newSprint/:id', component: NewSprintComponent},
