@@ -134,4 +134,3 @@ module.exports.getSingleSprintByProject = async function(idProject,idSprint){
         return { success: false, message: "Not found" + error};
         }
 }
-

@@ -1,8 +1,30 @@
 const router = require('express').Router();
+
+const taskController = require('../controllers/taskController');
 const { getAllUsers, getUserById, updateUser, removeUser, addUser } = require('../controllers/userController');
 const { getAllColumns, getColumnById, updateColumn, removeColumn, addColumn } = require('../controllers/columnController');
 const { getAllLogs, getLogById, updateLog, removeLog, addLog } = require('../controllers/logController');
 const { getAllProjects, addProject, addSprint ,getProjectById,getSingleSprintByProject, updateProject, removeProject,getProjetAndSprint } = require('../controllers/projectsController');
+// const {taskController} = require('../controllers/taskController');
+// const { task } = require('../controllers/taskController');
+// router.route('/tasks').get(async (req, res) =>{
+//     let response = await taskController.getAllTask();
+//     if (response.success == true) {
+//         res.status(200).json(response);
+//     } else {
+//         res.status(404).json(response);
+//     }
+// });
+// router.route('/task').get(async (req, res) =>{
+//     let response = await taskController.getTaskById("kjbf");
+//     if (response.success == true) {
+//         res.status(200).json(response);
+//     } else {
+//         res.status(404).json(response);
+//     }
+// });
+
+
 router.get('/', function (req, res) {
     res.status(200).json({
         status: 'API is Working',
@@ -59,6 +81,7 @@ router.get('/', function (req, res) {
 
 // COLUMN // 
     router.route('/columns').get(async (req, res) => {
+        // let response = await ColumnController.getAllColumns();
         let response = await getAllColumns();
         if (response.success == true) {
             res.status(200).json(response);
