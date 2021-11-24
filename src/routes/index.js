@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { getAllUsers, getUserById, updateUser, removeUser, addUser } = require('../controllers/userController');
 const { getAllColumns, getColumnById, updateColumn, removeColumn, addColumn } = require('../controllers/columnController');
 const { getAllLogs, getLogById, updateLog, removeLog, addLog } = require('../controllers/logController');
-const { getAllProjects, addProject, addSprint ,getProjectById,getSingleSprintByProject, updateProject, removeProject,getProjetAndSprint } = require('../controllers/projectsController');
+const { getAllProjects, addProject, addSprint ,getProjectById,getSingleSprintByProject, updateProject, removeProject,getProjetAndSprint, deleteSingleSprintByProject } = require('../controllers/projectsController');
 router.get('/', function (req, res) {
     res.status(200).json({
         status: 'API is Working',
@@ -214,5 +214,13 @@ router.get('/', function (req, res) {
         }
     });
     
-
+    router.route('/project/:id1/delete_sprint/:id2').delete(async (req, res) => {
+        let response = await deleteSingleSprintByProject(req.params.id1,req.params.id2 );
+        if (response.success == true) {
+            res.status(200).json(response);
+         } else {
+             res.status(404).json(response);
+        }
+    });
+    
 module.exports = router;
