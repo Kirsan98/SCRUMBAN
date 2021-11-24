@@ -1,0 +1,30 @@
+N°;Action;Attendu;Résultat
+1;Aller sur le site scrumban et afficher la page d’accueil;Ouverture de la page d’accueil.;
+2;Cliquer sur le lien Nouveaux Projet ;Affiche un formulaire permettant de créer un nouveaux projet (associé à un ou plusieurs utilisateur);
+3;Cliquer sur le lien Projet ;Afficher la liste de tous les projets existants associé à l’utilisateur courant;
+4;Cliquer sur le lien Nouveaux Sprint ;Afficher un formulaire permettant de créer un nouveaux sprint associé à un projet existant;
+;Cliquer sur le bouton Créer Sprint;Crée un nouveau sprint au sein d’un projet existant.;
+5;Cliquer sur le lien Nouvelle tâche;Affiche un formulaire permettant de créer une nouvelle tâche associé à un projet et/ou un sprint existants.;
+6;Cliquer sur le lien Connexion;Afficher un formulaire contenant un nom d’utilisateur et un mot de passe avec un bouton connexion permettant de se connecter;
+;Cliquer sur le lien Déconnexion;Déconnecte l’utilisateur et retourne sur la page d’accueil du site. ;
+7;Cliquer sur le bouton Inscription;Afficher la page qui contient un formulaire contenant (le prénom, le nom, l’adresse email, le nom d’utilisateur et le mot de passe).;
+;Une ou des informations sont invalides et je clique sur le bouton Valider;Message d'erreur « Veuillez insérer tout les champs requis »;
+8;Rentrer une adresse email invalide (sans @) ; Message d’erreur « Adresse email invalide. »;
+9;Rentrer une adresse email valide sans compte actif ;Message d’erreur « Désolé, adresse email inconnue. »;
+10;Rentrer une adresse email valide avec compte actif sans mot de passe ;Message d'erreur «  Merci de saisir votre mot de passe »;
+11;Rentrer une adresse email valide avec compte actif avec mot de passe;Connexion au tableau de bord de l’utilisateur ;
+12;Cliquer sur le boutton Settings;Afficher la page des paramètres contenant un formulaire capable de modifier les paramètres d’un profil ou d’un projet existant.;
+13;Cliquer sur le bouton Update ;Modifie les paramètres d’un profil ou d’un projet existant.;
+14;Cliquer sur le bouton pour  supprimer un projet;Afficher une pop-up demandant d’entrer le nom du projet à supprimer ;
+15;Cliquer sur le boutton Supprimer;Supprime le projet associé et retourne sur la page des projets;
+12;Cliquer sur le lien Rejoindre Projet;Affiche un formulaire contenant un id (de projet);
+13;Cliquer sur le bouton Rejoindre Projet;"Ajoute l’utilisateur courant au projet associé
+Ajoute le projet à l’utilisateur courant";
+14;;;
+15;Déplacer les tâches d’une colonne à une autre via un système de  « Drag&Drop » ;Déplace la tâche de la colonne de départ à la colonne d’arrivé. ;
+16;Modifier le nombre maximum de tâche dans une colonne;Affiche une pop-up contenant le nombre de tâche maximum que l’on veut associé à une ou plusieurs colonnes. ;
+17;;;
+18;;;
+19;;;
+20;;;
+21;;;
