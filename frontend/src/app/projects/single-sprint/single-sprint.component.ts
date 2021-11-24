@@ -18,15 +18,16 @@ export class SingleSprintComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-      // this.route.paramMap.subscribe(
-      //   (params: Params) => {
-      //       this.projectService.getSingleSprintByProject(params.get('id1'),params.get('id2')).then(
-      //       (project: any) => {
-              
-      //       }
-      //       );
-      //     }
-      //   );
+      this.route.paramMap.subscribe(
+        (params: Params) => {
+            this.projectService.getSingleSprintByProject(params.get('id1'),params.get('id2')).then(
+            (sprint: any) => {
+              this.sprint = sprint['data']
+              console.log(this.sprint.title)
+            }
+            );
+          }
+        );
     }
 
 }

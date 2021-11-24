@@ -84,16 +84,16 @@ export class ProjectService{
     }
 
     getSingleSprintByProject(id1: string, id2: string){
-      // return new Promise((resolve,reject) => {
-      //   this.http.get('http://localhost:5000/api/addSprint/'+ id,).subscribe(
-      //     (response) => {
-      //       resolve(response);
-      //     },
-      //     (error) => {
-      //       reject(error);
-      //     }
-      //   );
-      // });
+      return new Promise((resolve,reject) => {
+        this.http.get('http://localhost:5000/api/project/'+ id1+'/sprint/'+id2,).subscribe(
+          (response) => {
+            resolve(response);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
     }
     
 }

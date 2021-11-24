@@ -23,7 +23,6 @@ export class SingleProjectComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(
       (params: Params) => {
-        console.log(params)
         this.projectService.getProjectById(params.id).then(
           (project: any) => {
             this.project = project['data'];
