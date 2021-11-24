@@ -4,6 +4,7 @@ const taskController = require('../controllers/taskController');
 const { getAllUsers, getUserById, updateUser, removeUser, addUser } = require('../controllers/userController');
 const { getAllColumns, getColumnById, updateColumn, removeColumn, addColumn } = require('../controllers/columnController');
 const { getAllLogs, getLogById, updateLog, removeLog, addLog } = require('../controllers/logController');
+<<<<<<< HEAD
 const { getAllProjects, addProject, addSprint ,getProjectById,getSingleSprintByProject, updateProject, removeProject,getProjetAndSprint } = require('../controllers/projectsController');
 // const {taskController} = require('../controllers/taskController');
 // const { task } = require('../controllers/taskController');
@@ -25,6 +26,9 @@ const { getAllProjects, addProject, addSprint ,getProjectById,getSingleSprintByP
 // });
 
 
+=======
+const { getAllProjects, addProject, addSprint ,getProjectById,getSingleSprintByProject, updateProject, removeProject,getProjetAndSprint, deleteSingleSprintByProject } = require('../controllers/projectsController');
+>>>>>>> c7d33c80e0449c61d70661f3c9c20d2797fa3187
 router.get('/', function (req, res) {
     res.status(200).json({
         status: 'API is Working',
@@ -237,5 +241,13 @@ router.get('/', function (req, res) {
         }
     });
     
-
+    router.route('/project/:id1/delete_sprint/:id2').delete(async (req, res) => {
+        let response = await deleteSingleSprintByProject(req.params.id1,req.params.id2 );
+        if (response.success == true) {
+            res.status(200).json(response);
+         } else {
+             res.status(404).json(response);
+        }
+    });
+    
 module.exports = router;

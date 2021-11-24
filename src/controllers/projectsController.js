@@ -134,3 +134,27 @@ module.exports.getSingleSprintByProject = async function(idProject,idSprint){
         return { success: false, message: "Not found" + error};
         }
 }
+
+
+
+// delete sprint by id 
+module.exports.deleteSingleSprintByProject = async function(idProject,idSprint){
+    try {
+        const project = await Project.findById(idProject).populate("sprints");
+        const sprints = project.sprints;
+        let sprint;
+        sprints.forEach(element => {
+            if (element._id == idSprint){
+                sprint = element;
+                sprint.remove();
+            }
+        });
+        
+        return {
+            success:  true,
+    
+        }} catch (error){
+        return { success: false, message: "Not found" + error};
+        }
+}
+

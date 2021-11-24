@@ -40,5 +40,4 @@ export class ProjectsComponent implements OnInit {
    onUpdate(id: string){
     this.router.navigate(['/projectSettings/' + id]); 
    }
-
 }

@@ -1,1 +1,14 @@
-<p>single-sprint works!</p>
+<p>{{sprint.title}}</p>
+<div class="wrapper">
+    <details data-popover="down">
+      <summary>
+        <h2 class="hover_three_dots">...</h2>
+      </summary>
+      <div>
+        <div class="list-group popover__message">
+          <a  (click)="onDelete()" class="list-group-item list-group-item-action deleteProject" >Déplacer dans la corbeille</a> 
+ 
+        </div>
+      </div>
+    </details>
+  </div>

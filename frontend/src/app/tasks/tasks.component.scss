@@ -1,0 +1,41 @@
+.ligne:hover{
+    background-color: rgb(230, 230, 230);
+}
+
+.nameTask, .updateTask, .deleteTask{
+  cursor: pointer;
+}
+
+/* popover */
+details[data-popover] {
+    display: inline;
+    position: relative;
+  }
+  details[data-popover] > summary:focus {
+    outline: none;
+  }
+  details[data-popover] > summary::-webkit-details-marker {
+    display: none;
+  }
+  details[data-popover] > summary {
+    list-style: none;
+  }
+  details[data-popover] > summary + * {
+    position: absolute;
+    display: block;
+    z-index: 2;
+    width: 1000%;
+    border-radius: 0%;
+    padding: 0px;
+    background: rgb(255, 255, 255);
+  }
+  details[data-popover] > * + * {
+    /* hide detail elements that would ruin the popover */
+    display: none;
+  }
+
+  details[data-popover="down"] > summary + * {
+    top: calc(0rem + 100%);
+    right: 250%;
+    transform: translateX(50%);
+  }
