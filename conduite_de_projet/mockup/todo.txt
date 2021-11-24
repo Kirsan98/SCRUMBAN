@@ -1,0 +1,3 @@
+changer l'ordre des onglets accueil projets
+modif general en settings
+virer l'encart settings 

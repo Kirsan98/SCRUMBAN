@@ -81,9 +81,7 @@ module.exports.updateLog = async function(id, body) {
 // Remove an existing log
 module.exports.removeLog = async function(id) {
     try { 
-    // const contact = await Contact.findByIdAndRemove(id) 
-      const log = await Log.findById(id)
-      log.remove();
+    	const log = await Log.findByIdAndRemove(id);
       return {
         success: true,
         data: log,
