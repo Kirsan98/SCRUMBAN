@@ -4,7 +4,6 @@ const taskController = require('../controllers/taskController');
 const { getAllUsers, getUserById, updateUser, removeUser, addUser } = require('../controllers/userController');
 const { getAllColumns, getColumnById, updateColumn, removeColumn, addColumn } = require('../controllers/columnController');
 const { getAllLogs, getLogById, updateLog, removeLog, addLog } = require('../controllers/logController');
-<<<<<<< HEAD
 const { getAllProjects, addProject, addSprint ,getProjectById,getSingleSprintByProject, updateProject, removeProject,getProjetAndSprint } = require('../controllers/projectsController');
 // const {taskController} = require('../controllers/taskController');
 // const { task } = require('../controllers/taskController');
@@ -26,9 +25,6 @@ const { getAllProjects, addProject, addSprint ,getProjectById,getSingleSprintByP
 // });
 
 
-=======
-const { getAllProjects, addProject, addSprint ,getProjectById,getSingleSprintByProject, updateProject, removeProject,getProjetAndSprint, deleteSingleSprintByProject } = require('../controllers/projectsController');
->>>>>>> c7d33c80e0449c61d70661f3c9c20d2797fa3187
 router.get('/', function (req, res) {
     res.status(200).json({
         status: 'API is Working',
