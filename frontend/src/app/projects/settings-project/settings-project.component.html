@@ -6,13 +6,13 @@
 
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link" href="project/{{this.project._id}}">Détail du projet</a>
+          <a class="nav-link" routerLink="../../project/{{this.project._id}}">Détail du projet</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="tasks">Backlog</a>
+          <a class="nav-link" routerLink="../../tasks">Backlog</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="project/{{project?._id}}/sprints">Sprint</a>
+          <a class="nav-link" routerLink="../../project/{{project?._id}}/sprints">Sprint</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" routerLink="#">Setting</a>
