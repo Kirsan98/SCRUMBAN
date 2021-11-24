@@ -6,12 +6,14 @@ import { DeleteProjectComponent } from './projects/delete-project/delete-project
 import { NewProjectComponent } from './projects/new-project/new-project.component';
 import { NewSprintComponent } from './projects/new-sprint/new-sprint.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { TasksComponent } from './tasks/tasks.component';
 import { SingleProjectComponent } from './projects/single-project/single-project.component';
 import { SingleSprintComponent } from './projects/single-sprint/single-sprint.component';
 import { SettingsProjectComponent } from './projects/settings-project/settings-project.component';
 
 const routes: Routes = [
   {path: 'accueil',component: AccueilComponent},
+  {path: 'tasks',component: TasksComponent},
   {path: 'projects',component: ProjectsComponent},
   {path: 'project/:id', component: SingleProjectComponent},
   {path: 'projectSettings/:id', component: SettingsProjectComponent},

@@ -1,0 +1,40 @@
+<section>
+  <a routerLink="/newTask">
+    <button type="button" class="btn btn-primary btn-lg">
+      + Nouvelle tâche
+    </button>
+  </a>
+</section>
+
+<section>
+<h2 style="text-align: center">Vos Tâches:</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nom</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let task of tasks.slice().reverse();">
+    <tr class="ligne">
+      <td class="nameTask" (click)="onTaskClicked(task._id)">{{ task.title }}</td>
+      <td>
+        <div class="wrapper">
+          <details data-popover="down">
+            <summary>
+              <h2 class="hover_three_dots">...</h2>
+            </summary>
+            <div>
+              <div class="list-group popover__message">
+                <a  (click)="onUpdate(task._id)" class="list-group-item list-group-item-action updateTask" >Paramètres de la tâche</a>
+                <a  (click)="onDelete(task._id)" class="list-group-item list-group-item-action deleteTask" >Déplacer dans la corbeille</a> 
+              </div>
+            </div>
+          </details>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
