@@ -9,6 +9,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { SingleProjectComponent } from './projects/single-project/single-project.component';
 import { SingleSprintComponent } from './projects/single-sprint/single-sprint.component';
 import { SettingsProjectComponent } from './projects/settings-project/settings-project.component';
+import { DeletesprintComponent } from './projects/deletesprint/deletesprint.component';
 
 const routes: Routes = [
   {path: 'accueil',component: AccueilComponent},
@@ -19,6 +20,8 @@ const routes: Routes = [
   {path: 'newProject', component: NewProjectComponent},
   {path: 'newSprint/:id', component: NewSprintComponent},
   {path: 'project/:id1/sprint/:id2', component: SingleSprintComponent},
+  {path: 'project/:id1/delete-sprint/:id2', component: DeletesprintComponent},
+
 
   { path: '', pathMatch: 'full', redirectTo: 'accueil' },
   { path: '**', redirectTo: 'accueil' }];

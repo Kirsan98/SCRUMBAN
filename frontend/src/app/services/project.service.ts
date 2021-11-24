@@ -95,5 +95,19 @@ export class ProjectService{
         );
       });
     }
-    
+
+
+
+    deleteSingleSprintByProject(id1: string, id2: string){
+      return new Promise((resolve,reject) => {
+        this.http.delete('http://localhost:5000/api/project/'+ id1+'/delete_sprint/'+id2,).subscribe(
+          (response) => {
+            resolve(response);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    }
 }
