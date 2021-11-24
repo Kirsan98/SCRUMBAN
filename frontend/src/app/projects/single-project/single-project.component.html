@@ -30,7 +30,7 @@
         </thead>
         <tbody *ngFor="let sprint of sprints.slice().reverse();">
           <tr  class="ligne"  (click)="onSprintClicked(project._id,sprint._id)" >
-            <td class="nameProject">{{  sprint.title }}</td>
+            <td class="nameSprint">{{  sprint.title }}</td>
 
            
           </tr>

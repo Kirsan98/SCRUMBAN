@@ -1,3 +1,5 @@
 changer l'ordre des onglets accueil projets
 modif general en settings
 virer l'encart settings 
+
+faire crud sprint et l'utiliser dans project
