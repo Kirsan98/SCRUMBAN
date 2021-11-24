@@ -18,7 +18,7 @@ PUT http://localhost:5000/api/updateUser/618d6fcde8bdae86415cad58
 content-type: application/json
 
 {
-    "first_name": "Jules"
+	"first_name": "Jules"
 }
 
 ### addUser API URL
@@ -26,11 +26,11 @@ POST http://localhost:5000/api/addUser/
 content-type: application/json
 
 {
-    "first_name": "Patrik",
-    "last_name": "Legrand",
-    "email": "sait-kik@hotmail.com",
-    "username": "Test",
-    "password": "test2"
+	"first_name": "Patrik",
+	"last_name": "Legrand",
+	"email": "sait-kik@hotmail.com",
+	"username": "Test",
+	"password": "test2"
 }
 
 ### Default removeContact URL
@@ -49,10 +49,10 @@ POST http://localhost:5000/api/addColumn/
 content-type: application/json
 
 {
-    "title": "Column test",
-    "index": 0,
-    "maxTask": 10,
-    "_tasks": ["618d6fcde8bdae86415cad58","618d6fcde8bdae86415cad58"]
+	"title": "Column test",
+	"index": 0,
+	"maxTask": 10,
+	"_tasks": ["618d6fcde8bdae86415cad58","618d6fcde8bdae86415cad58"]
 }
 
 ### Default updateColumn URL
@@ -60,13 +60,38 @@ PUT http://localhost:5000/api/updateColumn/6195122b3c5dd1819f182277
 content-type: application/json
 
 {
-    "title": "Jules",
-    "index": 10,
-    "maxTask": 1
+	"title": "Jules",
+	"index": 10,
+	"maxTask": 1
 }
 
 ### Default removeColumn URL
 DELETE http://localhost:5000/api/removeColumn/6195122b3c5dd1819f182277
+
+
+### Add task to column
+POST http://localhost:5000/api/column/61951d1d3d935eb947113029/addTask/619ec4c87d5b5c528be8e823
+
+
+//***** TASK *****//
+
+### Get all tasks API URL
+GET http://localhost:5000/api/tasks/
+
+### Get the task
+GET http://localhost:5000/api/task/619ec4c87d5b5c528be8e823
+
+### Add a task API URL
+POST http://localhost:5000/api/addTask/
+content-type: application/json
+
+{
+	"title": "premiere tache wallah",
+	"color": "rouge",
+	"description": "ceci est la premiere tache, c'est un test",
+	"state": "a faire"
+}
+
 
 //***** LOG *****//
 
@@ -81,10 +106,10 @@ POST http://localhost:5000/api/addLog/
 content-type: application/json
 
 {
-    "_userId": "618d6fcde8bdae86415cad58",
-    "_columnIdStart": "61951d1d3d935eb947113029",
-    "_columnIdEnd": "61951d4a3d935eb94711302d",
-    "updated_at": "2020-11-17"
+	"_userId": "618d6fcde8bdae86415cad58",
+	"_columnIdStart": "61951d1d3d935eb947113029",
+	"_columnIdEnd": "61951d4a3d935eb94711302d",
+	"updated_at": "2020-11-17"
 }
 
 ### Default updateLog URL
@@ -92,9 +117,9 @@ PUT http://localhost:5000/api/updateLog/61951d853d935eb947113033
 content-type: application/json
 
 {
-    "_columnIdStart": "61951d4a3d935eb94711302d",
-    "_columnIdEnd": "61951d1d3d935eb947113029",
-    "updated_at": "2020-11-18"
+	"_columnIdStart": "61951d4a3d935eb94711302d",
+	"_columnIdEnd": "61951d1d3d935eb947113029",
+	"updated_at": "2020-11-18"
 }
 
 ### Default removeLog URL
@@ -115,7 +140,7 @@ POST http://localhost:5000/api/addProject/
 content-type: application/json
 
 {
-    "title": "PPPE"
+	"title": "PPPE"
 }
 
 #### Default updateProject URL
@@ -123,7 +148,7 @@ PUT http://localhost:5000/api/updateProject/619d165aab62e0388fdbfac7
 content-type: application/json
 
 {
-    "title": "Test"
+	"title": "Test"
 }
 
 ### Default removeProject URL
@@ -135,7 +160,7 @@ POST http://localhost:5000/api/addSprint/619d16a52002c0630d0f9364
 content-type: application/json
 
 {
-    "title": "Sprint 0"
+	"title": "Sprint 0"
 }
 
 
