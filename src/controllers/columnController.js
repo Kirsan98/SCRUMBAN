@@ -85,12 +85,12 @@ module.exports.updateColumn = async function (id, body) {
 module.exports.removeColumn = async function (id) {
 	try {
 		// const contact = await Contact.findByIdAndRemove(id) 
-		const column = await Column.findById(id)
+		const column = await Column.findById(id);
 		column.remove();
 		return {
 			success: true,
 			data: column,
-		}
+		};
 	} catch (error) {
 		return { success: false, message: "Column not removed " + error };
 	}
