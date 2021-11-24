@@ -10,7 +10,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { SingleProjectComponent } from './projects/single-project/single-project.component';
 import { SingleSprintComponent } from './projects/single-sprint/single-sprint.component';
 import { SettingsProjectComponent } from './projects/settings-project/settings-project.component';
-import { DeletesprintComponent } from './projects/deletesprint/deletesprint.component';
+import { DeletesprintComponent } from './projects/delete-sprint/deletesprint.component';
 
 const routes: Routes = [
   {path: 'accueil',component: AccueilComponent},
