@@ -137,3 +137,6 @@ content-type: application/json
     "title": "Sprint 0"
 }
 
+
+### get one sprint from project
+GET http://localhost:5000/api/project/619d16a52002c0630d0f9364/sprint/619d29510d3b3e78a6c4812f
