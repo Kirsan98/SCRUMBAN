@@ -17,8 +17,9 @@ import { NewSprintComponent } from './projects/new-sprint/new-sprint.component';
 import { SingleSprintComponent } from './projects/single-sprint/single-sprint.component';
 import { SettingsProjectComponent } from './projects/settings-project/settings-project.component';
 import { TasksComponent } from './tasks/tasks.component';
-import { DeletesprintComponent } from './projects/delete-sprint/deletesprint.component';
+import { DeletesprintComponent } from './projects/deleteSprint/deletesprint.component';
 import { JoinProjectComponent } from './projects/join-project/join-project.component';
+import { SprintsComponent } from './projects/sprints/sprints.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { JoinProjectComponent } from './projects/join-project/join-project.compo
     SettingsProjectComponent,
     TasksComponent,
     DeletesprintComponent,
-    JoinProjectComponent
+    JoinProjectComponent,
+    SprintsComponent,
   ],
   imports: [
     BrowserModule,

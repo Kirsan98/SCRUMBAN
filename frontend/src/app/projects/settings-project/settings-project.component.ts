@@ -44,7 +44,7 @@ export class SettingsProjectComponent implements OnInit {
     this.projectService.updateProject(this.project._id, projectUpdated).then(
       () => {
         this.updateProjectForm.reset();
-        this.router.navigate(['projects']);
+        this.router.navigate(['project/'+this.project._id]);
       }
     ).catch(
       (error) => {

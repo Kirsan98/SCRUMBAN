@@ -42,7 +42,7 @@ export class DeletesprintComponent implements OnInit {
   onDelete(){
     this.projectService.deleteSingleSprintByProject(this.project._id,this.sprint._id).then(
       () => {
-        this.router.navigate(['project/'+this.project._id]);
+        this.router.navigate(['project/'+this.project._id+'/sprints']);
       }
     )
   }

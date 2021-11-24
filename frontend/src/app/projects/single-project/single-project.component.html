@@ -1,42 +1,28 @@
-<h1>{{project?.title}}</h1>
-<p>{{project?.created_at}}</p>
-
-<p>{{project?._id}}</p>
-
 <section>
-  <button type="button" class="btn btn-primary" routerLink="/tasks"> Tâches </button>
-    <div class="col-3 bg-light p-3 border">
-      <a routerLink="/newSprint/{{project?._id}}">
-        <button
-        style="
-          margin-left: 20%;
-          margin-right: 20%;
-          margin-top: 10%;
-          margin-bottom:8%;
-          width: 15%;
-          min-width: 100px;
+  <div class="card " style="margin-right: 25px; margin-left: 25px; margin-top: 10px; margin-bottom: 20px; box-shadow: 0px 4px 10px #aaa;     position: unset;" >
 
-          box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
-        "
-        type="button"
-        class="btn btn-primary "
-      ><p>+ Sprint</p></button>
-    </a>
-    <table class="table" style="width: 80%; margin-left: 10%;; margin-right: 10%;">
-        <thead>
-          <tr>
-            <th scope="col">Nom</th>
+  <div class="card-body">
+    <h3  style="    text-align: -webkit-center;">{{project?.title}}</h3>
 
-          </tr>
-        </thead>
-        <tbody *ngFor="let sprint of sprints.slice().reverse();">
-          <tr  class="ligne"  (click)="onSprintClicked(project._id,sprint._id)" >
-            <td class="nameSprint">{{  sprint.title }}</td>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Détail du projet</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="tasks">Backlog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="project/{{project?._id}}/sprints">Sprint</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="projectSettings/{{project?._id}}">Setting</a>
+      </li>
+    </ul>
+    
+    <section>
+      <p> Date de création : {{project.created_at | date : "dd-mm-YYYY"}}</p>
+    </section>
 
-           
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
+  </div>
+</div>
 </section>
