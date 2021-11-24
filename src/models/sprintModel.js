@@ -8,9 +8,9 @@ const sprintSchema = new Schema({
   start_at: {type: Date},
   end_at: {type: Date},
   _user: [{ type: mongoose.Schema.Types.ObjectId, ref:'User'}],
-  maxColumns: {type: Number},
   columns:[{type: mongoose.Schema.Types.ObjectId, ref:'Column'}],
-  // TODO columns, planningDaily
+  planningDaily: {type: String},
+  sprintRetrospective: {type: String}
 });
 
 const Sprint = mongoose.model('Sprint', sprintSchema);
