@@ -18,6 +18,7 @@ import { SingleSprintComponent } from './projects/single-sprint/single-sprint.co
 import { SettingsProjectComponent } from './projects/settings-project/settings-project.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { DeletesprintComponent } from './projects/delete-sprint/deletesprint.component';
+import { JoinProjectComponent } from './projects/join-project/join-project.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { DeletesprintComponent } from './projects/delete-sprint/deletesprint.com
     SingleSprintComponent,
     SettingsProjectComponent,
     TasksComponent,
-    DeletesprintComponent
+    DeletesprintComponent,
+    JoinProjectComponent
   ],
   imports: [
     BrowserModule,

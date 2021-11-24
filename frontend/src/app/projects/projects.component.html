@@ -20,7 +20,7 @@
       </a>
       </div>
       <div class="col-4">
-        <a routerLink="">
+        <a routerLink="/join-project">
           <button
           style="
             margin-left: 20%;
@@ -48,7 +48,7 @@
 <section>
   <h2 style="text-align: center">Vos Projets:</h2>
 
-  <table class="table" style="width: 80%; margin-left: 10%;; margin-right: 10%;">
+  <table class="table" style="width: 80%; margin-left: 10%;; margin-right: 10%; margin-bottom: 10%;">
     <thead>
       <tr>
         <th scope="col">Nom</th>
@@ -59,7 +59,7 @@
     <tbody *ngFor="let project of projects.slice().reverse();">
       <tr  class="ligne"   >
         <td class="nameProject" (click)="onProjectClicked(project._id)">{{ project.title }}</td>
-        <td>{{project.created_at | date: 'dd/MM/y'}}</td>
+        <td class= "dateProject" (click)="onProjectClicked(project._id)">{{project.created_at | date: 'dd/MM/y'}}</td>
         <td>
           <div class="wrapper">
             <details data-popover="down">
