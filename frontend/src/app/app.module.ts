@@ -15,6 +15,7 @@ import { SingleProjectComponent } from './projects/single-project/single-project
 import { DeleteProjectComponent } from './projects/delete-project/delete-project.component';
 import { NewSprintComponent } from './projects/new-sprint/new-sprint.component';
 import { SingleSprintComponent } from './projects/single-sprint/single-sprint.component';
+import { SettingsProjectComponent } from './projects/settings-project/settings-project.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SingleSprintComponent } from './projects/single-sprint/single-sprint.co
     SingleProjectComponent,
     DeleteProjectComponent,
     NewSprintComponent,
-    SingleSprintComponent
+    SingleSprintComponent,
+    SettingsProjectComponent
   ],
   imports: [
     BrowserModule,

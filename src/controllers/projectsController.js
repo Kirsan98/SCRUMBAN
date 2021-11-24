@@ -24,10 +24,8 @@ module.exports.addProject = async function(body){
     return { success: false, message: "Project not added "};
     if (body.title!= null)
     projectAdded.title = body.title;
-    
     projectAdded.created_at = Date.now();
-    // if (body.updated_at != null)
-    // projectAdded.updated_at = body.updated_at;
+    projectAdded.updated_at = null;
     // if (body._members != null)
     // projectAdded._members = body._members;
     try {
@@ -46,6 +44,7 @@ module.exports.updateProject = async function(id,body){
     const projectUpdated = await Project.findById(id)
     if(projectUpdated == null)
     return { success: false, message: "Project not updated"};
+    projectUpdated.updated_at = Date.now();
     if (body.title != null)
     projectUpdated.title = body.title;
     if (body.sprints != null)
@@ -108,25 +107,31 @@ module.exports.getProjectById = async function(id){
         success:  true,
         data: project,
 
-        message: "Add successfully",
     }} catch (error){
-    return { success: false, message: "Fail to add" + error};
+    return { success: false, message: "Project not found" + error};
     }
 }
 
 
 // get sprint by id 
-module.exports.getSingleSprintByProject = async function(id1,id2){
-    // try {
-    //     const project = await Project.findByIdAndUpdate(id1).populate("sprints");
+module.exports.getSingleSprintByProject = async function(idProject,idSprint){
+    try {
+        const project = await Project.findById(idProject).populate("sprints");
+        //project = project.find({'_id':{$in:[id2]}})
+        const sprints = project.sprints;
+        let sprint;
+        sprints.forEach(element => {
+            if (element._id == idSprint){
+                sprint = element;
+            }
+        });
 
-    //     return {
-    //         success:  true,
-    //         data: project,
+        return {
+            success:  true,
+            data: sprint,
     
-    //         message: "Add successfully",
-    //     }} catch (error){
-    //     return { success: false, message: "Fail to add" + error};
-    //     }
+        }} catch (error){
+        return { success: false, message: "Not found" + error};
+        }
 }
 

@@ -12,7 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/Kirsan98/SCRUMBAN.git"
   },
-  "keywords": ["les boss"],
+  "keywords": [
+    "les boss"
+  ],
   "author": "KG_LD_VF",
   "license": "ISC",
   "bugs": {
