@@ -1,21 +1,47 @@
 <section>
-    <a routerLink="/newProject">
-        <button
-        style="
-          margin-left: 20%;
-          margin-right: 20%;
-          margin-top: 10%;
-          margin-bottom:8%;
-          width: 25%;
-          min-width: 200px;
-
-          box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
-        "
-        type="button"
-        class="btn btn-primary btn-lg"
-      >+ Nouveau projet</button>
-    </a>
+  <div class="container">
+    <div class="row justify-content-around">
+      <div class="col-4">
+        <a routerLink="/newProject">
+          <button
+          style="
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 10%;
+            margin-bottom:8%;
+            width: 25%;
+            min-width: 200px;
+  
+            box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
+          "
+          type="button"
+          class="btn btn-primary btn-lg"
+        >+ Nouveau projet</button>
+      </a>
+      </div>
+      <div class="col-4">
+        <a routerLink="">
+          <button
+          style="
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 10%;
+            margin-bottom:8%;
+            width: 25%;
+            min-width: 200px;
     
+            box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
+          "
+          type="button"
+          class="btn btn-primary btn-lg"
+        >+ Joindre projet</button>
+      </a>
+      </div>
+    </div>
+  </div>
+    
+   
+  
  
 </section>
 
@@ -26,15 +52,14 @@
     <thead>
       <tr>
         <th scope="col">Nom</th>
-        <th scope="col">Clé</th>
-        <th scope="col">Chef de projet</th>
+        <th scope="col">Date création</th>
+        <th scope="col">Paramètres</th>
       </tr>
     </thead>
     <tbody *ngFor="let project of projects.slice().reverse();">
       <tr  class="ligne"   >
         <td class="nameProject" (click)="onProjectClicked(project._id)">{{ project.title }}</td>
-        <td>Otto</td>
-        <td>XX</td>
+        <td>{{project.created_at | date: 'dd/MM/y'}}</td>
         <td>
           <div class="wrapper">
             <details data-popover="down">
