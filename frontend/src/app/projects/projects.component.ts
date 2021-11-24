@@ -37,4 +37,8 @@ export class ProjectsComponent implements OnInit {
     this.router.navigate(['/deleteProject/' + id]);
    }
 
+   onUpdate(id: string){
+    this.router.navigate(['/projectSettings/' + id]); 
+   }
+
 }

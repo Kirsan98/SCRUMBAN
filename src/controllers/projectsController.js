@@ -24,10 +24,8 @@ module.exports.addProject = async function(body){
     return { success: false, message: "Project not added "};
     if (body.title!= null)
     projectAdded.title = body.title;
-    
     projectAdded.created_at = Date.now();
-    // if (body.updated_at != null)
-    // projectAdded.updated_at = body.updated_at;
+    projectAdded.updated_at = null;
     // if (body._members != null)
     // projectAdded._members = body._members;
     try {
@@ -46,6 +44,7 @@ module.exports.updateProject = async function(id,body){
     const projectUpdated = await Project.findById(id)
     if(projectUpdated == null)
     return { success: false, message: "Project not updated"};
+    projectUpdated.updated_at = Date.now();
     if (body.title != null)
     projectUpdated.title = body.title;
     if (body.sprints != null)

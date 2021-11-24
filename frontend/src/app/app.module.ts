@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SingleProjectComponent } from './projects/single-project/single-project.component';
 import { DeleteProjectComponent } from './projects/delete-project/delete-project.component';
 import { NewSprintComponent } from './projects/new-sprint/new-sprint.component';
+import { SettingsProjectComponent } from './projects/settings-project/settings-project.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NewSprintComponent } from './projects/new-sprint/new-sprint.component';
     NewProjectComponent,
     SingleProjectComponent,
     DeleteProjectComponent,
-    NewSprintComponent
+    NewSprintComponent,
+    SettingsProjectComponent
   ],
   imports: [
     BrowserModule,

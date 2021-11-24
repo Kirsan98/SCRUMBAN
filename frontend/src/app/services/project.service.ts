@@ -42,6 +42,21 @@ export class ProjectService{
       });
     }
 
+    updateProject(id: string, project: Project){
+      console.log(project);
+      return new Promise((resolve, reject) => {
+        this.http.put('http://localhost:5000/api/updateProject/' + id, project).subscribe(
+          (response) => {
+            console.log(response);
+            resolve(response);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    }
+
     getProjectById(id: string){
       return new Promise((resolve,reject) => {
         this.http.get('http://localhost:5000/api/projects/'+ id).subscribe(

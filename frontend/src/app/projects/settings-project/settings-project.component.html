@@ -1,0 +1,10 @@
+
+<section>
+  <form [formGroup]="updateProjectForm">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" formControlName="title" placeholder="Enter new title" name="title">
+      <button class="btn btn-primary btn-lg" (click)="onSubmit()">Update</button>
+    </div>
+  </form>
+</section>

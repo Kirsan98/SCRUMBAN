@@ -1,5 +1,5 @@
 <section>
-    <a href="newProject">
+    <a routerLink="/newProject">
         <button
         style="
           margin-left: 20%;
@@ -43,7 +43,7 @@
               </summary>
               <div>
                 <div class="list-group popover__message">
-                  <a  href="accueil" class="list-group-item list-group-item-action">Paramètres du projet</a>
+                  <a  (click)="onUpdate(project._id)" class="list-group-item list-group-item-action updateProject" >Paramètres du projet</a>
                   <a  (click)="onDelete(project._id)" class="list-group-item list-group-item-action deleteProject" >Déplacer dans la corbeille</a> 
                   <!-- 
                     TODO
