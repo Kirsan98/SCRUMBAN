@@ -34,10 +34,10 @@ export class ProjectsComponent implements OnInit {
    }
 
    onDelete(id: string){
-    this.router.navigate(['/deleteProject/' + id]);
+    this.router.navigate(['/delete-project/' + id]);
    }
 
    onUpdate(id: string){
-    this.router.navigate(['/projectSettings/' + id]); 
+    this.router.navigate(['/project-settings/' + id]); 
    }
 }

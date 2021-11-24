@@ -1,8 +1,8 @@
 
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <h5 style="margin-top: 3%;">Vous êtes absoluement sûr ?</h5>
-    <p style="margin: 10%;">
+    <h5 class="title">Vous êtes absoluement sûr ?</h5>
+    <p class="text">
       This action cannot be undone. This will permanently delete
       {{project.title}}
       and remove all collaborator associations.
@@ -10,8 +10,9 @@
 
     <p>Please type <b>{{project.title}}</b> to confirm.</p>
 
-    <input  style="width: 80%; margin-left: 10%;margin-right: 10%;" type="text" class="form-control"  placeholder="" >
-
+    <div class="inputTitle">
+      <input type="text" class="form-control"  placeholder="" >
+    </div>
     <button class="btn btn-danger m-1" (click)="onDelete()" >Supprimer</button>
   </div>
 </div>

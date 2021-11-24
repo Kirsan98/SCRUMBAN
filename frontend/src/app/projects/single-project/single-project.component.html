@@ -1,8 +1,8 @@
 <section>
-  <div class="card " style="margin-right: 25px; margin-left: 25px; margin-top: 10px; margin-bottom: 20px; box-shadow: 0px 4px 10px #aaa;     position: unset;" >
+  <div class="card ">
 
   <div class="card-body">
-    <h3  style="    text-align: -webkit-center;">{{project?.title}}</h3>
+    <h3  class="titleProject">{{project?.title}}</h3>
 
     <ul class="nav nav-tabs">
       <li class="nav-item">
@@ -15,7 +15,7 @@
         <a class="nav-link" href="project/{{project?._id}}/sprints">Sprint</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="projectSettings/{{project?._id}}">Setting</a>
+        <a class="nav-link" href="project-settings/{{project?._id}}">Setting</a>
       </li>
     </ul>
     

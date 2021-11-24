@@ -35,10 +35,10 @@ export class SingleProjectComponent implements OnInit {
 
 
   onDelete(){
-    this.router.navigate(['/deleteProject/' + this.project._id]);
+    this.router.navigate(['/delete-project/' + this.project._id]);
    }
 
    onUpdate(){
-    this.router.navigate(['/projectSettings/' + this.project._id]); 
+    this.router.navigate(['/project-settings/' + this.project._id]); 
    }
 }
