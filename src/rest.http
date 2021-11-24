@@ -107,7 +107,7 @@ GET http://localhost:5000/api/projects/
 
 
 ### getProjectById API URL
-GET http://localhost:5000/api/projects/619d165aab62e0388fdbfac7
+GET http://localhost:5000/api/projects/619d16a52002c0630d0f9364
 
 ### add project
 POST http://localhost:5000/api/addProject/
@@ -130,7 +130,7 @@ DELETE http://localhost:5000/api/removeProject/619a9dd68616a2e8d5c083db
 
 
 ### create sprint
-POST http://localhost:5000/api/addSprint/619d165aab62e0388fdbfac7
+POST http://localhost:5000/api/addSprint/619d16a52002c0630d0f9364
 content-type: application/json
 
 {
@@ -140,3 +140,7 @@ content-type: application/json
 
 ### get one sprint from project
 GET http://localhost:5000/api/project/619d16a52002c0630d0f9364/sprint/619d29510d3b3e78a6c4812f
+
+###delete one sprint from project 
+DELETE http://localhost:5000/api/project/619d16a52002c0630d0f9364/delete_sprint/619e5cdb2b46f4c047513490
+
