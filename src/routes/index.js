@@ -1,10 +1,10 @@
 const router = require('express').Router();
 
 const taskController = require('../controllers/taskController');
-const { getAllUsers, getUserById, updateUser, removeUser, addUser } = require('../controllers/userController');
-const { getAllColumns, getColumnById, updateColumn, removeColumn, addColumn } = require('../controllers/columnController');
-const { getAllLogs, getLogById, updateLog, removeLog, addLog } = require('../controllers/logController');
-const { getAllProjects, addProject, addSprint ,getProjectById,getSingleSprintByProject, updateProject, removeProject,getProjetAndSprint } = require('../controllers/projectsController');
+const userController = require('../controllers/userController');
+const columnController = require('../controllers/columnController');
+const logController = require('../controllers/logController');
+const  projectController = require('../controllers/projectsController');
 // const {taskController} = require('../controllers/taskController');
 // const { task } = require('../controllers/taskController');
 // router.route('/tasks').get(async (req, res) =>{
@@ -34,7 +34,7 @@ router.get('/', function (req, res) {
 
 // USER //
     router.route('/users').get(async (req, res) => {
-        let response = await getAllUsers();
+        let response = await userController.getAllUsers();
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -43,7 +43,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/user/:id').get(async (req, res) => {
-        let response = await getUserById(req.params.id);
+        let response = await userController.getUserById(req.params.id);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -52,7 +52,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/addUser/').post(async (req, res) => {
-        let response = await addUser(req.body);
+        let response = await userController.addUser(req.body);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -61,7 +61,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/updateUser/:id').put(async (req, res) => {
-        let response = await updateUser(req.params.id, req.body);
+        let response = await userController.updateUser(req.params.id, req.body);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -71,7 +71,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/removeUser/:id').delete(async (req, res) => {
-        let response = await removeUser(req.params.id);
+        let response = await userController.removeUser(req.params.id);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -81,8 +81,7 @@ router.get('/', function (req, res) {
 
 // COLUMN // 
     router.route('/columns').get(async (req, res) => {
-        // let response = await ColumnController.getAllColumns();
-        let response = await getAllColumns();
+        let response = await columnController.getAllColumns();
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -91,7 +90,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/column/:id').get(async (req, res) => {
-        let response = await getColumnById(req.params.id);
+        let response = await columnController.getColumnById(req.params.id);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -100,7 +99,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/addColumn/').post(async (req, res) => {
-        let response = await addColumn(req.body);
+        let response = await columnController.addColumn(req.body);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -109,7 +108,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/updateColumn/:id').put(async (req, res) => {
-        let response = await updateColumn(req.params.id, req.body);
+        let response = await columnController.updateColumn(req.params.id, req.body);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -118,7 +117,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/removeColumn/:id').delete(async (req, res) => {
-        let response = await removeColumn(req.params.id);
+        let response = await columnController.removeColumn(req.params.id);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -128,7 +127,7 @@ router.get('/', function (req, res) {
 
 // LOG // 
     router.route('/logs').get(async (req, res) => {
-        let response = await getAllLogs();
+        let response = await logController.getAllLogs();
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -137,7 +136,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/log/:id').get(async (req, res) => {
-        let response = await getLogById(req.params.id);
+        let response = await logController.getLogById(req.params.id);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -146,7 +145,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/addLog/').post(async (req, res) => {
-        let response = await addLog(req.body);
+        let response = await logController.addLog(req.body);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -155,7 +154,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/updateLog/:id').put(async (req, res) => {
-        let response = await updateLog(req.params.id, req.body);
+        let response = await logController.updateLog(req.params.id, req.body);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -164,7 +163,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/removeLog/:id').delete(async (req, res) => {
-        let response = await removeLog(req.params.id);
+        let response = await logController.removeLog(req.params.id);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -175,7 +174,7 @@ router.get('/', function (req, res) {
 
 // PROJECTS
     router.route('/projects').get(async (req, res) => {
-        let response = await getAllProjects();
+        let response = await projectController.getAllProjects();
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -184,7 +183,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/projects/:id').get(async (req, res) => {
-        let response = await getProjectById(req.params.id);
+        let response = await projectController.getProjectById(req.params.id);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -193,7 +192,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/addProject/').post(async (req, res) => {
-        let response = await addProject(req.body);
+        let response = await projectController.addProject(req.body);
         if (response.success == true) {
             res.status(200).json(response);
          } else {
@@ -202,7 +201,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/updateProject/:id').put(async (req,res) => {
-        let response = await updateProject(req.params.id, req.body);
+        let response = await projectController.updateProject(req.params.id, req.body);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -211,7 +210,7 @@ router.get('/', function (req, res) {
     });
     
     router.route('/removeProject/:id').delete(async (req, res) => {
-        let response = await removeProject(req.params.id);
+        let response = await projectController.removeProject(req.params.id);
         if (response.success == true) {
             res.status(200).json(response);
         } else {
@@ -220,7 +219,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/addSprint/:id').post(async (req, res) => {
-        let response = await addSprint(req.params.id, req.body);
+        let response = await projectController.addSprint(req.params.id, req.body);
         if (response.success == true) {
             res.status(200).json(response);
          } else {
@@ -229,7 +228,7 @@ router.get('/', function (req, res) {
     });
 
     router.route('/project/:id1/sprint/:id2').get(async (req, res) => {
-        let response = await getSingleSprintByProject(req.params.id1,req.params.id2 );
+        let response = await projectController.getSingleSprintByProject(req.params.id1,req.params.id2 );
         if (response.success == true) {
             res.status(200).json(response);
          } else {
@@ -238,7 +237,7 @@ router.get('/', function (req, res) {
     });
     
     router.route('/project/:id1/delete_sprint/:id2').delete(async (req, res) => {
-        let response = await deleteSingleSprintByProject(req.params.id1,req.params.id2 );
+        let response = await projectController.deleteSingleSprintByProject(req.params.id1,req.params.id2 );
         if (response.success == true) {
             res.status(200).json(response);
          } else {
