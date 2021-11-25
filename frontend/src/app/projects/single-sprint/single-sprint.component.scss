@@ -3,7 +3,7 @@
   background-color: rgb(230, 230, 230);
 }
 
-.ligne {
+.ligne, .hover_three_dots {
   cursor: pointer;
 }
 
@@ -45,8 +45,6 @@
   margin-right: 20%;
   margin-top: 10%;
   margin-bottom: 8%;
-  width: 15%;
-  min-width: 100px;
 
   box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
 }

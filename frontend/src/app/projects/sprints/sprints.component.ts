@@ -27,6 +27,9 @@ export class SprintsComponent implements OnInit {
           (project: any) => {
             this.project = project['data'];
             this.sprints = this.project.sprints;
+            
+            console.log(this.sprints);
+            
           }
           );
         }
