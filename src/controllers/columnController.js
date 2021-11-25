@@ -1,6 +1,6 @@
 const Column = require('../models/columnModel');
 
-let ColumnController = {};
+
 // Get all columns
 module.exports.getAllColumns = async function () {
 	let total = await Column.countDocuments({});
@@ -19,7 +19,7 @@ module.exports.getAllColumns = async function () {
 }
 
 // Get column by Id
-module.exports.getColumnById = async function (id) {
+module.exports.getColumnById = async function (idColumn) {
 	try {
 		const column = await Column.findById(id);
 		return {
@@ -57,8 +57,8 @@ module.exports.addColumn = async function (body) {
 }
 
 // Update an existing column
-module.exports.updateColumn = async function (id, body) {
-	const columnUpdated = await Column.findById(id);
+module.exports.updateColumn = async function (idColumn, body) {
+	const columnUpdated = await Column.findById(idColumn);
 	if (columnUpdated == null)
 		return { success: false, message: "column not updated " };
 	if (body.title != null)
@@ -82,16 +82,29 @@ module.exports.updateColumn = async function (id, body) {
 }
 
 // Remove an existing column
-module.exports.removeColumn = async function (id) {
+module.exports.removeColumn = async function (idColumn) {
 	try {
-		// const contact = await Contact.findByIdAndRemove(id) 
-		const column = await Column.findById(id)
+		const column = await Column.findById(idColumn);
 		column.remove();
 		return {
 			success: true,
 			data: column,
-		}
+		};
 	} catch (error) {
 		return { success: false, message: "Column not removed " + error };
+	}
+}
+
+// Add a task to an existing column
+module.exports.addTaskToColumn = async function (idColumn, idTask) {
+	try {
+		const column = await Column.findById(idColumn);
+		column._tasks.push(idTask);
+		return { 
+			success: true,
+			data: column,
+		};
+	} catch (error) {
+		return { success: false, message: "task not added to the column " + error };
 	}
 }

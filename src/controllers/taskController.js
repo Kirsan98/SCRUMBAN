@@ -2,25 +2,25 @@ const Task = require('../models/taskModel');
 
 // Get all tasks
 module.exports.getAllTask = async function () {
-    let total = await Task.countDocuments({});
-    let limit = parseInt(total);
+  let total = await Task.countDocuments({});
+  let limit = parseInt(total);
 
-    try {
-      const tasks = await Task.find().limit(limit);
-      return {
-        success: true,
-        data: tasks,
-        total: total.toString(),
-      }
-    } catch (err) {
-      return { success: false, message: "Taks not found " + err };
+  try {
+    const tasks = await Task.find().limit(limit);
+    return {
+      success: true,
+      data: tasks,
+      total: total.toString(),
     }
+  } catch (err) {
+    return { success: false, message: "Taks not found " + err };
   }
+}
 
 // Get task by Id
-module.exports.getTaskById = async function (id) {
+module.exports.getTaskById = async function (idTask) {
   try {
-    const task = await Task.findById(id);
+    const task = await Task.findById(idTask);
     return {
       success: true,
       data: task,
@@ -63,8 +63,48 @@ module.exports.addTask = async function (body) {
   }
 }
 
-// // Update an existing task
-// module.exports.updateTask = async function(idTask, body){
-//   const taskUpdated = await Task.findById(idTask);
+// Update an existing task
+module.exports.updateTask = async function (idTask, body) {
+  const taskUpdated = await Task.findById(idTask);
+  if (taskUpdated == null)
+    return { success: false, message: "task not updated" };
+  if (body != null) {
+    if (body.title != null)
+      taskUpdated.title = body.title;
+    if (body.color != null)
+      taskUpdated.color = body.color;
+    if (body.description != null)
+      taskUpdated.description = body.description;
+    if (body.state != null)
+      taskUpdated.state = body.state;
+    if (body._owner != null)
+      taskUpdated._owner = body._owner;
+    if (body.created_at != null)
+      taskUpdated.created_at = body.created_at;
+    if (body.estimated_duration != null)
+      taskUpdated.estimated_duration = body.estimated_duration;
+    if (body._logs != null)
+      taskUpdated._logs = body._logs;
+  }
+  try {
+    await taskUpdated.save();
+    return {
+      success: true,
+      data: taskUpdated,
+      message: "task updated successfully",
+    }
+  } catch (error) {
+    return { success: false, message: "Fail to update task " + error };
+  }
+}
 
-// }
+// Remove an existing task
+module.exports.removeTask = async function (idTask) {
+  try {
+    const task = await Task.findById(idTask);
+    task.remove();
+    return { success: true, data: task };
+  } catch (error) {
+    return { success: false, message: "Task not removed " + error };
+  }
+}
