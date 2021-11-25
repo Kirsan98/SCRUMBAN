@@ -140,7 +140,8 @@ POST http://localhost:5000/api/addProject/
 content-type: application/json
 
 {
-	"title": "PPPE"
+	"title": "PPPE",
+	"password" :"123"
 }
 
 #### Default updateProject URL

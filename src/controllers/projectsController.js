@@ -26,6 +26,8 @@ module.exports.addProject = async function(body){
     projectAdded.title = body.title;
     projectAdded.created_at = Date.now();
     projectAdded.updated_at = null;
+    if( body.password!=null)
+    projectAdded.password = body.password;
     // if (body._members != null)
     // projectAdded._members = body._members;
     try {
