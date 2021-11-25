@@ -29,9 +29,9 @@ export class NewProjectComponent implements OnInit {
     const project = new Project();
     project.title = this.projectForm.get('title')?.value;
     this.projectService.addProject(project).then(
-      ()=>{
-        this.projectForm.reset();
-        this.router.navigate(['projects']);
+      (project: any)=>{
+        this.projectForm.reset();        
+        this.router.navigate(['project/'+project['data']._id]);
       }
     ).catch(
       (error) => {

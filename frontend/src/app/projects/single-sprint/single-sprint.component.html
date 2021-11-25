@@ -1,18 +1,137 @@
 
-<p>{{ sprint.title }}</p>
-<div class="wrapper">
-  <details data-popover="down">
-    <summary>
-      <h2 class="hover_three_dots">...</h2>
-    </summary>
-    <div>
-      <div class="list-group popover__message">
-        <a
-          (click)="onDelete()"
-          class="list-group-item list-group-item-action deleteProject"
-          >Déplacer dans la corbeille</a
-        >
+
+<div class="card">
+  <div class="card-body">
+    <section>
+      <h3 class="titleProject">{{ project.title }}</h3>
+
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/project/{{ project._id }}"
+            >Détail</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/tasks">Backlog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Sprint</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/project-settings/{{ project?._id }}"
+            >Setting</a
+          >
+        </li>
+      </ul>
+    </section>
+
+    <section style="margin-top: 10px" >
+      
+      <div class="row">
+        <div class="col-2">
+          <a routerLink="/new-sprint/{{ project?._id }}">
+            <button type="button" class="btn btn-primary">
+              <p>+ Sprint</p>
+            </button>
+          </a>
+          <div class="bg-light border">
+            <div class="scroller">
+            <table class="table" >
+              <thead>
+                <tr>
+                  <th scope="col">Nom</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let sprint of sprints.slice().reverse()">
+                <tr
+                  class="ligne"
+                  (click)="onSprintClicked(project._id, sprint._id)"
+                >
+                  <td class="name-sprint">{{ sprint.title }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+        </div>
+        <div class="col-10">
+
+          <div class="row">
+            <div class="col-10"><div class="titleSprint">
+              <h5>{{sprint.title}}</h5>
+            </div>  </div>
+            <div class="col-2"> <div class="wrapper">
+              <details data-popover="down">
+                <summary >
+                  <h2 class="hover_three_dots"  style=" 
+                  margin-right: 20px;
+                ">...</h2>
+                </summary>
+                <div>
+                  <div class="list-group popover__message">
+                    <a
+                      (click)="onDelete()"
+                      class="list-group-item list-group-item-action deleteProject"
+                      >Déplacer dans la corbeille</a
+                    >
+                  </div>
+                </div>
+              </details>
+            </div></div>
+          </div>
+                    
+
+         
+          <div class="bg-light border">
+
+
+            <div class="container">
+              <div class="row">
+                <div class="col colonne">
+                  <h4 style="text-align: center;">A faire </h4>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+              </div>
+                <div class="col colonne">
+                  <h4 style="text-align: center;">En cours</h4>
+                </div>
+                <div class="col colonne">
+                  <h4 style="text-align: center;">Review</h4>
+                </div>
+                <div class="col colonne">
+                  <h4 style="text-align: center;">Terminé </h4>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </details>
+    </section>
+  </div>
 </div>
+
+

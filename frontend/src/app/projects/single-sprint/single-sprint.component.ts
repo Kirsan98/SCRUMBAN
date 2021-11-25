@@ -12,6 +12,7 @@ import { ProjectService } from 'src/app/services/project.service';
 export class SingleSprintComponent implements OnInit {
   public project!: Project;
   public sprint!: Sprint;
+  public sprints!: Sprint[];
 
   constructor(
     private router: Router,
@@ -25,6 +26,7 @@ export class SingleSprintComponent implements OnInit {
             this.projectService.getProjectById(params.get('id1')).then(
               (project: any) => {
                 this.project = project['data']
+                this.sprints = this.project.sprints;
               }
             )        
             this.projectService.getSingleSprintByProject(params.get('id1'),params.get('id2')).then(
@@ -39,6 +41,12 @@ export class SingleSprintComponent implements OnInit {
     onDelete(){
       this.router.navigate(['/project/' + this.project._id+'/delete-sprint/'+this.sprint._id]);
      }
+
+       
+  onSprintClicked(id1: string, id2: string){
+    this.router.navigate(['project/'+id1+'/sprint/'+id2]);
+  }
+
 
  
 }

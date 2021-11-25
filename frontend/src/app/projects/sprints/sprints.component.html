@@ -1,3 +1,4 @@
+
 <div class="card">
   <div class="card-body">
     <section>
@@ -6,7 +7,7 @@
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link" routerLink="../../../project/{{ project._id }}"
-            >Détail du projet</a
+            >Détail</a
           >
         </li>
         <li class="nav-item">
@@ -23,16 +24,18 @@
       </ul>
     </section>
 
-    <section style="margin-top: 10px">
+    <section style="margin-top: 10px" >
+      
       <div class="row">
         <div class="col-2">
+          <a routerLink="/new-sprint/{{ project?._id }}">
+            <button type="button" class="btn btn-primary">
+              <p>+ Sprint</p>
+            </button>
+          </a>
           <div class="bg-light border">
-            <a routerLink="/new-sprint/{{ project?._id }}">
-              <button type="button" class="btn btn-primary">
-                <p>+ Sprint</p>
-              </button>
-            </a>
-            <table class="table">
+            <div class="scroller">
+            <table class="table" >
               <thead>
                 <tr>
                   <th scope="col">Nom</th>
@@ -48,9 +51,55 @@
               </tbody>
             </table>
           </div>
+          </div>
         </div>
-        <div class="col-8">
-          <div class="bg-light border">col-8</div>
+        <div class="col-10">
+          <div class="bg-light border">
+
+
+            <div class="container">
+              <div class="row">
+                <div class="col colonne">
+                  <h4 style="text-align: center;">A faire </h4>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+                <div class="card">
+                  Tache 
+                </div>
+              </div>
+                <div class="col colonne">
+                  <h4 style="text-align: center;">En cours</h4>
+                </div>
+                <div class="col colonne">
+                  <h4 style="text-align: center;">Review</h4>
+                </div>
+                <div class="col colonne">
+                  <h4 style="text-align: center;">Terminé </h4>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
