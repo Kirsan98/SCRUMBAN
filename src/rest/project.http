@@ -1,0 +1,58 @@
+# PROJECTS
+
+### Get all projects
+GET http://localhost:5000/api/projects/
+
+### getProjectById API URL
+GET http://localhost:5000/api/projects/619e83c92b46f4c0475135d4
+
+### add project
+POST http://localhost:5000/api/addProject/
+content-type: application/json
+
+{
+	"title": "PPPE"
+}
+
+#### Default updateProject URL
+PUT http://localhost:5000/api/updateProject/619d165aab62e0388fdbfac7
+content-type: application/json
+
+{
+	"title": "Test"
+}
+
+### Default removeProject URL
+DELETE http://localhost:5000/api/removeProject/619e83c92b46f4c0475135d4
+
+### create sprint
+POST http://localhost:5000/api/addSprint/619d16a52002c0630d0f9364
+content-type: application/json
+
+{
+	"title": "Sprint 0"
+}
+
+### get one sprint from project
+GET http://localhost:5000/api/project/619c1f7ebd1154bf4b51ccb8/sprint/619c1f88bd1154bf4b51ccbe
+
+###delete one sprint from project 
+DELETE http://localhost:5000/api/project/619d16a52002c0630d0f9364/delete_sprint/619e5cdb2b46f4c047513490
+
+########################################################################################################
+
+### Create task in an existing project
+POST http://localhost:5000/api/project/619e83b82b46f4c0475135cc/add-task
+content-type: application/json
+
+{
+	"title": "Task 1"
+}
+
+### Get task from an existing project
+GET http://localhost:5000/api/project/619e83b42b46f4c0475135c8/task/619f656c3371b688d6260595
+
+### Get all tasks from an existing project
+GET http://localhost:5000/api/project/619e83b42b46f4c0475135c8/tasks
+
+##############################################################################################################

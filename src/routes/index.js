@@ -144,6 +144,15 @@ router.route('/task/:id').get(async (req, res) => {
 	}
 });
 
+router.route('/removeTask/:id').delete(async (req, res) => {
+	let response = await taskController.removeTask(req.params.id);
+	if (response.success == true) {
+		res.status(200).json(response);
+	} else {
+		res.status(404).json(response);
+	}
+});
+
 // LOG // 
 router.route('/logs').get(async (req, res) => {
 	let response = await logController.getAllLogs();
@@ -246,6 +255,33 @@ router.route('/addSprint/:id').post(async (req, res) => {
 	}
 });
 
+router.route('/project/:id/add-task/').post(async (req, res) => {
+	let response = await projectController.addTaskToProject(req.params.id, req.body);
+	if (response.success == true) {
+		res.status(200).json(response);
+	} else {
+		res.status(404).json(response);
+	}
+});
+
+router.route('/project/:idProject/task/:idTask').get(async (req, res) => {
+	let response = await projectController.getTaskFromProject(req.params.idProject, req.params.idTask);
+	if (response.success == true) {
+		res.status(200).json(response);
+	} else {
+		res.status(404).json(response);
+	}
+});
+
+router.route('/project/:id/tasks').get(async (req, res) => {
+	let response = await projectController.getTasksFromProject(req.params.id);
+	if (response.success == true) {
+		res.status(200).json(response);
+	} else {
+		res.status(404).json(response);
+	}
+});
+
 router.route('/project/:id1/sprint/:id2').get(async (req, res) => {
 	let response = await projectController.getSingleSprintByProject(req.params.id1, req.params.id2);
 	if (response.success == true) {
@@ -272,5 +308,6 @@ router.route('/project/:id1/sprint/:id2/add-column').post(async (req, res) => {
 		res.status(404).json(response);
 	}
 });
+
 
 module.exports = router;
