@@ -1,5 +1,6 @@
 const Project = require('../models/projectModel');
 const Sprint = require('../models/sprintModel');
+const Column = require('../models/columnModel')
 
 //get all projects
 module.exports.getAllProjects = async function(){
@@ -97,6 +98,7 @@ module.exports.addSprint = async function(id,body){
 
     const project = await Project.findByIdAndUpdate(id,
        {$push: {sprints:sprintAdded} });
+       // add modif de KG
     return {
         success:  true,
         data: project,
@@ -166,3 +168,42 @@ module.exports.deleteSingleSprintByProject = async function(idProject,idSprint){
         }
 }
 
+// add column 
+
+// module.exports.addColumn = async function(idProject,idSprint,body){
+//     const columnAdded = new Column();
+//     if(columnAdded == null)
+//     return { success: false, message: "Column not added "};
+//     //if (body.title!= null)
+//     columnAdded.title = body.title;
+//     // if(body.index!= null)
+//     // columnAdded.index = body.index;
+//     // if(body.maxTask != null)
+//     // columnAdded.maxTask = body.maxTask;
+//     // columnAdded._tasks = null;
+//     try {
+//     await columnAdded.save();
+
+//     const projectNew = await Project.findById(idProject);
+//     let sprint;
+//     projectNew.sprints.forEach(element => {
+//          if (element._id == idSprint){
+//              sprint = element;
+//          }
+//     });
+
+//     sprint.columns.push(columnAdded);
+
+
+//     const project = await Project.findByIdAndUpdate(idProject,
+//     {$push: {}});
+    
+//     return {
+//         success:  true,
+//         data: project,
+
+//         message: "Add successfully",
+//     }} catch (error){
+//     return { success: false, message: "Fail to add" + error};
+//     }
+// }

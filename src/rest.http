@@ -175,3 +175,9 @@ GET http://localhost:5000/api/project/619e83b42b46f4c0475135c8/sprint/619f9cc5f5
 ###delete one sprint from project 
 DELETE http://localhost:5000/api/project/619d16a52002c0630d0f9364/delete_sprint/619e5cdb2b46f4c047513490
 
+### add column to define sprint in one project
+POST http://localhost:5000/api/project/619e83b42b46f4c0475135c8/sprint/619f9cc5f538de7420a1ba35/add-column
+
+{
+	"title":"test"
+}

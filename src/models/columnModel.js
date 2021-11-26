@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 // created schema for Board
 const columnSchema = new Schema({
-  title: {type: String, required: true},
+  title: {type: String},
   index: Number,
   maxTask : Number,
   _tasks: [{type: mongoose.Schema.Types.ObjectId, ref:'Task'}],
