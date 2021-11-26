@@ -133,14 +133,15 @@ GET http://localhost:5000/api/projects/
 
 
 ### getProjectById API URL
-GET http://localhost:5000/api/projects/619d16a52002c0630d0f9364
+GET http://localhost:5000/api/projects/619e83b42b46f4c0475135c8
 
 ### add project
 POST http://localhost:5000/api/addProject/
 content-type: application/json
 
 {
-	"title": "PPPE"
+	"title": "PPPE",
+	"password" :"123"
 }
 
 #### Default updateProject URL
@@ -156,16 +157,20 @@ DELETE http://localhost:5000/api/removeProject/619a9dd68616a2e8d5c083db
 
 
 ### create sprint
-POST http://localhost:5000/api/addSprint/619d16a52002c0630d0f9364
+POST http://localhost:5000/api/addSprint/619e83b42b46f4c0475135c8
 content-type: application/json
 
 {
-	"title": "Sprint 0"
+	"title": "Sprint 2",
+	"start_at": "10-12-2021",
+	"end_at": "10-12-2022",
+	"planningDaily": "A 9h",
+	"sprintRetrospective": "Un jour avant la fin"
 }
 
 
 ### get one sprint from project
-GET http://localhost:5000/api/project/619c1f7ebd1154bf4b51ccb8/sprint/619c1f88bd1154bf4b51ccbe
+GET http://localhost:5000/api/project/619e83b42b46f4c0475135c8/sprint/619f9cc5f538de7420a1ba35
 
 ###delete one sprint from project 
 DELETE http://localhost:5000/api/project/619d16a52002c0630d0f9364/delete_sprint/619e5cdb2b46f4c047513490

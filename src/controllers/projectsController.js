@@ -26,6 +26,8 @@ module.exports.addProject = async function(body){
     projectAdded.title = body.title;
     projectAdded.created_at = Date.now();
     projectAdded.updated_at = null;
+    if( body.password!=null)
+    projectAdded.password = body.password;
     // if (body._members != null)
     // projectAdded._members = body._members;
     try {
@@ -82,7 +84,14 @@ module.exports.addSprint = async function(id,body){
     return { success: false, message: "Sprint not added "};
     if (body.title!= null)
     sprintAdded.title = body.title;
-    
+    if (body.start_at !=null)
+    sprintAdded.start_at = body.start_at;
+    if (body.end_at !=null)
+    sprintAdded.end_at = body.end_at;
+    if (body.planningDaily != null)
+    sprintAdded.planningDaily = body.planningDaily;
+    if (body.sprintRetrospective != null)
+    sprintAdded.sprintRetrospective = body.sprintRetrospective;
     try {
     await sprintAdded.save();
 
@@ -117,7 +126,6 @@ module.exports.getProjectById = async function(id){
 module.exports.getSingleSprintByProject = async function(idProject,idSprint){
     try {
         const project = await Project.findById(idProject).populate("sprints");
-        //project = project.find({'_id':{$in:[id2]}})
         const sprints = project.sprints;
         let sprint;
         sprints.forEach(element => {
