@@ -6,18 +6,18 @@
 
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link" routerLink="../../../project/{{ project._id }}"
+          <a class="nav-link" routerLink="/project/{{ project._id }}"
             >Détail</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="../../../tasks">Backlog</a>
+          <a class="nav-link" routerLink="/tasks">Backlog</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="#">Sprint</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="../../../project-settings/{{ project?._id }}"
+          <a class="nav-link" routerLink="/project/{{ project?._id }}/settings"
             >Setting</a
           >
         </li>
@@ -28,7 +28,7 @@
       
       <div class="row">
         <div class="col-2">
-          <a routerLink="/new-sprint/{{ project?._id }}">
+          <a routerLink="/project/{{ project?._id }}/new-sprint">
             <button type="button" class="btn btn-primary">+</button>
           </a>
           <div class="bg-light border">
@@ -52,10 +52,12 @@
           </div>
         </div>
         <div class="col-10">
-          <!-- <div class="bg-light border">
+          <div class="bg-light border">
+            
+              <h6>Select sprint or create sprint</h6>
+            
 
-
-            <div class="container">
+             <!-- <div class="container">
               <div class="row">
                 <div class="col colonne">
                   <h4 style="text-align: center;">A faire </h4>
@@ -96,8 +98,8 @@
 
 
               </div>
-            </div>
-          </div> -->
+            </div>  -->
+          </div> 
         </div>
       </div>
     </section>
