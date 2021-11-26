@@ -9,8 +9,8 @@ module.exports.getAllTask = async function () {
     const tasks = await Task.find().limit(limit);
     return {
       success: true,
-      data: tasks,
       total: total.toString(),
+      data: tasks,
     }
   } catch (err) {
     return { success: false, message: "Taks not found " + err };
