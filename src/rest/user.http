@@ -1,0 +1,28 @@
+### getAllUser API URL
+GET http://localhost:5000/api/users/
+
+### getUserById API URL
+GET http://localhost:5000/api/user/618d9e7e32456040a8f3250c
+
+### Default updateUser URL
+PUT http://localhost:5000/api/updateUser/618d6fcde8bdae86415cad58
+content-type: application/json
+
+{
+	"first_name": "Jules"
+}
+
+### addUser API URL
+POST http://localhost:5000/api/addUser/
+content-type: application/json
+
+{
+	"first_name": "Patrik",
+	"last_name": "Legrand",
+	"email": "sait-kik@hotmail.com",
+	"username": "Test",
+	"password": "test2"
+}
+
+### Remove a User
+DELETE http://localhost:5000/api/removeUser/618d6fcde8bdae86415cad58

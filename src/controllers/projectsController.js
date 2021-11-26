@@ -1,5 +1,7 @@
 const Project = require('../models/projectModel');
 const Sprint = require('../models/sprintModel');
+const Task = require('../models/taskModel');
+const TaskController = require('../controllers/taskController');
 
 //get all projects
 module.exports.getAllProjects = async function(){
@@ -98,6 +100,53 @@ module.exports.addSprint = async function(id,body){
     }
 }
 
+// Create task to an existing project 
+module.exports.addTaskToProject = async function(id,body){
+    const taskAdded = TaskController.addTask(body);
+    try {
+    const project = await Project.findById(id).populate("tasks");
+    project.tasks.push(taskAdded);
+    project.save();
+    return {
+        success:  true,
+        data: project,
+        message: "Add successfully",
+    }} catch (error){
+    return { success: false, message: "Fail to add task " + error};
+    }
+}
+
+// Get task from an existing project 
+module.exports.getTaskFromProject = async function(idProject, idTask){
+    try {
+    const project = await Project.findById(idProject).populate("tasks");
+    let task;
+    project.tasks.forEach(element => {
+        if(element._id == idTask){
+            task = element; 
+        }
+    });
+    return {
+        success:  true,
+        data: task,
+        message: "Get task from project is success",
+    }} catch (error){
+    return { success: false, message: "Fail to get task from project " + error};
+    }
+}
+
+// Get task from an existing project 
+module.exports.getTasksFromProject = async function(idProject){
+    try {
+    const project = await Project.findById(idProject).populate("tasks");
+    return {
+        success:  true,
+        data: project.tasks,
+        message: "Get task from project is success",
+    }} catch (error){
+    return { success: false, message: "Fail to get task from project " + error};
+    }
+}
 
 //get project by id with sprints
 module.exports.getProjectById = async function(id){
