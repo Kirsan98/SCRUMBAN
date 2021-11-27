@@ -3,6 +3,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
 import { Sprint } from 'src/app/models/sprint.model';
 import { ProjectService } from 'src/app/services/project.service';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-single-sprint',
@@ -13,6 +15,22 @@ export class SingleSprintComponent implements OnInit {
   public project!: Project;
   public sprint!: Sprint;
   public sprints!: Sprint[];
+
+  todo = [
+    'Tache 1',
+    'Tache 2',
+    'Tache 3',
+    'Tache 4'
+  ];
+
+  done = [
+    'Tache 5'
+  ];
+
+  review = [
+    'Tache 6',
+  ];
+
 
   constructor(
     private router: Router,
@@ -36,6 +54,17 @@ export class SingleSprintComponent implements OnInit {
             );
           }
         );
+    }
+
+    drop(event: CdkDragDrop<string[]>) {
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      } else {
+        transferArrayItem(event.previousContainer.data,
+                          event.container.data,
+                          event.previousIndex,
+                          event.currentIndex);
+      }
     }
 
     onDelete(){
