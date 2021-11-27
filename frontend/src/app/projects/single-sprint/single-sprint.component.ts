@@ -16,27 +16,39 @@ export class SingleSprintComponent implements OnInit {
   public sprint!: Sprint;
   public sprints!: Sprint[];
 
-  todo = [
-    'Tache 1',
-    'Tache 2',
-    'Tache 3',
-    'Tache 4'
-  ];
-
-  done = [
-    'Tache 5'
-  ];
-
-  review = [
-    'Tache 6',
-  ];
-
-
+  columns:any  = [];
+  connectedTo:any = [];
+  
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService
-  ) { }
+  ) {
+    this.columns = [
+      {
+        id:'A faire',
+        taskList:[
+          "task 1",
+          "task 2",
+          "task 3",
+          "task 4",
+          "task 5"
+        ]
+      },{
+        id:'En cours',
+        taskList:[]
+      },{
+        id:'Review',
+        taskList:[]
+      },{
+        id:'Fini',
+        taskList:[]
+      }
+    ];
+    for (let column of this.columns) {
+      this.connectedTo.push(column.id);
+    };
+  }
 
   ngOnInit(): void {
       this.route.paramMap.subscribe(
