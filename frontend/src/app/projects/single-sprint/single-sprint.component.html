@@ -18,7 +18,7 @@
           <a class="nav-link active" href="#">Sprint</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/project-settings/{{ project?._id }}"
+          <a class="nav-link" routerLink="/project/{{ project?._id }}/settings"
             >Setting</a
           >
         </li>
@@ -55,9 +55,11 @@
         <div class="col-10">
 
           <div class="row">
-            <div class="col-10"><div class="titleSprint">
-              <h5>{{sprint.title}}</h5>
-            </div>  </div>
+            <div class="col-10">
+              <div class="titleSprint">
+                <h5>{{sprint.title}}</h5>
+              </div>  
+            </div>
             <div class="col-2"> <div class="wrapper">
               <details data-popover="down">
                 <summary >
@@ -81,9 +83,21 @@
 
          
           <div class="bg-light border">
-
-
             <div class="container">
+              <div class="row">
+
+                <div class="col-md-3" *ngFor="let column of columns">
+              <div class="drag-container">
+                <div class="section-heading">{{column.id}}</div>
+        
+                <div cdkDropList id="{{column.id}}" [cdkDropListData]="column.taskList"
+                  [cdkDropListConnectedTo]="connectedTo" class="item-list" (cdkDropListDropped)="drop($event)">
+                  <div class="item-box" *ngFor="let task of column.taskList" cdkDrag>{{column.id}} {{task}}</div>
+                </div>
+              </div>
+            </div>
+          
+            <!-- <div class="container">
               <div class="row">
                 <div class="col colonne">
                   <h4 style="text-align: center;">A faire </h4>
@@ -124,7 +138,10 @@
 
 
               </div>
-            </div>
+            </div> -->
+          
+          </div>
+          </div>
           </div>
         </div>
       </div>

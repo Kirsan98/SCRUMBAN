@@ -39,6 +39,6 @@ export class SingleProjectComponent implements OnInit {
    }
 
    onUpdate(){
-    this.router.navigate(['/project-settings/' + this.project._id]); 
+    this.router.navigate(['/project/' + this.project._id+'/settings']); 
    }
 }
