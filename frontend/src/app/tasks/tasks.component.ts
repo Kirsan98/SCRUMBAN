@@ -22,11 +22,11 @@ export class TasksComponent implements OnInit {
   }
 
   listTask(): void{
-    this.taskService.getAllTasks().subscribe(
-    data => {
-      this.tasks = data['data'];
-      console.log(this.tasks);
-    });
+    // this.taskService.getAllTasks().subscribe(
+    // data => {
+    //   // this.tasks = data['data'];
+    //   console.log(this.tasks);
+    // });
   }
 
   onTaskClicked(idTask :string){

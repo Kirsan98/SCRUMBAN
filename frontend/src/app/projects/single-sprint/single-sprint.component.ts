@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChange } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
 import { Sprint } from 'src/app/models/sprint.model';
@@ -13,7 +13,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class SingleSprintComponent implements OnInit {
   public project!: Project;
-  public sprint!: Sprint;
+  @Input () public sprint!: Sprint;
   public sprints!: Sprint[];
 
   columns: any = [];
@@ -51,6 +51,7 @@ export class SingleSprintComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("on init un single sprint");
     let idProject!: string;
     let idSprint!: string;
     this.route.params.subscribe(
@@ -59,11 +60,6 @@ export class SingleSprintComponent implements OnInit {
         idProject = params['idProject'];
       }
     );
-    // this.route.paramMap.subscribe(
-    //   (params: Params) => {
-    //     console.log(params);
-    //   }
-    // );
     this.projectService.getProjectById(idProject)
     .then(
       (project: any) => {
@@ -77,6 +73,9 @@ export class SingleSprintComponent implements OnInit {
         this.sprint = sprint['data'];
       }
     );
+  }
+  ngOnChanges(changes: SimpleChange){
+    console.log("on change de sprint");
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -96,13 +95,13 @@ export class SingleSprintComponent implements OnInit {
 
 
   onSprintClicked(idProject: string, idSprint: string) {
-    console.log("id project");
-    console.log(idProject);
-    console.log("id sprint");
-    console.log(idSprint);
     this.router.navigate(['project/' + idProject + '/sprint/' + idSprint]);
+    this.projectService.getSingleSprintByProject(idProject, idSprint)
+    .then(
+      (sprint: any) => {
+        this.sprint = sprint['data'];
+      }
+    );
   }
-
-
 
 }
