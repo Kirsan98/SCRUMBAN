@@ -8,10 +8,12 @@
           <a class="nav-link" routerLink="/project/{{ project._id }}">Détail</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{ project._id }}/tasks">Backlog</a>
+          <a class="nav-link" routerLink="/project/{{ project._id }}/tasks"
+            >Backlog</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link active" >Sprint</a>
+          <a class="nav-link active">Sprint</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/project/{{ project?._id }}/settings"
@@ -20,40 +22,19 @@
         </li>
       </ul>
     </section>
-     
+
     <section style="margin-top: 10px">
       <div class="row">
         <div class="col-2">
-          <a routerLink="/new-sprint/{{ project?._id }}">
-            <button type="button" class="btn btn-primary">+</button>
-          </a>
           <div class="bg-light border">
             <div class="scroller">
-<<<<<<< HEAD
-            <table class="table" >
-              <thead>
-                <tr>
-                  <th scope="col">Nom</th>
-                </tr>
-              </thead>
-              
-              <tbody *ngFor="let sprint of sprints.slice().reverse()">
-                <tr
-                  class="ligne"
-                  (click)="onSprintClicked(project._id, sprint._id)"
-                >
-                  <td class="name-sprint">{{ sprint.title }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-=======
               <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">Nom</th>
                   </tr>
                 </thead>
+
                 <tbody *ngFor="let sprint of sprints.slice().reverse()">
                   <tr
                     class="ligne"
@@ -64,7 +45,6 @@
                 </tbody>
               </table>
             </div>
->>>>>>> 82b779becf8a098de12f5d1df10b7e56ac1e294d
           </div>
         </div>
         <div class="col-10">
@@ -124,8 +104,7 @@
                     </div>
                   </div>
                 </div>
-               
-              
+
                 <!-- <div class="container">
               <div class="row">
                 <div class="col colonne">
@@ -172,6 +151,7 @@
             </div>
           </div>
         </div>
+      </div>
     </section>
   </div>
 </div>
