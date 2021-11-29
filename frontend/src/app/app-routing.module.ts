@@ -7,6 +7,7 @@ import { NewProjectComponent } from './projects/new-project/new-project.componen
 import { NewSprintComponent } from './projects/new-sprint/new-sprint.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { NewTaskComponent } from './tasks/new-task/new-task.component';
 import { SingleProjectComponent } from './projects/single-project/single-project.component';
 import { SingleSprintComponent } from './projects/single-sprint/single-sprint.component';
 import { SettingsProjectComponent } from './projects/settings-project/settings-project.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'projects',component: ProjectsComponent},
   {path: 'project/:id', component: SingleProjectComponent},
   {path: 'project/:id/tasks',component: TasksComponent},
+  {path: 'project/:id/addTask',component: NewTaskComponent},
   {path: 'project/:id/settings', component: SettingsProjectComponent},
   {path: 'project/:id/delete', component: DeleteProjectComponent},
   {path: 'new-project', component: NewProjectComponent},

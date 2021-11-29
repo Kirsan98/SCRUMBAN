@@ -113,14 +113,14 @@ module.exports.addSprint = async function(id,body){
 
 // Create task to an existing project 
 module.exports.addTaskToProject = async function(id,body){
-    const taskAdded = TaskController.addTask(body);
     try {
-    const project = await Project.findById(id).populate("tasks");
-    project.tasks.push(taskAdded);
+    const taskAdded = await TaskController.addTask(body);
+    const project = await Project.findById(id);
+    project.tasks.push(taskAdded.data._id);
     project.save();
     return {
         success:  true,
-        data: project,
+        data: taskAdded.data,
         message: "Add successfully",
     }} catch (error){
     return { success: false, message: "Fail to add task " + error};
@@ -130,34 +130,48 @@ module.exports.addTaskToProject = async function(id,body){
 // Get task from an existing project 
 module.exports.getTaskFromProject = async function(idProject, idTask){
     try {
-    const project = await Project.findById(idProject).populate("tasks");
-    let task;
-    project.tasks.forEach(element => {
-        if(element._id == idTask){
-            task = element; 
-        }
-    });
+    let task = await TaskController.getTaskById(idTask);
     return {
         success:  true,
-        data: task,
+        data: task.data,
         message: "Get task from project is success",
     }} catch (error){
     return { success: false, message: "Fail to get task from project " + error};
     }
 }
 
-// Get task from an existing project 
-module.exports.getTasksFromProject = async function(idProject){
-    try {
-    const project = await Project.findById(idProject).populate("tasks");
-    return {
-        success:  true,
-        data: project,
-        message: "Get task from project is success",
-    }} catch (error){
-    return { success: false, message: "Fail to get task from project " + error};
-    }
-}
+// On arrive pas à gérer la promesse et l'init du tableau de tâches
+
+// async function loadTask(elements){
+//     return new Promise((resolve) => {
+//         let tasks = [];
+//         elements.forEach(async element =>{
+//             let task = await TaskController.getTaskById(element);
+//             tasks.push(task.data);      
+//             console.log(tasks);
+//             console.log("tableau ok")
+//         })
+//         console.log("fin load task");
+//         resolve(tasks);
+//     })
+// }
+
+// // Get task from an existing project 
+// module.exports.getTasksFromProject = async function(idProject){
+//     try {
+//     const project = await Project.findById(idProject);
+//     loadTask(project.tasks).then(
+//         (tasks) => {
+//             console.log("promessse ntm");
+//         }
+//     );
+//     return {
+//         success:  false,
+//     };
+//     } catch (error){
+//     return { success: false, message: "Fail to get task from project " + error};
+//     }
+// }
 
 //get project by id with sprints
 module.exports.getProjectById = async function(id){

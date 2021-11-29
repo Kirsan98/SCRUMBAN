@@ -121,4 +121,17 @@ export class ProjectService{
         );
       });
     }
+
+    addTask(id: string, task : any){
+      return new Promise((resolve,reject) => {
+        this.http.post('http://localhost:5000/api/project/'+ id + '/addTask/',task).subscribe(
+          (response) => {
+            resolve(response);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    }
 }

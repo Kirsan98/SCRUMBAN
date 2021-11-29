@@ -4,26 +4,26 @@
 GET http://localhost:5000/api/projects/
 
 ### getProjectById API URL
-GET http://localhost:5000/api/projects/619e83b42b46f4c0475135c8
+GET http://localhost:5000/api/projects/61a50f7e3fc2fc80f0f3aa2c
 
 ### add project
 POST http://localhost:5000/api/addProject/
 content-type: application/json
 
 {
-	"title": "PPPE"
+	"title": "Cest la bonne"
 }
 
 #### Default updateProject URL
-PUT http://localhost:5000/api/updateProject/619d165aab62e0388fdbfac7
+PUT http://localhost:5000/api/updateProject/61a50f243fc2fc80f0f3aa17
 content-type: application/json
 
 {
-	"title": "Test"
+	"title": "C'est la bonne"
 }
 
 ### Default removeProject URL
-DELETE http://localhost:5000/api/removeProject/619e83c92b46f4c0475135d4
+DELETE http://localhost:5000/api/removeProject/61a50f243fc2fc80f0f3aa17
 
 ### create sprint
 POST http://localhost:5000/api/project/61a119531b96b6b9ed9671a3/addSprint
@@ -42,17 +42,17 @@ DELETE http://localhost:5000/api/project/619d16a52002c0630d0f9364/delete_sprint/
 ########################################################################################################
 
 ### Create task in an existing project
-POST http://localhost:5000/api/project/619e83b42b46f4c0475135c8/addTask
+POST http://localhost:5000/api/project/61a50f7e3fc2fc80f0f3aa2c/addTask
 content-type: application/json
 
 {
-	"title": "Task 2"
+	"title": "Task bonne"
 }
 
 ### Get task from an existing project
-GET http://localhost:5000/api/project/619e83b42b46f4c0475135c8/task/619f656c3371b688d6260595
+GET http://localhost:5000/api/project/61a50f7e3fc2fc80f0f3aa2c/task/61a50fb73fc2fc80f0f3aa30
 
 ### Get all tasks from an existing project
-GET http://localhost:5000/api/project/619e83b42b46f4c0475135c8/tasks
+GET http://localhost:5000/api/project/61a50f7e3fc2fc80f0f3aa2c/tasks
 
 ##############################################################################################################
