@@ -22,7 +22,7 @@ router.route('/project/:id').get(async (req, res) => {
   }
 });
 
-// create a nex project
+// create a new project
 router.route('/addProject/').post(async (req, res) => {
   let response = await projectController.addProject(req.body);
   if (response.success == true) {
@@ -51,6 +51,8 @@ router.route('/removeProject/:idProject').delete(async (req, res) => {
     res.status(404).json(response);
   }
 });
+
+//SPRINT
 
 // add a sprint to project
 router.route('/project/:idProject/addSprint').post(async (req, res) => {
@@ -91,6 +93,8 @@ router.route('/project/:id1/delete-sprint/:id2').delete(async (req, res) => {
     res.status(404).json(response);
   }
 });
+
+//TASK
 
 // add task to project
 router.route('/project/:idProject/addTask/').post(async (req, res) => {

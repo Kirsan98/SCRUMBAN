@@ -165,7 +165,7 @@ module.exports.getSingleColumnByProject = async function (idSprint, idColumn) {
 }
 
 // get all columns from project
-module.exports.getAllColumnFromProject = async function (idSprint) {
+module.exports.getAllColumnFromSprint = async function (idSprint) {
   try {
     const sprint = await Sprint.findById(idSprint);
     if (sprint != null)

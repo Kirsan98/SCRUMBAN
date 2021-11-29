@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRoutes");
 const columnRoutes = require("./routes/columnRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 const logRoutes = require("./routes/logRoutes");
+const sprintRoutes = require('./routes/sprintRoutes');
 const app = express();
 
 // parse requests of content-type - application/json
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
 })
 app.use('/api', route);
 app.use('/api', projectRoutes);
+app.use('/api', sprintRoutes);
 app.use('/api', userRoutes);
 app.use('/api', columnRoutes);
 app.use('/api', taskRoutes);

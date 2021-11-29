@@ -1,0 +1,37 @@
+#SPRINTS OPERATION FROM PROJECT
+
+
+# DEBUG URL
+### Get all projects
+GET http://localhost:5000/api/projects/
+
+### getProjectById API URL
+GET http://localhost:5000/api/project/61a549f275a713f1150e7188
+
+
+### get all sprints from project
+GET http://localhost:5000/api/project/61a549f275a713f1150e7188/sprints/
+
+### get one sprint from project
+GET http://localhost:5000/api/project/61a549f275a713f1150e7188/sprint/61a54aebb85185bd68d6c588
+
+
+#COLUMN OPERATION FROM SPRINT
+
+### add column to sprint
+POST http://localhost:5000/api/project/61a549f275a713f1150e7188/sprint/61a54aebb85185bd68d6c588/add-column/
+content-type: application/json
+
+{
+	"title": "Column 2 test from Sprint 1 from WEB"
+}
+
+### get column from sprint
+GET http://localhost:5000/api/project/61a549f275a713f1150e7188/sprint/61a54aebb85185bd68d6c588/column/61a55c188a13e61e6a29e2df
+
+### get all columns from sprint
+GET http://localhost:5000/api/project/61a549f275a713f1150e7188/sprint/61a54aebb85185bd68d6c588/columns/
+
+### delete a column from sprint
+DELETE http://localhost:5000/api/project/61a549f275a713f1150e7188/sprint/61a54aebb85185bd68d6c588/delete-column/61a55d01eb1fdb0bea68c0c1
+
