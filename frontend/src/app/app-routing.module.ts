@@ -20,7 +20,6 @@ const routes: Routes = [
   {path: 'projects',component: ProjectsComponent},
   {path: 'project/:id', component: SingleProjectComponent},
   {path: 'project/:id/tasks',component: TasksComponent},
-  // {path: 'project/:idProject/task/:idTask',component: TasksComponent},
   {path: 'project/:id/settings', component: SettingsProjectComponent},
   {path: 'project/:id/delete', component: DeleteProjectComponent},
   {path: 'new-project', component: NewProjectComponent},
