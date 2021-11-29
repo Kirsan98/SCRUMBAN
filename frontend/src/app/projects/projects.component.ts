@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProjectsComponent implements OnInit {
 
-   projects:any[]= [];
+   projects!:Project[];
 
   constructor(
     private router: Router,

@@ -6,10 +6,10 @@
 
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link active" href="#">Détail</a>
+        <a class="nav-link active">Détail</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="../../tasks">Backlog</a>
+        <a class="nav-link" routerLink="../../project/{{project?._id}}/tasks">Backlog</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="../../project/{{project?._id}}/sprints">Sprint</a>
@@ -20,7 +20,7 @@
     </ul>
     
     <section>
-      <p> Date de création : {{project.created_at | date : "dd-mm-YYYY"}}</p>
+      <!-- <p> Date de création : {{project.created_at | date : "dd-mm-YYYY"}}</p> -->
     </section>
 
   </div>
