@@ -13,7 +13,7 @@ router.route('/projects').get(async (req, res) => {
 });
 
 // get a project by id
-router.route('/projects/:id').get(async (req, res) => {
+router.route('/project/:id').get(async (req, res) => {
   let response = await projectController.getProjectById(req.params.id);
   if (response.success == true) {
     res.status(200).json(response);
@@ -93,8 +93,8 @@ router.route('/project/:id/tasks').get(async (req, res) => {
 });
 
 // get a sprint from project
-router.route('/project/:id1/sprint/:id2').get(async (req, res) => {
-  let response = await projectController.getSingleSprintByProject(req.params.id1, req.params.id2);
+router.route('/project/:idProject/sprint/:idSprint').get(async (req, res) => {
+  let response = await projectController.getSingleSprintByProject(req.params.idProject, req.params.idSprint);
   if (response.success == true) {
     res.status(200).json(response);
   } else {

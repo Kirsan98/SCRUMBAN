@@ -170,18 +170,19 @@ module.exports.getProjectById = async function (id) {
 // get sprint by id 
 module.exports.getSingleSprintByProject = async function (idProject, idSprint) {
     try {
-        const project = await Project.findById(idProject).populate("sprints");
-        const sprints = project.sprints;
-        let sprint;
-        sprints.forEach(element => {
-            if (element._id == idSprint) {
-                sprint = element;
-            }
-        });
+        const sprintData = await sprintController.getSprintById(idSprint);
+        // const project = await Project.findById(idProject).populate("sprints");
+        // const sprints = project.sprints;
+        // let sprint;
+        // sprints.forEach(element => {
+        //     if (element._id == idSprint) {
+        //         sprint = element;
+        //     }
+        // });
 
         return {
             success: true,
-            data: sprint,
+            data: sprintData.data,
         }
     } catch (error) {
         return { success: false, message: "Not found" + error };

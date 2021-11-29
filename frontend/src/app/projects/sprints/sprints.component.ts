@@ -38,7 +38,7 @@ export class SprintsComponent implements OnInit {
 
   
   onSprintClicked(idProject: string, idSprint: string){
-    this.router.navigate(['project/'+idProject+'/sprint/'+idSprint]);
+    this.router.navigate(['project/'+idProject+'/sprints/sprint/'+idSprint]);
   }
 
 }

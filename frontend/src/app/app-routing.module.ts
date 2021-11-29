@@ -27,21 +27,26 @@ const routes: Routes = [
       {path: 'settings', component: SettingsProjectComponent},
       {path: 'delete', component: DeleteProjectComponent},
       {path: 'new-sprint', component: NewSprintComponent},
-      {path: 'sprint/:idSprint', component: SingleSprintComponent},
       {path: 'delete-sprint/:idSprint', component: DeletesprintComponent},
-      {path: 'sprints', component: SprintsComponent},
+      {
+        path: 'sprints',
+        component: SprintsComponent,
+        children: [
+          {path: 'sprint/:idSprint', component: SingleSprintComponent},
+        ],
+      },
     ]
   },
   {path: 'new-project', component: NewProjectComponent},
   {path: 'join-project', component: JoinProjectComponent},
 
 
-  { path: '', pathMatch: 'full', redirectTo: 'accueil' },
-  { path: '**', redirectTo: 'accueil' }];
+  { path: '', pathMatch: 'full', redirectTo: 'accueil' }
+];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {paramsInheritanceStrategy: 'always'}),
   ],
   exports: [RouterModule]
 })

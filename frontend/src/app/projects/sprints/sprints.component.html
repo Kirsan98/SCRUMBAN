@@ -1,73 +1,31 @@
-
-    <section style="margin-top: 10px" >
-      
-      <div class="row">
-        <div class="col-2">
-          <a routerLink="/project/{{ project?._id }}/new-sprint">
-            <button type="button" class="btn btn-primary">+ New Sprint</button>
-          </a>
-          <div class="bg-light border">
-            <div class="scroller">
-            <table class="table" >
-              <thead>
-                <tr>
-                  <th scope="col">Nom</th>
-                </tr>
-              </thead>
-              <tbody *ngFor="let sprint of sprints.slice().reverse()">
-                <tr
-                  class="ligne"
-                  (click)="onSprintClicked(project._id, sprint._id)"
-                >
-                  <td class="name-sprint">{{ sprint.title }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          </div>
+<section style="margin-top: 10px">
+  <div class="row">
+    <div class="col-2">
+      <a routerLink="/project/{{ project?._id }}/new-sprint">
+        <button type="button" class="btn btn-primary">+ New Sprint</button>
+      </a>
+      <div class="bg-light border">
+        <div class="scroller">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let sprint of sprints.slice().reverse()">
+              <!-- <tr class="ligne"  (click)="onSprintClicked(project._id, sprint._id)"> -->
+              <tr class="ligne" routerLink="./sprint/{{sprint._id}}">
+                <td class="name-sprint">{{ sprint.title }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="col-10">
-          <div class="bg-light border">
-            
-              <h6>Select sprint or create sprint</h6>
-            
-
-             <!-- <div class="container">
-              <div class="row">
-                <div class="col colonne">
-                  <h4 style="text-align: center;">A faire </h4>
-                <div class="card">
-                  Tache 
-                </div>
-                <div class="card">
-                  Tache 
-                </div>
-                <div class="card">
-                  Tache 
-                </div>
-                <div class="card">
-                  Tache 
-                </div>
-                <div class="card">
-                  Tache 
-                </div>
-                <div class="card">
-                  Tache 
-                </div>
-                <div class="card">
-                  Tache 
-                </div>
-                <div class="card">
-                  Tache 
-                </div>
-              </div>
-                <div class="col colonne">
-                  <h4 style="text-align: center;">En cours</h4>
-                </div>
-                <div class="col colonne">
-                  <h4 style="text-align: center;">Review</h4>
-                </div>
-                <div class="col colonne">
-                  <h4 style="text-align: center;">Terminé </h4>
-                </div>
-              -->
+      </div>
+    </div>
+  </div>
+  <div class="col-10">
+    <div class="bg-light border">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</section>

@@ -34,7 +34,7 @@ content-type: application/json
 }
 
 ### get one sprint from project
-GET http://localhost:5000/api/project/61a119531b96b6b9ed9671a3/sprint/61a147788dcf29c044112e46
+GET http://localhost:5000/api/project/61a119531b96b6b9ed9671a3/sprint/61a4bfebae308504d3706596
 
 ###delete one sprint from project 
 DELETE http://localhost:5000/api/project/619d16a52002c0630d0f9364/delete_sprint/619e5cdb2b46f4c047513490

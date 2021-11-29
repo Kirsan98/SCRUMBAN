@@ -59,7 +59,7 @@ export class ProjectService{
 
     getProjectById(id: string){
       return new Promise((resolve,reject) => {
-        this.http.get('http://localhost:5000/api/projects/'+ id).subscribe(
+        this.http.get('http://localhost:5000/api/project/'+ id).subscribe(
           (response) => {
             resolve(response);
           },
@@ -83,9 +83,9 @@ export class ProjectService{
       });
     }
 
-    getSingleSprintByProject(id1: string, id2: string){
+    getSingleSprintByProject(idProject: string, idSprint: string){
       return new Promise((resolve,reject) => {
-        this.http.get('http://localhost:5000/api/project/'+ id1+'/sprint/'+id2,).subscribe(
+        this.http.get('http://localhost:5000/api/project/'+ idProject+'/sprint/'+idSprint,).subscribe(
           (response) => {
             resolve(response);
           },
