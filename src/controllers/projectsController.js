@@ -1,10 +1,6 @@
 const Project = require('../models/projectModel');
 const Sprint = require('../models/sprintModel');
-<<<<<<< HEAD
-const sprintController = require('../controllers/sprintController');
-=======
 const Column = require('../models/columnModel')
->>>>>>> 22fc7ee50a99710b4a3679e0e4a74ccdef610c54
 const Task = require('../models/taskModel');
 const taskController = require('../controllers/taskController');
 
@@ -210,12 +206,7 @@ module.exports.deleteSingleSprintByProject = async function (idProject, idSprint
             success: true,
 
         }
-<<<<<<< HEAD
     } catch (error) {
         return { success: false, message: "Not found" + error };
     }
 }
-
-=======
-}
->>>>>>> 22fc7ee50a99710b4a3679e0e4a74ccdef610c54
