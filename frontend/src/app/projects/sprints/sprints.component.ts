@@ -12,7 +12,7 @@ import { ProjectService } from 'src/app/services/project.service';
 export class SprintsComponent implements OnInit {
   public project!: Project;
   public sprints!: Sprint[];
-
+  public sprintSelected!: Sprint;
 
 
   constructor(
@@ -35,6 +35,13 @@ export class SprintsComponent implements OnInit {
 
 
   onSprintClicked(idProject: string, idSprint: string) {
+    this.projectService.getSingleSprintByProject(idProject, idSprint)
+    .then(
+      (sprint: any) => {
+        this.sprintSelected = sprint;
+      }
+    );
+    // console.log(this.sprintSelected);
     this.router.navigate(['project/' + idProject + '/sprints/sprint/' + idSprint]);
   }
 }

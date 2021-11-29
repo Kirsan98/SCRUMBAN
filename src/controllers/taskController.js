@@ -21,10 +21,16 @@ module.exports.getAllTask = async function () {
 module.exports.getTaskById = async function (idTask) {
   try {
     const task = await Task.findById(idTask);
-    return {
-      success: true,
-      data: task,
-    }
+    if (task != null)
+      return {
+        success: true,
+        data: task,
+      };
+    else
+      return {
+        success: false,
+        message: "task not found",
+      };
   } catch (err) {
     return { success: false, message: "Task not found " + err };
   }
@@ -99,7 +105,7 @@ module.exports.updateTask = async function (idTask, body) {
 }
 
 // Remove an existing task
-module.exports.removeTask = async function (idTask) {
+module.exports.deleteTask = async function (idTask) {
   try {
     const task = await Task.findById(idTask);
     task.remove();

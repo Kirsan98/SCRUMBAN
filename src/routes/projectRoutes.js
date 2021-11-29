@@ -62,6 +62,36 @@ router.route('/project/:idProject/addSprint').post(async (req, res) => {
   }
 });
 
+// get a sprint from project
+router.route('/project/:idProject/sprint/:idSprint').get(async (req, res) => {
+  let response = await projectController.getSingleSprintByProject(req.params.idProject, req.params.idSprint);
+  if (response.success == true) {
+    res.status(200).json(response);
+  } else {
+    res.status(404).json(response);
+  }
+});
+
+// get all sprints from project
+router.route('/project/:idProject/sprints').get(async (req, res) => {
+  let response = await projectController.getAllSprintFromProject(req.params.idProject);
+  if (response.success == true) {
+    res.status(200).json(response);
+  } else {
+    res.status(404).json(response);
+  }
+});
+
+// delete a sprint from project
+router.route('/project/:id1/delete-sprint/:id2').delete(async (req, res) => {
+  let response = await projectController.deleteSingleSprintByProject(req.params.id1, req.params.id2);
+  if (response.success == true) {
+    res.status(200).json(response);
+  } else {
+    res.status(404).json(response);
+  }
+});
+
 // add task to project
 router.route('/project/:idProject/addTask/').post(async (req, res) => {
   let response = await projectController.addTaskToProject(req.params.idProject, req.body);
@@ -92,25 +122,15 @@ router.route('/project/:id/tasks').get(async (req, res) => {
   }
 });
 
-// get a sprint from project
-router.route('/project/:idProject/sprint/:idSprint').get(async (req, res) => {
-  let response = await projectController.getSingleSprintByProject(req.params.idProject, req.params.idSprint);
-  if (response.success == true) {
-    res.status(200).json(response);
-  } else {
-    res.status(404).json(response);
+router.route('/project/:idProject/delete-task/:idTask').delete(
+  async (req, res) => {
+    let response = await projectController.deleteSingleTaskByProject(req.params.idProject, req.params.idTask);
+    if (response.success == true)
+      res.status(200).json(response);
+    else
+      res.status(404).json(response);
   }
-});
+);
 
-
-// delete a sprint from project
-router.route('/project/:id1/delete_sprint/:id2').delete(async (req, res) => {
-  let response = await projectController.deleteSingleSprintByProject(req.params.id1, req.params.id2);
-  if (response.success == true) {
-    res.status(200).json(response);
-  } else {
-    res.status(404).json(response);
-  }
-});
 
 module.exports = router;

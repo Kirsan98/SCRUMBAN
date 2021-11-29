@@ -13,8 +13,8 @@
               </tr>
             </thead>
             <tbody *ngFor="let sprint of sprints.slice().reverse()">
-              <!-- <tr class="ligne"  (click)="onSprintClicked(project._id, sprint._id)"> -->
-              <tr class="ligne" routerLink="./sprint/{{sprint._id}}">
+              <tr class="ligne"  (click)="onSprintClicked(project._id, sprint._id)">
+              <!-- <tr class="ligne" routerLink="./sprint/{{sprint._id}}"> -->
                 <td class="name-sprint">{{ sprint.title }}</td>
               </tr>
             </tbody>
@@ -22,6 +22,6 @@
         </div>
       </div>
     </div>
-    <router-outlet sprint={{sprint}}></router-outlet>
+    <router-outlet></router-outlet>
   </div>
 </section>

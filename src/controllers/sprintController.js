@@ -107,3 +107,15 @@ module.exports.updateSprint = async function (idSprint, body) {
   }
   return {success: false, message: "Fail to update sprint, wrong body parameter"};
 };
+
+
+// delete a sprint
+module.exports.deleteSprint = async function (idSprint) {
+  try {
+    const sprint = await Sprint.findById(idSprint);
+    sprint.remove();
+    return { success: true, data: sprint};
+  } catch (error) {
+    return { success: false, message: "Sprint not removed " + error };
+  }
+};

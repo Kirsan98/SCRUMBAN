@@ -30,7 +30,7 @@ router.route('/task/:id').get(async (req, res) => {
 });
 
 router.route('/removeTask/:id').delete(async (req, res) => {
-	let response = await taskController.removeTask(req.params.id);
+	let response = await taskController.deleteTask(req.params.id);
 	if (response.success == true) {
 		res.status(200).json(response);
 	} else {
