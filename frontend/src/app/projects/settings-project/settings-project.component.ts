@@ -26,9 +26,9 @@ export class SettingsProjectComponent implements OnInit {
       title: [null,Validators.required]
     })
 
-    this.route.params.subscribe(
+    this.route.parent!.params.subscribe(
       (params) => {
-        this.projectService.getProjectById(params.id).then(
+        this.projectService.getProjectById(params.idProject).then(
           (project: any) => {
             this.project = project['data'];
             this.updateProjectForm.get('title')?.setValue(this.project.title);

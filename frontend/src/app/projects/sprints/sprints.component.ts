@@ -21,9 +21,9 @@ export class SprintsComponent implements OnInit {
     private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(
+    this.route.parent!.params.subscribe(
       (params: Params) => {
-        this.projectService.getProjectById(params.id).then(
+        this.projectService.getProjectById(params.idProject).then(
           (project: any) => {
             this.project = project['data'];
             this.sprints = this.project.sprints;
@@ -37,8 +37,8 @@ export class SprintsComponent implements OnInit {
   }
 
   
-  onSprintClicked(id1: string, id2: string){
-    this.router.navigate(['project/'+id1+'/sprint/'+id2]);
+  onSprintClicked(idProject: string, idSprint: string){
+    this.router.navigate(['project/'+idProject+'/sprint/'+idSprint]);
   }
 
 }

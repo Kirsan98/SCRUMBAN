@@ -22,14 +22,14 @@ export class DeletesprintComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(
+    this.route.parent!.paramMap.subscribe(
       (params: Params) => {
-          this.projectService.getProjectById(params.get('id1')).then(
+          this.projectService.getProjectById(params.get('idProject')).then(
             (project: any) => {
               this.project = project['data']
             }
           )        
-          this.projectService.getSingleSprintByProject(params.get('id1'),params.get('id2')).then(
+          this.projectService.getSingleSprintByProject(params.get('idProject'),params.get('idSprint')).then(
           (sprint: any) => {
             this.sprint = sprint['data']
           }

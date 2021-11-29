@@ -20,7 +20,7 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.parent!.paramMap.subscribe(
       (params: Params) => {
-        this.projectService.getProjectById(params.get('id'))
+        this.projectService.getProjectById(params.get('idProject'))
         .then(
           (project: any) => {
             this.project = project['data'];

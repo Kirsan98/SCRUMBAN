@@ -29,8 +29,8 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  onTaskClicked(id :string){
-    this.router.navigate(['/task/' + id]);
+  onTaskClicked(idTask :string){
+    this.router.navigate(['/task/' + idTask]);
   }
 
   onDelete(id: string){

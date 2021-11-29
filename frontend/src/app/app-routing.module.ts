@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'accueil',component: AccueilComponent},
   {path: 'projects',component: ProjectsComponent},
   {
-    path: 'project/:id',
+    path: 'project/:idProject',
     component: SingleProjectComponent,
     children: [
       {path: 'detail', component: DetailComponent},
@@ -27,8 +27,8 @@ const routes: Routes = [
       {path: 'settings', component: SettingsProjectComponent},
       {path: 'delete', component: DeleteProjectComponent},
       {path: 'new-sprint', component: NewSprintComponent},
-      {path: 'sprint/:id2', component: SingleSprintComponent},
-      {path: 'delete-sprint/:id2', component: DeletesprintComponent},
+      {path: 'sprint/:idSprint', component: SingleSprintComponent},
+      {path: 'delete-sprint/:idSprint', component: DeletesprintComponent},
       {path: 'sprints', component: SprintsComponent},
     ]
   },

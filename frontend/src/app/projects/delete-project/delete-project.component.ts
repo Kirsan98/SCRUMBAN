@@ -30,9 +30,9 @@ export class DeleteProjectComponent implements OnInit {
 
   ngOnInit(): void {
  
-    this.route.params.subscribe(
+    this.route.parent!.params.subscribe(
       (params: Params) => {
-        this.projectService.getProjectById(params.id).then(
+        this.projectService.getProjectById(params.idProject).then(
           (project: any) => {
             this.project = project['data'];
           }
