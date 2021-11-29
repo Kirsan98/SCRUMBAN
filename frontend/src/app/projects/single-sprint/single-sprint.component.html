@@ -1,5 +1,3 @@
-
-
 <div class="card">
   <div class="card-body">
     <section>
@@ -7,9 +5,7 @@
 
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{ project._id }}"
-            >Détail</a
-          >
+          <a class="nav-link" routerLink="/project/{{ project._id }}">Détail</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/tasks">Backlog</a>
@@ -25,8 +21,7 @@
       </ul>
     </section>
 
-    <section style="margin-top: 10px" >
-      
+    <section style="margin-top: 10px">
       <div class="row">
         <div class="col-2">
           <a routerLink="/new-sprint/{{ project?._id }}">
@@ -34,70 +29,84 @@
           </a>
           <div class="bg-light border">
             <div class="scroller">
-            <table class="table" >
-              <thead>
-                <tr>
-                  <th scope="col">Nom</th>
-                </tr>
-              </thead>
-              <tbody *ngFor="let sprint of sprints.slice().reverse()">
-                <tr
-                  class="ligne"
-                  (click)="onSprintClicked(project._id, sprint._id)"
-                >
-                  <td class="name-sprint">{{ sprint.title }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Nom</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let sprint of sprints.slice().reverse()">
+                  <tr
+                    class="ligne"
+                    (click)="onSprintClicked(project._id, sprint._id)"
+                  >
+                    <td class="name-sprint">{{ sprint.title }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
         <div class="col-10">
-
           <div class="row">
             <div class="col-10">
               <div class="titleSprint">
-                <h5>{{sprint.title}}</h5>
-              </div>  
+                <h5>{{ sprint.title }}</h5>
+              </div>
             </div>
-            <div class="col-2"> <div class="wrapper">
-              <details data-popover="down">
-                <summary >
-                  <h2 class="hover_three_dots"  style=" 
-                  margin-right: 20px;
-                ">...</h2>
-                </summary>
-                <div>
-                  <div class="list-group popover__message">
-                    <a
-                      (click)="onDelete()"
-                      class="list-group-item list-group-item-action deleteProject"
-                      >Déplacer dans la corbeille</a
-                    >
+            <div class="col-2">
+              <div class="wrapper">
+                <details data-popover="down">
+                  <summary>
+                    <h2 class="hover_three_dots" style="margin-right: 20px">
+                      ...
+                    </h2>
+                  </summary>
+                  <div>
+                    <div class="list-group popover__message">
+                      <a
+                        (click)="onDelete()"
+                        class="
+                          list-group-item list-group-item-action
+                          deleteProject
+                        "
+                        >Déplacer dans la corbeille</a
+                      >
+                    </div>
                   </div>
-                </div>
-              </details>
-            </div></div>
+                </details>
+              </div>
+            </div>
           </div>
-                    
 
-         
           <div class="bg-light border">
             <div class="container">
               <div class="row">
-
                 <div class="col-md-3" *ngFor="let column of columns">
-              <div class="drag-container">
-                <div class="section-heading">{{column.id}}</div>
-        
-                <div cdkDropList id="{{column.id}}" [cdkDropListData]="column.taskList"
-                  [cdkDropListConnectedTo]="connectedTo" class="item-list" (cdkDropListDropped)="drop($event)">
-                  <div class="item-box" *ngFor="let task of column.taskList" cdkDrag>{{column.id}} {{task}}</div>
+                  <div class="drag-container">
+                    <div class="section-heading">{{ column.id }}</div>
+
+                    <div
+                      cdkDropList
+                      id="{{ column.id }}"
+                      [cdkDropListData]="column.taskList"
+                      [cdkDropListConnectedTo]="connectedTo"
+                      class="item-list"
+                      (cdkDropListDropped)="drop($event)"
+                    >
+                      <div
+                        class="item-box"
+                        *ngFor="let task of column.taskList"
+                        cdkDrag
+                      >
+                        {{ column.id }} {{ task }}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          
-            <!-- <div class="container">
+               
+              
+                <!-- <div class="container">
               <div class="row">
                 <div class="col colonne">
                   <h4 style="text-align: center;">A faire </h4>
@@ -139,14 +148,11 @@
 
               </div>
             </div> -->
-          
-          </div>
-          </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </div>
 </div>
-
-

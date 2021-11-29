@@ -203,7 +203,7 @@ module.exports.deleteSingleSprintByProject = async function(idProject,idSprint){
         const sprints = project.sprints;
         let sprint;
         sprints.forEach(element => {
-            if (element._id == idSprint){
+            if (element._id == idSprint){ 
                 sprint = element;
                 sprint.remove();
             }
