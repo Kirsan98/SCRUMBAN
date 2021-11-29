@@ -16,14 +16,10 @@ import { SprintsComponent } from './projects/sprints/sprints.component';
 
 const routes: Routes = [
   {path: 'accueil',component: AccueilComponent},
-<<<<<<< HEAD
   {path: 'project/:id/tasks',component: TasksComponent},
-=======
->>>>>>> 6c014ab3703f555c5027e85ee69285660ee28a67
   {path: 'projects',component: ProjectsComponent},
   {path: 'project/:id', component: SingleProjectComponent},
   {path: 'project/:id/tasks',component: TasksComponent},
-  // {path: 'project/:idProject/task/:idTask',component: TasksComponent},
   {path: 'project/:id/settings', component: SettingsProjectComponent},
   {path: 'project/:id/delete', component: DeleteProjectComponent},
   {path: 'new-project', component: NewProjectComponent},
