@@ -162,7 +162,7 @@ module.exports.getTasksFromProject = async function(idProject){
 //get project by id with sprints
 module.exports.getProjectById = async function(id){
     try {
-    const project = await Project.findByIdAndUpdate(id).populate("sprints","tasks");
+    const project = await Project.findByIdAndUpdate(id).populate("sprints" );
     return {
         success:  true,
         data: project,

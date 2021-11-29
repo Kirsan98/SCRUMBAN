@@ -42,11 +42,11 @@ DELETE http://localhost:5000/api/project/619d16a52002c0630d0f9364/delete_sprint/
 ########################################################################################################
 
 ### Create task in an existing project
-POST http://localhost:5000/api/project/619e83b82b46f4c0475135cc/addTask
+POST http://localhost:5000/api/project/619e83b42b46f4c0475135c8/addTask
 content-type: application/json
 
 {
-	"title": "Task 1"
+	"title": "Task 2"
 }
 
 ### Get task from an existing project
