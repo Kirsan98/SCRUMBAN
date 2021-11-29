@@ -96,8 +96,6 @@ export class ProjectService{
       });
     }
 
-
-
     deleteSingleSprintByProject(id1: string, id2: string){
       return new Promise((resolve,reject) => {
         this.http.delete('http://localhost:5000/api/project/'+ id1+'/delete_sprint/'+id2,).subscribe(
@@ -111,6 +109,22 @@ export class ProjectService{
       });
     }
 
+<<<<<<< HEAD
+=======
+    // addTask(id: string,task: any){
+    //   return new Promise((resolve,reject) => {
+    //     this.http.post('http://localhost:5000/api/addTask/'+ id,task).subscribe(
+    //       (response) => {
+    //         resolve(response);
+    //       },
+    //       (error) => {
+    //         reject(error);
+    //       }
+    //     );
+    //   });
+    // }
+
+>>>>>>> 6c014ab3703f555c5027e85ee69285660ee28a67
     getTasksFromProject(id: string){
       return new Promise((resolve,reject) => {
         this.http.get('http://localhost:5000/api/project/'+ id +'/tasks/').subscribe(

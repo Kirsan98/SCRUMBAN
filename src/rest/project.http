@@ -4,7 +4,7 @@
 GET http://localhost:5000/api/projects/
 
 ### getProjectById API URL
-GET http://localhost:5000/api/projects/619e83c92b46f4c0475135d4
+GET http://localhost:5000/api/projects/619e83b42b46f4c0475135c8
 
 ### add project
 POST http://localhost:5000/api/addProject/
