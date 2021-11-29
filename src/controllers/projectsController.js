@@ -144,7 +144,7 @@ module.exports.getTasksFromProject = async function (idProject) {
         const project = await Project.findById(idProject).populate("tasks");
         return {
             success: true,
-            data: project.tasks,
+            data: project,
             message: "Get task from project is success",
         }
     } catch (error) {

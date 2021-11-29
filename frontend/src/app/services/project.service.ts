@@ -110,4 +110,17 @@ export class ProjectService{
         );
       });
     }
+
+    getTasksFromProject(id: string){
+      return new Promise((resolve,reject) => {
+        this.http.get('http://localhost:5000/api/project/'+ id +'/tasks/').subscribe(
+          (response) => {
+            resolve(response);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    }
 }

@@ -8,10 +8,10 @@
           <a class="nav-link" routerLink="/project/{{ project._id }}">Détail</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/tasks">Backlog</a>
+          <a class="nav-link" routerLink="/project/{{ project._id }}/tasks">Backlog</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">Sprint</a>
+          <a class="nav-link active" >Sprint</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/project/{{ project?._id }}/settings"
@@ -20,7 +20,7 @@
         </li>
       </ul>
     </section>
-
+     
     <section style="margin-top: 10px">
       <div class="row">
         <div class="col-2">
