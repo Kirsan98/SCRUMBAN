@@ -84,13 +84,15 @@ module.exports.removeProject = async function (id) {
   try {
     const project = await Project.findById(id);
     const tasks = project.tasks;
-    tasks.forEach(async element => {
-      taskController.deleteTask(element);
-    });
+    if (tasks != null)
+      tasks.forEach(async element =>
+        taskController.deleteTask(element)
+      );
     const sprints = project.sprints;
-    sprints.forEach(async element => {
-      sprintController.deleteSprint(element);
-    });
+    if (sprints != null)
+      sprints.forEach(async element => {
+        sprintController.deleteSprint(element);
+      });
     project.remove();
     return {
       success: true,
@@ -113,8 +115,8 @@ module.exports.addSprint = async function (idProject, body) {
       return {
         success: true,
         data: sprintData.data,
-        message: "Add successfully",
-      }
+        message: "Add sprint successfully",
+      };
     }
   }
   catch (error) {
@@ -126,10 +128,11 @@ module.exports.addSprint = async function (idProject, body) {
 module.exports.getSingleSprintByProject = async function (idProject, idSprint) {
   try {
     const sprintData = await sprintController.getSprintById(idSprint);
-    return {
-      success: true,
-      data: sprintData.data,
-    }
+    if (sprintData.success)
+      return {
+        success: true,
+        data: sprintData.data,
+      };
   } catch (error) {
     return { success: false, message: "Not found" + error };
   }
@@ -139,12 +142,13 @@ module.exports.getSingleSprintByProject = async function (idProject, idSprint) {
 module.exports.getAllSprintFromProject = async function (idProject) {
   try {
     const project = await Project.findById(idProject);
-    return {
-      success: true,
-      data: project.sprints,
-    };
+    if (project != null)
+      return {
+        success: true,
+        data: project.sprints,
+      };
   } catch (error) {
-    return { success: false, message: "Not found " + error };
+    return { success: false, message: "Project not found " + error };
   }
 };
 
@@ -235,9 +239,9 @@ module.exports.getTasksFromProject = async function (idProject) {
 
 // delete a task from project
 module.exports.deleteSingleTaskByProject = async function (idProject, idTask) {
-  try{
+  try {
     const project = await Project.findByIdAndUpdate(
-      idProject, 
+      idProject,
       { $pull: { tasks: idTask } }
     );
     taskController.deleteTask(idTask);

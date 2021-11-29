@@ -1,4 +1,5 @@
 const Sprint = require('../models/sprintModel');
+const columnController = require('../controllers/columnController');
 
 // Get all sprints
 
@@ -69,7 +70,7 @@ module.exports.addSprint = async function (body) {
       return { success: false, message: "Fail to add sprint " + error };
     }
   }
-  return {success: false, message: "Fail to add sprint, wrong body parameter"};
+  return { success: false, message: "Fail to add sprint, wrong body parameter" };
 };
 
 
@@ -105,7 +106,7 @@ module.exports.updateSprint = async function (idSprint, body) {
       return { success: false, message: "Fail to update sprint " + error };
     }
   }
-  return {success: false, message: "Fail to update sprint, wrong body parameter"};
+  return { success: false, message: "Fail to update sprint, wrong body parameter" };
 };
 
 
@@ -113,9 +114,83 @@ module.exports.updateSprint = async function (idSprint, body) {
 module.exports.deleteSprint = async function (idSprint) {
   try {
     const sprint = await Sprint.findById(idSprint);
+    const columns = sprint.columns;
+    if (columns != null)
+      columns.forEach(
+        async element => columnController.deleteColumn(element)
+      );
     sprint.remove();
-    return { success: true, data: sprint};
+    return { success: true, data: sprint };
   } catch (error) {
     return { success: false, message: "Sprint not removed " + error };
   }
 };
+
+// COLUMN
+
+module.exports.addColumn = async function (idSprint, body) {
+  try {
+    const columnData = await columnController.addColumn(body);
+    if (columnData.success) {
+      const sprint = await Sprint.findByIdAndUpdate(
+        idSprint,
+        { $push: { columns: columnData.data._id } }
+      );
+      return {
+        success: true,
+        data: columnData.data,
+        message: "add column successfully",
+      };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: "Fail to add column " + error,
+    };
+  }
+}
+
+// get column by id
+module.exports.getSingleColumnByProject = async function (idSprint, idColumn) {
+  try {
+    const columnData = await columnController.getColumnById(idColumn);
+    if (columnData.success)
+      return {
+        success: true,
+        data: columnData.data,
+      };
+  } catch (error) {
+    return { success: false, message: "Column not found " + error };
+  }
+}
+
+// get all columns from project
+module.exports.getAllColumnFromProject = async function (idSprint) {
+  try {
+    const sprint = await Sprint.findById(idSprint);
+    if (sprint != null)
+      return {
+        success: true,
+        data: sprint.columns,
+      };
+  } catch (error) {
+    return { success: false, message: "Sprint not found " + error };
+  }
+}
+
+// delete column by id
+module.exports.deleteSingleColumnBySprint = async function (idSprint, idColumn) {
+  try {
+    const sprint = await Sprint.findByIdAndUpdate(
+      idSprint,
+      { $pull: { columns: idColumn } }
+    );
+    columnController.deleteColumn(idColumn);
+    return {
+      success: true,
+      message: "Column delete with success",
+    };
+  } catch (error) {
+    return { success: false, message: "Not found" + error };
+  }
+}
