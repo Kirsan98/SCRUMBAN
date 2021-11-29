@@ -13,20 +13,27 @@ import { SettingsProjectComponent } from './projects/settings-project/settings-p
 import { DeletesprintComponent } from './projects/deleteSprint/deletesprint.component';
 import { JoinProjectComponent } from './projects/join-project/join-project.component';
 import { SprintsComponent } from './projects/sprints/sprints.component';
+import { DetailComponent } from './projects/detail/detail.component';
 
 const routes: Routes = [
   {path: 'accueil',component: AccueilComponent},
-  {path: 'tasks',component: TasksComponent},
   {path: 'projects',component: ProjectsComponent},
-  {path: 'project/:id', component: SingleProjectComponent},
-  {path: 'project/:id/settings', component: SettingsProjectComponent},
-  {path: 'project/:id/delete', component: DeleteProjectComponent},
+  {
+    path: 'project/:id',
+    component: SingleProjectComponent,
+    children: [
+      {path: 'detail', component: DetailComponent},
+      {path: 'tasks',component: TasksComponent},
+      {path: 'settings', component: SettingsProjectComponent},
+      {path: 'delete', component: DeleteProjectComponent},
+      {path: 'new-sprint', component: NewSprintComponent},
+      {path: 'sprint/:id2', component: SingleSprintComponent},
+      {path: 'delete-sprint/:id2', component: DeletesprintComponent},
+      {path: 'sprints', component: SprintsComponent},
+    ]
+  },
   {path: 'new-project', component: NewProjectComponent},
-  {path: 'project/:id/new-sprint', component: NewSprintComponent},
-  {path: 'project/:id1/sprint/:id2', component: SingleSprintComponent},
-  {path: 'project/:id1/delete-sprint/:id2', component: DeletesprintComponent},
   {path: 'join-project', component: JoinProjectComponent},
-  {path: 'project/:id/sprints', component: SprintsComponent},
 
 
   { path: '', pathMatch: 'full', redirectTo: 'accueil' },

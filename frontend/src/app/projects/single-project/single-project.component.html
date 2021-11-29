@@ -6,23 +6,20 @@
 
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link active" href="#">Détail</a>
+        <a class="nav-link active" routerLink="./detail">Détail</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="../../tasks">Backlog</a>
+        <a class="nav-link" routerLink="./tasks">Product Backlog</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="../../project/{{project?._id}}/sprints">Sprint</a>
+        <a class="nav-link" routerLink="./sprints">Sprint</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="../..//project/{{ project?._id }}/settings">Setting</a>
+        <a class="nav-link" routerLink="./settings">Setting</a>
       </li>
     </ul>
-    
-    <section>
-      <p> Date de création : {{project.created_at | date : "dd-mm-YYYY"}}</p>
-    </section>
 
+    <router-outlet></router-outlet>
   </div>
 </div>
 </section>

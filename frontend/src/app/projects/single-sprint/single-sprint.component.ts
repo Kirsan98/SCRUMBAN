@@ -53,13 +53,13 @@ export class SingleSprintComponent implements OnInit {
   ngOnInit(): void {
       this.route.paramMap.subscribe(
         (params: Params) => {
-            this.projectService.getProjectById(params.get('id1')).then(
+            this.projectService.getProjectById(params.get('id')).then(
               (project: any) => {
                 this.project = project['data']
                 this.sprints = this.project.sprints;
               }
             )        
-            this.projectService.getSingleSprintByProject(params.get('id1'),params.get('id2')).then(
+            this.projectService.getSingleSprintByProject(params.get('id'),params.get('id2')).then(
             (sprint: any) => {
               this.sprint = sprint['data']
             }
@@ -84,8 +84,8 @@ export class SingleSprintComponent implements OnInit {
      }
 
        
-  onSprintClicked(id1: string, id2: string){
-    this.router.navigate(['project/'+id1+'/sprint/'+id2]);
+  onSprintClicked(idProject: string, idSprint: string){
+    this.router.navigate(['project/'+idProject+'/sprint/'+idSprint]);
   }
 
 

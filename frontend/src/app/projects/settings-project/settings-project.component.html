@@ -1,27 +1,4 @@
-
-<section>
-  <div class="card ">
-    <div class="card-body">
-      <h3  class="titleProject">{{project?.title}}</h3>
-
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{this.project._id}}">Détail
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/tasks">Backlog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{project?._id}}/sprints">Sprint</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="#">Setting</a>
-        </li>
-      </ul>
-    </div>
-
-  
+ 
     <div class="card-body">
       <h3 class="title"> Modifier les paramètres du projet</h3>
   
@@ -41,8 +18,3 @@
   type="button"
   class="btn btn-primary btn-lg"
   (click)="onSubmit()">Enregistrer</button>
-  
-    
-    </div>
-  </div>
-</section>
