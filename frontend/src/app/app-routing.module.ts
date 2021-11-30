@@ -17,24 +17,30 @@ import { SprintsComponent } from './projects/sprints/sprints.component';
 import { DetailComponent } from './projects/detail/detail.component';
 
 const routes: Routes = [
-  {path: 'accueil',component: AccueilComponent},
-  {path: 'project/:id/tasks',component: TasksComponent},
-  {path: 'projects',component: ProjectsComponent},
-  {path: 'project/:id', component: SingleProjectComponent},
-  {path: 'project/:id/tasks',component: TasksComponent},
-  {path: 'project/:id/addTask',component: NewTaskComponent},
-  {path: 'project/:id/settings', component: SettingsProjectComponent},
-  {path: 'project/:id/delete', component: DeleteProjectComponent},
-  {path: 'new-project', component: NewProjectComponent},
-  {path: 'join-project', component: JoinProjectComponent},
+  { path: 'accueil', component: AccueilComponent },
+  { path: 'projects', component: ProjectsComponent },
+  {
+    path: 'project/:id',
+    component: SingleProjectComponent,
+    children: [
+      { path: 'detail', component: DetailComponent },
+      { path: 'tasks', component: TasksComponent },
+      { path: 'sprints', component: SprintsComponent },
+      { path: 'settings', component: SettingsProjectComponent },
+      { path: 'add-task', component: NewTaskComponent },
+      { path: 'delete', component: DeleteProjectComponent },
+    ]
+  },
+  { path: 'new-project', component: NewProjectComponent },
+  { path: 'join-project', component: JoinProjectComponent },
 
-  
+
   { path: '', pathMatch: 'full', redirectTo: 'accueil' }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {paramsInheritanceStrategy: 'always'}),
+    RouterModule.forRoot(routes, { paramsInheritanceStrategy: 'always' }),
   ],
   exports: [RouterModule]
 })
