@@ -31,7 +31,7 @@ export class ProjectService{
     
     deleteProject(id: string){
       return new Promise((resolve, reject) => {
-        this.http.delete('http://localhost:5000/api/delete-project/' + id).subscribe(
+        this.http.delete('http://localhost:5000/api/remove-project/' + id).subscribe(
           (response) => {
             resolve(response);
           },
