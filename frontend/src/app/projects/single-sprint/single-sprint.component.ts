@@ -13,7 +13,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class SingleSprintComponent implements OnInit {
   public project!: Project;
-  @Input () public sprint!: Sprint;
+  public sprint!: Sprint;
   public sprints!: Sprint[];
 
   columns: any = [];
@@ -61,20 +61,20 @@ export class SingleSprintComponent implements OnInit {
       }
     );
     this.projectService.getProjectById(idProject)
-    .then(
-      (project: any) => {
-        this.project = project['data'];
-        this.sprints = this.project.sprints;
-      }
-    );
+      .then(
+        (project: any) => {
+          this.project = project['data'];
+          this.sprints = this.project.sprints;
+        }
+      );
     this.projectService.getSingleSprintByProject(idProject, idSprint)
-    .then(
-      (sprint: any) => {
-        this.sprint = sprint['data'];
-      }
-    );
+      .then(
+        (sprint: any) => {
+          this.sprint = sprint['data'];
+        }
+      );
   }
-  ngOnChanges(changes: SimpleChange){
+  ngOnChanges(changes: SimpleChange) {
     console.log("on change de sprint");
   }
 
@@ -90,6 +90,7 @@ export class SingleSprintComponent implements OnInit {
   }
 
   onDelete() {
+    console.log("on essaye de delete");
     this.router.navigate(['/project/' + this.project._id + '/delete-sprint/' + this.sprint._id]);
   }
 
@@ -97,11 +98,11 @@ export class SingleSprintComponent implements OnInit {
   onSprintClicked(idProject: string, idSprint: string) {
     this.router.navigate(['project/' + idProject + '/sprint/' + idSprint]);
     this.projectService.getSingleSprintByProject(idProject, idSprint)
-    .then(
-      (sprint: any) => {
-        this.sprint = sprint['data'];
-      }
-    );
+      .then(
+        (sprint: any) => {
+          this.sprint = sprint['data'];
+        }
+      );
   }
 
 }

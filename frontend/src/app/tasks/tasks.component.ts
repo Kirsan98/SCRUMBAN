@@ -12,27 +12,33 @@ import { ProjectService } from 'src/app/services/project.service';
 export class TasksComponent implements OnInit {
   public project!: Project;
   public tasks!: Task[];
-  
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService,
-  ){ }
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
       (params: Params) => {
-        this.projectService.getTasksFromProject(params.id).then(
-          (project: any) => {
-            this.project = project['data'];
-            this.tasks = this.project.tasks;
-            console.log(project);
-          });
+        this.projectService.getProjectById(params.idProject)
+          .then(
+            (project: any) => {
+              this.project = project['data'];
+            }
+          );
+        this.projectService.getTasksFromProject(params.idProject)
+          .then(
+            (tasks: any) => {
+              this.tasks = tasks['data'];
+            }
+          );
       }
     );
   }
 
-  onTaskClicked(idProject :string, idTask: string){
+  onTaskClicked(idProject: string, idTask: string) {
     this.router.navigate(['/project/' + idProject + '/task/' + idTask]);
   }
 }

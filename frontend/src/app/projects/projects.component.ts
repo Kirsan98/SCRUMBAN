@@ -25,19 +25,18 @@ export class ProjectsComponent implements OnInit {
        this.projectService.getAllProjects().subscribe(
        data => {
         this.projects = data['data'];
-        console.log(this.projects);
       });
    }
 
-   onProjectClicked(id :string){
-     this.router.navigate(['/project/' + id]);
+   onProjectClicked(idProject :string){
+     this.router.navigate(['/project/' + idProject+'/detail']);
    }
 
-   onDelete(id: string){
-    this.router.navigate(['/project/' + id+'/delete']);
+   onDelete(idProject: string){
+    this.router.navigate(['/project/' + idProject+'/delete']);
    }
 
-   onUpdate(id: string){
-    this.router.navigate(['/project/' + id+'/settings']); 
+   onUpdate(idProject: string){
+    this.router.navigate(['/project/' + idProject+'/settings']); 
    }
 }

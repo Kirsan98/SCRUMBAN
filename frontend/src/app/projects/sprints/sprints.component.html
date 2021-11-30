@@ -1,58 +1,31 @@
-<div class="card">
-  <div class="card-body">
-    <section>
-      <h3 class="titleProject">{{ project.title }}</h3>
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{ project._id }}">Détail</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{project?._id}}/tasks">Backlog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active">Sprint</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{ project?._id }}/settings">Setting</a>
-        </li>
-      </ul>
-    </section>
+<section style="margin-top: 10px">
 
-    <section style="margin-top: 10px">
-
-      <div class="row">
-        <div class="col-2">
-          <a routerLink="/project/{{ project?._id }}/new-sprint">
-            <button type="button" class="btn btn-primary">Créer un sprint</button>
-          </a>
-          <div class="bg-light border">
-            <div class="scroller">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Nom</th>
-                  </tr>
-                </thead>
-                <tbody *ngFor="let sprint of sprints.slice().reverse()">
-                  <tr class="ligne" (click)="onSprintClicked(project._id, sprint._id)">
-                    <td class="name-sprint">{{ sprint.title }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="col-10">
-          <div class="bg-light border">
-
-            <h6>Select sprint or create sprint</h6>
-
-
-
-          </div>
+  <div class="row">
+    <div class="col-2">
+      <a routerLink="./add-sprint">
+        <button type="button" class="btn btn-primary">Créer un sprint</button>
+      </a>
+      <div class="bg-light border">
+        <div class="scroller">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let sprint of sprints.slice().reverse()">
+              <tr class="ligne" (click)="onSprintClicked(project._id, sprint._id)">
+                <td class="name-sprint">{{ sprint.title }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </section>
+    </div>
+    <div class="col-10">
+      <div class="bg-light border">
+        <p>Selectionnez un sprint ou créez en un !</p>
+      </div>
+    </div>
   </div>
-  <router-outlet></router-outlet>
-</div>
+</section>

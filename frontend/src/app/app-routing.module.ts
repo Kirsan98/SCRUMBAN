@@ -20,15 +20,23 @@ const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
   { path: 'projects', component: ProjectsComponent },
   {
-    path: 'project/:id',
+    path: 'project/:idProject',
     component: SingleProjectComponent,
     children: [
       { path: 'detail', component: DetailComponent },
       { path: 'tasks', component: TasksComponent },
-      { path: 'sprints', component: SprintsComponent },
+      {
+        path: 'sprints',
+        component: SprintsComponent,
+        children: [
+          { path: 'add-sprint', component: NewSprintComponent },
+        ]
+      },
+      { path: 'sprint/:idSprint', component: SingleSprintComponent,},
       { path: 'settings', component: SettingsProjectComponent },
+      { path: 'delete-sprint/:idSprint', component: DeletesprintComponent },
       { path: 'add-task', component: NewTaskComponent },
-      { path: 'delete', component: DeleteProjectComponent }
+      { path: 'delete', component: DeleteProjectComponent },
     ]
   },
   { path: 'new-project', component: NewProjectComponent },

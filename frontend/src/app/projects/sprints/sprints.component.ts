@@ -23,12 +23,18 @@ export class SprintsComponent implements OnInit {
   ngOnInit(): void {
     this.route.parent!.params.subscribe(
       (params: Params) => {
-        this.projectService.getProjectById(params.idProject).then(
-          (project: any) => {
-            this.project = project['data'];
-            this.sprints = this.project.sprints;
-          }
-        );
+        this.projectService.getAllSprintByProject(params.idProject)
+          .then(
+            (sprints: any) => {
+              this.sprints = sprints['data'];              
+            }
+          );
+        this.projectService.getProjectById(params.idProject)
+          .then(
+            (project: any) => {
+              this.project = project['data'];
+            }
+          );
       }
     );
   }
@@ -36,12 +42,12 @@ export class SprintsComponent implements OnInit {
 
   onSprintClicked(idProject: string, idSprint: string) {
     this.projectService.getSingleSprintByProject(idProject, idSprint)
-    .then(
-      (sprint: any) => {
-        this.sprintSelected = sprint;
-      }
-    );
+      .then(
+        (sprint: any) => {
+          this.sprintSelected = sprint;
+        }
+      );
     // console.log(this.sprintSelected);
-    this.router.navigate(['project/' + idProject + '/sprints/sprint/' + idSprint]);
+    this.router.navigate(['project/' + idProject + '/sprint/' + idSprint]);
   }
 }

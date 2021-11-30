@@ -1,43 +1,16 @@
+<div class="card-body">
+  <h3 class="title"> Modifier les paramètres du projet</h3>
 
-<section>
-  <div class="card ">
-    <div class="card-body">
-      <h3  class="titleProject">{{project?.title}}</h3>
-
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{this.project._id}}">Détail
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{project?._id}}/tasks">Backlog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{project?._id}}/sprints">Sprint</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" >Setting</a>
-        </li>
-      </ul>
+  <form [formGroup]="updateProjectForm">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" formControlName="title" placeholder="Enter new title"
+        name="title">
     </div>
+  </form>
 
-  
-    <div class="card-body">
-      <h3 class="title"> Modifier les paramètres du projet</h3>
-  
-      <form [formGroup]="updateProjectForm">
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input type="text" class="form-control" id="title" formControlName="title" placeholder="Enter new title" name="title">
-        </div>
-      </form>
-
-      <div>
-        <h6>Membres : </h6>
-      </div>
-
-   
-    <button 
-  type="button"
-  class="btn btn-primary btn-lg"
-  (click)="onSubmit()">Enregistrer</button>
+  <div>
+    <h6>Membres : </h6>
+  </div>
+  <button type="button" class="btn btn-primary btn-lg" (click)="onSubmit()">Enregistrer</button>
+</div>

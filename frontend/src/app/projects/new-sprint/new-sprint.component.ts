@@ -42,9 +42,9 @@ export class NewSprintComponent implements OnInit {
     const sprint = new Sprint();
     sprint.title = this.sprintForm.get('title')?.value;
     this.projectService.addSprint(this.projectID,sprint).then(
-      ()=>{
+      (sprintData: any)=>{
         this.sprintForm.reset();
-        this.router.navigate(['project/'+this.projectID+'/sprints']);
+        this.router.navigate(['project/'+this.projectID+'/sprint/'+sprintData.data._id]);
       }
     ).catch(
       (error) => {

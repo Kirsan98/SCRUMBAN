@@ -1,71 +1,25 @@
-<div class="card">
-  <div class="card-body">
-    <section>
-      <h3 class="titleProject">{{project.title}}</h3>
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{ project?._id }}">Détail</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active">Backlog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{ project?._id }}sprints">Sprint</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{ project?._id }}settings">Settings</a>
-        </li>
-      </ul>
-    </section>
-
-    <section style="margin-top: 10px" >
-      
-      <div class="row">
-        <div class="col-2">
-          <a routerLink="/project/{{ project?._id }}add-task">
-            <button type="button" class="btn btn-primary">Créer une tâche</button>
-          </a>
-          <div class="bg-light border">
-            <div class="scroller">
-            <table class="table" >
-              <thead>
-                <tr>
-                  <th scope="col">Nom</th>
-                </tr>
-              </thead>
-              <tbody *ngFor="let task of tasks.slice().reverse();">
-                <tr
-                  class="ligne"
-                  (click)="onTaskClicked(project._id, task._id)">
-                  <td class="name-task">{{ task }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          </div>
-        </div>
-        <div class="col-10">
-          <h6>Select task or create a task</h6>
-          <div class="bg-light border">
-             <div class="container">
-              <div class="row">
-                <div class="col colonne">
-                  <h4 style="text-align: center;">A faire </h4>
-              </div>
-                <div class="col colonne">
-                  <h4 style="text-align: center;">En cours</h4>
-                </div>
-                <div class="col colonne">
-                  <h4 style="text-align: center;">Review</h4>
-                </div>
-                <div class="col colonne">
-                  <h4 style="text-align: center;">Terminé </h4>
-                </div>
-              </div>
-            </div> 
-          </div> 
+<section style="margin-top: 10px">
+  <div class="row">
+    <div class="col-2">
+      <a routerLink="../add-task">
+        <button type="button" class="btn btn-primary">Créer une tâche</button>
+      </a>
+      <div class="bg-light border">
+        <div class="scroller">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let task of tasks.reverse();">
+              <tr class="ligne" (click)="onTaskClicked(project._id, task._id)">
+                <td class="name-task">{{ task.title }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </section>
+    </div>
   </div>
-</div>
+</section>

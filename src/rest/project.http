@@ -4,30 +4,18 @@
 GET http://localhost:5000/api/projects/
 
 ### getProjectById API URL
-<<<<<<< HEAD
 GET http://localhost:5000/api/project/61a549f275a713f1150e7188
-=======
-GET http://localhost:5000/api/projects/61a549d075a713f1150e7179
->>>>>>> develop
 
 ### add project
-POST http://localhost:5000/api/addProject/
+POST http://localhost:5000/api/add-project/
 content-type: application/json
 
 {
-<<<<<<< HEAD
 	"title": "projet 2"
 }
 
 #### Default updateProject URL
-PUT http://localhost:5000/api/updateProject/61a522cdc300c6cce45eb37e
-=======
-	"title": "Cest la bonne"
-}
-
-#### Default updateProject URL
-PUT http://localhost:5000/api/updateProject/61a50f243fc2fc80f0f3aa17
->>>>>>> develop
+PUT http://localhost:5000/api/update-project/61a522cdc300c6cce45eb37e
 content-type: application/json
 
 {
@@ -35,17 +23,13 @@ content-type: application/json
 }
 
 ### Default removeProject URL
-<<<<<<< HEAD
-DELETE http://localhost:5000/api/removeProject/61a522cdc300c6cce45eb37e
+DELETE http://localhost:5000/api/remove-project/61a522cdc300c6cce45eb37e
 
 #################################################################################
 #Sprints
-=======
-DELETE http://localhost:5000/api/removeProject/61a50f243fc2fc80f0f3aa17
->>>>>>> develop
 
 ### create sprint
-POST http://localhost:5000/api/project/61a549f275a713f1150e7188/addSprint
+POST http://localhost:5000/api/project/61a549f275a713f1150e7188/add-sprint
 content-type: application/json
 
 {
@@ -67,8 +51,7 @@ DELETE http://localhost:5000/api/project/61a549f275a713f1150e7188/delete-sprint/
 #tasks
 
 ### Create task in an existing project
-<<<<<<< HEAD
-POST http://localhost:5000/api/project/61a549f275a713f1150e7188/addTask
+POST http://localhost:5000/api/project/61a549f275a713f1150e7188/add-task
 content-type: application/json
 
 {
@@ -83,19 +66,5 @@ GET http://localhost:5000/api/project/61a549f275a713f1150e7188/tasks
 
 ### delete a task from an existing project
 DELETE http://localhost:5000/api/project/61a549f275a713f1150e7188/delete-task/61a610e9884f0e4d9ab6c632
-=======
-POST http://localhost:5000/api/project/61a549d075a713f1150e7179/addTask
-content-type: application/json
-
-{
-	"title": "Task pour voir si getTasksFromProject fonctionne"
-}
-
-### Get task from an existing project
-GET http://localhost:5000/api/project/61a50f7e3fc2fc80f0f3aa2c/task/61a50fb73fc2fc80f0f3aa30
-
-### Get all tasks from an existing project
-GET http://localhost:5000/api/project/61a549d075a713f1150e7179/tasks
->>>>>>> develop
 
 ##############################################################################################################

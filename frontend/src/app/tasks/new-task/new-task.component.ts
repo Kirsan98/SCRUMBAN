@@ -28,10 +28,9 @@ export class NewTaskComponent implements OnInit {
     });
     this.route.params.subscribe(
       (params: Params) => {
-        this.projectService.getProjectById(params.id).then(
+        this.projectService.getProjectById(params.idProject).then(
           (project: any) => {
             this.project = project['data'];
-            console.log(this.project);
           });
         }
       );

@@ -18,7 +18,7 @@ export class ProjectService{
 
     addProject(project: any){
         return new Promise((resolve,reject) => {
-            this.http.post('http://localhost:5000/api/addProject/',project).subscribe(
+            this.http.post('http://localhost:5000/api/add-project/',project).subscribe(
                 (response) => {
                     resolve(response);
                   },
@@ -31,7 +31,7 @@ export class ProjectService{
     
     deleteProject(id: string){
       return new Promise((resolve, reject) => {
-        this.http.delete('http://localhost:5000/api/removeProject/' + id).subscribe(
+        this.http.delete('http://localhost:5000/api/delete-project/' + id).subscribe(
           (response) => {
             resolve(response);
           },
@@ -45,7 +45,7 @@ export class ProjectService{
     updateProject(id: string, project: Project){
       console.log(project);
       return new Promise((resolve, reject) => {
-        this.http.put('http://localhost:5000/api/updateProject/' + id, project).subscribe(
+        this.http.put('http://localhost:5000/api/update-project/' + id, project).subscribe(
           (response) => {
             console.log(response);
             resolve(response);
@@ -70,9 +70,9 @@ export class ProjectService{
       });
     }
 
-    addSprint(id: string,sprint: any){
+    addSprint(idProject: string,sprint: any){
       return new Promise((resolve,reject) => {
-        this.http.post('http://localhost:5000/api/project/'+ id+'/addSprint',sprint).subscribe(
+        this.http.post('http://localhost:5000/api/project/'+ idProject+'/add-sprint',sprint).subscribe(
           (response) => {
             resolve(response);
           },
@@ -96,9 +96,9 @@ export class ProjectService{
       });
     }
 
-    deleteSingleSprintByProject(id1: string, id2: string){
+    getAllSprintByProject(idProject: string){
       return new Promise((resolve,reject) => {
-        this.http.delete('http://localhost:5000/api/project/'+ id1+'/delete_sprint/'+id2,).subscribe(
+        this.http.get('http://localhost:5000/api/project/'+ idProject+'/sprints/').subscribe(
           (response) => {
             resolve(response);
           },
@@ -109,9 +109,9 @@ export class ProjectService{
       });
     }
 
-    getTasksFromProject(id: string){
+    deleteSingleSprintByProject(idProject: string, idSprint: string){
       return new Promise((resolve,reject) => {
-        this.http.get('http://localhost:5000/api/project/'+ id +'/tasks/').subscribe(
+        this.http.delete('http://localhost:5000/api/project/'+ idProject+'/delete-sprint/'+idSprint,).subscribe(
           (response) => {
             resolve(response);
           },
@@ -122,9 +122,22 @@ export class ProjectService{
       });
     }
 
-    addTask(id: string, task : any){
+    getTasksFromProject(idProject: string){
       return new Promise((resolve,reject) => {
-        this.http.post('http://localhost:5000/api/project/'+ id + '/add-task/',task).subscribe(
+        this.http.get('http://localhost:5000/api/project/'+ idProject +'/tasks/').subscribe(
+          (response) => {
+            resolve(response);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    }
+
+    addTask(idProject: string, task : any){
+      return new Promise((resolve,reject) => {
+        this.http.post('http://localhost:5000/api/project/'+ idProject + '/add-task/',task).subscribe(
           (response) => {
             resolve(response);
           },

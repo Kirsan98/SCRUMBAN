@@ -21,24 +21,25 @@ export class SingleProjectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.route.params.subscribe(
-      (params: Params) => {
-        this.projectService.getProjectById(params.idProject).then(
-          (project: any) => {
-            this.project = project['data'];
-            this.sprints = this.project.sprints;
-          }
+        async (params: Params) => {
+          this.projectService.getProjectById(params.idProject).then(
+            (project: any) => {
+              this.project = project['data'];
+              this.sprints = this.project.sprints;
+            }
           );
         }
       );
   }
 
 
-  onDelete(){
+  onDelete() {
     this.router.navigate(['/delete-project/' + this.project._id]);
-   }
+  }
 
-   onUpdate(){
-    this.router.navigate(['/project/' + this.project._id+'/settings']); 
-   }
+  onUpdate() {
+    this.router.navigate(['/project/' + this.project._id + '/settings']);
+  }
 }
