@@ -1,7 +1,7 @@
 <section>
     <div class="card">
       <div class="card-body">
-        <h3 class="title">Nouvelle tâche</h3>
+        <h3 class="taskSettings">Nouvelle tâche</h3>
   
         <form [formGroup]="taskForm">
           <div class="form-group">
@@ -11,8 +11,44 @@
               class="form-control"
               id="title"
               formControlName="title"
-              placeholder="Enter titre de la tâche"
+              placeholder="Entrer titre de la tâche"
               name="title"
+            />
+            <label for="color">Couleur de la tâche</label>
+            <input
+              type="text"
+              class="form-control"
+              id="color"
+              formControlName="color"
+              placeholder="Entrer couleur la de la tâche"
+              name="color"
+            />
+            <label for="description">Description de la tâche</label>
+            <input
+              type="text"
+              class="form-control"
+              id="description"
+              formControlName="description"
+              placeholder="Entrer la description de la tâche"
+              name="description"
+            />
+            <label for="state">État de la tâche</label>
+            <input
+              type="text"
+              class="form-control"
+              id="state"
+              formControlName="state"
+              placeholder="Entrer l'état de la tâche"
+              name="state"
+            />
+            <label for="estimated_duration">Durée estimé de la tâche</label>
+            <input
+              type="text"
+              class="form-control"
+              id="estimated_duration"
+              formControlName="estimated_duration"
+              placeholder="Entrer la durée estimé de la tâche"
+              name="estimated_duration"
             />
           </div>
         </form>
