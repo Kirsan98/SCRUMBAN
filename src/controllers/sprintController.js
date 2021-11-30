@@ -168,11 +168,20 @@ module.exports.getSingleColumnByProject = async function (idSprint, idColumn) {
 module.exports.getAllColumnFromSprint = async function (idSprint) {
   try {
     const sprint = await Sprint.findById(idSprint);
-    if (sprint != null)
+    if (sprint != null) {
+      let columns = [];
+      await Promise.all(sprint.columns.map(
+        async (element) => {
+          const column = await columnController.getColumnById(element);
+          if (column.success)
+            columns.push(column.data);
+        }
+      ));
       return {
         success: true,
-        data: sprint.columns,
+        data: columns,
       };
+    }
   } catch (error) {
     return { success: false, message: "Sprint not found " + error };
   }

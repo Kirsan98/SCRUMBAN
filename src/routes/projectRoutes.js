@@ -118,7 +118,7 @@ router.route('/project/:idProject/task/:idTask').get(async (req, res) => {
 
 // get all task from project
 router.route('/project/:id/tasks').get(async (req, res) => {
-  let response = await projectController.getTasksFromProject(req.params.id);
+  let response = await projectController.getAllTaskFromProject(req.params.id);
   if (response.success == true) {
     res.status(200).json(response);
   } else {

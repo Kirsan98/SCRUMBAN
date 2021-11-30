@@ -65,6 +65,6 @@ GET http://localhost:5000/api/project/61a549f275a713f1150e7188/task/61a54db7d5b2
 GET http://localhost:5000/api/project/61a549f275a713f1150e7188/tasks
 
 ### delete a task from an existing project
-DELETE http://localhost:5000/api/project/61a549f275a713f1150e7188/delete-task/61a54db7d5b2ff27be5821d9
+DELETE http://localhost:5000/api/project/61a549f275a713f1150e7188/delete-task/61a610e9884f0e4d9ab6c632
 
 ##############################################################################################################
