@@ -28,7 +28,7 @@ const routes: Routes = [
       { path: 'sprints', component: SprintsComponent },
       { path: 'settings', component: SettingsProjectComponent },
       { path: 'add-task', component: NewTaskComponent },
-      { path: 'delete', component: DeleteProjectComponent },
+      { path: 'delete', component: DeleteProjectComponent }
     ]
   },
   { path: 'new-project', component: NewProjectComponent },

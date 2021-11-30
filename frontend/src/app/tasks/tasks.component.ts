@@ -25,8 +25,8 @@ export class TasksComponent implements OnInit {
         this.projectService.getTasksFromProject(params.id).then(
           (project: any) => {
             this.project = project['data'];
-            console.log(project);
             this.tasks = this.project.tasks;
+            console.log(project);
           });
       }
     );

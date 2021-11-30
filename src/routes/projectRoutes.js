@@ -97,7 +97,7 @@ router.route('/project/:id1/delete-sprint/:id2').delete(async (req, res) => {
 //TASK
 
 // add task to project
-router.route('/project/:idProject/addTask/').post(async (req, res) => {
+router.route('/project/:idProject/add-task/').post(async (req, res) => {
   let response = await projectController.addTaskToProject(req.params.idProject, req.body);
   if (response.success == true) {
     res.status(200).json(response);

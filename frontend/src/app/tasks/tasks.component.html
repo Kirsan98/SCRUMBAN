@@ -1,20 +1,19 @@
 <div class="card">
   <div class="card-body">
     <section>
-      <h3 class="titleProject">{{ project.title }}</h3>
+      <h3 class="titleProject">{{project.title}}</h3>
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{ project._id }}">Détail</a>
+          <a class="nav-link" routerLink="/project/{{ project?._id }}">Détail</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active">Backlog</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{ project?._id }}/sprints">Sprint</a>
+          <a class="nav-link" routerLink="/project/{{ project?._id }}sprints">Sprint</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/project/{{ project?._id }}/settings">Setting</a
-          >
+          <a class="nav-link" routerLink="/project/{{ project?._id }}settings">Settings</a>
         </li>
       </ul>
     </section>
@@ -23,7 +22,7 @@
       
       <div class="row">
         <div class="col-2">
-          <a routerLink="/project/{{ project?._id }}/addTask">
+          <a routerLink="/project/{{ project?._id }}add-task">
             <button type="button" class="btn btn-primary">Créer une tâche</button>
           </a>
           <div class="bg-light border">
@@ -38,7 +37,7 @@
                 <tr
                   class="ligne"
                   (click)="onTaskClicked(project._id, task._id)">
-                  <td class="name-task">{{ task.title }}</td>
+                  <td class="name-task">{{ task }}</td>
                 </tr>
               </tbody>
             </table>
