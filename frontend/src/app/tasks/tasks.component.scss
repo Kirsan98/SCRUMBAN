@@ -7,7 +7,9 @@
     position: unset;
   }
   
-
+.ligne:hover {
+  background-color: rgb(230, 230, 230);
+}
 .nameTask, .updateTask, .deleteTask{
   cursor: pointer;
 }

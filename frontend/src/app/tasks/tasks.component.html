@@ -1,25 +1,42 @@
-<section style="margin-top: 10px">
-  <div class="row">
-    <div class="col-2">
-      <a routerLink="../add-task">
-        <button type="button" class="btn btn-primary">Créer une tâche</button>
-      </a>
-      <div class="bg-light border">
-        <div class="scroller">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Nom</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let task of tasks.reverse();">
-              <tr class="ligne" (click)="onTaskClicked(project._id, task._id)">
-                <td class="name-task">{{ task.title }}</td>
-              </tr>
-            </tbody>
-          </table>
+
+
+<a routerLink="../add-task">
+  <button type="button" class="btn btn-primary">Créer une tâche</button>
+</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date création</th>
+      <th scope="col">Paramètres</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let task of tasks.reverse();">
+    <tr  class="ligne" >
+      <td class="nameTask" (click)="onTaskClicked(project._id, task._id)">{{ task.title }}</td>
+      <td class="descriptionTask"(click)="onTaskClicked(project._id, task._id)"> {{task.description}}</td>
+      <td class= "dateTask" (click)="onTaskClicked(project._id, task._id)">{{task.created_at | date: 'dd/MM/y'}}</td>
+      <td>
+        <div class="wrapper">
+          <details data-popover="down">
+            <summary>
+              <h2 class="hover_three_dots">...</h2>
+            </summary>
+            <div>
+              <div class="list-group popover__message">
+                <a   class="list-group-item list-group-item-action updateProject" >Paramètres du projet</a>
+                <a   class="list-group-item list-group-item-action deleteProject" >Déplacer dans la corbeille</a> 
+                <!-- 
+                  TODO
+                  parametres du projet permet d'aller vers la page settingsProject
+                -->
+              </div>
+            </div>
+          </details>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </td>
+     
+    </tr>
+  </tbody>
+</table>

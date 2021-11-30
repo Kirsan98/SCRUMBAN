@@ -5,7 +5,7 @@ export class Task{
     _id!: string;
     title!: string;
     color!: String;
-    desrciption !: String;
+    description !: String;
     state !: String;
     _owner !: User[];
     created_at !: Date;
