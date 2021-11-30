@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { TaskService } from 'src/app/services/task.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Task } from 'src/app/models/task.model';
+import { Project } from 'src/app/models/project.model';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-tasks',
@@ -9,35 +10,29 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
-
-  tasks:any[] = [];
+  public project!: Project;
+  public tasks!: Task[];
   
   constructor(
     private router: Router,
-    public taskService: TaskService 
+    private route: ActivatedRoute,
+    private projectService: ProjectService,
   ){ }
 
   ngOnInit(): void {
-    this.listTask();
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.projectService.getTasksFromProject(params.id).then(
+          (project: any) => {
+            this.project = project['data'];
+            console.log(project);
+            this.tasks = this.project.tasks;
+          });
+      }
+    );
   }
 
-  listTask(): void{
-    // this.taskService.getAllTasks().subscribe(
-    // data => {
-    //   // this.tasks = data['data'];
-    //   console.log(this.tasks);
-    // });
-  }
-
-  onTaskClicked(idTask :string){
-    this.router.navigate(['/task/' + idTask]);
-  }
-
-  onDelete(id: string){
-   this.router.navigate(['/deleteTask/' + id]);
-  }
-
-  onUpdate(id: string){
-   this.router.navigate(['/taskSettings/' + id]); 
+  onTaskClicked(idProject :string, idTask: string){
+    this.router.navigate(['/project/' + idProject + '/task/' + idTask]);
   }
 }

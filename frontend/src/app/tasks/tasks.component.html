@@ -1,40 +1,72 @@
-<section>
-  <a routerLink="/newTask">
-    <button type="button" class="btn btn-primary btn-lg">
-      + Nouvelle tâche
-    </button>
-  </a>
-</section>
+<div class="card">
+  <div class="card-body">
+    <section>
+      <h3 class="titleProject">{{ project.title }}</h3>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/project/{{ project._id }}">Détail</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active">Backlog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/project/{{ project?._id }}/sprints">Sprint</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/project/{{ project?._id }}/settings">Setting</a
+          >
+        </li>
+      </ul>
+    </section>
 
-<section>
-<h2 style="text-align: center">Vos Tâches:</h2>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Nom</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let task of tasks.slice().reverse();">
-    <tr class="ligne">
-      <td class="nameTask" (click)="onTaskClicked(task._id)">{{ task.title }}</td>
-      <td>
-        <div class="wrapper">
-          <details data-popover="down">
-            <summary>
-              <h2 class="hover_three_dots">...</h2>
-            </summary>
-            <div>
-              <div class="list-group popover__message">
-                <a  (click)="onUpdate(task._id)" class="list-group-item list-group-item-action updateTask" >Paramètres de la tâche</a>
-                <a  (click)="onDelete(task._id)" class="list-group-item list-group-item-action deleteTask" >Déplacer dans la corbeille</a> 
-              </div>
-            </div>
-          </details>
+    <section style="margin-top: 10px" >
+      
+      <div class="row">
+        <div class="col-2">
+          <a routerLink="/project/{{ project?._id }}/addTask">
+            <button type="button" class="btn btn-primary">Créer une tâche</button>
+          </a>
+          <div class="bg-light border">
+            <div class="scroller">
+            <table class="table" >
+              <thead>
+                <tr>
+                  <th scope="col">Nom</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let task of tasks.slice().reverse();">
+                <tr
+                  class="ligne"
+                  (click)="onTaskClicked(project._id, task._id)">
+                  <td class="name-task">{{ task.title }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
         </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</section>
-
+        <div class="col-10">
+          <h6>Select task or create a task</h6>
+          <div class="bg-light border">
+             <div class="container">
+              <div class="row">
+                <div class="col colonne">
+                  <h4 style="text-align: center;">A faire </h4>
+              </div>
+                <div class="col colonne">
+                  <h4 style="text-align: center;">En cours</h4>
+                </div>
+                <div class="col colonne">
+                  <h4 style="text-align: center;">Review</h4>
+                </div>
+                <div class="col colonne">
+                  <h4 style="text-align: center;">Terminé </h4>
+                </div>
+              </div>
+            </div> 
+          </div> 
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

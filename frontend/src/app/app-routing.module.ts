@@ -7,6 +7,7 @@ import { NewProjectComponent } from './projects/new-project/new-project.componen
 import { NewSprintComponent } from './projects/new-sprint/new-sprint.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { NewTaskComponent } from './tasks/new-task/new-task.component';
 import { SingleProjectComponent } from './projects/single-project/single-project.component';
 import { SingleSprintComponent } from './projects/single-sprint/single-sprint.component';
 import { SettingsProjectComponent } from './projects/settings-project/settings-project.component';
@@ -17,30 +18,17 @@ import { DetailComponent } from './projects/detail/detail.component';
 
 const routes: Routes = [
   {path: 'accueil',component: AccueilComponent},
+  {path: 'project/:id/tasks',component: TasksComponent},
   {path: 'projects',component: ProjectsComponent},
-  {
-    path: 'project/:idProject',
-    component: SingleProjectComponent,
-    children: [
-      {path: 'detail', component: DetailComponent},
-      {path: 'tasks',component: TasksComponent},
-      {path: 'settings', component: SettingsProjectComponent},
-      {path: 'delete', component: DeleteProjectComponent},
-      {path: 'new-sprint', component: NewSprintComponent},
-      {path: 'delete-sprint/:idSprint', component: DeletesprintComponent},
-      {
-        path: 'sprints',
-        component: SprintsComponent,
-        children: [
-          {path: 'sprint/:idSprint', component: SingleSprintComponent},
-        ],
-      },
-    ]
-  },
+  {path: 'project/:id', component: SingleProjectComponent},
+  {path: 'project/:id/tasks',component: TasksComponent},
+  {path: 'project/:id/addTask',component: NewTaskComponent},
+  {path: 'project/:id/settings', component: SettingsProjectComponent},
+  {path: 'project/:id/delete', component: DeleteProjectComponent},
   {path: 'new-project', component: NewProjectComponent},
   {path: 'join-project', component: JoinProjectComponent},
 
-
+  
   { path: '', pathMatch: 'full', redirectTo: 'accueil' }
 ];
 
