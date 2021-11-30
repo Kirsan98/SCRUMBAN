@@ -1,7 +1,5 @@
 const Project = require('../models/projectModel');
 const Sprint = require('../models/sprintModel');
-const Column = require('../models/columnModel')
-const Task = require('../models/taskModel');
 const TaskController = require('../controllers/taskController');
 
 //get all projects
@@ -141,37 +139,24 @@ module.exports.getTaskFromProject = async function(idProject, idTask){
 }
 
 // On arrive pas à gérer la promesse et l'init du tableau de tâches
-
-// async function loadTask(elements){
-//     return new Promise((resolve) => {
-//         let tasks = [];
-//         elements.forEach(async element =>{
-//             let task = await TaskController.getTaskById(element);
-//             tasks.push(task.data);      
-//             console.log(tasks);
-//             console.log("tableau ok")
-//         })
-//         console.log("fin load task");
-//         resolve(tasks);
-//     })
-// }
-
-// // Get task from an existing project 
-// module.exports.getTasksFromProject = async function(idProject){
-//     try {
-//     const project = await Project.findById(idProject);
-//     loadTask(project.tasks).then(
-//         (tasks) => {
-//             console.log("promessse ntm");
-//         }
-//     );
-//     return {
-//         success:  false,
-//     };
-//     } catch (error){
-//     return { success: false, message: "Fail to get task from project " + error};
-//     }
-// }
+module.exports.getTasksFromProject = async function(idProject){
+    try {
+        const project = await Project.findById(idProject);
+        if(project != null){
+            let tasks = [] ;
+            await Promise.all(project.tasks.map(async (element) => {
+                const task = await TaskController.getTaskById(element);
+                tasks.push(task.data);
+            }));
+            return {
+                success : true,
+                data : tasks
+            }
+        }
+    } catch (error) {
+        return { success: false, message: "Fail to get all tasks from project " + error.message};
+    }
+}
 
 //get project by id with sprints
 module.exports.getProjectById = async function(id){

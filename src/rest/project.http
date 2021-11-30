@@ -4,7 +4,7 @@
 GET http://localhost:5000/api/projects/
 
 ### getProjectById API URL
-GET http://localhost:5000/api/projects/61a50f7e3fc2fc80f0f3aa2c
+GET http://localhost:5000/api/projects/61a549d075a713f1150e7179
 
 ### add project
 POST http://localhost:5000/api/addProject/
@@ -42,17 +42,17 @@ DELETE http://localhost:5000/api/project/619d16a52002c0630d0f9364/delete_sprint/
 ########################################################################################################
 
 ### Create task in an existing project
-POST http://localhost:5000/api/project/61a50f7e3fc2fc80f0f3aa2c/addTask
+POST http://localhost:5000/api/project/61a549d075a713f1150e7179/addTask
 content-type: application/json
 
 {
-	"title": "Task bonne"
+	"title": "Task pour voir si getTasksFromProject fonctionne"
 }
 
 ### Get task from an existing project
 GET http://localhost:5000/api/project/61a50f7e3fc2fc80f0f3aa2c/task/61a50fb73fc2fc80f0f3aa30
 
 ### Get all tasks from an existing project
-GET http://localhost:5000/api/project/61a50f7e3fc2fc80f0f3aa2c/tasks
+GET http://localhost:5000/api/project/61a549d075a713f1150e7179/tasks
 
 ##############################################################################################################
