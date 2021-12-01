@@ -45,4 +45,8 @@ export class TasksComponent implements OnInit {
   onDelete(idProject: string, idTask: string){
     this.router.navigate(['/project/' + idProject +'/delete-task/' + idTask]);
   }
+
+  onUpdate(idProject: string, idTask: string){
+    this.router.navigate(['/project/' + idProject +'/update-task/' + idTask]);
+  }
 }

@@ -23,7 +23,7 @@
             </summary>
             <div>
               <div class="list-group popover__message">
-                <a class="list-group-item list-group-item-action">Paramètres de la tâche</a>
+                <a class="list-group-item list-group-item-action updateTask" (click)="onUpdate(project._id, task._id)">Paramètres de la tâche</a>
                 <a class="list-group-item list-group-item-action deleteTask" (click)="onDelete(project._id, task._id)">Déplacer dans la corbeille</a> 
               </div>
             </div>

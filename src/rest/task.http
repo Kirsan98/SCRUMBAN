@@ -18,3 +18,14 @@ content-type: application/json
 
 ### Remove a task
 DELETE http://localhost:5000/api/removeTask/61a52cb7df9572abed26401e
+
+### Update task
+PUT http://localhost:5000/api/updateTask/61a6c50cdd7a0f2ccf0989b7
+content-type: application/json
+
+{
+	"title": "ok",
+	"color": "ook",
+	"description": "okkkk",
+	"state": "okkkkkkk"
+}

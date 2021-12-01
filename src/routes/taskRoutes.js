@@ -38,4 +38,13 @@ router.route('/removeTask/:id').delete(async (req, res) => {
 	}
 });
 
+router.route('/updateTask/:id').put(async (req, res) => {
+	let response = await taskController.updateTask(req.params.id, req.body);
+	if (response!=null && response.success == true) {
+		res.status(200).json(response);
+	} else {
+		res.status(404).json(response);
+	}
+});
+
 module.exports = router;
