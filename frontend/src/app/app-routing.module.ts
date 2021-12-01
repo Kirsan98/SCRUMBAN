@@ -6,9 +6,12 @@ import { DeleteProjectComponent } from './projects/delete-project/delete-project
 import { NewProjectComponent } from './projects/new-project/new-project.component';
 import { NewSprintComponent } from './projects/new-sprint/new-sprint.component';
 import { ProjectsComponent } from './projects/projects.component';
+
 import { TasksComponent } from './tasks/tasks.component';
 import { NewTaskComponent } from './tasks/new-task/new-task.component';
 import { DeleteTaskComponent } from './tasks/delete-task/delete-task.component';
+
+
 import { SingleProjectComponent } from './projects/single-project/single-project.component';
 import { SingleSprintComponent } from './projects/single-sprint/single-sprint.component';
 import { SettingsProjectComponent } from './projects/settings-project/settings-project.component';
@@ -17,6 +20,7 @@ import { JoinProjectComponent } from './projects/join-project/join-project.compo
 import { SprintsComponent } from './projects/sprints/sprints.component';
 import { DetailComponent } from './projects/detail/detail.component';
 import { ColumnsComponent } from './columns/columns.component';
+import { SingleTaskComponent } from './tasks/single-task/single-task.component';
 
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -45,6 +49,7 @@ const routes: Routes = [
       { path: 'delete-sprint/:idSprint', component: DeletesprintComponent },
       { path: 'add-task', component: NewTaskComponent },
       { path: 'delete-task/:idTask', component: DeleteTaskComponent },
+      { path: 'task/:idTask', component: SingleTaskComponent},
       { path: 'delete', component: DeleteProjectComponent },
     ]
   },

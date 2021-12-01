@@ -25,6 +25,7 @@ import { SprintsComponent } from './projects/sprints/sprints.component';
 import { NewTaskComponent } from './tasks/new-task/new-task.component';
 import { ColumnsComponent } from './columns/columns.component';
 import { DeleteTaskComponent } from './tasks/delete-task/delete-task.component';
+import { SingleTaskComponent } from './tasks/single-task/single-task.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { DeleteTaskComponent } from './tasks/delete-task/delete-task.component';
     SprintsComponent,
     NewTaskComponent,
     ColumnsComponent,
-    DeleteTaskComponent
+    DeleteTaskComponent,
+    SingleTaskComponent
   ],
   imports: [
     BrowserModule,
