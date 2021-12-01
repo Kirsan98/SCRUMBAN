@@ -25,7 +25,11 @@ export class NewSprintComponent implements OnInit {
 
   ngOnInit(): void {
     this.sprintForm = this.formBuilder.group({
-      title: [null,Validators.required]
+      title: [null,Validators.required],
+      start_at: [null,Validators.required],
+      end_at: [null,Validators.required],
+      planningDaily: [null, Validators.required],
+      sprintRetrospective: [null, Validators.required]
     });
     this.route.parent!.params.subscribe(
       (params: Params) => {
@@ -41,6 +45,11 @@ export class NewSprintComponent implements OnInit {
   onSubmit(){
     const sprint = new Sprint();
     sprint.title = this.sprintForm.get('title')?.value;
+    sprint.start_at = this.sprintForm.get('start_at')?.value;
+    sprint.end_at = this.sprintForm.get('end_at')?.value;
+    sprint.planningDaily = this.sprintForm.get('planningDaily')?.value;
+    sprint.sprintRetrospective = this.sprintForm.get('sprintRetrospective')?.value;
+    console.log(sprint);
     this.projectService.addSprint(this.projectID,sprint).then(
       (sprintData: any)=>{
         this.sprintForm.reset();

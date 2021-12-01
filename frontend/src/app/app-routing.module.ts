@@ -15,6 +15,7 @@ import { DeletesprintComponent } from './projects/deleteSprint/deletesprint.comp
 import { JoinProjectComponent } from './projects/join-project/join-project.component';
 import { SprintsComponent } from './projects/sprints/sprints.component';
 import { DetailComponent } from './projects/detail/detail.component';
+import { ColumnsComponent } from './columns/columns.component';
 
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -32,7 +33,13 @@ const routes: Routes = [
           { path: 'add-sprint', component: NewSprintComponent },
         ]
       },
-      { path: 'sprint/:idSprint', component: SingleSprintComponent,},
+      { 
+      path: 'sprint/:idSprint', 
+      component: SingleSprintComponent,
+      children: [
+        { path: 'columns', component: ColumnsComponent}
+      ]
+      },
       { path: 'settings', component: SettingsProjectComponent },
       { path: 'delete-sprint/:idSprint', component: DeletesprintComponent },
       { path: 'add-task', component: NewTaskComponent },

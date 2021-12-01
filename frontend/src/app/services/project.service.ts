@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Project } from '../models/project.model';
 
@@ -138,6 +138,19 @@ export class ProjectService{
     addTask(idProject: string, task : any){
       return new Promise((resolve,reject) => {
         this.http.post('http://localhost:5000/api/project/'+ idProject + '/add-task/',task).subscribe(
+          (response) => {
+            resolve(response);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    }
+
+    deleteSingleTaskByProject(idProject: string, idTask: string){
+      return new Promise((resolve,reject) => {
+        this.http.delete('http://localhost:5000/api/project/'+ idProject +'/delete-task/'+ idTask).subscribe(
           (response) => {
             resolve(response);
           },

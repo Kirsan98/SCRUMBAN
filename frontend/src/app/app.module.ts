@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProjectService } from './services/project.service';
+import { SprintService } from './services/sprint.service';
 import { UserService } from './services/user.service';
 import { AccueilComponent } from './accueil/accueil.component';
 import { ProjectsComponent } from './projects/projects.component';
@@ -22,6 +23,7 @@ import { DeletesprintComponent } from './projects/deleteSprint/deletesprint.comp
 import { JoinProjectComponent } from './projects/join-project/join-project.component';
 import { SprintsComponent } from './projects/sprints/sprints.component';
 import { NewTaskComponent } from './tasks/new-task/new-task.component';
+import { ColumnsComponent } from './columns/columns.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { NewTaskComponent } from './tasks/new-task/new-task.component';
     JoinProjectComponent,
     SprintsComponent,
     NewTaskComponent,
+    ColumnsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ import { NewTaskComponent } from './tasks/new-task/new-task.component';
   ],
   providers: [
     ProjectService,
+    SprintService,
     UserService
   ],
   bootstrap: [AppComponent]
