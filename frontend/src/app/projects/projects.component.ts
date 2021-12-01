@@ -39,4 +39,6 @@ export class ProjectsComponent implements OnInit {
    onUpdate(idProject: string){
     this.router.navigate(['/project/' + idProject+'/settings']); 
    }
+
+   
 }
