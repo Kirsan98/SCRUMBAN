@@ -6,25 +6,26 @@
         <button type="button" class="btn btn-primary">Créer un sprint</button>
       </a>
       <div class="bg-light border">
-        <div class="scroller">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Nom</th>
-              </tr>
-            </thead>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nom</th>
+            </tr>
+          </thead>
+          <div class="scroller">
             <tbody *ngFor="let sprint of sprints.slice().reverse()">
               <tr class="ligne" (click)="onSprintClicked(project._id, sprint._id)">
                 <td class="name-sprint">{{ sprint.title }}</td>
               </tr>
             </tbody>
-          </table>
-        </div>
+          </div>
+        </table>
       </div>
     </div>
     <div class="col-10">
       <div class="bg-light border">
-        
+
         <router-outlet></router-outlet>
       </div>
     </div>

@@ -1,8 +1,8 @@
 .card {
   margin-right: 25px;
   margin-left: 25px;
-  margin-top: 70px;
-  margin-bottom: 20px;
+  margin-top: 2%;
+  margin-bottom: 2%;
   box-shadow: 0px 7px 20px #aaa;
   position: unset;
 }
@@ -24,7 +24,24 @@ label {
   font: 1rem 'Fira Sans', sans-serif;
 }
 
-input,
-label {
+input/* ,
+label */ {
   margin: .4rem 0;
+}
+
+.scroller {
+  height: 330px;
+  overflow-y: scroll;
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
+}
+.taskchoice {
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 2%;
+}
+
+.ligne {
+  cursor: pointer;
 }

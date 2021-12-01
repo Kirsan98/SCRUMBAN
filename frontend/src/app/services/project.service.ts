@@ -122,7 +122,7 @@ export class ProjectService{
       });
     }
 
-    getTasksFromProject(idProject: string){
+    getAllTaskFromProject(idProject: string){
       return new Promise((resolve,reject) => {
         this.http.get('http://localhost:5000/api/project/'+ idProject +'/tasks/').subscribe(
           (response) => {

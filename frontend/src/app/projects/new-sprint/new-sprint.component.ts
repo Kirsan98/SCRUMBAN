@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Column } from 'src/app/models/column.model';
+import { Project } from 'src/app/models/project.model';
 import { Sprint } from 'src/app/models/sprint.model';
+import { Task } from 'src/app/models/task.model';
 import { ProjectService } from 'src/app/services/project.service';
 import { SprintService } from 'src/app/services/sprint.service';
 
@@ -15,6 +17,8 @@ export class NewSprintComponent implements OnInit {
   public sprintForm !: FormGroup;
   public errorMessage!: string;
   public projectID!: string;
+  public project!: Project;
+  public tasksProject!: Task[];
 
 
   constructor(
@@ -38,9 +42,17 @@ export class NewSprintComponent implements OnInit {
       (params: Params) => {
         this.projectService.getProjectById(params.idProject).then(
           (project: any) => {
+            this.project = project['data'];
             this.projectID = project['data']._id;
+            this.projectService.getAllTaskFromProject(this.projectID)
+              .then(
+                (taskListData: any) => {
+                  this.tasksProject = taskListData.data;
+                }
+              );
           }
         );
+
       }
     );
   }
@@ -59,10 +71,9 @@ export class NewSprintComponent implements OnInit {
         columnInit.index = 0;
         this.sprintForm.reset();
         this.sprintService.addColumn(this.projectID, sprintData.data._id, columnInit).then(
-          (columnData: any) => {console.log("column ajoutée correctement");
-           }
-
-
+          (columnData: any) => {
+            console.log("column ajoutée correctement");
+          }
         ).catch((error) => {
           this.errorMessage = error.message;
         });

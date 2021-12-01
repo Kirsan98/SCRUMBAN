@@ -3,64 +3,58 @@
     <div class="card-body">
       <h3 class="title">Nouveau sprint</h3>
 
-      <form [formGroup]="sprintForm">
-        <div class="form-group">
-          <label for="title">Titre du sprint</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            formControlName="title"
-            placeholder="Enter titre du sprint"
-            name="title"
-          />
-          <label for="start_at">Date de début</label>
-          <input
-            type="date"
-            class="form-control"
-            id="start_at"
-            formControlName="start_at"
-            placeholder="Entrer la date du sprint"
-            name="start_at"
-          />
-          <label for="end_at">Date de fin</label>
-          <input
-            type="text"
-            class="form-control"
-            id="end_at"
-            formControlName="end_at"
-            placeholder="Entrer la date de fin du sprint"
-            name="end_at"
-          />
-          <label for="planningDaily">Planning Daily</label>
-          <input
-            type="text"
-            class="form-control"
-            id="planningDaily"
-            formControlName="planningDaily"
-            placeholder="Entrer le planning daily"
-            name="planningDaily"
-          />
-          <label for="sprintRetrospective">Sprint Retrospective</label>
-          <input
-            type="text"
-            class="form-control"
-            id="sprintRetrospective"
-            formControlName="sprintRetrospective"
-            placeholder="Entrer le sprint retrospective"
-            name="sprintRetrospective"
-          />
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <form [formGroup]="sprintForm">
+              <div class="form-group">
+                <label for="title">Titre du sprint</label>
+                <input type="text" class="form-control" id="title" formControlName="title"
+                  placeholder="Enter titre du sprint" name="title" />
+                <label for="start_at">Date de début</label>
+                <input type="date" class="form-control" id="start_at" formControlName="start_at"
+                  placeholder="Entrer la date du sprint" name="start_at" />
+                <label for="end_at">Date de fin</label>
+                <input type="text" class="form-control" id="end_at" formControlName="end_at"
+                  placeholder="Entrer la date de fin du sprint" name="end_at" />
+                <label for="planningDaily">Planning Daily</label>
+                <input type="text" class="form-control" id="planningDaily" formControlName="planningDaily"
+                  placeholder="Entrer le planning daily" name="planningDaily" />
+                <label for="sprintRetrospective">Sprint Retrospective</label>
+                <input type="text" class="form-control" id="sprintRetrospective" formControlName="sprintRetrospective"
+                  placeholder="Entrer le sprint retrospective" name="sprintRetrospective" />
+              </div>
+            </form>
+          </div>
+          <div class="col">
+            <div class="bg-light border taskchoice">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Tâches</th>
+                  </tr>
+                </thead>
+                <div class="scroller">
+                  <tbody *ngFor="let task of tasksProject.slice().reverse()">
+                    <label class="ligne" for="{{ task.title }}">
+                      <tr>
+                        <td class="name-sprint">
+                          <input type="checkbox" id="{{ task.title }}" name="{{ task.title }}">
+                          {{ task.title }}
+                        </td>
+                      </tr>
+                    </label>
+                  </tbody>
+                </div>
+              </table>
+            </div>
+          </div>
         </div>
-      </form>
-      <button
-        type="button"
-        class="btn btn-primary btn-lg"
-        (click)="onSubmit()"
-        [disabled]="sprintForm.invalid"
-      >
-        + Nouveau sprint
-      </button>
-      <p class="alert-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
+      </div>
     </div>
+    <button type="button" class="btn btn-primary btn-lg" (click)="onSubmit()" [disabled]="sprintForm.invalid">
+      + Nouveau sprint
+    </button>
+    <p class="alert-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
   </div>
 </section>
