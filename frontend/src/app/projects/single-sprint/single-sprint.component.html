@@ -50,7 +50,7 @@
           <div class="row">
             <div class="col-md-3" *ngFor="let column of columns">
               <div class="drag-container">
-                <div class="section-heading">{{ column.id }}</div>
+                <div class="section-heading">{{ column.title }}</div>
 
                 <div cdkDropList id="{{ column.id }}" [cdkDropListData]="column.taskList"
                   [cdkDropListConnectedTo]="connectedTo" class="item-list" (cdkDropListDropped)="drop($event)">

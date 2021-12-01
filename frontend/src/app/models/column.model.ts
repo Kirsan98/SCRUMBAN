@@ -3,7 +3,7 @@ import {Task} from "./task.model";
 export class Column{
     _id!: String;
     title!: String;
-    index!: Date;
+    index!: Number;
     maxTask !: Number;
     tasks !: Task[];
 }
