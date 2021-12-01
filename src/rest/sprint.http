@@ -10,7 +10,7 @@ GET http://localhost:5000/api/project/61a549f275a713f1150e7188
 
 
 ### get all sprints from project
-GET http://localhost:5000/api/project/61a549f275a713f1150e7188/sprints/
+GET http://localhost:5000/api/project/61a67bf62a850e40dc86247c/sprints/
 
 ### get one sprint from project
 GET http://localhost:5000/api/project/61a549f275a713f1150e7188/sprint/61a54aebb85185bd68d6c588
@@ -19,11 +19,13 @@ GET http://localhost:5000/api/project/61a549f275a713f1150e7188/sprint/61a54aebb8
 #COLUMN OPERATION FROM SPRINT
 
 ### add column to sprint
-POST http://localhost:5000/api/project/61a549f275a713f1150e7188/sprint/61a54aebb85185bd68d6c588/add-column/
+POST http://localhost:5000/api/project/61a67bf62a850e40dc86247c/sprint/61a67c142a850e40dc86249a/add-column/
 content-type: application/json
 
 {
-	"title": "Column 2 test from Sprint 1 from WEB"
+	"title": "Column 2 test from Sprint 1 from WEB",
+	"index": 10,
+	"maxTask": 20
 }
 
 ### get column from sprint

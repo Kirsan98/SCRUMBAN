@@ -5,7 +5,7 @@ const projectController = require('../controllers/projectsController');
 // get all projects
 router.route('/projects').get(async (req, res) => {
   let response = await projectController.getAllProjects();
-  if (response.success == true) {
+  if (response!=null && response.success == true) {
     res.status(200).json(response);
   } else {
     res.status(404).json(response);
@@ -15,7 +15,7 @@ router.route('/projects').get(async (req, res) => {
 // get a project by id
 router.route('/project/:id').get(async (req, res) => {
   let response = await projectController.getProjectById(req.params.id);
-  if (response.success == true) {
+  if (response!=null && response.success == true) {
     res.status(200).json(response);
   } else {
     res.status(404).json(response);
@@ -25,7 +25,7 @@ router.route('/project/:id').get(async (req, res) => {
 // create a new project
 router.route('/add-project/').post(async (req, res) => {
   let response = await projectController.addProject(req.body);
-  if (response.success == true) {
+  if (response!=null && response.success == true) {
     res.status(200).json(response);
   } else {
     res.status(404).json(response);
@@ -35,7 +35,7 @@ router.route('/add-project/').post(async (req, res) => {
 // update a project
 router.route('/update-project/:id').put(async (req, res) => {
   let response = await projectController.updateProject(req.params.id, req.body);
-  if (response.success == true) {
+  if (response!=null && response.success == true) {
     res.status(200).json(response);
   } else {
     res.status(404).json(response);
@@ -45,7 +45,7 @@ router.route('/update-project/:id').put(async (req, res) => {
 // delete a project
 router.route('/remove-project/:idProject').delete(async (req, res) => {
   let response = await projectController.removeProject(req.params.idProject);
-  if (response.success == true) {
+  if (response!=null && response.success == true) {
     res.status(200).json(response);
   } else {
     res.status(404).json(response);
@@ -57,7 +57,7 @@ router.route('/remove-project/:idProject').delete(async (req, res) => {
 // add a sprint to project
 router.route('/project/:idProject/add-sprint').post(async (req, res) => {
   let response = await projectController.addSprint(req.params.idProject, req.body);
-  if (response.success == true) {
+  if (response!=null && response.success == true) {
     res.status(200).json(response);
   } else {
     res.status(404).json(response);
@@ -77,7 +77,7 @@ router.route('/project/:idProject/sprint/:idSprint').get(async (req, res) => {
 // get all sprints from project
 router.route('/project/:idProject/sprints').get(async (req, res) => {
   let response = await projectController.getAllSprintFromProject(req.params.idProject);
-  if (response.success == true) {
+  if (response!=null && response.success == true) {
     res.status(200).json(response);
   } else {
     res.status(404).json(response);
@@ -87,7 +87,7 @@ router.route('/project/:idProject/sprints').get(async (req, res) => {
 // delete a sprint from project
 router.route('/project/:idProject/delete-sprint/:idSprint').delete(async (req, res) => {
   let response = await projectController.deleteSingleSprintByProject(req.params.idProject, req.params.idSprint);
-  if (response.success == true) {
+  if (response!=null && response.success == true) {
     res.status(200).json(response);
   } else {
     res.status(404).json(response);
@@ -99,7 +99,7 @@ router.route('/project/:idProject/delete-sprint/:idSprint').delete(async (req, r
 // add task to project
 router.route('/project/:idProject/add-task/').post(async (req, res) => {
   let response = await projectController.addTaskToProject(req.params.idProject, req.body);
-  if (response.success == true) {
+  if (response!=null && response.success == true) {
     res.status(200).json(response);
   } else {
     res.status(404).json(response);
@@ -109,7 +109,7 @@ router.route('/project/:idProject/add-task/').post(async (req, res) => {
 // get a task from project
 router.route('/project/:idProject/task/:idTask').get(async (req, res) => {
   let response = await projectController.getTaskFromProject(req.params.idProject, req.params.idTask);
-  if (response.success == true) {
+  if (response!=null && response.success == true) {
     res.status(200).json(response);
   } else {
     res.status(404).json(response);
@@ -119,7 +119,7 @@ router.route('/project/:idProject/task/:idTask').get(async (req, res) => {
 // get all task from project
 router.route('/project/:id/tasks').get(async (req, res) => {
   let response = await projectController.getAllTaskFromProject(req.params.id);
-  if (response.success == true) {
+  if (response!=null && response.success == true) {
     res.status(200).json(response);
   } else {
     res.status(404).json(response);
@@ -129,12 +129,11 @@ router.route('/project/:id/tasks').get(async (req, res) => {
 router.route('/project/:idProject/delete-task/:idTask').delete(
   async (req, res) => {
     let response = await projectController.deleteSingleTaskByProject(req.params.idProject, req.params.idTask);
-    if (response.success == true)
+    if (response!=null && response.success == true) 
       res.status(200).json(response);
     else
       res.status(404).json(response);
   }
 );
-
 
 module.exports = router;

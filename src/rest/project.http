@@ -51,11 +51,13 @@ DELETE http://localhost:5000/api/project/61a53939896e0b50815fc764/delete_sprint/
 
 
 ### Create task in an existing project
-POST http://localhost:5000/api/project/61a549d075a713f1150e7179/addTask
+POST http://localhost:5000/api/project/61a67bf62a850e40dc86247c/add-task
 content-type: application/json
 
 {
-	"title": "Task pour voir si getTasksFromProject fonctionne"
+	"title": "tache depuis .http",
+	"color": "red", 
+	"description": "ceci est une description de test"
 }
 
 ### Get task from an existing project
@@ -63,6 +65,6 @@ GET http://localhost:5000/api/project/61a53939896e0b50815fc764/task/61a53d403618
 
 
 ### Get all tasks from an existing project
-GET http://localhost:5000/api/project/61a549d075a713f1150e7179/tasks
+GET http://localhost:5000/api/project/61a67bf62a850e40dc86247c/tasks
 
 ##############################################################################################################

@@ -90,7 +90,6 @@ export class SingleSprintComponent implements OnInit {
   }
 
   onDelete() {
-    console.log("on essaye de delete");
     this.router.navigate(['/project/' + this.project._id + '/delete-sprint/' + this.sprint._id]);
   }
 

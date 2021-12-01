@@ -12,7 +12,6 @@ export class DetailComponent implements OnInit {
   public project!: Project;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService
   ) { }
@@ -25,9 +24,9 @@ export class DetailComponent implements OnInit {
           (project: any) => {
             this.project = project['data'];
           }
-        )
+        );
       }
-    )
+    );
   }
 
 }

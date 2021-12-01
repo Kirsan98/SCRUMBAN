@@ -18,3 +18,13 @@
   width: 40%;
   box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
 }
+
+label {
+  display: block;
+  font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+  margin: .4rem 0;
+}

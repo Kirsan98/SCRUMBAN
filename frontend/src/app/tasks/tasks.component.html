@@ -1,5 +1,3 @@
-
-
 <a routerLink="../add-task">
   <button type="button" class="btn btn-primary">Créer une tâche</button>
 </a>
@@ -25,18 +23,13 @@
             </summary>
             <div>
               <div class="list-group popover__message">
-                <a   class="list-group-item list-group-item-action updateProject" >Paramètres du projet</a>
-                <a   class="list-group-item list-group-item-action deleteProject" >Déplacer dans la corbeille</a> 
-                <!-- 
-                  TODO
-                  parametres du projet permet d'aller vers la page settingsProject
-                -->
+                <a class="list-group-item list-group-item-action">Paramètres de la tâche</a>
+                <a class="list-group-item list-group-item-action deleteTask" (click)="onDelete(project._id, task._id)">Déplacer dans la corbeille</a> 
               </div>
             </div>
           </details>
         </div>
       </td>
-     
     </tr>
   </tbody>
 </table>
