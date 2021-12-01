@@ -26,7 +26,7 @@ export class SettingsProjectComponent implements OnInit {
       title: [null,Validators.required]
     })
 
-    this.route.parent!.params.subscribe(
+    this.route.params.subscribe(
       (params) => {
         this.projectService.getProjectById(params.idProject).then(
           (project: any) => {
@@ -52,5 +52,4 @@ export class SettingsProjectComponent implements OnInit {
       }
     )
   }
-
 }

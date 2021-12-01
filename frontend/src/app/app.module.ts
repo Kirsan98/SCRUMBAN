@@ -18,14 +18,20 @@ import { DeleteProjectComponent } from './projects/delete-project/delete-project
 import { NewSprintComponent } from './projects/new-sprint/new-sprint.component';
 import { SingleSprintComponent } from './projects/single-sprint/single-sprint.component';
 import { SettingsProjectComponent } from './projects/settings-project/settings-project.component';
-import { TasksComponent } from './tasks/tasks.component';
+
 import { DeletesprintComponent } from './projects/deleteSprint/deletesprint.component';
 import { JoinProjectComponent } from './projects/join-project/join-project.component';
+
 import { SprintsComponent } from './projects/sprints/sprints.component';
-import { NewTaskComponent } from './tasks/new-task/new-task.component';
+
 import { ColumnsComponent } from './columns/columns.component';
+
+import { TasksComponent } from './tasks/tasks.component';
+import { NewTaskComponent } from './tasks/new-task/new-task.component';
 import { DeleteTaskComponent } from './tasks/delete-task/delete-task.component';
 import { SingleTaskComponent } from './tasks/single-task/single-task.component';
+import { UpdateTaskComponent } from './tasks/update-task/update-task.component';
+import { TaskService } from './services/task.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +52,8 @@ import { SingleTaskComponent } from './tasks/single-task/single-task.component';
     NewTaskComponent,
     ColumnsComponent,
     DeleteTaskComponent,
-    SingleTaskComponent
+    SingleTaskComponent,
+    UpdateTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +66,8 @@ import { SingleTaskComponent } from './tasks/single-task/single-task.component';
   providers: [
     ProjectService,
     SprintService,
-    UserService
+    UserService, 
+    TaskService
   ],
   bootstrap: [AppComponent]
 })

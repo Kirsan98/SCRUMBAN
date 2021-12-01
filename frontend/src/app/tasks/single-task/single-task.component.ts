@@ -21,7 +21,6 @@ export class SingleTaskComponent implements OnInit {
       async (params: Params) => {
         this.projectService.getSingleTaskFromProject(params.idProject, params.idTask).then(
           (task: any) => {
-            console.log(task);
             this.task = task['data'];
           }
         );
