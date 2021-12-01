@@ -77,7 +77,7 @@ export class NewSprintComponent implements OnInit {
         ).catch((error) => {
           this.errorMessage = error.message;
         });
-        this.router.navigate(['project/' + this.projectID + '/sprint/' + sprintData.data._id]);
+        this.router.navigate(['project/' + this.projectID + '/sprints/' /* + sprintData.data._id */]);
       }
     ).catch(
       (error) => {

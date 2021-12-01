@@ -27,30 +27,30 @@ export class SingleSprintComponent implements OnInit {
     private sprintService: SprintService,
 
   ) {
-    //this.columns = [
-    //   {
-    //     id: 'A faire',
-    //     taskList: [
-    //       "task 1",
-    //       "task 2",
-    //       "task 3",
-    //       "task 4",
-    //       "task 5"
-    //     ]
-    //   }, {
-    //     id: 'En cours',
-    //     taskList: []
-    //   }, {
-    //     id: 'Review',
-    //     taskList: []
-    //   }, {
-    //     id: 'Fini',
-    //     taskList: []
-    //   }
-    // ];
-    // for (let column of this.columns) {
-    //   this.connectedTo.push(column.id);
-    // };
+    this.columns = [
+      {
+        title: 'A faire',
+        taskList: [
+          "task 1",
+          "task 2",
+          "task 3",
+          "task 4",
+          "task 5"
+        ]
+      }, {
+        title: 'En cours',
+        taskList: []
+      }, {
+        title: 'Review',
+        taskList: []
+      }, {
+        title: 'Fini',
+        taskList: []
+      }
+    ];
+    for (let column of this.columns) {
+      this.connectedTo.push(column.id);
+    };
   }
 
   ngOnInit(): void {
@@ -82,7 +82,7 @@ export class SingleSprintComponent implements OnInit {
     this.sprintService.getAllColumnFromSprint(idProject, idSprint)
     .then(
       (columns: any) => {
-        this.columns = columns.data;
+        // this.columns = columns.data;
         console.log("testttttttt");
         
       }

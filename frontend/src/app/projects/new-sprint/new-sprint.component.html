@@ -15,7 +15,7 @@
                 <input type="date" class="form-control" id="start_at" formControlName="start_at"
                   placeholder="Entrer la date du sprint" name="start_at" />
                 <label for="end_at">Date de fin</label>
-                <input type="text" class="form-control" id="end_at" formControlName="end_at"
+                <input type="date" class="form-control" id="end_at" formControlName="end_at"
                   placeholder="Entrer la date de fin du sprint" name="end_at" />
                 <label for="planningDaily">Planning Daily</label>
                 <input type="text" class="form-control" id="planningDaily" formControlName="planningDaily"
@@ -38,7 +38,7 @@
                   <tbody *ngFor="let task of tasksProject.slice().reverse()">
                     <label class="ligne" for="{{ task.title }}">
                       <tr>
-                        <td class="name-sprint">
+                        <td class="name-task">
                           <input type="checkbox" id="{{ task.title }}" name="{{ task.title }}">
                           {{ task.title }}
                         </td>
