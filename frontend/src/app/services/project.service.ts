@@ -135,6 +135,19 @@ export class ProjectService{
       });
     }
 
+    getSingleTaskFromProject(idProject: string, idTask: string){
+      return new Promise((resolve,reject) => {
+        this.http.get('http://localhost:5000/api/project/'+ idProject + '/task/' + idTask).subscribe(
+          (response) => {
+            resolve(response);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    }
+
     addTask(idProject: string, task : any){
       return new Promise((resolve,reject) => {
         this.http.post('http://localhost:5000/api/project/'+ idProject + '/add-task/',task).subscribe(

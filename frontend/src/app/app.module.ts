@@ -24,6 +24,7 @@ import { JoinProjectComponent } from './projects/join-project/join-project.compo
 import { SprintsComponent } from './projects/sprints/sprints.component';
 import { NewTaskComponent } from './tasks/new-task/new-task.component';
 import { ColumnsComponent } from './columns/columns.component';
+import { DeleteTaskComponent } from './tasks/delete-task/delete-task.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ColumnsComponent } from './columns/columns.component';
     JoinProjectComponent,
     SprintsComponent,
     NewTaskComponent,
-    ColumnsComponent
+    ColumnsComponent,
+    DeleteTaskComponent
   ],
   imports: [
     BrowserModule,
