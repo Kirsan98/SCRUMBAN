@@ -5,29 +5,22 @@
         <a routerLink="/new-project">
           <button
           type="button"
-          class="btn btn-primary btn-lg"
-        >+ Nouveau projet</button>
+          class="btn btn-primary btn-lg">+ Nouveau projet</button>
       </a>
       </div>
       <div class="col">
         <a routerLink="/join-project">
           <button
           type="button"
-          class="btn btn-primary btn-lg"
-        >+ Joindre projet</button>
+          class="btn btn-primary btn-lg">+ Joindre projet</button>
       </a>
       </div>
     </div>
   </div>
-    
-   
-  
- 
 </section>
 
 <section>
   <h2 style="text-align: center">Vos Projets:</h2>
-
   <table class="table">
     <thead>
       <tr>
@@ -36,7 +29,7 @@
         <th scope="col">Paramètres</th>
       </tr>
     </thead>
-    <tbody *ngFor="let project of projects.reverse();">
+    <tbody *ngFor="let project of projects">
       <tr  class="ligne">
         <td class="nameProject" (click)="onProjectClicked(project._id)">{{ project.title }}</td>
         <td class= "dateProject" (click)="onProjectClicked(project._id)">{{project.created_at | date: 'dd/MM/y'}}</td>
@@ -50,16 +43,11 @@
                 <div class="list-group popover__message">
                   <a  (click)="onUpdate(project._id)" class="list-group-item list-group-item-action updateProject" >Paramètres du projet</a>
                   <a  (click)="onDelete(project._id)" class="list-group-item list-group-item-action deleteProject" >Déplacer dans la corbeille</a> 
-                  <!-- 
-                    TODO
-                    parametres du projet permet d'aller vers la page settingsProject
-                  -->
                 </div>
               </div>
             </details>
           </div>
         </td>
-       
       </tr>
     </tbody>
   </table>

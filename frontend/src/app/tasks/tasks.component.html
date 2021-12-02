@@ -10,7 +10,7 @@
       <th scope="col">Paramètres</th>
     </tr>
   </thead>
-  <tbody *ngFor="let task of tasks.reverse();">
+  <tbody *ngFor="let task of tasks">
     <tr  class="ligne" >
       <td class="nameTask" (click)="onTaskClicked(project._id, task._id)">{{ task.title }}</td>
       <td class="descriptionTask"(click)="onTaskClicked(project._id, task._id)"> {{task.description}}</td>

@@ -2,15 +2,14 @@
     <div id="formContent">
       <h5 class="title">Vous êtes absoluement sûr ?</h5>
       <p class="text">
-        This action cannot be undone. This will permanently delete
-        {{task.title}}
-        and remove all collaborator associations.
+        Cette action ne peut pas être annulée.
+        Cela supprimera définitivement {{task.title}} et supprimera toutes ces associations.
       </p>
-      <p>Please type <b>{{task.title}}</b> to confirm.</p>
-  <div class="inputTitle">
-      <input type="text" class="form-control"  placeholder="" >
-    </div>
-      <button class="btn btn-danger m-1" (click)="onDelete() ">Supprimer</button>
-    </div>
+      <p>S'il vous plait tapez <b>{{task.title}}</b> pour confirmer.</p>
+    <form name="inputTitle">
+      <input type="text" pattern="{{task.title}}" required [(ngModel)]="task.title" #myInput />
+      <button class="btn btn-danger m-1"  [disabled]="!myInput.validity.valid" (click)="onDelete()">Supprimer</button>
+    </form>
   </div>
+</div>
   
