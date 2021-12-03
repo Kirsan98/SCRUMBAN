@@ -25,33 +25,32 @@ export class SingleSprintComponent implements OnInit {
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private sprintService: SprintService,
-
-  ) {
-    this.columns = [
-      {
-        title: 'A faire',
-        taskList: [
-          "task 1",
-          "task 2",
-          "task 3",
-          "task 4",
-          "task 5"
-        ]
-      }, {
-        title: 'En cours',
-        taskList: []
-      }, {
-        title: 'Review',
-        taskList: []
-      }, {
-        title: 'Fini',
-        taskList: []
-      }
-    ];
-    for (let column of this.columns) {
-      this.connectedTo.push(column.id);
-    };
-  }
+  ) {}
+  //   this.columns = [
+  //     {
+  //       title: 'A faire',
+  //       taskList: [
+  //         "task 1",
+  //         "task 2",
+  //         "task 3",
+  //         "task 4",
+  //         "task 5"
+  //       ]
+  //     }, {
+  //       title: 'En cours',
+  //       taskList: []
+  //     }, {
+  //       title: 'Review',
+  //       taskList: []
+  //     }, {
+  //       title: 'Fini',
+  //       taskList: []
+  //     }
+  //   ];
+  //   for (let column of this.columns) {
+  //     this.connectedTo.push(column.id);
+  //   };
+  //}
 
   ngOnInit(): void {
     console.log("on init");
@@ -69,6 +68,7 @@ export class SingleSprintComponent implements OnInit {
         (project: any) => {
           this.project = project['data'];
           this.sprints = this.project.sprints;
+
         }
       );
     this.projectService.getSingleSprintByProject(idProject, idSprint)
@@ -82,8 +82,8 @@ export class SingleSprintComponent implements OnInit {
     this.sprintService.getAllColumnFromSprint(idProject, idSprint)
     .then(
       (columns: any) => {
-        // this.columns = columns.data;
-        console.log("testttttttt");
+        this.columns = columns.data;
+        console.log(this.columns);
         
       }
     );
@@ -119,6 +119,11 @@ export class SingleSprintComponent implements OnInit {
           this.sprint = sprint['data'];
         }
       );
+  }
+
+
+  addColumnToSprint(){
+    
   }
 
 }

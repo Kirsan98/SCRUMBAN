@@ -10,7 +10,7 @@ POST http://localhost:5000/api/add-task/
 content-type: application/json
 
 {
-	"title": "premiere tache wallah",
+	"title": "premiere tache ",
 	"color": "rouge",
 	"description": "ceci est la premiere tache, c'est un test",
 	"state": "a faire"

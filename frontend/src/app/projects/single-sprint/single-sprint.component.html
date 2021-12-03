@@ -1,31 +1,11 @@
 <section style="margin-top: 10px">
-  <div class="row">
-    <!-- <div class="col-2">
-      <div class="bg-light border">
-        <div class="scroller">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Nom</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let sprint of sprints.slice().reverse()">
-              <tr class="ligne" (click)="onSprintClicked(project._id, sprint._id)">
-                <td class="name-sprint">{{ sprint.title }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div> -->
-    <div class="col-10">
-      <div class="row">
-        <div class="col-10">
+    <div class="row">
+        <div class="col-11">
           <div class="titleSprint">
             <h5>{{ sprint.title }}</h5>
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-1">
           <div class="wrapper">
             <details data-popover="down">
               <summary>
@@ -45,10 +25,11 @@
           </div>
         </div>
       </div>
-      <div class="bg-light border">
-        <div class="container">
           <div class="row">
-            <div class="col-md-3" *ngFor="let column of columns">
+            <div class="col-md-11" *ngFor="let column of columns">
+              <div class="bg-light border">
+
+
               <div class="drag-container">
                 <div class="section-heading">{{ column.title }}</div>
 
@@ -60,9 +41,13 @@
                 </div>
               </div>
             </div>
+            </div>
+            <div class="col-md-1">
+              <a >
+                <button
+                type="button"
+                class="btn btn-primary btn-lg">+</button>
+            </a>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>

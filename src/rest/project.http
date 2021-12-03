@@ -5,7 +5,7 @@
 GET http://localhost:5000/api/projects/
 
 ### getProjectById API URL
-GET http://localhost:5000/api/projects/61a549d075a713f1150e7179
+GET http://localhost:5000/api/projects/61a9e15954812dd4f4de2a5f
 
 ### add project
 POST http://localhost:5000/api/addProject/
@@ -39,7 +39,7 @@ content-type: application/json
 }
 
 ### get one sprint from project
-GET http://localhost:5000/api/project/61a53939896e0b50815fc764/sprint/61a53f5fbec8e97a93c9176c
+GET http://localhost:5000/api/project/w/sprint/61a9e17854812dd4f4de2a68
 
 
 
