@@ -32,6 +32,8 @@ import { DeleteTaskComponent } from './tasks/delete-task/delete-task.component';
 import { SingleTaskComponent } from './tasks/single-task/single-task.component';
 import { UpdateTaskComponent } from './tasks/update-task/update-task.component';
 import { TaskService } from './services/task.service';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { TaskService } from './services/task.service';
     ColumnsComponent,
     DeleteTaskComponent,
     SingleTaskComponent,
-    UpdateTaskComponent
+    UpdateTaskComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

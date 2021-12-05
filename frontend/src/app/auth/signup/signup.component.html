@@ -1,0 +1,27 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <!-- titre -->
+      <h3>Inscription</h3>
+      <!-- Icon -->
+      <!-- <div class="fadeIn first">
+        <img src="../../../assets/emblemok_103757.png" id="icon" alt="User Icon" />
+      </div> -->
+  
+      <!-- Signup Form -->
+      <form [formGroup] = "signupForm">
+        <input type="text" id="nom" formControlName="nom" class="fadeIn second" name="nom" placeholder="Nom">
+        <input type="text" id="prenom" formControlName="prenom" class="fadeIn second" name="prenom" placeholder="Prenom">
+        <input type="email" id="email" formControlName="email" class="fadeIn second" name="email" placeholder="Email">
+        <input type="password" id="password" formControlName="password" class="fadeIn third" name="password" placeholder="Password">
+        <!-- <input type="submit" class="fadeIn fourth" value="Signup"> -->
+        <button class="button" (click)="onSignup()">Inscription</button>
+  
+  
+      </form>
+  
+    </div>
+  </div>

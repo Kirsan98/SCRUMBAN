@@ -1,0 +1,29 @@
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h3>Connexion</h3>
+      <!-- Icon -->
+      <!-- <div class="fadeIn first">
+        <img src="../../../assets/emblemok_103757.png" id="icon" alt="User Icon" />
+      </div> -->
+  
+      <!-- Login Form -->
+      <form [formGroup]="loginForm">
+        <input type="email" id="email" formControlName="email" class="fadeIn second" name="email" placeholder="Email">
+        <input type="password" id="password" formControlName="password" class="fadeIn third" name="password" placeholder="Password">
+        <!-- <input type="submit" (click)="onLogin()" class="fadeIn fourth" [disabled]="loginForm.invalid" value="Log In"> -->
+        <button class="button" (click)="onLogin()">Connexion</button>
+  
+      </form>
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+      </div>
+  
+    </div>
+    <p>{{ errorMessage }}</p>
+  </div>

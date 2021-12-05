@@ -25,9 +25,13 @@ import { SingleSprintComponent } from './projects/single-sprint/single-sprint.co
 import { DetailComponent } from './projects/detail/detail.component';
 
 import { ColumnsComponent } from './columns/columns.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
+  { path: 'connexion', component: LoginComponent},
+  { path: 'inscription', component: SignupComponent},
   { path: 'projects', component: ProjectsComponent },
   {
     path: 'project/:idProject',
