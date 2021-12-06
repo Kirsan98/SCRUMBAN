@@ -114,7 +114,10 @@ module.exports.addSprint = async function (idProject, body) {
 				{ $push: { sprints: sprintData.data._id } });
 			return {
 				success: true,
-				data: sprintData.data,
+				data: {
+					"project": project,
+					"sprint": sprintData.data
+				},
 				message: "Add sprint successfully",
 			};
 		}

@@ -6,6 +6,7 @@ import { Project } from 'src/app/models/project.model';
 import { Sprint } from 'src/app/models/sprint.model';
 import { Task } from 'src/app/models/task.model';
 import { ProjectService } from 'src/app/services/project.service';
+import { RefreshProjectService } from 'src/app/services/refresh-project.service';
 import { SprintService } from 'src/app/services/sprint.service';
 
 @Component({
@@ -27,6 +28,7 @@ export class NewSprintComponent implements OnInit {
     private sprintService: SprintService,
     private router: Router,
     private route: ActivatedRoute,
+    private refreshProjectService: RefreshProjectService
 
   ) { }
 
@@ -65,18 +67,19 @@ export class NewSprintComponent implements OnInit {
     sprint.planningDaily = this.sprintForm.get('planningDaily')?.value;
     sprint.sprintRetrospective = this.sprintForm.get('sprintRetrospective')?.value;
     this.projectService.addSprint(this.projectID, sprint).then(
-      (sprintData: any) => {
+      (data: any) => {
         const columnInit = new Column();
         columnInit.title = "Sprint Backlog";
         columnInit.index = 0;
         this.sprintForm.reset();
-        this.sprintService.addColumn(this.projectID, sprintData.data._id, columnInit).then(
-          (columnData: any) => {
+        this.sprintService.addColumn(this.projectID, data.data.sprint._id, columnInit).then(
+          () => {
             console.log("column ajoutée correctement");
           }
         ).catch((error) => {
           this.errorMessage = error.message;
         });
+        this.refreshProjectService.refreshProject(data.data.project);
         this.router.navigate(['project/' + this.projectID + '/sprints/' /* + sprintData.data._id */]);
       }
     ).catch(
