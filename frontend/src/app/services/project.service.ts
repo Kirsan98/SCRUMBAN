@@ -47,7 +47,6 @@ export class ProjectService{
       return new Promise((resolve, reject) => {
         this.http.put('http://localhost:5000/api/update-project/' + id, project).subscribe(
           (response) => {
-            console.log(response);
             resolve(response);
           },
           (error) => {

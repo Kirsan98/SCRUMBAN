@@ -3,6 +3,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RefreshProjectService } from 'src/app/services/refresh-project.service';
 
 @Component({
   selector: 'app-settings-project',
@@ -18,7 +19,8 @@ export class SettingsProjectComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private projectService: ProjectService  
+    private projectService: ProjectService,
+    private refreshProjectService: RefreshProjectService
   ) { }
 
   ngOnInit(){
@@ -42,8 +44,9 @@ export class SettingsProjectComponent implements OnInit {
     const projectUpdated = new Project();
     projectUpdated.title = this.updateProjectForm.get('title')?.value;
     this.projectService.updateProject(this.project._id, projectUpdated).then(
-      () => {
+      (newProj: any) => {
         this.updateProjectForm.reset();
+        this.refreshProjectService.refreshProject(newProj.data);
         this.router.navigate(['project/'+this.project._id]);
       }
     ).catch(

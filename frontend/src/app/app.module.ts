@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ProjectService } from './services/project.service';
 import { SprintService } from './services/sprint.service';
 import { UserService } from './services/user.service';
+import { RefreshProjectService } from './services/refresh-project.service';
 import { AccueilComponent } from './accueil/accueil.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -71,7 +72,8 @@ import { SignupComponent } from './auth/signup/signup.component';
     ProjectService,
     SprintService,
     UserService, 
-    TaskService
+    TaskService,
+    RefreshProjectService
   ],
   bootstrap: [AppComponent]
 })
