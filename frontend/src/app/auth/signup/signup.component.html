@@ -12,15 +12,101 @@
       </div> -->
   
       <!-- Signup Form -->
-      <form [formGroup] = "signupForm">
-        <input type="text" id="nom" formControlName="nom" class="fadeIn second" name="nom" placeholder="Nom">
-        <input type="text" id="prenom" formControlName="prenom" class="fadeIn second" name="prenom" placeholder="Prenom">
-        <input type="email" id="email" formControlName="email" class="fadeIn second" name="email" placeholder="Email">
-        <input type="password" id="password" formControlName="password" class="fadeIn third" name="password" placeholder="Password">
-        <!-- <input type="submit" class="fadeIn fourth" value="Signup"> -->
-        <button class="button" (click)="onSignup()">Inscription</button>
-  
-  
+      <form [formGroup] = "signupForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input type="text" id="lastname" formControlName="lastname" class="form-control fadeIn first" name="lastname" [ngClass]="{ 'is-invalid': submitted && f['lastname'].errors }" placeholder="Lastname">
+          <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback">
+            <div *ngIf="f['lastname'].errors['required']">Lastname is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" id="firstname" formControlName="firstname" class="form-control fadeIn second" name="firstname" [ngClass]="{ 'is-invalid': submitted && f['firstname'].errors }"  placeholder="Firstname">
+          <div *ngIf="submitted && f['firstname'].errors" class="invalid-feedback">
+            <div *ngIf="f['firstname'].errors['required']">Firstname is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="username"
+            class="form-control fadeIn third"
+            [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+            placeholder="Username"
+          />
+          <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+            <div *ngIf="f['username'].errors['required']">Username is required</div>
+            <div *ngIf="f['username'].errors['minlength']">
+              Username must be at least 6 characters
+            </div>
+            <div *ngIf="f['username'].errors['maxlength']">
+              Username must not exceed 20 characters
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="email"
+            class="form-control fadeIn fourth"
+            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+            placeholder="Email"
+          />
+          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+            <div *ngIf="f['email'].errors['required']">Email is required</div>
+            <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control fadeIn fourth"
+            [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+            placeholder="Password"
+          />
+          <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+            <div *ngIf="f['password'].errors['required']">Password is required</div>
+            <div *ngIf="f['password'].errors['minlength']">
+              Password must be at least 6 characters
+            </div>
+            <div *ngIf="f['password'].errors['maxlength']">
+              Password must not exceed 40 characters
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="password"
+            formControlName="confirmPassword"
+            class="form-control fadeIn fourth"
+            [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+            placeholder="Confirm password"
+          />
+          <div
+            *ngIf="submitted && f['confirmPassword'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['confirmPassword'].errors['required']">
+              Confirm Password is required
+            </div>
+            <div *ngIf="f['confirmPassword'].errors['matching']">
+              Confirm Password does not match
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Register</button>
+          <button
+            type="button"
+            (click)="onReset()"
+            class="btn btn-warning">
+            Reset
+          </button>
+        </div>
+        <!-- <button class="button" (click)="onSubmit()">Inscription</button> -->
       </form>
   
     </div>
