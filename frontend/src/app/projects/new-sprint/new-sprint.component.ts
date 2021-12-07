@@ -59,25 +59,29 @@ export class NewSprintComponent implements OnInit {
     );
   }
 
-  onSubmit() {
+  public loadSprint(): Sprint{
     const sprint = new Sprint();
     sprint.title = this.sprintForm.get('title')?.value;
     sprint.start_at = this.sprintForm.get('start_at')?.value;
     sprint.end_at = this.sprintForm.get('end_at')?.value;
     sprint.planningDaily = this.sprintForm.get('planningDaily')?.value;
     sprint.sprintRetrospective = this.sprintForm.get('sprintRetrospective')?.value;
+    this.sprintForm.reset();
+    return sprint;
+  }
+
+  onSubmit() {
+    const sprint = this.loadSprint()
     this.projectService.addSprint(this.projectID, sprint).then(
       (response: any) => {
         const columnInit = new Column();
         columnInit.title = "Sprint Backlog";
         columnInit.index = 0;
-        this.sprintForm.reset();
-        console.log(response.data);
         this.sprintService.addColumn(this.projectID, response.data.sprint._id, columnInit).then(
           () => {
             console.log("column ajoutée correctement");
             this.refreshProjectService.refreshProject(response.data.project);
-        this.router.navigate(['project/' + this.projectID + '/sprint/' + response.data.sprint._id]);
+            this.router.navigate(['project/' + this.projectID + '/sprint/' + response.data.sprint._id]);
           }
         ).catch((error) => {
           this.errorMessage = error.message;
