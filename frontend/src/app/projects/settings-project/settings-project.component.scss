@@ -12,10 +12,6 @@
     text-align: -webkit-center;
 }
 
-.title{
-    text-align: -webkit-center;
-}
-
 .btn{
     margin-top: 3%;
     margin-left: 30%;
@@ -23,3 +19,10 @@
     width: 40%;
     box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
 }
+
+.form-group, .title{
+    width: 25%;
+    margin-left: 37.5%;
+    margin-right: 37.5%;
+    padding: 1%;
+  }
