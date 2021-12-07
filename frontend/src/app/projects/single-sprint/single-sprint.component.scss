@@ -3,6 +3,12 @@
   background-color: rgb(230, 230, 230);
 }
 
+.scrolling-wrapper{
+	overflow-x: auto;
+}
+
+
+
 .ligne, .hover_three_dots {
   cursor: pointer;
 }

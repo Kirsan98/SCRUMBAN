@@ -128,26 +128,51 @@ module.exports.deleteSprint = async function (idSprint) {
 
 // COLUMN
 
-module.exports.addColumn = async function (idSprint, body) {
-  try {
-    const columnData = await columnController.addColumn(body);
-    if (columnData.success) {
-      const sprint = await Sprint.findByIdAndUpdate(
-        idSprint,
-        { $push: { columns: columnData.data._id } }
-      );
-      return {
-        success: true,
-        data: columnData.data,
-        message: "add column successfully",
-      };
-    }
-  } catch (error) {
-    return {
-      success: false,
-      message: "Fail to add column " + error,
-    };
-  }
+// module.exports.addColumn = async function (idSprint, body) {
+//   try {
+//     const columnData = await columnController.addColumn(body);
+//     if (columnData.success) {
+//       const sprint = await Sprint.findByIdAndUpdate(
+//         idSprint,
+//         { $push: { columns: columnData.data._id } }
+//       );
+//       return {
+//         success: true,
+//         data: columnData.data,
+//         message: "add column successfully",
+//       };
+//     }
+//   } catch (error) {
+//     return {
+//       success: false,
+//       message: "Fail to add column " + error,
+//     };
+//   }
+// }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//columns
+
+module.exports.addColumnToSprint = async function (idSprint, body){
+	try{
+		const columnAdded = await columnController.addColumn(body);
+		if (columnAdded.success == false)
+			return {
+				success: false,
+				message: "Fail to create column",
+			};
+		const sprint = await Sprint.findById(idSprint);
+		sprint.columns.push(columnAdded.data._id);
+		sprint.save();
+		return {
+			success: true, 
+			data: sprint,
+			message: "Add successfully",
+		}
+	}catch(error){
+		return { success: false, message: "Fail to add column " + error };
+	}
 }
 
 // get column by id
