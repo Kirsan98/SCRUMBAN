@@ -68,7 +68,7 @@ export class SingleSprintComponent implements OnInit {
       .then(
         (project: any) => {
           this.project = project['data'];
-          this.sprints = this.project.sprints;
+          //this.sprints = this.project.sprints;
 
         }
       );
@@ -127,8 +127,15 @@ export class SingleSprintComponent implements OnInit {
     newColumn.index = 0;
     this.sprintService.addColumn(this.project._id, this.sprint._id, newColumn).then(
       (response: any) => {
-        this.columns = response.data.columns;
+        this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
+          (columns:any) => {
+            this.columns = columns.data;
+            console.log(this.columns);
 
+          }
+        )
+       
+        
         console.log("COLUMN ADD");
         this.router.navigate(['project/' + this.project._id + '/sprint/' + this.sprint._id]);
       }
