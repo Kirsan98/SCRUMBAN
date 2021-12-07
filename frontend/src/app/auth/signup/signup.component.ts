@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import Validation from '../../utils/validation';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-signup',
@@ -8,17 +11,30 @@ import Validation from '../../utils/validation';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-  signupForm: FormGroup = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    username: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    confirmPassword: new FormControl(''),
-  });
-  submitted = false;
+  // signupForm: FormGroup = new FormGroup({
+  //   firstname: new FormControl(''),
+  //   lastname: new FormControl(''),
+  //   username: new FormControl(''),
+  //   email: new FormControl(''),
+  //   password: new FormControl(''),
+  //   confirmPassword: new FormControl(''),
+  // });
+  // signupForm: FormGroup = new FormGroup({
+  //   firstname: new FormControl(''),
+  //   lastname: new FormControl(''),
+  //   username: new FormControl(''),
+  //   email: new FormControl(''),
+  //   password: new FormControl(''),
+  //   confirmPassword: new FormControl(''),
+  // });
+  public signupForm!: FormGroup;
+  public submitted = false;
+  public errorMessage!: string;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router) { }
+
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group(
@@ -54,14 +70,32 @@ export class SignupComponent implements OnInit {
     return this.signupForm.controls;
   }
 
-  onSubmit(): void {
+  onSubmit(){
     this.submitted = true;
-
     if (this.signupForm.invalid) {
+      console.log("form is invalid");
+      
       return;
     }
 
-    console.log(JSON.stringify(this.signupForm.value, null, 2));
+    const user = new User();
+    user.first_name = this.signupForm.get('firstname')?.value;
+    user.last_name = this.signupForm.get('lastname')?.value;
+    user.username = this.signupForm.get('username')?.value;
+    user.email = this.signupForm.get('email')?.value;
+    user.password = this.signupForm.get('password')?.value;
+    const confirmPassword = this.signupForm.get('confirmPassword')?.value;
+    
+    this.authService.createNewUser(user).then(
+      () => {
+        this.signupForm.reset();
+        this.router.navigate(['/projects']);
+      }
+    ).catch(
+      (error: string) => {
+        this.errorMessage = error;
+      }
+    );
   }
 
   onReset(): void {
