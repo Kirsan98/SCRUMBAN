@@ -2,20 +2,25 @@
     margin-right: 25px;
     margin-left: 25px;
     margin-top: 70px;
-    margin-bottom: 20px;
+    margin-bottom: 1%;
     box-shadow: 0px 7px 20px #aaa;
     position: unset;
   }
   
-  .title {
-    text-align: -webkit-center;
-  }
+.title {
+  text-align: -webkit-center;
+}
   
-  .btn {
-    margin-top: 3%;
-    margin-left: 30%;
-    margin-right: 30%;
-    width: 40%;
-    box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
-  }
-  
+.btn {
+  margin-top: 1%;
+  margin-left: 30%;
+  margin-right: 30%;
+  width: 40%;
+  box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
+}
+
+.form-group, .taskSettings{
+  width: 25%;
+  margin-left: 37.5%;
+  margin-right: 37.5%;
+}

@@ -5,11 +5,22 @@
         <label for="title">Titre</label>
         <input type="text" class="form-control" id="title" formControlName="title" placeholder="Entrer nouveaux titre" name="title">
         <label for="color">Couleur</label>
-        <input type="text" class="form-control" id="color" formControlName="color" placeholder="Entrer nouvelle couleur" name="color">
+        <div ng-app>
+          <input type="color" class="form-control" id="color" formControlName="color" placeholder="Entrer nouvelle couleur" name="color" style="background-color:{{task.color}};">
+        </div>
         <label for="description">Description</label>
         <input type="text" class="form-control" id="description" formControlName="description" placeholder="Entrer une nouvelle description" name="description">
-        <label for="state">Etat</label>
-        <input type="text" class="form-control" id="state" formControlName="state" placeholder="Entrer nouvelle état" name="state">
+        
+        
+        <label for="state">État</label>
+        <select class="form-select" id="state" formControlName="state" name="state" aria-label="Default select example" style="width:100%;">
+          <option for="state" selected>{{task.state}}</option>
+          <option value="À FAIRE" *ngIf="task.state!=='À FAIRE'">À FAIRE</option>
+          <option value="EN COURS" *ngIf="task.state!=='EN COURS'">EN COURS</option>
+          <option value="TERMINÉ" *ngIf="task.state!=='TERMINÉ'">TERMINÉ</option>
+          <option value="{{task.title}}">{{task.title}}</option>
+        </select>
+
         <label for="estimated_duration">Durée estimé</label>
         <input type="text" class="form-control" id="estimated_duration" formControlName="estimated_duration" placeholder="Entrer nouvelle durée estimé" name="estimated_duration">
       </div>

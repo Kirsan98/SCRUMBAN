@@ -3,13 +3,12 @@
 
   <form [formGroup]="updateProjectForm">
     <div class="form-group">
-      <label for="title">Title</label>
-      <input type="text" class="form-control" id="title" formControlName="title" placeholder="Enter new title"
-        name="title">
+      <label for="title"> Titre : </label>
+      <input type="text" class="form-control" id="title" formControlName="title" placeholder="Enter new title"name="title">
     </div>
   </form>
 
-  <div>
+  <div class="form-group">
     <h6>Membres : </h6>
   </div>
   <button type="button" class="btn btn-primary btn-lg" (click)="onSubmit()">Enregistrer</button>
