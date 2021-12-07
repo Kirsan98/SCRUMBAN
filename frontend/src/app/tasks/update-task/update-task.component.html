@@ -5,7 +5,9 @@
         <label for="title">Titre</label>
         <input type="text" class="form-control" id="title" formControlName="title" placeholder="Entrer nouveaux titre" name="title">
         <label for="color">Couleur</label>
-        <input type="text" class="form-control" id="color" formControlName="color" placeholder="Entrer nouvelle couleur" name="color">
+        <div ng-app>
+          <input type="color" class="form-control" id="color" formControlName="color" placeholder="Entrer nouvelle couleur" name="color" style="background-color:{{task.color}};">
+        </div>
         <label for="description">Description</label>
         <input type="text" class="form-control" id="description" formControlName="description" placeholder="Entrer une nouvelle description" name="description">
         <label for="state">Etat</label>

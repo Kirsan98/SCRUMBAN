@@ -3,7 +3,16 @@
       <h3>Détail de la tâche</h3>
     <div class="card-body">
       <h5 class="title">Titre : {{task.title}}</h5>
-      <h5 class="color">Couleur : {{task.color}}</h5>
+      <div ng-app>
+        <div class="row justify-content-start">
+          <div class="col-md-0.5 column">
+            <h5>Couleur : </h5>
+          </div>
+          <div class="col-md-1">
+            <h5 type="color" class="color" style="background-color:{{task.color}};"></h5> 
+          </div>
+        </div>
+      </div>
       <h5 class="description">Description : {{task.description}}</h5>
       <h5 class="state">Etat : {{task.state}}</h5>
       <h5 class="created_at">Date de création : {{task.created_at}}</h5>

@@ -22,10 +22,23 @@
   box-shadow: rgb(0 0 0 / 57%) 0px 2px 8px 1px;
 }
 
-.nameTask, .descriptionTask, .dateTask, .wrapper,.updateTask, .deleteTask{
+.colorTask{
+  width:40px;
+  height:40px;
+  margin:10px;
+  padding:20px;
+}
+
+.nameTask, .descriptionTask, .dateTask, .estimationTimeTask, .stateTask, .colorTask, .wrapper,.updateTask, .deleteTask, .hi{
   cursor: pointer;
 }
 
+.descriptionTask{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
 /* popover */
 details[data-popover] {
     display: inline;
@@ -68,9 +81,4 @@ details[data-popover] {
   margin-bottom: 20px;
   box-shadow: 0px 4px 10px #aaa;
   position: unset;
-}
-  
-
-.titleProject{
-    text-align: -webkit-center;
 }

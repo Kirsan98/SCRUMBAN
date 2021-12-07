@@ -14,6 +14,15 @@
   cursor: pointer;
 }
 
+.color{
+  width:20px;
+  height:20px;
+}
+
+.column{
+  margin-left: 1%
+}
+
 /* popover */
 details[data-popover] {
     display: inline;
