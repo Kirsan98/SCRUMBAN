@@ -8,7 +8,7 @@ const sprintController = require('../controllers/sprintController');
 router.route('/project/:idProject/sprint/:idSprint/add-column')
   .post(
     async (req, res) => {
-      let response = await sprintController.addColumn(req.params.idSprint, req.body);
+      let response = await sprintController.addColumnToSprint(req.params.idSprint, req.body);
       if (response.success)
         res.status(200).json(response);
       else
