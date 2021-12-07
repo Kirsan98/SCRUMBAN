@@ -72,6 +72,7 @@ export class NewSprintComponent implements OnInit {
         columnInit.title = "Sprint Backlog";
         columnInit.index = 0;
         this.sprintForm.reset();
+        console.log(response.data);
         this.sprintService.addColumn(this.projectID, response.data.sprint._id, columnInit).then(
           () => {
             console.log("column ajoutée correctement");
