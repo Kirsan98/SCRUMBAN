@@ -33,13 +33,8 @@
             <div *ngIf="columns[i] != undefined" cdkDropList id="{{ column.title }}" [cdkDropListData]="column._tasks"
               [cdkDropListConnectedTo]="connectedTo" class="item-list" (cdkDropListDropped)="drop($event)">
                
-<<<<<<< HEAD
               <div class="item-box" *ngFor="let task of columns[i].slice()" cdkDrag>
                 {{ task.title }} 
-=======
-              <div class="item-box" *ngFor="let task of column._tasks" cdkDrag>
-                {{ task.title}} 
->>>>>>> d8f57fe5f2ea5df30f0a267d02cf282a66f94df1
               </div>
           </div>
         </div>
