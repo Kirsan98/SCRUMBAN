@@ -136,8 +136,9 @@ export class SingleSprintComponent implements OnInit {
 
   addColumnToSprint(){
     const newColumn = new Column();
-    newColumn.title = "Column test";
-    newColumn.index = 0;
+    newColumn.title = "Default name";
+    
+    newColumn.index = this.columns.length;
     this.sprintService.addColumn(this.project._id, this.sprint._id, newColumn).then(
       (response: any) => {
         this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
@@ -154,6 +155,12 @@ export class SingleSprintComponent implements OnInit {
       }
     ).catch((error) => {
       this.errorMessage = error.message;
+    });
+  }
+
+  get sortColumns(){
+    return this.columns.sort((a: { index: any; },b: { index: any; }) => {
+      return <any> new Number(a.index) - <any> new Number(b.index);
     });
   }
 }

@@ -27,7 +27,7 @@
       </div>
 
       <div class="row scrolling-wrapper  bg-light border row flex-row flex-nowrap mt-4 pb-4 pt-2 ">
-        <div class="col-3" *ngFor="let column of columns">
+        <div class="col-3" *ngFor="let column of sortColumns">
           <div class="drag-container">
             <div class="section-heading">{{ column.title }}</div>
             <div cdkDropList id="{{ column.title }}" [cdkDropListData]="column._tasks"

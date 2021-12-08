@@ -21,7 +21,9 @@
       <td class="stateTask"(click)="onTaskClicked(project._id, task._id)"> {{task.state}}</td>
       <td>
         <div ng-app>
+          <div>
           <td type="color" class="colorTask"(click)="onTaskClicked(project._id, task._id)" style="background-color:{{task.color}};"></td> 
+          </div>
         </div>
       </td>
       <td class= "dateTask" (click)="onTaskClicked(project._id, task._id)">{{task.created_at | date: 'dd/MM/y'}}</td>
