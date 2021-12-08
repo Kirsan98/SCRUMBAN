@@ -35,12 +35,26 @@
                   </tr>
                 </thead>
                 <div class="scroller">
-                  <tbody *ngFor="let task of tasksProject.slice().reverse()">
-                    <label class="ligne" for="{{ task.title }}">
+                  <!-- <tbody *ngIf="form != undefined" [formGroup]="form">
+                    <div *ngIf="tasksProject != undefined">
+                      <label *ngFor="let task of tasksProject.slice().reverse()" class="ligne" for="{{task.title}}">
+                        <tr>
+                          <td class="name-task">
+                            <input type="checkbox" id="{{task.title}}" name="task.title"
+                              [formControlName]="task.title">
+                            {{ task.title }}
+                          </td>
+                        </tr>
+                      </label>
+                    </div>
+                  </tbody> -->
+                  <tbody *ngIf="form != undefined" [formGroup]="form">
+                    <label formArrayName="orders" *ngFor="let order of ordersFormArray.controls; let i = index"
+                      class="ligne">
                       <tr>
                         <td class="name-task">
-                          <input type="checkbox" id="{{ task.title }}" name="{{ task.title }}">
-                          {{ task.title }}
+                          <input type="checkbox" [formControlName]="i">
+                          {{ tasksProject[i].title }}
                         </td>
                       </tr>
                     </label>

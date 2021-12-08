@@ -53,8 +53,6 @@ export class SingleSprintComponent implements OnInit {
   //}
 
   ngOnInit(): void {
-    console.log("on init");
-    
     let idProject!: string;
     let idSprint!: string;
     this.route.params.subscribe(
@@ -77,22 +75,16 @@ export class SingleSprintComponent implements OnInit {
           this.sprint = sprint['data'];
         }
       );
-      console.log("avant de recup les colonnes");
       
     this.sprintService.getAllColumnFromSprint(idProject, idSprint)
     .then(
       (columns: any) => {
         this.columns = columns.data;
         console.log(this.columns);
-        
       }
     );
-    console.log("apres recup colonne");
     
     
-  }
-  ngOnChanges(changes: SimpleChange) {
-    console.log("on change de sprint");
   }
 
   drop(event: CdkDragDrop<string[]>) {
