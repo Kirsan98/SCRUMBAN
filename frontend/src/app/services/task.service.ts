@@ -54,7 +54,7 @@ export class TaskService{
 
     getTaskById(id: string){
       return new Promise((resolve,reject) => {
-        this.http.get('http://localhost:5000/api/tasks/'+ id).subscribe(
+        this.http.get('http://localhost:5000/api/task/'+ id).subscribe(
           (response) => {
             resolve(response);
           },

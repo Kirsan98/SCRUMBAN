@@ -14,11 +14,13 @@
             </tr>
           </thead>
           <div class="scroller">
-            <tbody *ngFor="let sprint of sprints.slice().reverse()">
-              <tr class="ligne" (click)="onSprintClicked(project._id, sprint._id)">
-                <td class="name-sprint">{{ sprint.title }}</td>
-              </tr>
-            </tbody>
+            <div *ngIf="sprints!=undefined">
+              <tbody *ngFor="let sprint of sprints.slice().reverse()">
+                <tr class="ligne" (click)="onSprintClicked(project._id, sprint._id)">
+                  <td class="name-sprint">{{ sprint.title }}</td>
+                </tr>
+              </tbody>
+            </div>
           </div>
         </table>
       </div>

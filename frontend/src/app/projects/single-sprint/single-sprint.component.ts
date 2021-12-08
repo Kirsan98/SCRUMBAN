@@ -6,6 +6,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { SprintService } from 'src/app/services/sprint.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Column } from 'src/app/models/column.model';
+import { TaskService } from 'src/app/services/task.service';
 
 
 @Component({
@@ -19,16 +20,39 @@ export class SingleSprintComponent implements OnInit {
   public errorMessage!: string;
   public sprints!: Sprint[];
 
-  columns: any = [];
+  columnsObject: Column[] = [];
+
+  columns: any[] = [];
   connectedTo: any = [];
-  refreshProjectService: any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private sprintService: SprintService,
+    private taskService: TaskService
   ) {}
+
+  public loadTask(column: any): any[]{
+    const tasks: any[] = [];    
+    column._tasks.forEach((element: any) => {
+      this.taskService.getTaskById(element)
+      .then((task:any) => {
+        tasks.push(task.data);
+        
+      });
+    });
+    return tasks;
+  }
+
+  public loadColumns(columns: any[]){
+    let finalColumns: any[] = [];
+    columns.forEach((column: any) => {    
+      let tasks = this.loadTask(column);
+      finalColumns.push(tasks);
+    });
+    this.columns = finalColumns;
+  }
   //   this.columns = [
   //     {
   //       title: 'A faire',
@@ -68,8 +92,6 @@ export class SingleSprintComponent implements OnInit {
       .then(
         (project: any) => {
           this.project = project['data'];
-          //this.sprints = this.project.sprints;
-
         }
       );
     this.projectService.getSingleSprintByProject(idProject, idSprint)
@@ -82,19 +104,13 @@ export class SingleSprintComponent implements OnInit {
     this.sprintService.getAllColumnFromSprint(idProject, idSprint)
     .then(
       (columns: any) => {
-        this.columns = columns.data;
-        console.log(this.columns);
-        
+        this.columnsObject = columns.data;
+        this.loadColumns(columns.data);
       }
     );
-    
-    
-  }
-  ngOnChanges(changes: SimpleChange) {
-    console.log("on change de sprint");
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<String[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -129,14 +145,11 @@ export class SingleSprintComponent implements OnInit {
       (response: any) => {
         this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
           (columns:any) => {
-            this.columns = columns.data;
-            console.log(this.columns);
+            this.columnsObject = columns.data;
+            this.loadColumns(columns.data);
 
           }
         )
-       
-        
-        console.log("COLUMN ADD");
         this.router.navigate(['project/' + this.project._id + '/sprint/' + this.sprint._id]);
       }
     ).catch((error) => {

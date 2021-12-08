@@ -6,14 +6,14 @@
     <tr>
       <th scope="col">Titre</th>
       <th scope="col">Description</th>
-      <th scope="col">Temps estimé</th>
+      <th scope="col">Temps estimé en heure</th>
       <th scope="col">État</th>
       <th scope="col">Couleur</th>
       <th scope="col">Date création</th>
       <th scope="col">Paramètres</th>
     </tr>
   </thead>
-  <tbody *ngFor="let task of tasks">
+  <tbody *ngFor="let task of sortTask">
     <tr  class="ligne" >
       <td class="nameTask" (click)="onTaskClicked(project._id, task._id)">{{ task.title }}</td>
       <td class="descriptionTask"(click)="onTaskClicked(project._id, task._id)"> {{task.description}}</td>
