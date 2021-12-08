@@ -20,10 +20,8 @@ export class NewSprintComponent implements OnInit {
   public projectID!: string;
   public project!: Project;
   public tasksProject!: Task[];
-  // public form!: FormGroup;
 
-
-  form: FormGroup;
+  public form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,14 +67,6 @@ export class NewSprintComponent implements OnInit {
                 (taskListData: any) => {
                   this.tasksProject = taskListData.data;
                   this.addCheckboxesToForm();
-                  // this.form = new FormGroup({
-                  //   tasksProject: new FormArray([])
-                  // })
-                  // this.tasksProject.forEach(e => {
-                  //     this.control.push(new FormControl(false));
-                  //   }
-                  // );
-                  // console.log(this.tasksProject);
                 }
               );
           }
@@ -87,11 +77,6 @@ export class NewSprintComponent implements OnInit {
 
 
   }
-
-  // get control() {
-  //   return this.form.get('tasksProject') as FormArray;
-  // }
-
   public loadSprint(): Sprint {
     const sprint = new Sprint();
     sprint.title = this.sprintForm.get('title')?.value;
@@ -117,8 +102,6 @@ export class NewSprintComponent implements OnInit {
 
   onSubmit() {
     const list = this.loadAllTask();
-    console.log("taches selectionnées", list);
-
     const sprint = this.loadSprint()
     this.projectService.addSprint(this.projectID, sprint).then(
       (response: any) => {
@@ -127,11 +110,7 @@ export class NewSprintComponent implements OnInit {
         columnInit.index = 0;
         columnInit._tasks = this.loadAllTask();
         this.sprintService.addColumn(this.projectID, response.data.sprint._id, columnInit).then(
-          (rep) => {
-            console.log("column ajoutée correctement");
-
-            console.log(rep);
-
+          () => {
             this.refreshProjectService.refreshProject(response.data.project);
             this.router.navigate(['project/' + this.projectID + '/sprint/' + response.data.sprint._id]);
           }
