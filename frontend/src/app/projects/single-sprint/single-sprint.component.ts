@@ -5,6 +5,7 @@ import { Sprint } from 'src/app/models/sprint.model';
 import { ProjectService } from 'src/app/services/project.service';
 import { SprintService } from 'src/app/services/sprint.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Column } from 'src/app/models/column.model';
 
 
 @Component({
@@ -15,10 +16,12 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 export class SingleSprintComponent implements OnInit {
   public project!: Project;
   public sprint!: Sprint;
+  public errorMessage!: string;
   public sprints!: Sprint[];
 
   columns: any = [];
   connectedTo: any = [];
+  refreshProjectService: any;
 
   constructor(
     private router: Router,
@@ -65,7 +68,7 @@ export class SingleSprintComponent implements OnInit {
       .then(
         (project: any) => {
           this.project = project['data'];
-          this.sprints = this.project.sprints;
+          //this.sprints = this.project.sprints;
 
         }
       );
@@ -115,7 +118,25 @@ export class SingleSprintComponent implements OnInit {
 
 
   addColumnToSprint(){
-    
-  }
+    const newColumn = new Column();
+    newColumn.title = "Column test";
+    newColumn.index = 0;
+    this.sprintService.addColumn(this.project._id, this.sprint._id, newColumn).then(
+      (response: any) => {
+        this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
+          (columns:any) => {
+            this.columns = columns.data;
+            console.log(this.columns);
 
+          }
+        )
+       
+        
+        console.log("COLUMN ADD");
+        this.router.navigate(['project/' + this.project._id + '/sprint/' + this.sprint._id]);
+      }
+    ).catch((error) => {
+      this.errorMessage = error.message;
+    });
+  }
 }

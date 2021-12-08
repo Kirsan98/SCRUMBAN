@@ -27,7 +27,6 @@ export class NewTaskComponent implements OnInit {
       title: [null, Validators.required],
       color: [null, Validators.required],
       description: [null, Validators.required],
-      state: [null, Validators.required],
       estimated_duration: [null, Validators.required]
     });
     this.route.params.subscribe(
@@ -46,7 +45,7 @@ export class NewTaskComponent implements OnInit {
     task.title = this.taskForm.get('title')?.value;
     task.color = this.taskForm.get('color')?.value;
     task.description = this.taskForm.get('description')?.value;
-    task.state = this.taskForm.get('state')?.value;
+    task.state = "À FAIRE";
     task.estimated_duration = this.taskForm.get('estimated_duration')?.value;
     console.log(task);
     

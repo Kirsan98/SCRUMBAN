@@ -25,29 +25,39 @@
           </div>
         </div>
       </div>
-          <div class="row">
-            <div class="col-md-11" *ngFor="let column of columns">
-              <div class="bg-light border">
+      
+      <div class="row scrolling-wrapper  bg-light border row flex-row flex-nowrap mt-4 pb-4 pt-2 ">
+        <div class="col-3" *ngFor="let column of columns">
+    
+          <div class="drag-container">
+            <div class="section-heading">{{ column.title }}</div>
+            test ici mettre la liste des tasks
 
 
-              <div class="drag-container">
-                <div class="section-heading">{{ column.title }}</div>
-
-                <div cdkDropList id="{{ column.id }}" [cdkDropListData]="column.taskList"
-                  [cdkDropListConnectedTo]="connectedTo" class="item-list" (cdkDropListDropped)="drop($event)">
-                  <div class="item-box" *ngFor="let task of column.taskList" cdkDrag>
-                    {{ column.id }} {{ task }}
-                  </div>
-                </div>
+            <div cdkDropList id="{{ column.id }}" [cdkDropListData]="column.taskList"
+              [cdkDropListConnectedTo]="connectedTo" class="item-list" (cdkDropListDropped)="drop($event)">
+              
+              
+              <div class="item-box" *ngFor="let task of column.taskList" cdkDrag>
+                {{ column.id }} {{ task }}
               </div>
-            </div>
-            </div>
-            <div class="col-md-1">
-              <a >
-                <button
-                type="button"
-                class="btn btn-primary btn-lg">+</button>
-            </a>
-            </div>
+
+
           </div>
+        </div>
+        </div>
+        <div class="col-md-1">
+          <a >
+            <button
+            type="button"
+            class="btn btn-primary btn-lg" (click)="addColumnToSprint()">+</button>
+        </a>
+        </div>
+      </div>
+   
+
 </section>
+
+
+
+ 

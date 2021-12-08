@@ -4,8 +4,11 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Nom</th>
+      <th scope="col">Titre</th>
       <th scope="col">Description</th>
+      <th scope="col">Temps estimé</th>
+      <th scope="col">État</th>
+      <th scope="col">Couleur</th>
       <th scope="col">Date création</th>
       <th scope="col">Paramètres</th>
     </tr>
@@ -14,6 +17,13 @@
     <tr  class="ligne" >
       <td class="nameTask" (click)="onTaskClicked(project._id, task._id)">{{ task.title }}</td>
       <td class="descriptionTask"(click)="onTaskClicked(project._id, task._id)"> {{task.description}}</td>
+      <td class="estimationTimeTask"(click)="onTaskClicked(project._id, task._id)"> {{task.estimated_duration}}</td>
+      <td class="stateTask"(click)="onTaskClicked(project._id, task._id)"> {{task.state}}</td>
+      <td>
+        <div ng-app>
+          <td type="color" class="colorTask"(click)="onTaskClicked(project._id, task._id)" style="background-color:{{task.color}};"></td> 
+        </div>
+      </td>
       <td class= "dateTask" (click)="onTaskClicked(project._id, task._id)">{{task.created_at | date: 'dd/MM/y'}}</td>
       <td>
         <div class="wrapper">

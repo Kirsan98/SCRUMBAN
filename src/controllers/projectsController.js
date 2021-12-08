@@ -1,6 +1,8 @@
 const Project = require('../models/projectModel');
 const sprintController = require('../controllers/sprintController');
 const taskController = require('../controllers/taskController');
+const columnController = require('../controllers/columnController');
+const Sprint = require('../models/sprintModel');
 
 //get all projects
 module.exports.getAllProjects = async function () {
@@ -103,6 +105,8 @@ module.exports.removeProject = async function (id) {
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 // SPRINT
 
 // create sprint
@@ -184,6 +188,8 @@ module.exports.deleteSingleSprintByProject = async function (idProject, idSprint
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 // TASK
 
 // Create task to an existing project 
@@ -274,3 +280,5 @@ module.exports.deleteSingleTaskByProject = async function (idProject, idTask) {
 		return { success: false, message: "Not found" + error };
 	}
 }
+
+
