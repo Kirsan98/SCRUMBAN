@@ -86,8 +86,6 @@ export class SingleSprintComponent implements OnInit {
         console.log(this.columns);
       }
     );
-    
-    
   }
 
   drop(event: CdkDragDrop<string[]>) {
