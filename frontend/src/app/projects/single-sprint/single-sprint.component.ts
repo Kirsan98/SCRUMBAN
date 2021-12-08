@@ -24,7 +24,6 @@ export class SingleSprintComponent implements OnInit {
 
   columns: any[] = [];
   connectedTo: any = [];
-  refreshProjectService: any;
 
   constructor(
     private router: Router,
