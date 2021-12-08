@@ -6,6 +6,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { SprintService } from 'src/app/services/sprint.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Column } from 'src/app/models/column.model';
+import { TaskService } from 'src/app/services/task.service';
 
 
 @Component({
@@ -28,7 +29,25 @@ export class SingleSprintComponent implements OnInit {
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private sprintService: SprintService,
+    private taskService: TaskService
   ) {}
+
+  public loadColumns(columns: any[]){
+    let finalColumns: any[] = [];
+    columns.forEach((column: any) => {
+      let tasks: any[] = [];
+      column._tasks.forEach((taskId: any) => {
+        this.taskService.getTaskById(taskId)
+        .then(
+          (task: any) => {
+            tasks.push(task);
+          }
+        );
+      });
+      finalColumns.push(tasks);
+    });
+    this.columns = finalColumns;
+  }
   //   this.columns = [
   //     {
   //       title: 'A faire',
