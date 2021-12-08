@@ -21,8 +21,8 @@
           <option value="{{task.title}}">{{task.title}}</option>
         </select>
 
-        <label for="estimated_duration">Durée estimé</label>
-        <input type="text" class="form-control" id="estimated_duration" formControlName="estimated_duration" placeholder="Entrer nouvelle durée estimé" name="estimated_duration">
+        <label for="estimated_duration">Durée estimé en heure</label>
+        <input type="number" class="form-control" id="estimated_duration" formControlName="estimated_duration" placeholder="Entrer nouvelle durée estimé" name="estimated_duration">
       </div>
     </form>
     <button type="button" class="btn btn-primary btn-lg" (click)="onSubmit()">Enregistrer</button>

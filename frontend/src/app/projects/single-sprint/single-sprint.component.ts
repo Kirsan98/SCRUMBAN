@@ -109,8 +109,6 @@ export class SingleSprintComponent implements OnInit {
         this.loadColumns(columns.data);
       }
     );
-    
-    
   }
 
   drop(event: CdkDragDrop<String[]>) {
