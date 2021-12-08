@@ -84,14 +84,10 @@ export class SingleSprintComponent implements OnInit {
       (columns: any) => {
         this.columns = columns.data;
         console.log(this.columns);
-        
       }
     );
     
     
-  }
-  ngOnChanges(changes: SimpleChange) {
-    console.log("on change de sprint");
   }
 
   drop(event: CdkDragDrop<string[]>) {

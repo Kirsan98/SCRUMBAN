@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Column } from 'src/app/models/column.model';
 import { Project } from 'src/app/models/project.model';
@@ -20,7 +20,10 @@ export class NewSprintComponent implements OnInit {
   public projectID!: string;
   public project!: Project;
   public tasksProject!: Task[];
+  // public form!: FormGroup;
 
+
+  form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,7 +33,22 @@ export class NewSprintComponent implements OnInit {
     private route: ActivatedRoute,
     private refreshProjectService: RefreshProjectService
 
-  ) { }
+  ) {
+    this.form = this.formBuilder.group({
+      orders: new FormArray([])
+    });
+  }
+
+  private addCheckboxesToForm() {
+    this.tasksProject.forEach(
+      (element: any) => {
+        this.ordersFormArray.push(new FormControl(false));
+      });
+  }
+
+  get ordersFormArray() {
+    return this.form.controls.orders as FormArray;
+  }
 
   ngOnInit(): void {
     this.sprintForm = this.formBuilder.group({
@@ -50,6 +68,15 @@ export class NewSprintComponent implements OnInit {
               .then(
                 (taskListData: any) => {
                   this.tasksProject = taskListData.data;
+                  this.addCheckboxesToForm();
+                  // this.form = new FormGroup({
+                  //   tasksProject: new FormArray([])
+                  // })
+                  // this.tasksProject.forEach(e => {
+                  //     this.control.push(new FormControl(false));
+                  //   }
+                  // );
+                  // console.log(this.tasksProject);
                 }
               );
           }
@@ -57,9 +84,15 @@ export class NewSprintComponent implements OnInit {
 
       }
     );
+
+
   }
 
-  public loadSprint(): Sprint{
+  // get control() {
+  //   return this.form.get('tasksProject') as FormArray;
+  // }
+
+  public loadSprint(): Sprint {
     const sprint = new Sprint();
     sprint.title = this.sprintForm.get('title')?.value;
     sprint.start_at = this.sprintForm.get('start_at')?.value;
@@ -70,16 +103,35 @@ export class NewSprintComponent implements OnInit {
     return sprint;
   }
 
+  public loadAllTask(): String[] {
+    const tasks: String[] = [];
+    const elements = this.form.value['orders'];
+    for (let i = 0; i < this.tasksProject.length; i++) {
+      if (elements[i] == true) {
+        tasks.push(this.tasksProject[i]._id);
+      }
+    }
+
+    return tasks;
+  }
+
   onSubmit() {
+    const list = this.loadAllTask();
+    console.log("taches selectionnées", list);
+
     const sprint = this.loadSprint()
     this.projectService.addSprint(this.projectID, sprint).then(
       (response: any) => {
         const columnInit = new Column();
         columnInit.title = "Sprint Backlog";
         columnInit.index = 0;
+        columnInit._tasks = this.loadAllTask();
         this.sprintService.addColumn(this.projectID, response.data.sprint._id, columnInit).then(
-          () => {
+          (rep) => {
             console.log("column ajoutée correctement");
+
+            console.log(rep);
+
             this.refreshProjectService.refreshProject(response.data.project);
             this.router.navigate(['project/' + this.projectID + '/sprint/' + response.data.sprint._id]);
           }

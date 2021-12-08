@@ -1,7 +1,7 @@
 <section style="margin-top: 10px">
     <div class="row">
         <div class="col-11">
-          <div class="titleSprint">
+          <div *ngIf="sprint != undefined" class="titleSprint">
             <h5>{{ sprint.title }}</h5>
           </div>
         </div>
