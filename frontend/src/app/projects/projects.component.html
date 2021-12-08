@@ -29,7 +29,7 @@
         <th scope="col">Paramètres</th>
       </tr>
     </thead>
-    <tbody *ngFor="let project of projects">
+    <tbody *ngFor="let project of projects.slice().reverse()">
       <tr  class="ligne">
         <td class="nameProject" (click)="onProjectClicked(project._id)">{{ project.title }}</td>
         <td class= "dateProject" (click)="onProjectClicked(project._id)">{{project.created_at | date: 'dd/MM/y'}}</td>

@@ -49,4 +49,10 @@ export class TasksComponent implements OnInit {
   onUpdate(idProject: string, idTask: string){
     this.router.navigate(['/project/' + idProject +'/update-task/' + idTask]);
   }
+
+  get sortTask(){
+    return this.tasks.sort((a,b)=> {
+      return <any>new Date(b.created_at) - <any> new Date(a.created_at);
+    });
+  }
 }
