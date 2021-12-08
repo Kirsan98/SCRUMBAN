@@ -30,32 +30,11 @@
         <div class="col-3" *ngFor="let column of columns">
           <div class="drag-container">
             <div class="section-heading">{{ column.title }}</div>
-            <div cdkDropList id="{{ column.title }}" [cdkDropListData]="column.taskList"
+            <div cdkDropList id="{{ column.title }}" [cdkDropListData]="column._tasks"
               [cdkDropListConnectedTo]="connectedTo" class="item-list" (cdkDropListDropped)="drop($event)">
                
-              <div class="item-box"  cdkDrag>
-                Nom de la tache 1
-              </div>
-
-              <div class="item-box"  cdkDrag>
-                Nom de la tache 2
-              </div>
-              <div class="item-box"  cdkDrag>
-                Nom de la tache 1
-              </div>
-
-              <div class="item-box"  cdkDrag>
-                Nom de la tache 2
-              </div>
-              <div class="item-box"  cdkDrag>
-                Nom de la tache 1
-              </div>
-
-              <div class="item-box"  cdkDrag>
-                Nom de la tache 2
-              </div>
-              <div class="item-box" *ngFor="let task of column.taskList" cdkDrag>
-                {{ column.title }} {{ task }}
+              <div class="item-box" *ngFor="let task of column._tasks" cdkDrag>
+                {{ column }} 
               </div>
           </div>
         </div>
