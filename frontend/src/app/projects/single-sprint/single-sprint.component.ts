@@ -130,26 +130,33 @@ export class SingleSprintComponent implements OnInit {
     newColumn.title = "Default name";
     
     //a changer 
-    newColumn.index = this.columns.length;
-    this.sprintService.addColumn(this.project._id, this.sprint._id, newColumn).then(
-      (response: any) => {
-        this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
-          (columns:any) => {
-            
-            this.columnsObject = columns.data;
-            console.log(this.columns);
+    if (this.columns.length >=10){
+      console.log("Max column");
+      
+    }
+    else{
+      newColumn.index = this.columns.length;
 
-            this.loadColumns(this.columnsObject);
-            console.log(this.columns);
+      this.sprintService.addColumn(this.project._id, this.sprint._id, newColumn).then(
+        (response: any) => {
+          this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
+            (columns:any) => {
+              
+              this.columnsObject = columns.data;
+              console.log(this.columns);
+
+              this.loadColumns(this.columnsObject);
+              console.log(this.columns);
 
 
-          }
-        )
-        this.router.navigate(['project/' + this.project._id + '/sprint/' + this.sprint._id]);
-      }
-    ).catch((error) => {
-      this.errorMessage = error.message;
-    });
+            }
+          )
+          this.router.navigate(['project/' + this.project._id + '/sprint/' + this.sprint._id]);
+        }
+      ).catch((error) => {
+        this.errorMessage = error.message;
+      });
+    }
   }
 
   get sortColumns(){
