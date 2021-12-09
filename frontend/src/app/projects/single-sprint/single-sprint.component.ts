@@ -19,8 +19,11 @@ export class SingleSprintComponent implements OnInit {
   public sprint!: Sprint;
   public errorMessage!: string;
   public sprints!: Sprint[];
+  indexColumn: Number = 0;
 
-  columns: any = [];
+  columnsObject: Column[] = [];
+
+  columns: any[] = [];
   connectedTo: any = [];
   refreshProjectService: any;
 
@@ -32,47 +35,33 @@ export class SingleSprintComponent implements OnInit {
     private taskService: TaskService
   ) {}
 
+  public loadTask(column: any): any[]{
+    const tasks: any[] = [];    
+    column._tasks.forEach((element: any) => {
+      this.taskService.getTaskById(element)
+      .then((task:any) => {
+        tasks.push(task.data);
+        
+      });
+    });
+    return tasks;
+  }
+
   public loadColumns(columns: any[]){
     let finalColumns: any[] = [];
-    columns.forEach((column: any) => {
-      let tasks: any[] = [];
-      column._tasks.forEach((taskId: any) => {
-        this.taskService.getTaskById(taskId)
-        .then(
-          (task: any) => {
-            tasks.push(task);
-          }
-        );
-      });
+    columns.sort(function(a,b){
+      return a.index-b.index;
+    });
+
+    columns.forEach((column: any) => { 
+      let tasks = this.loadTask(column);
       finalColumns.push(tasks);
     });
-    this.columns = finalColumns;
+    this.columns = finalColumns; 
+       
   }
-  //   this.columns = [
-  //     {
-  //       title: 'A faire',
-  //       taskList: [
-  //         "task 1",
-  //         "task 2",
-  //         "task 3",
-  //         "task 4",
-  //         "task 5"
-  //       ]
-  //     }, {
-  //       title: 'En cours',
-  //       taskList: []
-  //     }, {
-  //       title: 'Review',
-  //       taskList: []
-  //     }, {
-  //       title: 'Fini',
-  //       taskList: []
-  //     }
-  //   ];
-  //   for (let column of this.columns) {
-  //     this.connectedTo.push(column.id);
-  //   };
-  //}
+  
+
 
   ngOnInit(): void {
     let idProject!: string;
@@ -87,8 +76,6 @@ export class SingleSprintComponent implements OnInit {
       .then(
         (project: any) => {
           this.project = project['data'];
-          //this.sprints = this.project.sprints;
-
         }
       );
     this.projectService.getSingleSprintByProject(idProject, idSprint)
@@ -101,13 +88,18 @@ export class SingleSprintComponent implements OnInit {
     this.sprintService.getAllColumnFromSprint(idProject, idSprint)
     .then(
       (columns: any) => {
-        this.columns = columns.data;
-        console.log(this.columns);
+        this.columnsObject = columns.data;
+        console.log(this.columnsObject);
+        
+        this.loadColumns(columns.data);
+
+        console.log(this.columnsObject);
+
       }
     );
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<String[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -138,19 +130,22 @@ export class SingleSprintComponent implements OnInit {
     const newColumn = new Column();
     newColumn.title = "Default name";
     
+    //a changer 
     newColumn.index = this.columns.length;
     this.sprintService.addColumn(this.project._id, this.sprint._id, newColumn).then(
       (response: any) => {
         this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
           (columns:any) => {
-            this.columns = columns.data;
+            
+            this.columnsObject = columns.data;
             console.log(this.columns);
+
+            this.loadColumns(this.columnsObject);
+            console.log(this.columns);
+
 
           }
         )
-       
-        
-        console.log("COLUMN ADD");
         this.router.navigate(['project/' + this.project._id + '/sprint/' + this.sprint._id]);
       }
     ).catch((error) => {
@@ -159,7 +154,7 @@ export class SingleSprintComponent implements OnInit {
   }
 
   get sortColumns(){
-    return this.columns.sort((a: { index: any; },b: { index: any; }) => {
+    return this.columnsObject.sort((a: { index: any; },b: { index: any; }) => {
       return <any> new Number(a.index) - <any> new Number(b.index);
     });
   }
