@@ -19,6 +19,7 @@ export class SingleSprintComponent implements OnInit {
   public sprint!: Sprint;
   public errorMessage!: string;
   public sprints!: Sprint[];
+  indexColumn: Number = 0;
 
   columnsObject: Column[] = [];
 
@@ -47,37 +48,19 @@ export class SingleSprintComponent implements OnInit {
 
   public loadColumns(columns: any[]){
     let finalColumns: any[] = [];
-    columns.forEach((column: any) => {    
+    columns.sort(function(a,b){
+      return a.index-b.index;
+    });
+
+    columns.forEach((column: any) => { 
       let tasks = this.loadTask(column);
       finalColumns.push(tasks);
     });
-    this.columns = finalColumns;
+    this.columns = finalColumns; 
+       
   }
-  //   this.columns = [
-  //     {
-  //       title: 'A faire',
-  //       taskList: [
-  //         "task 1",
-  //         "task 2",
-  //         "task 3",
-  //         "task 4",
-  //         "task 5"
-  //       ]
-  //     }, {
-  //       title: 'En cours',
-  //       taskList: []
-  //     }, {
-  //       title: 'Review',
-  //       taskList: []
-  //     }, {
-  //       title: 'Fini',
-  //       taskList: []
-  //     }
-  //   ];
-  //   for (let column of this.columns) {
-  //     this.connectedTo.push(column.id);
-  //   };
-  //}
+  
+
 
   ngOnInit(): void {
     let idProject!: string;
@@ -105,7 +88,12 @@ export class SingleSprintComponent implements OnInit {
     .then(
       (columns: any) => {
         this.columnsObject = columns.data;
+        console.log(this.columnsObject);
+        
         this.loadColumns(columns.data);
+
+        console.log(this.columnsObject);
+
       }
     );
   }
@@ -139,14 +127,21 @@ export class SingleSprintComponent implements OnInit {
 
   addColumnToSprint(){
     const newColumn = new Column();
-    newColumn.title = "Column test";
-    newColumn.index = 0;
+    newColumn.title = "Default name";
+    
+    //a changer 
+    newColumn.index = this.columns.length;
     this.sprintService.addColumn(this.project._id, this.sprint._id, newColumn).then(
       (response: any) => {
         this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
           (columns:any) => {
+            
             this.columnsObject = columns.data;
-            this.loadColumns(columns.data);
+            console.log(this.columns);
+
+            this.loadColumns(this.columnsObject);
+            console.log(this.columns);
+
 
           }
         )
@@ -154,6 +149,12 @@ export class SingleSprintComponent implements OnInit {
       }
     ).catch((error) => {
       this.errorMessage = error.message;
+    });
+  }
+
+  get sortColumns(){
+    return this.columnsObject.sort((a: { index: any; },b: { index: any; }) => {
+      return <any> new Number(a.index) - <any> new Number(b.index);
     });
   }
 }

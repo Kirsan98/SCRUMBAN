@@ -17,10 +17,11 @@
       <td class="nameTask" (click)="onTaskClicked(project._id, task._id)">{{ task.title }}</td>
       <td class="descriptionTask" (click)="onTaskClicked(project._id, task._id)"> {{task.description}}</td>
       <td>
-      <div ng-app>
-        <td type="color" class="colorTask" (click)="onTaskClicked(project._id, task._id)"
-          style="background-color:{{task.color}};"></td>
-      </div>
+        <div ng-app>
+          <div>
+          <td type="color" class="colorTask"(click)="onTaskClicked(project._id, task._id)" style="background-color:{{task.color}};"></td> 
+          </div>
+        </div>
       </td>
       <td>
         <div class="wrapper">

@@ -27,13 +27,13 @@
       </div>
 
       <div *ngIf="columnsObject != undefined" class="row scrolling-wrapper  bg-light border row flex-row flex-nowrap mt-4 pb-4 pt-2 ">
-        <div class="col-3" *ngFor="let column of columnsObject.slice(); let i=index">
+        <div class="col-3" *ngFor="let column of sortColumns; let i=index">
           <div class="drag-container">
             <div class="section-heading">{{ column.title }}</div>
             <div *ngIf="columns[i] != undefined" cdkDropList id="{{ column.title }}" [cdkDropListData]="column._tasks"
               [cdkDropListConnectedTo]="connectedTo" class="item-list" (cdkDropListDropped)="drop($event)">
                
-              <div class="item-box" *ngFor="let task of columns[i].slice()" cdkDrag>
+              <div class="item-box" *ngFor="let task of columns[i]" cdkDrag>
                 {{ task.title }} 
               </div>
           </div>
