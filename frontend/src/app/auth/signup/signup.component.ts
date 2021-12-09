@@ -11,22 +11,6 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-  // signupForm: FormGroup = new FormGroup({
-  //   firstname: new FormControl(''),
-  //   lastname: new FormControl(''),
-  //   username: new FormControl(''),
-  //   email: new FormControl(''),
-  //   password: new FormControl(''),
-  //   confirmPassword: new FormControl(''),
-  // });
-  // signupForm: FormGroup = new FormGroup({
-  //   firstname: new FormControl(''),
-  //   lastname: new FormControl(''),
-  //   username: new FormControl(''),
-  //   email: new FormControl(''),
-  //   password: new FormControl(''),
-  //   confirmPassword: new FormControl(''),
-  // });
   public signupForm!: FormGroup;
   public submitted = false;
   public errorMessage!: string;
@@ -89,7 +73,7 @@ export class SignupComponent implements OnInit {
     this.authService.createNewUser(user).then(
       () => {
         this.signupForm.reset();
-        this.router.navigate(['/projects']);
+        this.router.navigate(['/connexion']);
       }
     ).catch(
       (error: string) => {

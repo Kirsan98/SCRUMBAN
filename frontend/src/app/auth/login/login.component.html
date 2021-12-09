@@ -12,11 +12,13 @@
       </div> -->
   
       <!-- Login Form -->
-      <form [formGroup]="loginForm">
-        <input type="email" id="email" formControlName="email" class="fadeIn second" name="email" placeholder="Email">
-        <input type="password" id="password" formControlName="password" class="fadeIn third" name="password" placeholder="Password">
-        <!-- <input type="submit" (click)="onLogin()" class="fadeIn fourth" [disabled]="loginForm.invalid" value="Log In"> -->
-        <button class="button" (click)="onLogin()">Connexion</button>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <input type="email" id="email" formControlName="email" class="fadeIn second" name="email" placeholder="Email">
+          <input type="password" id="password" formControlName="password" class="fadeIn third" name="password" placeholder="Password">
+          <!-- <input type="submit" (click)="onLogin()" class="fadeIn fourth" [disabled]="loginForm.invalid" value="Log In"> -->
+          <button class="button" type="submit" class="btn btn-primary">Connexion</button>
+        </div>
   
       </form>
       <!-- Remind Passowrd -->

@@ -20,19 +20,20 @@ export class AuthService {
         });
     }
 
-    // signInUser(user: any) {
-    //     return new Promise(
-    //         (resolve, reject) => {
-    //             this.http.post('http://localhost:5000/api/addUser',user).subscribe(
-    //                 (response) => {
-    //                     resolve(response);
-    //                 },
-    //                 (error) => {
-    //                     reject(error);
-    //             }
-    //         );
-    //     });
-    // }
+    loginUser(body: any) {
+        return new Promise(
+            (resolve, reject) => {
+                console.log(body);
+                this.http.post('http://localhost:5000/api/login',body).subscribe(
+                    (response) => {
+                        resolve(response);
+                    },
+                    (error) => {
+                        reject(error);
+                }
+            );
+        });
+    }
 
         // signOutUser(user: any) {
     //     return new Promise(
