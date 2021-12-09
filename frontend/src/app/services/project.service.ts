@@ -149,7 +149,7 @@ export class ProjectService{
 
     addTask(idProject: string, task : any){
       return new Promise((resolve,reject) => {
-        this.http.post('http://localhost:5000/api/project/'+ idProject + '/add-task/',task).subscribe(
+        this.http.post('http://localhost:5000/api/project/'+ idProject + '/add-task',task).subscribe(
           (response) => {
             resolve(response);
           },

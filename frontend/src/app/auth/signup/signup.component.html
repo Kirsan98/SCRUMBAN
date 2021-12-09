@@ -14,15 +14,15 @@
       <!-- Signup Form -->
       <form [formGroup] = "signupForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <input type="text" id="lastname" formControlName="lastname" class="form-control fadeIn first" name="lastname" [ngClass]="{ 'is-invalid': submitted && f['lastname'].errors }" placeholder="Lastname">
-          <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback">
-            <div *ngIf="f['lastname'].errors['required']">Lastname is required</div>
-          </div>
-        </div>
-        <div class="form-group">
           <input type="text" id="firstname" formControlName="firstname" class="form-control fadeIn second" name="firstname" [ngClass]="{ 'is-invalid': submitted && f['firstname'].errors }"  placeholder="Firstname">
           <div *ngIf="submitted && f['firstname'].errors" class="invalid-feedback">
             <div *ngIf="f['firstname'].errors['required']">Firstname is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" id="lastname" formControlName="lastname" class="form-control fadeIn first" name="lastname" [ngClass]="{ 'is-invalid': submitted && f['lastname'].errors }" placeholder="Lastname">
+          <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback">
+            <div *ngIf="f['lastname'].errors['required']">Lastname is required</div>
           </div>
         </div>
         <div class="form-group">

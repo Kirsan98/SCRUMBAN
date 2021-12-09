@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import { Project } from 'src/app/models/project.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-update-task',
@@ -17,13 +18,30 @@ export class UpdateTaskComponent implements OnInit {
   public updateTaskForm !: FormGroup;
   public errorMessage !: string;
 
+  public users: any[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService,
-    private taskService: TaskService   
+    private taskService: TaskService,
+    private userService: UserService
   ) { }
+
+  public loadUsers() {
+    this.userService.getAllUsersFromProject(this.project._id).then(
+      (usersIdResp: any) => {
+        usersIdResp.data.forEach((userId: any) => {
+          this.userService.getUserById(userId).then(
+            (userResp: any) => {
+              this.users.push(userResp.data);
+            }
+          );
+        });
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.updateTaskForm = this.formBuilder.group({
@@ -31,7 +49,8 @@ export class UpdateTaskComponent implements OnInit {
       color: [null],
       description: [null],
       state: [null],
-      estimated_duration: [null]
+      estimated_duration: [null],
+      owner: [null]
     })
     this.route.params.subscribe(
       (params) => {

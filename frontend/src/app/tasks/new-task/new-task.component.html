@@ -42,6 +42,11 @@
               placeholder="Entrer la durée estimé de la tâche"
               name="estimated_duration"
             />
+            <label for="owner">Utilisateur réalisant la tâche</label>
+            <select class="select" formControlName="owner">
+              <option value="blank">Pas encore attribuée</option>
+              <option *ngFor="let user of users; let i = index"value="{{user._id}}">{{user.username}}</option>
+            </select>
           </div>
         </form>
         <button

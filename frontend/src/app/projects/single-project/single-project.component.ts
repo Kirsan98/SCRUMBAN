@@ -12,6 +12,8 @@ import { RefreshProjectService } from 'src/app/services/refresh-project.service'
 export class SingleProjectComponent implements OnInit {
   public project!: Project;
 
+  private idProject!: String;
+
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
@@ -21,6 +23,7 @@ export class SingleProjectComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(
       async (params: Params) => {
+        this.idProject = params.idProject;
         this.projectService.getProjectById(params.idProject).then(
           (project: any) => {
             this.project = project['data'];
@@ -30,7 +33,8 @@ export class SingleProjectComponent implements OnInit {
     );
     this.refreshProjectService.currentProject.subscribe(
       (newProject: Project) => {
-        this.project = newProject;
+        if (this.idProject == newProject._id)
+          this.project = newProject;
       }
     );
   }

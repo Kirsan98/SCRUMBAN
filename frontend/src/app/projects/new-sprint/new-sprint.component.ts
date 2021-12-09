@@ -17,7 +17,6 @@ import { SprintService } from 'src/app/services/sprint.service';
 export class NewSprintComponent implements OnInit {
   public sprintForm !: FormGroup;
   public errorMessage!: string;
-  public projectID!: string;
   public project!: Project;
   public tasksProject!: Task[];
 
@@ -61,8 +60,7 @@ export class NewSprintComponent implements OnInit {
         this.projectService.getProjectById(params.idProject).then(
           (project: any) => {
             this.project = project['data'];
-            this.projectID = project['data']._id;
-            this.projectService.getAllTaskFromProject(this.projectID)
+            this.projectService.getAllTaskFromProject(this.project._id)
               .then(
                 (taskListData: any) => {
                   this.tasksProject = taskListData.data;
@@ -96,27 +94,39 @@ export class NewSprintComponent implements OnInit {
         tasks.push(this.tasksProject[i]._id);
       }
     }
-
     return tasks;
   }
 
   onSubmit() {
     const list = this.loadAllTask();
     const sprint = this.loadSprint()
-    this.projectService.addSprint(this.projectID, sprint).then(
+    this.projectService.addSprint(this.project._id, sprint).then(
       (response: any) => {
-        const columnInit = new Column();
-        columnInit.title = "Sprint Backlog";
-        columnInit.index = 0;
-        columnInit._tasks = this.loadAllTask();
-        this.sprintService.addColumn(this.projectID, response.data.sprint._id, columnInit).then(
+        //premiere colonne
+        const sprintBacklogCol = new Column();
+        sprintBacklogCol.title = "Sprint Backlog";
+        sprintBacklogCol.index = 0;
+        sprintBacklogCol._tasks = this.loadAllTask();
+        this.sprintService.addColumn(this.project._id, response.data.sprint._id, sprintBacklogCol).then(
           () => {
             this.refreshProjectService.refreshProject(response.data.project);
-            this.router.navigate(['project/' + this.projectID + '/sprint/' + response.data.sprint._id]);
+            //derniere colonne
+            const finishedCol = new Column();
+            finishedCol.title = "Finished";
+            finishedCol.index = 10;
+            this.sprintService.addColumn(this.project._id, response.data.sprint._id, finishedCol).then(
+              () => {
+                this.refreshProjectService.refreshProject(response.data.project);
+                this.router.navigate(['project/' + this.project._id + '/sprint/' + response.data.sprint._id]);
+              }
+            ).catch((error) => {
+              this.errorMessage = error.message;
+            });
           }
         ).catch((error) => {
           this.errorMessage = error.message;
         });
+        
       }
     ).catch(
       (error) => {

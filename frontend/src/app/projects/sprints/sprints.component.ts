@@ -15,6 +15,8 @@ export class SprintsComponent implements OnInit {
   public sprints!: Sprint[];
   public sprintSelected!: Sprint;
 
+  private idProject!: String;
+
 
   constructor(
     private router: Router,
@@ -26,6 +28,7 @@ export class SprintsComponent implements OnInit {
   ngOnInit(): void {
     this.route.parent!.params.subscribe(
       (params: Params) => {
+        this.idProject = params.idProject;
         this.projectService.getAllSprintByProject(params.idProject)
           .then(
             (sprints: any) => {
@@ -42,14 +45,17 @@ export class SprintsComponent implements OnInit {
     );
     this.refreshProjectService.currentProject.subscribe(
       (newProject: Project) => {
-        this.project = newProject;
-        if (this.project._id != undefined)
-          this.projectService.getAllSprintByProject(this.project._id)
-            .then(
-              (sprints: any) => {
-                this.sprints = sprints['data'];
-              }
-            );
+        if (this.idProject == newProject._id) {
+          this.project = newProject;
+
+          if (this.project._id != undefined)
+            this.projectService.getAllSprintByProject(this.project._id)
+              .then(
+                (sprints: any) => {
+                  this.sprints = sprints['data'];
+                }
+              );
+        }
       }
     );
   }
