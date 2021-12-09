@@ -52,6 +52,16 @@ router.route('/remove-project/:idProject').delete(async (req, res) => {
   }
 });
 
+// get a list of users
+router.route('/project/:idProject/users').get(async (req, res) => {
+  let response = await projectController.getAllUsersFromProject(req.params.idProject);
+  if (response!=null && response.success == true) {
+    res.status(200).json(response);
+  } else {
+    res.status(404).json(response);
+  }
+});
+
 //SPRINT
 
 // add a sprint to project
@@ -97,7 +107,7 @@ router.route('/project/:idProject/delete-sprint/:idSprint').delete(async (req, r
 //TASK
 
 // add task to project
-router.route('/project/:idProject/add-task/').post(async (req, res) => {
+router.route('/project/:idProject/add-task').post(async (req, res) => {
   let response = await projectController.addTaskToProject(req.params.idProject, req.body);
   if (response!=null && response.success == true) {
     res.status(200).json(response);

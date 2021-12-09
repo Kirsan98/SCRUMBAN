@@ -102,18 +102,32 @@ export class NewSprintComponent implements OnInit {
     const sprint = this.loadSprint()
     this.projectService.addSprint(this.project._id, sprint).then(
       (response: any) => {
-        const columnInit = new Column();
-        columnInit.title = "Sprint Backlog";
-        columnInit.index = 0;
-        columnInit._tasks = this.loadAllTask();
-        this.sprintService.addColumn(this.project._id, response.data.sprint._id, columnInit).then(
+        //premiere colonne
+        const sprintBacklogCol = new Column();
+        sprintBacklogCol.title = "Sprint Backlog";
+        sprintBacklogCol.index = 0;
+        sprintBacklogCol._tasks = this.loadAllTask();
+        this.sprintService.addColumn(this.project._id, response.data.sprint._id, sprintBacklogCol).then(
           () => {
             this.refreshProjectService.refreshProject(response.data.project);
-            this.router.navigate(['project/' + this.project._id + '/sprint/' + response.data.sprint._id]);
+            //derniere colonne
+            const finishedCol = new Column();
+            finishedCol.title = "Finished";
+            finishedCol.index = 10;
+            this.sprintService.addColumn(this.project._id, response.data.sprint._id, finishedCol).then(
+              () => {
+                this.refreshProjectService.refreshProject(response.data.project);
+                this.router.navigate(['project/' + this.project._id + '/sprint/' + response.data.sprint._id]);
+              }
+            ).catch((error) => {
+              this.errorMessage = error.message;
+            });
+            // this.router.navigate(['project/' + this.project._id + '/sprint/' + response.data.sprint._id]);
           }
         ).catch((error) => {
           this.errorMessage = error.message;
         });
+        
       }
     ).catch(
       (error) => {

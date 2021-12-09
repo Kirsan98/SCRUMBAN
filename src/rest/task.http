@@ -10,10 +10,11 @@ POST http://localhost:5000/api/add-task/
 content-type: application/json
 
 {
-	"title": "premiere tache ",
+	"title": "tache test owner",
 	"color": "rouge",
 	"description": "ceci est la premiere tache, c'est un test",
-	"state": "a faire"
+	"state": "a faire",
+	"_owner": "blank"
 }
 
 ### Remove a task

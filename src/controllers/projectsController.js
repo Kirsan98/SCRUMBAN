@@ -69,6 +69,8 @@ module.exports.updateProject = async function (id, body) {
 		projectUpdated.title = body.title;
 	if (body.sprints != null)
 		projectUpdated.sprints = body.sprints;
+	if (body._members != null)
+		projectUpdated._members = body._members;
 	try {
 		await projectUpdated.save();
 		return {
@@ -101,7 +103,28 @@ module.exports.removeProject = async function (id) {
 			data: project,
 		}
 	} catch (error) {
-		return { success: false, message: "User not removed " + error };
+		return { success: false, message: "Project not removed " + error };
+	}
+}
+
+// get users working on the project
+module.exports.getAllUsersFromProject = async function (idProject) {
+	try {
+		const project = await Project.findById(idProject);
+		const users = project._members;
+		if (users != null)
+			return {
+				success: true,
+				data: users,
+			};
+		else {
+			return {
+				success: false,
+				message: "No users found in this project"
+			};
+		}
+	} catch (error) {
+		return { success: false, message: "Project not find " + error };
 	}
 }
 

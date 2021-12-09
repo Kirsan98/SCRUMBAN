@@ -7,4 +7,5 @@ export class Project{
     created_at!: Date;
     sprints !: Sprint[];
     tasks !: Task[];
+    _members!: String[];
 }
