@@ -88,20 +88,26 @@ export class SingleSprintComponent implements OnInit {
     .then(
       (columns: any) => {
         this.columnsObject = columns.data;
-        console.log(this.columnsObject);
-        
+
         this.loadColumns(columns.data);
 
-        console.log(this.columnsObject);
-
+        for (let column of this.columnsObject) {          
+          this.connectedTo.push(column.title);
+        };
       }
     );
+   
+    
   }
 
   drop(event: CdkDragDrop<String[]>) {
     if (event.previousContainer === event.container) {
+      console.log("ici");
+      
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      console.log("la");
+
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
@@ -136,18 +142,15 @@ export class SingleSprintComponent implements OnInit {
     }
     else{
       newColumn.index = this.columns.length;
-
+      this.connectedTo.push(newColumn.title);
       this.sprintService.addColumn(this.project._id, this.sprint._id, newColumn).then(
-        (response: any) => {
+        (response: any) => {          
+
           this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
             (columns:any) => {
               
               this.columnsObject = columns.data;
-              console.log(this.columns);
-
               this.loadColumns(this.columnsObject);
-              console.log(this.columns);
-
 
             }
           )
