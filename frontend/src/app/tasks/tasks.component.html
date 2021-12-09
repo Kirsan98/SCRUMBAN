@@ -1,30 +1,27 @@
-<a routerLink="../add-task">
-  <button type="button" class="btn btn-primary">Créer une tâche</button>
-</a>
+<div class="new-task-btn">
+  <a routerLink="../add-task">
+    <button type="button" class="btn btn-primary">Créer une tâche</button>
+  </a>
+</div>
 <table class="table">
   <thead>
     <tr>
       <th scope="col">Titre</th>
       <th scope="col">Description</th>
-      <th scope="col">Temps estimé en heure</th>
-      <th scope="col">État</th>
       <th scope="col">Couleur</th>
-      <th scope="col">Date création</th>
       <th scope="col">Paramètres</th>
     </tr>
   </thead>
   <tbody *ngFor="let task of sortTask">
-    <tr  class="ligne" >
+    <tr class="ligne">
       <td class="nameTask" (click)="onTaskClicked(project._id, task._id)">{{ task.title }}</td>
-      <td class="descriptionTask"(click)="onTaskClicked(project._id, task._id)"> {{task.description}}</td>
-      <td class="estimationTimeTask"(click)="onTaskClicked(project._id, task._id)"> {{task.estimated_duration}}</td>
-      <td class="stateTask"(click)="onTaskClicked(project._id, task._id)"> {{task.state}}</td>
+      <td class="descriptionTask" (click)="onTaskClicked(project._id, task._id)"> {{task.description}}</td>
       <td>
-        <div ng-app>
-          <td type="color" class="colorTask"(click)="onTaskClicked(project._id, task._id)" style="background-color:{{task.color}};"></td> 
-        </div>
+      <div ng-app>
+        <td type="color" class="colorTask" (click)="onTaskClicked(project._id, task._id)"
+          style="background-color:{{task.color}};"></td>
+      </div>
       </td>
-      <td class= "dateTask" (click)="onTaskClicked(project._id, task._id)">{{task.created_at | date: 'dd/MM/y'}}</td>
       <td>
         <div class="wrapper">
           <details data-popover="down">
@@ -33,8 +30,10 @@
             </summary>
             <div>
               <div class="list-group popover__message">
-                <a class="list-group-item list-group-item-action updateTask" (click)="onUpdate(project._id, task._id)">Paramètres de la tâche</a>
-                <a class="list-group-item list-group-item-action deleteTask" (click)="onDelete(project._id, task._id)">Déplacer dans la corbeille</a> 
+                <a class="list-group-item list-group-item-action updateTask"
+                  (click)="onUpdate(project._id, task._id)">Paramètres de la tâche</a>
+                <a class="list-group-item list-group-item-action deleteTask"
+                  (click)="onDelete(project._id, task._id)">Déplacer dans la corbeille</a>
               </div>
             </div>
           </details>

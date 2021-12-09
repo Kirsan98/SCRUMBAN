@@ -36,7 +36,6 @@ export class NewTaskComponent implements OnInit {
             }
           );
         });
-        console.log(this.users);
       }
     );
   }
@@ -68,7 +67,6 @@ export class NewTaskComponent implements OnInit {
     task.description = this.taskForm.get('description')?.value;
     task.state = "À FAIRE";
     task.estimated_duration = this.taskForm.get('estimated_duration')?.value;
-    console.log(this.taskForm.get('owner')?.value, "task owner value");
     if ( (this.taskForm.get('owner')?.value != "null") && (this.taskForm.get('owner')?.value !="blank"))
       task._owner = this.taskForm.get('owner')?.value;
     return task;
