@@ -16,13 +16,11 @@ content-type: application/json
 }
 
 ### Default updateColumn URL
-PUT http://localhost:5000/api/updateColumn/6195122b3c5dd1819f182277
+PUT http://localhost:5000/api/updateColumn/61b245316177941fdba76bfc
 content-type: application/json
 
 {
-	"title": "Jules",
-	"index": 10,
-	"maxTask": 1
+	"title": "2 eme colonne"
 }
 
 ### Default removeColumn URL

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task.model';
-import { Project } from '../models/project.model';
 
 @Injectable({  providedIn: 'root'})
 export class TaskService{
@@ -39,7 +38,6 @@ export class TaskService{
     }
 
     updateTask(id: string, task: Task){
-      console.log(task);
       return new Promise((resolve, reject) => {
         this.http.put('http://localhost:5000/api/updateTask/' + id, task).subscribe(
           (response) => {

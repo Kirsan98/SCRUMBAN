@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Column } from '../models/column.model';
 
 @Injectable({  providedIn: 'root'})
 export class SprintService{
@@ -55,6 +56,19 @@ export class SprintService{
                 },
                 (error) => {
                 reject(error);
+                }
+            );
+        });
+    }
+
+    updateColumn(id:string, column: Column){
+        return new Promise((resolve, reject) => {
+            this.http.put('http://localhost:5000/api/updateColumn/'+ id, column).subscribe(
+                (response) => {
+                    resolve(response);
+                  },
+                  (error) => {
+                    reject(error);
                 }
             );
         });

@@ -93,6 +93,8 @@ export class SingleSprintComponent implements OnInit {
 
         for (let column of this.columnsObject) {          
           this.connectedTo.push(column.title);
+          console.log(column._id);
+          
         };
       }
     );

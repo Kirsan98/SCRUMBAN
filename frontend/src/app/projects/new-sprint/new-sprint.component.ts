@@ -112,7 +112,7 @@ export class NewSprintComponent implements OnInit {
             this.refreshProjectService.refreshProject(response.data.project);
             //derniere colonne
             const finishedCol = new Column();
-            finishedCol.title = "Finished";
+            finishedCol.title = "Terminado";
             finishedCol.index = 10;
             this.sprintService.addColumn(this.project._id, response.data.sprint._id, finishedCol).then(
               () => {

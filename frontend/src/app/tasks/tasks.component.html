@@ -9,6 +9,8 @@
       <th scope="col">Titre</th>
       <th scope="col">Description</th>
       <th scope="col">Couleur</th>
+      <th scope="col">Durée estimé en heure</th>
+
       <th scope="col">Paramètres</th>
     </tr>
   </thead>
@@ -22,6 +24,9 @@
           <td type="color" class="colorTask"(click)="onTaskClicked(project._id, task._id)" style="background-color:{{task.color}};"></td> 
           </div>
         </div>
+      </td>
+      <td class="estimatedTime" (click)="onTaskClicked(project._id, task._id)">
+          {{task.estimated_duration}}
       </td>
       <td>
         <div class="wrapper">
