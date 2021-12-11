@@ -7,6 +7,7 @@ import { SprintService } from 'src/app/services/sprint.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Column } from 'src/app/models/column.model';
 import { TaskService } from 'src/app/services/task.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -20,6 +21,9 @@ export class SingleSprintComponent implements OnInit {
   public errorMessage!: string;
   public sprints!: Sprint[];
   indexColumn: Number = 0;
+  editMode: boolean=false;
+  columnHelp!: any;
+  updateColumnName !: FormGroup;
 
   columnsObject: Column[] = [];
 
@@ -27,40 +31,13 @@ export class SingleSprintComponent implements OnInit {
   connectedTo: any = [];
 
   constructor(
+    private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private sprintService: SprintService,
     private taskService: TaskService
   ) {}
-
-  public loadTask(column: any): any[]{
-    const tasks: any[] = [];    
-    column._tasks.forEach((element: any) => {
-      this.taskService.getTaskById(element)
-      .then((task:any) => {
-        tasks.push(task.data);
-        
-      });
-    });
-    return tasks;
-  }
-
-  public loadColumns(columns: any[]){
-    let finalColumns: any[] = [];
-    columns.sort(function(a,b){
-      return a.index-b.index;
-    });
-
-    columns.forEach((column: any) => { 
-      let tasks = this.loadTask(column);
-      finalColumns.push(tasks);
-    });
-    this.columns = finalColumns; 
-       
-  }
-  
-
 
   ngOnInit(): void {
     let idProject!: string;
@@ -98,9 +75,39 @@ export class SingleSprintComponent implements OnInit {
         };
       }
     );
+    this.updateColumnName = this.formBuilder.group({
+      title: [null,Validators.required]
+    })
    
     
   }
+
+  public loadTask(column: any): any[]{
+    const tasks: any[] = [];    
+    column._tasks.forEach((element: any) => {
+      this.taskService.getTaskById(element)
+      .then((task:any) => {
+        tasks.push(task.data);
+        
+      });
+    });
+    return tasks;
+  }
+
+  public loadColumns(columns: any[]){
+    let finalColumns: any[] = [];
+    columns.sort(function(a,b){
+      return a.index-b.index;
+    });
+
+    columns.forEach((column: any) => { 
+      let tasks = this.loadTask(column);
+      finalColumns.push(tasks);
+    });
+    this.columns = finalColumns; 
+       
+  }
+  
 
   drop(event: CdkDragDrop<String[]>) {
     if (event.previousContainer === event.container) {
@@ -168,5 +175,26 @@ export class SingleSprintComponent implements OnInit {
     return this.columnsObject.sort((a: { index: any; },b: { index: any; }) => {
       return <any> new Number(a.index) - <any> new Number(b.index);
     });
+  }
+
+  onUpdate(idColumn: any){
+    const columnUpdated = new Column();
+    columnUpdated.title = this.updateColumnName.get('title')?.value;
+    this.sprintService.updateColumn(idColumn,columnUpdated).then(
+      (column: any) => {
+        this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
+          (columns:any) => {
+            
+            this.columnsObject = columns.data;
+            this.loadColumns(this.columnsObject);
+
+          }
+        )
+      }
+    ).catch(
+      (error) => {
+        this.errorMessage = error.message;
+      }
+    )
   }
 }

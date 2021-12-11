@@ -16,7 +16,7 @@ content-type: application/json
 }
 
 ### Default updateColumn URL
-PUT http://localhost:5000/api/updateColumn/61b245316177941fdba76bfc
+PUT http://localhost:5000/api/updateColumn/61b249806177941fdba76cce
 content-type: application/json
 
 {
