@@ -73,4 +73,17 @@ export class SprintService{
             );
         });
     }
+
+    moveTaskToColumn(idColumnStart:String, idColumnEnd:String, idTask:String){
+        return new Promise((resolve, reject) => {
+            this.http.post('http://localhost:5000/api/move-task/'+ idColumnStart + '/' + idColumnEnd + '/' + idTask, null).subscribe(
+                (response) => {
+                    resolve(response);
+                  },
+                  (error) => {
+                    reject(error);
+                }
+            );
+        });        
+    }
 }

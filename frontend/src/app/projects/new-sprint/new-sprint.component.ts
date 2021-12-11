@@ -86,12 +86,12 @@ export class NewSprintComponent implements OnInit {
     return sprint;
   }
 
-  public loadAllTask(): String[] {
-    const tasks: String[] = [];
+  public loadAllTask(): Task[] {
+    const tasks: Task[] = [];
     const elements = this.form.value['orders'];
     for (let i = 0; i < this.tasksProject.length; i++) {
       if (elements[i] == true) {
-        tasks.push(this.tasksProject[i]._id);
+        tasks.push(this.tasksProject[i]);
       }
     }
     return tasks;
