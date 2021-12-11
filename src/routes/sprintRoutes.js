@@ -21,7 +21,7 @@ router.route('/project/:idProject/sprint/:idSprint/column/:idColumn')
   .get(
     async (req, res) => {
       let response = await sprintController.getSingleColumnByProject(req.params.idSprint, req.params.idColumn);
-      if (response.success)
+      if (response != undefnined && response.success)
         res.status(200).json(response);
       else
         res.status(404).json(response);
@@ -32,7 +32,7 @@ router.route('/project/:idProject/sprint/:idSprint/column/:idColumn')
 router.route('/project/:idProject/sprint/:idSprint/columns')
   .get(async (req, res) => {
     let response = await sprintController.getAllColumnFromSprint(req.params.idSprint);
-    if (response.success)
+    if ( response != undefined && response.success)
       res.status(200).json(response);
     else
       res.status(404).json(response);
