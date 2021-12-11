@@ -30,3 +30,6 @@ DELETE http://localhost:5000/api/removeColumn/6195122b3c5dd1819f182277
 ### Add task to column
 POST http://localhost:5000/api/column/61a9e17854812dd4f4de2a6b/addTask/618d6fcde8bdae86415cad58
 
+### move task from column start to column end
+POST http://localhost:5000/api/move-task/61b494e57d8bda3cc33dbea0/61b494e57d8bda3cc33dbea6/61b494c57d8bda3cc33dbe74
+

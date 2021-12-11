@@ -35,6 +35,7 @@ import { UpdateTaskComponent } from './tasks/update-task/update-task.component';
 import { TaskService } from './services/task.service';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { LogsComponent } from './logs/logs.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { SignupComponent } from './auth/signup/signup.component';
     SingleTaskComponent,
     UpdateTaskComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    LogsComponent
   ],
   imports: [
     BrowserModule,

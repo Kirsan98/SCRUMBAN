@@ -1,6 +1,15 @@
 ### getAllUser API URL
 GET http://localhost:5000/api/users/
 
+### signIn API URL
+GET http://localhost:5000/api/signin/
+content-type: application/json
+
+{
+	"_id": "61afefe413b58505faffcac0",
+	"password": "viveZemmour"
+}
+
 ### getUserById API URL
 GET http://localhost:5000/api/user/618d9e7e32456040a8f3250c
 

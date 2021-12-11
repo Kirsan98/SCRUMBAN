@@ -5,5 +5,5 @@ export class Column{
     title!: String;
     index!: Number;
     maxTask !: Number;
-    _tasks !: String[];
+    _tasks !: Task[];
 }
