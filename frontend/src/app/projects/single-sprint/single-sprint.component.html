@@ -58,7 +58,7 @@
         <div class="col-8">
           <div>
             <td>
-              <strong id={{column.title}} *ngIf="!editMode || columnHelp != column._id" >{{ column.title }}</strong>
+              <strong id={{column.title}} *ngIf="!editMode || columnHelp != column._id" class="section-heading">{{ column.title }} </strong>
               <span *ngIf="editMode && columnHelp == column._id" >
                 <form [formGroup]="updateColumnName">
                   <div class="form-group">
@@ -91,12 +91,16 @@
       </div>
 
       <div
+        cdkDropList
         *ngIf="columns[i] != undefined"
-        
+        id="{{column._id}}"
+        [cdkDropListData]="columns[i]"
+        [cdkDropListConnectedTo]="connectedTo"
         class="item-list"
+        (cdkDropListDropped)="drop($event)"
       >
-        <div class="item-box" *ngFor="let task of columns[i]">
-          {{ task.title }}
+        <div class="item-box" *ngFor="let task of columns[i]" cdkDrag>
+          {{ task.title }} {{task._id}}
           <div>
             <td
               type="color"

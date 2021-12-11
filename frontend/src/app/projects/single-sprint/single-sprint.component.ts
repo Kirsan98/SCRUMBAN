@@ -24,11 +24,11 @@ export class SingleSprintComponent implements OnInit {
   editMode: boolean=false;
   columnHelp!: any;
   updateColumnName !: FormGroup;
+  connectedTo : any[] = [];
 
   columnsObject: Column[] = [];
 
   columns: any[] = [];
-  connectedTo: any = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -67,12 +67,12 @@ export class SingleSprintComponent implements OnInit {
         this.columnsObject = columns.data;
 
         this.loadColumns(columns.data);
-
-        for (let column of this.columnsObject) {          
-          this.connectedTo.push(column.title);
-          console.log(column._id);
+        this.columnsObject.forEach((column: any) => { 
+          this.connectedTo.push(column._id)
           
-        };
+        });
+
+
       }
     );
     this.updateColumnName = this.formBuilder.group({
@@ -109,13 +109,17 @@ export class SingleSprintComponent implements OnInit {
   }
   
 
-  drop(event: CdkDragDrop<String[]>) {
-    if (event.previousContainer === event.container) {
-      console.log("ici");
-      
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  drop(event: CdkDragDrop<String[]>) {    
+    if (event.previousContainer === event.container) {     
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);      
     } else {
-      console.log("la");
+      
+      console.log("Id colonne depart",event.previousContainer.id);
+      console.log("Id colonne arrivee", event.container.id);
+      console.log(event.previousIndex);
+      console.log(event.currentIndex);
+
+      
 
       transferArrayItem(event.previousContainer.data,
         event.container.data,
@@ -139,6 +143,8 @@ export class SingleSprintComponent implements OnInit {
       );
   }
 
+  
+
 
   addColumnToSprint(){
     const newColumn = new Column();
@@ -160,6 +166,14 @@ export class SingleSprintComponent implements OnInit {
               
               this.columnsObject = columns.data;
               this.loadColumns(this.columnsObject);
+              
+              this.connectedTo = [];
+
+              this.columnsObject.forEach((column: any) => { 
+                this.connectedTo.push(column.title)
+
+                
+              });
 
             }
           )
@@ -169,6 +183,7 @@ export class SingleSprintComponent implements OnInit {
         this.errorMessage = error.message;
       });
     }
+
   }
 
   get sortColumns(){
@@ -187,6 +202,11 @@ export class SingleSprintComponent implements OnInit {
             
             this.columnsObject = columns.data;
             this.loadColumns(this.columnsObject);
+             
+            this.connectedTo = [];
+            this.columnsObject.forEach((column: any) => { 
+              this.connectedTo.push(column.title);
+            });
 
           }
         )
