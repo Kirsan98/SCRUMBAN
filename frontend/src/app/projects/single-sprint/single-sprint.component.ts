@@ -9,6 +9,7 @@ import { Column } from 'src/app/models/column.model';
 import { TaskService } from 'src/app/services/task.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ColumnService } from 'src/app/services/column.service';
+import { Task } from 'src/app/models/task.model';
 
 
 @Component({
@@ -115,7 +116,7 @@ export class SingleSprintComponent implements OnInit {
   drop(event: CdkDragDrop<String[]>) {     
        
     if (event.previousContainer === event.container) {     
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);      
+     // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);      
     } else {
       transferArrayItem(event.previousContainer.data,
         event.container.data,
@@ -126,6 +127,8 @@ export class SingleSprintComponent implements OnInit {
         console.log("Id colonne arrivee", event.container.id);
         console.log(event.previousIndex);
         console.log(event.currentIndex);
+        const task = event.container.data[event.currentIndex] as unknown as Task
+        console.log(task._id)
     }
   }
 
