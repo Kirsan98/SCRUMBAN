@@ -50,9 +50,7 @@
                   </div>
                 </form>
                 <button type="button" class="btn btn-primary" (click)="onUpdate(column._id); editMode = false">Save</button>
-              </span>
-              
-              
+              </span>   
           </div>
         </div>
 
@@ -64,7 +62,7 @@
               <summary>
                 <h2 class="hover_three_dots">...</h2>
               </summary>
-              <div>
+              <div class="pointer">
                 <div class="list-group popover__message">
                   <a  (click)=" editMode = true; columnHelp = column._id" class="list-group-item list-group-item-action updateProject" >Modifier le nom de la colonne</a>
                 </div>
