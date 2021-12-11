@@ -103,9 +103,11 @@ module.exports.addTaskToColumn = async function (idColumn, idTask) {
 	try {
 		const column = await Column.findById(idColumn);
 		column._tasks.push(idTask);
+    column.save();
 		return { 
 			success: true,
 			data: column,
+      message: "Add successfully",
 		};
 	} catch (error) {
 		return { success: false, message: "task not added to the column " + error };

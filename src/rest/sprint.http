@@ -6,14 +6,14 @@
 GET http://localhost:5000/api/projects/
 
 ### getProjectById API URL
-GET http://localhost:5000/api/project/61a549f275a713f1150e7188
+GET http://localhost:5000/api/project/61b2447e6177941fdba76ba7
 
 
 ### get all sprints from project
 GET http://localhost:5000/api/project/61a549f275a713f1150e7188/sprints/
 
 ### get one sprint from project
-GET http://localhost:5000/api/project/61a549f275a713f1150e7188/sprint/61a54aebb85185bd68d6c588
+GET http://localhost:5000/api/project/61b2447e6177941fdba76ba7/sprint/61b3e8936177941fdba77683
 
 
 #COLUMN OPERATION FROM SPRINT

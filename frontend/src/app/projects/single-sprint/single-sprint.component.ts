@@ -8,6 +8,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Column } from 'src/app/models/column.model';
 import { TaskService } from 'src/app/services/task.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ColumnService } from 'src/app/services/column.service';
 
 
 @Component({
@@ -36,7 +37,9 @@ export class SingleSprintComponent implements OnInit {
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private sprintService: SprintService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private columnService: ColumnService,
+
   ) {}
 
   ngOnInit(): void {
@@ -109,22 +112,20 @@ export class SingleSprintComponent implements OnInit {
   }
   
 
-  drop(event: CdkDragDrop<String[]>) {    
+  drop(event: CdkDragDrop<String[]>) {     
+       
     if (event.previousContainer === event.container) {     
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);      
     } else {
-      
-      console.log("Id colonne depart",event.previousContainer.id);
-      console.log("Id colonne arrivee", event.container.id);
-      console.log(event.previousIndex);
-      console.log(event.currentIndex);
-
-      
-
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+
+        console.log("Id colonne depart",event.previousContainer.id);
+        console.log("Id colonne arrivee", event.container.id);
+        console.log(event.previousIndex);
+        console.log(event.currentIndex);
     }
   }
 
@@ -149,7 +150,6 @@ export class SingleSprintComponent implements OnInit {
   addColumnToSprint(){
     const newColumn = new Column();
     newColumn.title = "Default name";
-    
     //a changer 
     if (this.columns.length >=10){
       console.log("Max column");
@@ -157,7 +157,6 @@ export class SingleSprintComponent implements OnInit {
     }
     else{
       newColumn.index = this.columns.length;
-      this.connectedTo.push(newColumn.title);
       this.sprintService.addColumn(this.project._id, this.sprint._id, newColumn).then(
         (response: any) => {          
 
@@ -166,13 +165,9 @@ export class SingleSprintComponent implements OnInit {
               
               this.columnsObject = columns.data;
               this.loadColumns(this.columnsObject);
-              
               this.connectedTo = [];
-
               this.columnsObject.forEach((column: any) => { 
-                this.connectedTo.push(column.title)
-
-                
+                this.connectedTo.push(column._id)
               });
 
             }
@@ -183,7 +178,6 @@ export class SingleSprintComponent implements OnInit {
         this.errorMessage = error.message;
       });
     }
-
   }
 
   get sortColumns(){
