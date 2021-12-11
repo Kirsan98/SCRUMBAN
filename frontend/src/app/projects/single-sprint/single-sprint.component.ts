@@ -10,7 +10,6 @@ import { TaskService } from 'src/app/services/task.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Task } from 'src/app/models/task.model';
 import { ColumnService } from 'src/app/services/column.service';
-import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-single-sprint',
@@ -126,14 +125,6 @@ export class SingleSprintComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
 
-<<<<<<< HEAD
-        console.log("Id colonne depart",event.previousContainer.id);
-        console.log("Id colonne arrivee", event.container.id);
-        console.log(event.previousIndex);
-        console.log(event.currentIndex);
-        const task = event.container.data[event.currentIndex] as unknown as Task
-        console.log(task._id)
-=======
       this.columnsObject.forEach((column:any) =>{
         if(column._id==idStartColumn){
           const task = event.container.data[event.currentIndex] as unknown as Task
@@ -141,7 +132,6 @@ export class SingleSprintComponent implements OnInit {
           this.sprintService.moveTaskToColumn(idStartColumn, idEndColumn, task._id);
         }
       });
->>>>>>> 07d1f363bd26624ec9be93b8c19bab154701639e
     }
   }
 
@@ -226,5 +216,9 @@ export class SingleSprintComponent implements OnInit {
         this.errorMessage = error.message;
       }
     )
+  }
+
+  onClick(idTask: any){
+    alert("hello" + idTask)
   }
 }

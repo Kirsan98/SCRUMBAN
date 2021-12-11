@@ -6,6 +6,10 @@
   overflow-x: auto;
 }
 
+.sprintTitle, .infoSprint, .section-heading{
+  cursor:default;
+}
+
 .wrapper {
   margin-left: 87%;
   margin-top: -10%;
@@ -123,6 +127,7 @@ details[data-popover="down"] > summary + * {
   margin-bottom: 2%;
 }
 
+
 .drag-container {
   width: 400px;
   max-width: 100%;
@@ -142,6 +147,10 @@ details[data-popover="down"] > summary + * {
 
 .row {
   margin-top: 10px;
+}
+
+.item-box:hover{
+ background-color: rgb(245, 245, 245);
 }
 
 .item-box {
