@@ -106,14 +106,20 @@ export class SingleSprintComponent implements OnInit {
     if (event.previousContainer === event.container) {
       console.log("ici");
       
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      // moveItemInArray(this.columnsObject, event.previousIndex, event.currentIndex);
     } else {
       console.log("la");
-
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
+      console.log(event);
+      
+      transferArrayItem(this.columns[event.previousIndex],
+        this.columns[event.currentIndex],
         event.previousIndex,
         event.currentIndex);
+      // transferArrayItem(event.previousContainer.data,
+      //   event.container.data,
+      //   event.previousIndex,
+      //   event.currentIndex);
     }
   }
 
