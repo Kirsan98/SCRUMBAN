@@ -15,7 +15,7 @@
           </thead>
           <div class="scroller">
             <div *ngIf="sprints!=undefined">
-              <tbody *ngFor="let sprint of sprints.slice().reverse()">
+              <tbody *ngFor="let sprint of sortSprint">
                 <tr class="ligne" (click)="onSprintClicked(project._id, sprint._id)">
                   <td class="name-sprint">{{ sprint.title }}</td>
                 </tr>

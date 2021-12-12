@@ -70,4 +70,10 @@ export class SprintsComponent implements OnInit {
       );
     this.router.navigate(['project/' + idProject + '/sprint/' + idSprint]);
   }
+
+  get sortSprint(){
+    return this.sprints.sort((a,b) => {
+      return <any>new Date(b.start_at) - <any> new Date(a.start_at);
+    });
+  }
 }
