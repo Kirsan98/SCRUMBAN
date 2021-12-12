@@ -126,49 +126,67 @@
 </section>
 
 <!-- MODAL -->
-<ng-template #editProfileModal let-modal class="modal-content">
-  <div class="modal-header">
-    <h5 class="modal-title" id="editProfileLabel">
-      {{ taskDrag.title }}
-      <td
-        type="color"
-        class="colorTask"
-        style="background-color:{{ taskDrag.color }};"
-      ></td>
-    </h5>
+<ng-template #editProfileModal let-modal class="md">
+  <div class="modal-dialog" >
+    <div class="modal-content" >
+    <div class="modal-header">
+      <h5 class="modal-title" id="editProfileLabel">
+        {{ taskDrag.title }}
+        <td
+          type="color"
+          class="colorTask"
+          style="background-color:{{ taskDrag.color }};"
+        ></td>
+      </h5>
 
-    <button
-      type="button"
-      class="close"
-      (click)="modal.dismiss()"
-      aria-label="Close"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-
-  <div class="modal-body">
-    <div>
-      <strong>Description:</strong> {{ taskDrag.description }}
-    </div>
-    
-    <div>
-      <strong>Date de création:</strong> {{ taskDrag.created_at | date }}
+      <button
+        type="button"
+        class="close"
+        (click)="modal.dismiss()"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
 
-    <div>
-      <strong>Temps estimé:</strong> {{ taskDrag.estimated_duration}}
+    <div class="modal-body">
+      <div>
+        <strong>Description:</strong> {{ taskDrag.description }}
+      </div>
+      
+      <div>
+        <strong>Date de création:</strong> {{ taskDrag.created_at | date }}
+      </div>
+
+      <div>
+        <strong>Temps estimé:</strong> {{ taskDrag.estimated_duration}} H
+      </div>
+
+      <div>
+        <strong>Etat de la tâche:</strong> {{taskDrag.state}}
+      </div>
+
+
+      <table class="table" style="margin-top:2%">
+        <thead>
+          <tr>
+            <th scope="col">Colonne départ </th>
+            <th scope="col">Colonne arrivée</th>
+            <th scope="col">Date modification</th>
+            <th scope="col">Personne</th>
+
+          </tr>
+        </thead>
+        <tbody *ngFor="let log of sortLog">
+          <tr  class="ligne">
+            <td class="logColStart">{{ log._columnIdStart}}</td>
+            <td class= "logColEnd">{{log._columnIdEnd}}</td>
+            <td class= "logDate">{{log.updated_at | date: 'M/d/yy, h:mm a '}}</td> 
+            <td class= "logUser">XXX</td>         
+          </tr>
+        </tbody>
+      </table>
+      </div>
     </div>
-
-    <div>
-      <strong>Etat de la tâche:</strong> {{taskDrag.state}}
-    </div>
-
-
-
-    <div *ngFor="let log; in: taskDrag._logs">
-      <p>{{ log}}</p>
-    </div>
-
   </div>
 </ng-template>

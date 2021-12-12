@@ -11,6 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Task } from 'src/app/models/task.model';
 import { ColumnService } from 'src/app/services/column.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LogService } from 'src/app/services/log.service';
+import { Log } from 'src/app/models/log.model';
 
 @Component({
   selector: 'app-single-sprint',
@@ -30,6 +32,7 @@ export class SingleSprintComponent implements OnInit {
   columnsObject: Column[] = [];
   columns: any[] = [];
   taskDrag!: Task;
+  logTaskDrag : Log[] = [];
   isTerminated = false;
 
   constructor(
@@ -38,6 +41,7 @@ export class SingleSprintComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
+    private logService: LogService,
     private projectService: ProjectService,
     private sprintService: SprintService,
     private columnService : ColumnService,
@@ -231,8 +235,26 @@ export class SingleSprintComponent implements OnInit {
      backdrop: true
     });
     this.taskDrag = task;
-    console.log(this.taskDrag._logs[0]);
     
+    for(let i=0; i<this.taskDrag._logs.length;i++){
+      this.logService.getLogById(this.taskDrag._logs[i]).then(
+        (log: any) => {
+          this.columnService.getColumnById(log.data._columnIdStart).then(
+            (columnStart: any) =>{
+              this.columnService.getColumnById(log.data._columnIdEnd).then(
+                (columnEnd: any) =>{
+                  let logWithNameOfColumn = log.data;
+                  logWithNameOfColumn._columnIdStart = columnStart.data.title
+                  logWithNameOfColumn._columnIdEnd = columnEnd.data.title
+                  this.logTaskDrag.push(logWithNameOfColumn)
+                }
+              )
+            }
+          )
+         
+        }
+      )
+    }    
   }
   
    onSubmit() {
@@ -252,5 +274,11 @@ export class SingleSprintComponent implements OnInit {
       }
     });
     this.router.navigate(['/project/' + this.project._id + '/sprints/']);
+  }
+
+  get sortLog(){
+    return this.logTaskDrag.sort((a,b) => {
+      return <any>new Date(b.updated_at) - <any> new Date(a.updated_at);
+    });
   }
 }
