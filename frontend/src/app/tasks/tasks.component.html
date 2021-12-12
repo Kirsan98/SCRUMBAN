@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody *ngFor="let task of sortTask">
-    <tr class="ligne">
+    <tr *ngIf="task.state === 'UNDEFINED'" class="ligne">
       <td class="nameTask" (click)="onTaskClicked(project._id, task._id)">{{ task.title }}</td>
       <td class="descriptionTask" (click)="onTaskClicked(project._id, task._id)"> {{task.description}}</td>
       <td>

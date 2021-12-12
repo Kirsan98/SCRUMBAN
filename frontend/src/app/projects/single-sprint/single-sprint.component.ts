@@ -30,7 +30,7 @@ export class SingleSprintComponent implements OnInit {
   columnsObject: Column[] = [];
   columns: any[] = [];
   taskDrag!: Task;
-  
+  isTerminated = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,9 +40,8 @@ export class SingleSprintComponent implements OnInit {
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private sprintService: SprintService,
+    private columnService : ColumnService,
     private taskService: TaskService,
-    private columnService: ColumnService,
-
   ) {}
 
   ngOnInit(): void {
@@ -133,6 +132,11 @@ export class SingleSprintComponent implements OnInit {
           const task = event.container.data[event.currentIndex] as unknown as Task
           console.log(task);
           this.sprintService.moveTaskToColumn(idStartColumn, idEndColumn, task._id);
+          this.columnService.getColumnById(idEndColumn).then((column:any)=>{
+            console.log(column);
+            task.state = column.title;
+            this.taskService.updateTask(task._id, task);
+          });
         }
       });
     }
@@ -235,5 +239,18 @@ export class SingleSprintComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  
+  endSprint(){
+    this.isTerminated = true;
+    this.columnsObject.forEach((column:any)=>{
+      if(column.title!="Terminado"){
+        column._tasks.forEach((taskId:any)=> {
+          this.taskService.getTaskById(taskId).then((task:any) => {
+            task.state = "UNDEFINED";
+            this.taskService.updateTask(taskId,task);
+          });
+        });
+      }
+    });
+    this.router.navigate(['/project/' + this.project._id + '/sprints/']);
+  }
 }

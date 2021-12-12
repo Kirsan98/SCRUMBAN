@@ -16,35 +16,32 @@
       <div class="col"><b>Planning daily:</b> {{ sprint.planningDaily }}</div>
       <div class="col">
         <b>Sprint Retro:</b> {{ sprint.sprintRetrospective }}
+        <button type="button" class="btn btn-primary btn-lg" (click)="endSprint()">
+          Terminer le sprint
+        </button>
       </div>
     </div>
   </section>
 
-  <div
-    *ngIf="columnsObject != undefined"
-    class="
-      row
-      scrolling-wrapper
-      bg-light
-      border
-      row
-      flex-row flex-nowrap
-      mt-4
-      pb-4
-      pt-2
-    "
-  >
+  <div *ngIf="columnsObject != undefined" class="
+        row
+        scrolling-wrapper
+        bg-light
+        border
+        row
+        flex-row flex-nowrap
+        mt-4
+        pb-4
+        pt-2
+      ">
     <div class="col-3" *ngFor="let column of sortColumns; let i = index">
       <div class="drag-container">
         <div class="row">
           <div class="col-8">
             <div>
               <td>
-                <strong
-                  id="{{ column.title }}"
-                  *ngIf="!editMode || columnHelp != column._id"
-                  class="section-heading"
-                  >{{ column.title }}
+                <strong id="{{ column.title }}" *ngIf="!editMode || columnHelp != column._id" class="section-heading">{{
+                  column.title }}
                 </strong>
                 <span *ngIf="editMode && columnHelp == column._id">
                   <form [formGroup]="updateColumnName">
@@ -78,14 +75,10 @@
                 </summary>
                 <div class="pointer">
                   <div class="list-group popover__message">
-                    <a
-                      (click)="editMode = true; columnHelp = column._id"
-                      class="
-                        list-group-item list-group-item-action
-                        updateProject
-                      "
-                      >Modifier le nom de la colonne</a
-                    >
+                    <a (click)="editMode = true; columnHelp = column._id" class="
+                          list-group-item list-group-item-action
+                          updateProject
+                        ">Modifier le nom de la colonne</a>
                   </div>
                 </div>
               </details>
@@ -124,11 +117,7 @@
 
     <div class="col-md-1">
       <a>
-        <button
-          type="button"
-          class="btn btn-primary btn-lg"
-          (click)="addColumnToSprint()"
-        >
+        <button type="button" class="btn btn-primary btn-lg" (click)="addColumnToSprint()">
           +
         </button>
       </a>
@@ -159,21 +148,27 @@
   </div>
 
   <div class="modal-body">
-    <div><strong>Description:</strong> {{ taskDrag.description }}</div>
-    <div *ngFor="let log; in: taskDrag._logs">
-      <p>{{ log }}</p>
+    <div>
+      <strong>Description:</strong> {{ taskDrag.description }}
     </div>
-
+    
     <div>
       <strong>Date de création:</strong> {{ taskDrag.created_at | date }}
     </div>
-    <div *ngFor="let log; in: taskDrag._logs">
-      <p>{{ log }}</p>
+
+    <div>
+      <strong>Temps estimé:</strong> {{ taskDrag.estimated_duration}}
     </div>
 
-    <div><strong></strong> {{ taskDrag.description }}</div>
-    <div *ngFor="let log; in: taskDrag._logs">
-      <p>{{ log }}</p>
+    <div>
+      <strong>Etat de la tâche:</strong> {{taskDrag.state}}
     </div>
+
+
+
+    <div *ngFor="let log; in: taskDrag._logs">
+      <p>{{ log}}</p>
+    </div>
+
   </div>
 </ng-template>
