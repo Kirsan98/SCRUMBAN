@@ -66,8 +66,8 @@ module.exports.updateLog = async function (id, body) {
 		logUpdated._columnIdStart = body._columnIdStart;
 	if (body._columnIdEnd != null)
 		logUpdated._columnIdEnd = body._columnIdEnd;
-	if (body.updated_at != null)
-		logUpdated.updated_at = body.updated_at;
+	// if (body.updated_at != null)
+		logUpdated.updated_at = Date.now();
 	try {
 		await logUpdated.save();
 		return {

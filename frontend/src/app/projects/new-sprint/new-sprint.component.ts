@@ -8,6 +8,7 @@ import { Task } from 'src/app/models/task.model';
 import { ProjectService } from 'src/app/services/project.service';
 import { RefreshProjectService } from 'src/app/services/refresh-project.service';
 import { SprintService } from 'src/app/services/sprint.service';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-new-sprint',
@@ -26,6 +27,7 @@ export class NewSprintComponent implements OnInit {
     private formBuilder: FormBuilder,
     private projectService: ProjectService,
     private sprintService: SprintService,
+    private taskService: TaskService,
     private router: Router,
     private route: ActivatedRoute,
     private refreshProjectService: RefreshProjectService
@@ -38,7 +40,7 @@ export class NewSprintComponent implements OnInit {
 
   private addCheckboxesToForm() {
     this.tasksProject.forEach(
-      (element: any) => {
+      () => {
         this.ordersFormArray.push(new FormControl(false));
       });
   }
@@ -63,18 +65,22 @@ export class NewSprintComponent implements OnInit {
             this.projectService.getAllTaskFromProject(this.project._id)
               .then(
                 (taskListData: any) => {
-                  this.tasksProject = taskListData.data;
-                  this.addCheckboxesToForm();
+                  let tasksUndefined :any = [];
+                  taskListData.data.forEach((task:any) => {
+                    if (task.state=="UNDEFINED"){
+                      tasksUndefined.push(task);
+                    }
+                    this.tasksProject = tasksUndefined;
+                    this.addCheckboxesToForm();
+                  });
                 }
               );
           }
         );
-
       }
     );
-
-
   }
+
   public loadSprint(): Sprint {
     const sprint = new Sprint();
     sprint.title = this.sprintForm.get('title')?.value;
@@ -82,23 +88,22 @@ export class NewSprintComponent implements OnInit {
     sprint.end_at = this.sprintForm.get('end_at')?.value;
     sprint.planningDaily = this.sprintForm.get('planningDaily')?.value;
     sprint.sprintRetrospective = this.sprintForm.get('sprintRetrospective')?.value;
-    this.sprintForm.reset();
+    this.sprintForm.reset()
     return sprint;
   }
 
-  public loadAllTask(): String[] {
-    const tasks: String[] = [];
+  public loadAllTask(): Task[] {
+    const tasks: Task[] = [];
     const elements = this.form.value['orders'];
     for (let i = 0; i < this.tasksProject.length; i++) {
       if (elements[i] == true) {
-        tasks.push(this.tasksProject[i]._id);
+        tasks.push(this.tasksProject[i]);
       }
     }
     return tasks;
   }
 
   onSubmit() {
-    const list = this.loadAllTask();
     const sprint = this.loadSprint()
     this.projectService.addSprint(this.project._id, sprint).then(
       (response: any) => {
@@ -107,6 +112,10 @@ export class NewSprintComponent implements OnInit {
         sprintBacklogCol.title = "Sprint Backlog";
         sprintBacklogCol.index = 0;
         sprintBacklogCol._tasks = this.loadAllTask();
+        sprintBacklogCol._tasks.forEach((task:any)=>{
+          task.state = sprintBacklogCol.title;
+          this.taskService.updateTask(task._id, task)
+        });
         this.sprintService.addColumn(this.project._id, response.data.sprint._id, sprintBacklogCol).then(
           () => {
             this.refreshProjectService.refreshProject(response.data.project);

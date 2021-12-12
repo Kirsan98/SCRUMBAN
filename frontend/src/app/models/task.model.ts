@@ -1,5 +1,5 @@
 import {User} from "./user.model";
-// import {Log} from "./log.model";
+import {Log} from "./log.model";
 
 export class Task{
     _id!: string;
@@ -10,5 +10,5 @@ export class Task{
     _owner !: User[];
     created_at !: Date;
     estimated_duration !: String;
-    // _logs !: Log[];
+    _logs !: Log[];
 }

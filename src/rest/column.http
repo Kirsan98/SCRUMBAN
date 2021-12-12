@@ -16,7 +16,7 @@ content-type: application/json
 }
 
 ### Default updateColumn URL
-PUT http://localhost:5000/api/updateColumn/61b245316177941fdba76bfc
+PUT http://localhost:5000/api/updateColumn/61b249806177941fdba76cce
 content-type: application/json
 
 {
@@ -28,5 +28,5 @@ DELETE http://localhost:5000/api/removeColumn/6195122b3c5dd1819f182277
 
 
 ### Add task to column
-POST http://localhost:5000/api/column/61a9e17854812dd4f4de2a6b/addTask/618d6fcde8bdae86415cad58
+POST http://localhost:5000/api/column/61b3e8936177941fdba7768b/addTask/61b244c66177941fdba76bc6
 

@@ -7,7 +7,10 @@ import { SprintService } from 'src/app/services/sprint.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Column } from 'src/app/models/column.model';
 import { TaskService } from 'src/app/services/task.service';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Task } from 'src/app/models/task.model';
+import { ColumnService } from 'src/app/services/column.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-single-sprint',
@@ -20,19 +23,81 @@ export class SingleSprintComponent implements OnInit {
   public errorMessage!: string;
   public sprints!: Sprint[];
   indexColumn: Number = 0;
-
+  editMode: boolean=false;
+  columnHelp!: any;
+  updateColumnName !: FormGroup;
+  connectedTo : any[] = [];
   columnsObject: Column[] = [];
-
   columns: any[] = [];
-  connectedTo: any = [];
+  title = 'modal2';
+  taskForm!: FormGroup;
+  isTerminated = false;
 
   constructor(
+    private formBuilder: FormBuilder,
+    private fb: FormBuilder, 
+    private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private sprintService: SprintService,
-    private taskService: TaskService
+    private columnService : ColumnService,
+    private taskService: TaskService,
   ) {}
+
+  ngOnInit(): void {
+    this.taskForm = this.fb.group({
+      _id: [''],
+      title:  [''],
+      color:  [''],
+      description:  [''],
+      state:  [''],
+      created_at:  [''],
+      estimated_duration:  [''],
+      _logs: ['']
+
+    })
+    let idProject!: string;
+    let idSprint!: string;
+    this.route.params.subscribe(
+      (params: Params) => {
+        idSprint = params['idSprint'];
+        idProject = params['idProject'];
+      }
+    );
+    this.projectService.getProjectById(idProject)
+      .then(
+        (project: any) => {
+          this.project = project['data'];
+        }
+      );
+    this.projectService.getSingleSprintByProject(idProject, idSprint)
+      .then(
+        (sprint: any) => {
+          this.sprint = sprint['data'];
+        }
+      );
+      
+    this.sprintService.getAllColumnFromSprint(idProject, idSprint)
+    .then(
+      (columns: any) => {
+        this.columnsObject = columns.data;
+
+        this.loadColumns(columns.data);
+        this.columnsObject.forEach((column: any) => { 
+          this.connectedTo.push(column._id)
+          
+        });
+
+
+      }
+    );
+    this.updateColumnName = this.formBuilder.group({
+      title: [null,Validators.required]
+    })
+   
+    
+  }
 
   public loadTask(column: any): any[]{
     const tasks: any[] = [];    
@@ -61,65 +126,31 @@ export class SingleSprintComponent implements OnInit {
   }
   
 
-
-  ngOnInit(): void {
-    let idProject!: string;
-    let idSprint!: string;
-    this.route.params.subscribe(
-      (params: Params) => {
-        idSprint = params['idSprint'];
-        idProject = params['idProject'];
-      }
-    );
-    this.projectService.getProjectById(idProject)
-      .then(
-        (project: any) => {
-          this.project = project['data'];
-        }
-      );
-    this.projectService.getSingleSprintByProject(idProject, idSprint)
-      .then(
-        (sprint: any) => {
-          this.sprint = sprint['data'];
-        }
-      );
-      
-    this.sprintService.getAllColumnFromSprint(idProject, idSprint)
-    .then(
-      (columns: any) => {
-        this.columnsObject = columns.data;
-
-        this.loadColumns(columns.data);
-
-        for (let column of this.columnsObject) {          
-          this.connectedTo.push(column.title);
-          console.log(column._id);
-          
-        };
-      }
-    );
-   
-    
-  }
-
-  drop(event: CdkDragDrop<String[]>) {
-    if (event.previousContainer === event.container) {
-      console.log("ici");
-      
-      // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      // moveItemInArray(this.columnsObject, event.previousIndex, event.currentIndex);
+  drop(event: CdkDragDrop<String[]>) {     
+       
+    if (event.previousContainer === event.container) {     
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);      
     } else {
-      console.log("la");
-      console.log(event);
-      
-      transferArrayItem(this.columns[event.previousIndex],
-        this.columns[event.currentIndex],
+      const idStartColumn = event.previousContainer.id;
+      const idEndColumn = event.container.id;
+
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
         event.previousIndex,
         event.currentIndex);
-      // transferArrayItem(event.previousContainer.data,
-      //   event.container.data,
-      //   event.previousIndex,
-      //   event.currentIndex);
+
+      this.columnsObject.forEach((column:any) =>{
+        if(column._id==idStartColumn){
+          const task = event.container.data[event.currentIndex] as unknown as Task
+          console.log(task);
+          this.sprintService.moveTaskToColumn(idStartColumn, idEndColumn, task._id);
+          this.columnService.getColumnById(idEndColumn).then((column:any)=>{
+            console.log(column);
+            task.state = column.title;
+            this.taskService.updateTask(task._id, task);
+          });
+        }
+      });
     }
   }
 
@@ -138,11 +169,12 @@ export class SingleSprintComponent implements OnInit {
       );
   }
 
+  
+
 
   addColumnToSprint(){
     const newColumn = new Column();
     newColumn.title = "Default name";
-    
     //a changer 
     if (this.columns.length >=10){
       console.log("Max column");
@@ -150,7 +182,6 @@ export class SingleSprintComponent implements OnInit {
     }
     else{
       newColumn.index = this.columns.length;
-      this.connectedTo.push(newColumn.title);
       this.sprintService.addColumn(this.project._id, this.sprint._id, newColumn).then(
         (response: any) => {          
 
@@ -159,6 +190,10 @@ export class SingleSprintComponent implements OnInit {
               
               this.columnsObject = columns.data;
               this.loadColumns(this.columnsObject);
+              this.connectedTo = [];
+              this.columnsObject.forEach((column: any) => { 
+                this.connectedTo.push(column._id)
+              });
 
             }
           )
@@ -174,5 +209,68 @@ export class SingleSprintComponent implements OnInit {
     return this.columnsObject.sort((a: { index: any; },b: { index: any; }) => {
       return <any> new Number(a.index) - <any> new Number(b.index);
     });
+  }
+
+  onUpdate(idColumn: any){
+    const columnUpdated = new Column();
+    columnUpdated.title = this.updateColumnName.get('title')?.value;
+    this.sprintService.updateColumn(idColumn,columnUpdated).then(
+      (column: any) => {
+        this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
+          (columns:any) => {
+            
+            this.columnsObject = columns.data;
+            this.loadColumns(this.columnsObject);
+             
+            this.connectedTo = [];
+            this.columnsObject.forEach((column: any) => { 
+              this.connectedTo.push(column._id);
+            });
+
+          }
+        )
+      }
+    ).catch(
+      (error) => {
+        this.errorMessage = error.message;
+      }
+    )
+  }
+
+  openModal(targetModal: any , task: any) {
+    this.modalService.open(targetModal, {
+     centered: true,
+     backdrop: true
+    });
+   
+    this.taskForm.patchValue({
+      _id: task._id,
+      title: task.title,
+      color: task.color,
+      description: task.description,
+      state: task.state,
+      created_at: task.created_at,
+      estimated_duration: task.estimated_duration,
+      _logs: task._logs,
+    });
+  }
+  
+   onSubmit() {
+    this.modalService.dismissAll();
+  }
+
+  endSprint(){
+    this.isTerminated = true;
+    this.columnsObject.forEach((column:any)=>{
+      if(column.title!="Terminado"){
+        column._tasks.forEach((taskId:any)=> {
+          this.taskService.getTaskById(taskId).then((task:any) => {
+            task.state = "UNDEFINED";
+            this.taskService.updateTask(taskId,task);
+          });
+        });
+      }
+    });
+    this.router.navigate(['/project/' + this.project._id + '/sprints/']);
   }
 }

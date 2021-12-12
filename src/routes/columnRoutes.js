@@ -56,4 +56,13 @@ router.route('/column/:idColumn/addTask/:idTask').post(async (req, res) => {
 	}
 });
 
+router.route('/move-task/:idColumnStart/:idColumnEnd/:idTask').post(async (req, res) => {
+	let response = await columnController.moveTaskToColumn(req.params.idColumnStart, req.params.idColumnEnd, req.params.idTask);
+	if (response.success == true) {
+		res.status(200).json(response);
+	} else {
+		res.status(404).json(response);
+	}
+});
+
 module.exports = router;
