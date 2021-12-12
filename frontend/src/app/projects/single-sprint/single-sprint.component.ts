@@ -29,8 +29,7 @@ export class SingleSprintComponent implements OnInit {
   connectedTo : any[] = [];
   columnsObject: Column[] = [];
   columns: any[] = [];
-  title = 'modal2';
-  taskForm!: FormGroup;
+  taskDrag!: Task;
   
 
   constructor(
@@ -47,17 +46,6 @@ export class SingleSprintComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.taskForm = this.fb.group({
-      _id: [''],
-      title:  [''],
-      color:  [''],
-      description:  [''],
-      state:  [''],
-      created_at:  [''],
-      estimated_duration:  [''],
-      _logs: ['']
-
-    })
     let idProject!: string;
     let idSprint!: string;
     this.route.params.subscribe(
@@ -238,17 +226,9 @@ export class SingleSprintComponent implements OnInit {
      centered: true,
      backdrop: true
     });
-   
-    this.taskForm.patchValue({
-      _id: task._id,
-      title: task.title,
-      color: task.color,
-      description: task.description,
-      state: task.state,
-      created_at: task.created_at,
-      estimated_duration: task.estimated_duration,
-      _logs: task._logs,
-    });
+    this.taskDrag = task;
+    console.log(this.taskDrag._logs[0]);
+    
   }
   
    onSubmit() {

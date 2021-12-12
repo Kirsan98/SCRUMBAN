@@ -1,180 +1,179 @@
 <section style="margin-top: 10px">
+  <div class="row">
+    <div class="col-11">
+      <div *ngIf="sprint != undefined" class="titleSprint">
+        <h5 class="sprintTitle">{{ sprint.title }}</h5>
+      </div>
+    </div>
+    <div class="col-1"></div>
+  </div>
+  <section class="infoSprint">
     <div class="row">
-      <div class="col-11">
-        <div *ngIf="sprint != undefined" class="titleSprint">
-          <h5 class="sprintTitle">{{ sprint.title }}</h5>
-        </div>
+      <div class="col">
+        <b>Début du sprint: </b>{{ sprint.start_at | date }}
       </div>
-      <div class="col-1"></div>
+      <div class="col"><b>Fin du sprint:</b> {{ sprint.end_at | date }}</div>
+      <div class="col"><b>Planning daily:</b> {{ sprint.planningDaily }}</div>
+      <div class="col">
+        <b>Sprint Retro:</b> {{ sprint.sprintRetrospective }}
+      </div>
     </div>
-    <section class="infoSprint">
-      <div class="row">
-        <div class="col">
-          <b>Début du sprint: </b>{{ sprint.start_at | date }}
-        </div>
-        <div class="col"><b>Fin du sprint:</b> {{ sprint.end_at | date }}</div>
-        <div class="col"><b>Planning daily:</b> {{ sprint.planningDaily }}</div>
-        <div class="col">
-          <b>Sprint Retro:</b> {{ sprint.sprintRetrospective }}
-        </div>
-      </div>
-    </section>
+  </section>
 
-    <div
-      *ngIf="columnsObject != undefined"
-      class="
-        row
-        scrolling-wrapper
-        bg-light
-        border
-        row
-        flex-row flex-nowrap
-        mt-4
-        pb-4
-        pt-2
-      "
-    >
-      <div class="col-3" *ngFor="let column of sortColumns; let i = index">
-        <div class="drag-container">
-          <div class="row">
-            <div class="col-8">
-              <div>
-                <td>
-                  <strong
-                    id="{{ column.title }}"
-                    *ngIf="!editMode || columnHelp != column._id"
-                    class="section-heading"
-                    >{{ column.title }}
-                  </strong>
-                  <span *ngIf="editMode && columnHelp == column._id">
-                    <form [formGroup]="updateColumnName">
-                      <div class="form-group">
-                        <input
-                          ngModel="{{ column.title }}"
-                          type="text"
-                          id="title"
-                          formControlName="title"
-                          class="form-control"
-                        />
-                      </div>
-                    </form>
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      (click)="onUpdate(column._id); editMode = false"
-                    >
-                      Save
-                    </button>
-                  </span>
-                </td>
-              </div>
-            </div>
-
-            <div class="col-2 dot">
-              <div class="wrapper">
-                <details data-popover="down">
-                  <summary>
-                    <h2 class="hover_three_dots">...</h2>
-                  </summary>
-                  <div class="pointer">
-                    <div class="list-group popover__message">
-                      <a
-                        (click)="editMode = true; columnHelp = column._id"
-                        class="
-                          list-group-item list-group-item-action
-                          updateProject
-                        "
-                        >Modifier le nom de la colonne</a
-                      >
+  <div
+    *ngIf="columnsObject != undefined"
+    class="
+      row
+      scrolling-wrapper
+      bg-light
+      border
+      row
+      flex-row flex-nowrap
+      mt-4
+      pb-4
+      pt-2
+    "
+  >
+    <div class="col-3" *ngFor="let column of sortColumns; let i = index">
+      <div class="drag-container">
+        <div class="row">
+          <div class="col-8">
+            <div>
+              <td>
+                <strong
+                  id="{{ column.title }}"
+                  *ngIf="!editMode || columnHelp != column._id"
+                  class="section-heading"
+                  >{{ column.title }}
+                </strong>
+                <span *ngIf="editMode && columnHelp == column._id">
+                  <form [formGroup]="updateColumnName">
+                    <div class="form-group">
+                      <input
+                        ngModel="{{ column.title }}"
+                        type="text"
+                        id="title"
+                        formControlName="title"
+                        class="form-control"
+                      />
                     </div>
-                  </div>
-                </details>
-              </div>
+                  </form>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="onUpdate(column._id); editMode = false"
+                  >
+                    Save
+                  </button>
+                </span>
+              </td>
             </div>
           </div>
 
+          <div class="col-2 dot">
+            <div class="wrapper">
+              <details data-popover="down">
+                <summary>
+                  <h2 class="hover_three_dots">...</h2>
+                </summary>
+                <div class="pointer">
+                  <div class="list-group popover__message">
+                    <a
+                      (click)="editMode = true; columnHelp = column._id"
+                      class="
+                        list-group-item list-group-item-action
+                        updateProject
+                      "
+                      >Modifier le nom de la colonne</a
+                    >
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+
+        <div
+          cdkDropList
+          *ngIf="columns[i] != undefined"
+          id="{{ column._id }}"
+          [cdkDropListData]="columns[i]"
+          [cdkDropListConnectedTo]="connectedTo"
+          class="item-list"
+          (cdkDropListDropped)="drop($event)"
+        >
           <div
-            cdkDropList
-            *ngIf="columns[i] != undefined"
-            id="{{ column._id }}"
-            [cdkDropListData]="columns[i]"
-            [cdkDropListConnectedTo]="connectedTo"
-            class="item-list"
-            (cdkDropListDropped)="drop($event)"
-          >
-            <div
             (click)="openModal(editProfileModal, task)"
-              class="item-box"
-              style="box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px"
-              *ngFor="let task of columns[i]"
-              cdkDrag
-            >
-              {{ task.title }}
-              <div>
-                <td
-                  type="color"
-                  class="colorTask"
-                  style="background-color:{{ task.color }};"
-                ></td>
-              </div>
+            class="item-box"
+            style="box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px"
+            *ngFor="let task of columns[i]"
+            cdkDrag
+          >
+            {{ task.title }}
+            <div>
+              <td
+                type="color"
+                class="colorTask"
+                style="background-color:{{ task.color }};"
+              ></td>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="col-md-1">
-        <a>
-          <button
-            type="button"
-            class="btn btn-primary btn-lg"
-            (click)="addColumnToSprint()"
-          >
-            +
-          </button>
-        </a>
-      </div>
     </div>
+
+    <div class="col-md-1">
+      <a>
+        <button
+          type="button"
+          class="btn btn-primary btn-lg"
+          (click)="addColumnToSprint()"
+        >
+          +
+        </button>
+      </a>
+    </div>
+  </div>
 </section>
 
+<!-- MODAL -->
+<ng-template #editProfileModal let-modal class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="editProfileLabel">
+      {{ taskDrag.title }}
+      <td
+        type="color"
+        class="colorTask"
+        style="background-color:{{ taskDrag.color }};"
+      ></td>
+    </h5>
 
-  <!-- MODAL -->
-   <ng-template #editProfileModal let-modal>
-    <div class="modal-header">
-     <h5 class="modal-title" id="editProfileLabel">d</h5>
-     <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss()"
+      aria-label="Close"
+    >
       <span aria-hidden="true">&times;</span>
-     </button>
-    </div>
-    
-    <div class="modal-body">
-     <form [formGroup]="taskForm">
-      <div class="form-group row">
-       <label for="_id" class="col-sm-4 col-form-label">Id</label>
-       <div class="col-sm-8">
-        <input type="text" class="form-control" formControlName="_id" id="_id">
-       </div>
-      </div>
-      <div class="form-group row">
-       <label for="title" class="col-sm-4 col-form-label">Titre</label>
-       <div class="col-sm-8">
-        <input type="text" class="form-control" formControlName="title" id="title">
-       </div>
-      </div>
-      <div class="form-group row">
-       <label for="color" class="col-sm-4 col-form-label">Couleur</label>
-       <div class="col-sm-8">
-        <input type="text" class="form-control" formControlName="color" id="color">
-       </div>
-      </div>
-      <div class="form-group row">
-       <label for="description" class="col-sm-4 col-form-label">Description</label>
-       <div class="col-sm-8">
-        <input type="text" class="form-control" formControlName="description" id="description">
-       </div>
-      </div>
-      ...
-      
+    </button>
+  </div>
 
-     </form>
+  <div class="modal-body">
+    <div><strong>Description:</strong> {{ taskDrag.description }}</div>
+    <div *ngFor="let log; in: taskDrag._logs">
+      <p>{{ log }}</p>
     </div>
-   </ng-template>
+
+    <div>
+      <strong>Date de création:</strong> {{ taskDrag.created_at | date }}
+    </div>
+    <div *ngFor="let log; in: taskDrag._logs">
+      <p>{{ log }}</p>
+    </div>
+
+    <div><strong></strong> {{ taskDrag.description }}</div>
+    <div *ngFor="let log; in: taskDrag._logs">
+      <p>{{ log }}</p>
+    </div>
+  </div>
+</ng-template>
