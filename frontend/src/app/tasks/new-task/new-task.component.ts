@@ -53,7 +53,6 @@ export class NewTaskComponent implements OnInit {
         this.projectService.getProjectById(params.idProject).then(
           (project: any) => {
             this.project = project['data'];
-            console.log(this.project.tasks);
             this.loadUsers();
           });
       }
@@ -65,7 +64,7 @@ export class NewTaskComponent implements OnInit {
     task.title = this.taskForm.get('title')?.value;
     task.color = this.taskForm.get('color')?.value;
     task.description = this.taskForm.get('description')?.value;
-    task.state = "À FAIRE";
+    task.state = "UNDEFINED";
     task.estimated_duration = this.taskForm.get('estimated_duration')?.value;
     if ( (this.taskForm.get('owner')?.value != "null") && (this.taskForm.get('owner')?.value !="blank"))
       task._owner = this.taskForm.get('owner')?.value;

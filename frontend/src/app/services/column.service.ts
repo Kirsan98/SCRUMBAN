@@ -22,4 +22,17 @@ export class ColumnService{
         });
       }
 
+      getColumnById(idColumn: any){
+        return new Promise((resolve,reject) => {
+          this.http.get('http://localhost:5000/api/column/'+idColumn).subscribe(
+            (response) => {
+              resolve(response);
+            },
+            (error) => {
+              reject(error);
+            }
+          );
+        });
+      }
+
 }
