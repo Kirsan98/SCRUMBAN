@@ -10,6 +10,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Task } from 'src/app/models/task.model';
 import { ColumnService } from 'src/app/services/column.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-single-sprint',
@@ -26,13 +27,16 @@ export class SingleSprintComponent implements OnInit {
   columnHelp!: any;
   updateColumnName !: FormGroup;
   connectedTo : any[] = [];
-
   columnsObject: Column[] = [];
-
   columns: any[] = [];
+  title = 'modal2';
+  taskForm!: FormGroup;
+  
 
   constructor(
     private formBuilder: FormBuilder,
+    private fb: FormBuilder, 
+    private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService,
@@ -43,6 +47,17 @@ export class SingleSprintComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.taskForm = this.fb.group({
+      _id: [''],
+      title:  [''],
+      color:  [''],
+      description:  [''],
+      state:  [''],
+      created_at:  [''],
+      estimated_duration:  [''],
+      _logs: ['']
+
+    })
     let idProject!: string;
     let idSprint!: string;
     this.route.params.subscribe(
@@ -115,7 +130,7 @@ export class SingleSprintComponent implements OnInit {
   drop(event: CdkDragDrop<String[]>) {     
        
     if (event.previousContainer === event.container) {     
-     // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);      
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);      
     } else {
       const idStartColumn = event.previousContainer.id;
       const idEndColumn = event.container.id;
@@ -218,7 +233,27 @@ export class SingleSprintComponent implements OnInit {
     )
   }
 
-  onClick(idTask: any){
-    alert("hello" + idTask)
+  openModal(targetModal: any , task: any) {
+    this.modalService.open(targetModal, {
+     centered: true,
+     backdrop: true
+    });
+   
+    this.taskForm.patchValue({
+      _id: task._id,
+      title: task.title,
+      color: task.color,
+      description: task.description,
+      state: task.state,
+      created_at: task.created_at,
+      estimated_duration: task.estimated_duration,
+      _logs: task._logs,
+    });
   }
+  
+   onSubmit() {
+    this.modalService.dismissAll();
+  }
+
+  
 }
