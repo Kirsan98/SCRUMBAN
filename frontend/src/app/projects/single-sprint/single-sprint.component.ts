@@ -32,7 +32,7 @@ export class SingleSprintComponent implements OnInit {
   columnsObject: Column[] = [];
   columns: any[] = [];
   taskDrag!: Task;
-  logTaskDrag : Log[] = [];
+  logTaskDrag: Log[] = [];
   isTerminated = false;
 
   constructor(
@@ -69,26 +69,19 @@ export class SingleSprintComponent implements OnInit {
           this.sprint = sprint['data'];
         }
       );
-
     this.sprintService.getAllColumnFromSprint(idProject, idSprint)
       .then(
         (columns: any) => {
           this.columnsObject = columns.data;
-
           this.loadColumns(columns.data);
           this.columnsObject.forEach((column: any) => {
             this.connectedTo.push(column._id)
-
           });
-
-
         }
       );
     this.updateColumnName = this.formBuilder.group({
       title: [null, Validators.required]
     })
-
-
   }
 
   public loadTask(column: any): any[] {
@@ -117,6 +110,20 @@ export class SingleSprintComponent implements OnInit {
 
   }
 
+  /**
+   * Remove a task id from this columnsObject which as an array of objects which represents our columns.
+   * These columns contains an array of task id.
+   * @param task
+   */
+  removeTaskIdFromColumnsObject(task: Task, columnId: String) {
+    this.columnsObject.forEach((column: any) => {
+      if (column._id == columnId) {
+        column._tasks.forEach((taskId: any, index: Number) => {
+          if (taskId == task._id) column._tasks.splice(index, 1);
+        });
+      }
+    });
+  }
 
   drop(event: CdkDragDrop<String[]>) {
     if (event.previousContainer === event.container) {
@@ -129,20 +136,21 @@ export class SingleSprintComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-      console.log("Avant update",this.columnsObject);
-      this.columnsObject.forEach((column: any) => {
+      this.columnsObject.forEach((column: any, index) => {
+        let task = event.container.data[event.currentIndex] as unknown as Task;
         if (column._id == idStartColumn) {
-          let task = event.container.data[event.currentIndex] as unknown as Task;
+          this.removeTaskIdFromColumnsObject(task, idStartColumn);
           this.sprintService.moveTaskToColumn(idStartColumn, idEndColumn, task._id);
           this.columnService.getColumnById(idEndColumn).then((column: any) => {
             this.taskService.getTaskById(task._id).then((taskObj: any) => {
               taskObj.data.state = column.data.title;
               this.taskService.updateTask(task._id, taskObj.data);
               event.container.data[event.currentIndex] = taskObj.data;
-              console.log("Apres update",this.columnsObject);
-              //TODO Modifier columnsObject --> Supprimer l'id de lâ tache columnsObject(idStartColumn) et ajouter l'id de la tâche columnsObject(idEndColumn)
             });
           });
+        }
+        if (column._id == idEndColumn) {
+          column._tasks.push(task._id);
         }
       });
     }
@@ -163,16 +171,12 @@ export class SingleSprintComponent implements OnInit {
       );
   }
 
-
-
-
   addColumnToSprint() {
     const newColumn = new Column();
     newColumn.title = "Default name";
-    //a changer 
     if (this.columns.length >= 10) {
       console.log("Max column");
-
+      // TODO : Afficher un message d'alerte au niveau du front
     }
     else {
       newColumn.index = this.columns.length;
@@ -210,11 +214,10 @@ export class SingleSprintComponent implements OnInit {
     columnUpdated.title = this.updateColumnName.get('title')?.value;
     this.sprintService.updateColumn(idColumn, columnUpdated).then(
       (column: any) => {
-        console.log(column);
-        column.data._tasks.forEach((taskId:any)=>{
-          this.taskService.getTaskById(taskId).then((taskObj:any)=>{
+        column.data._tasks.forEach((taskId: any) => {
+          this.taskService.getTaskById(taskId).then((taskObj: any) => {
             taskObj.data.state = column.data.title;
-            this.taskService.updateTask(taskObj.data._id,taskObj.data);
+            this.taskService.updateTask(taskObj.data._id, taskObj.data);
           });
         });
         this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
@@ -243,13 +246,13 @@ export class SingleSprintComponent implements OnInit {
       backdrop: true
     });
     this.taskDrag = task;
-    for(let i=0; i<this.taskDrag._logs.length;i++){
+    for (let i = 0; i < this.taskDrag._logs.length; i++) {
       this.logService.getLogById(this.taskDrag._logs[i]).then(
         (log: any) => {
           this.columnService.getColumnById(log.data._columnIdStart).then(
-            (columnStart: any) =>{
+            (columnStart: any) => {
               this.columnService.getColumnById(log.data._columnIdEnd).then(
-                (columnEnd: any) =>{
+                (columnEnd: any) => {
                   let logWithNameOfColumn = log.data;
                   logWithNameOfColumn._columnIdStart = columnStart.data.title
                   logWithNameOfColumn._columnIdEnd = columnEnd.data.title
@@ -258,10 +261,9 @@ export class SingleSprintComponent implements OnInit {
               )
             }
           )
-         
         }
       )
-    }    
+    }
   }
 
   onSubmit() {
@@ -269,17 +271,16 @@ export class SingleSprintComponent implements OnInit {
   }
 
   endSprint() {
-
     this.isTerminated = true;
     this.columnsObject.forEach((column: any) => {
       if (column.title != "Terminado") {
         column._tasks.forEach((taskId: any) => {
           this.taskService.getTaskById(taskId).then((task: any) => {
             task.data.state = "UNDEFINED";
-            console.log("column", column);
             this.taskService.updateTask(taskId, task.data).then(
               (success) => {
-                console.log("Dans endSprint",success);
+                console.log("Dans endSprint", success);
+                // TODO : Afficher un message de succès comme quoi le sprint à bien était terminé  
               }
             ).catch(
               (error) => {
@@ -293,9 +294,9 @@ export class SingleSprintComponent implements OnInit {
     this.router.navigate(['/project/' + this.project._id + '/sprints/']);
   }
 
-  get sortLog(){
-    return this.logTaskDrag.sort((a,b) => {
-      return <any>new Date(b.updated_at) - <any> new Date(a.updated_at);
+  get sortLog() {
+    return this.logTaskDrag.sort((a, b) => {
+      return <any>new Date(b.updated_at) - <any>new Date(a.updated_at);
     });
   }
 }
