@@ -2,7 +2,7 @@
 GET http://localhost:5000/api/logs/
 
 ### getLogById API URL
-GET http://localhost:5000/api/log/61b4c141de129ab4678def7f
+GET http://localhost:5000/api/log/61b652697833bb9e394b445f
 
 ### addLog API URL
 POST http://localhost:5000/api/addLog/

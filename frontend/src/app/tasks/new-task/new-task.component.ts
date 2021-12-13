@@ -66,6 +66,7 @@ export class NewTaskComponent implements OnInit {
     task.description = this.taskForm.get('description')?.value;
     task.state = "UNDEFINED";
     task.estimated_duration = this.taskForm.get('estimated_duration')?.value;
+    console.log("DEBUG loadTask");
     if ( (this.taskForm.get('owner')?.value != "null") && (this.taskForm.get('owner')?.value !="blank"))
       task._owner = this.taskForm.get('owner')?.value;
     return task;

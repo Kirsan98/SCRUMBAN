@@ -113,8 +113,14 @@ export class NewSprintComponent implements OnInit {
         sprintBacklogCol.index = 0;
         sprintBacklogCol._tasks = this.loadAllTask();
         sprintBacklogCol._tasks.forEach((task:any)=>{
-          task.state = sprintBacklogCol.title;
-          this.taskService.updateTask(task._id, task)
+          // task.state = sprintBacklogCol.title;
+          // this.taskService.updateTask(task._id, task);
+          console.log("dans new-sprint",task);
+          this.taskService.getTaskById(task._id).then((taskObj:any)=>{
+            taskObj.data.state = sprintBacklogCol.title;
+            this.taskService.updateTask(taskObj.data._id, taskObj.data);
+            console.log("",taskObj.data);
+          });
         });
         this.sprintService.addColumn(this.project._id, response.data.sprint._id, sprintBacklogCol).then(
           () => {

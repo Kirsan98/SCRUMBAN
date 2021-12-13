@@ -6,5 +6,5 @@ export class Log{
     _userId!: User;
     _columnIdStart!: Column;
     _columnIdEnd !: Column;
-    updated_at!: String;
+    updated_at!: Date;
 }
