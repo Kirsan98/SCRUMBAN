@@ -20,7 +20,6 @@ import { Log } from 'src/app/models/log.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-import { RefreshLogService } from 'src/app/services/refresh-log.service';
 
 @Component({
   selector: 'app-single-sprint',
@@ -41,7 +40,8 @@ export class SingleSprintComponent implements OnInit {
   columnsObject: Column[] = [];
   columns: any[] = [];
   taskDrag!: Task;
-  logTaskDrag: Log[] = [];
+  // logTaskDrag: Log[] = [];
+  logTaskDrag: any[] = [];
   logTaskDragSort: Log[] = [];
   userLog: User[] = [];
   isTerminated = false;
@@ -58,8 +58,7 @@ export class SingleSprintComponent implements OnInit {
     private columnService: ColumnService,
     private taskService: TaskService,
     private authService: AuthService,
-    private userService: UserService,
-    private refreshLogService: RefreshLogService
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -91,13 +90,6 @@ export class SingleSprintComponent implements OnInit {
     this.updateColumnName = this.formBuilder.group({
       title: [null, Validators.required],
     });
-    this.refreshLogService.currentLogList.subscribe(
-      () => {
-        this.userLog = this.refreshLogService.getUsers();
-        console.log(this.userLog, "on vient de charger le log from single sprint");
-
-      }
-    );
   }
 
   public loadTask(column: any): any[] {
@@ -280,35 +272,26 @@ export class SingleSprintComponent implements OnInit {
                   this.columnService.getColumnById(log.data._columnIdEnd)
                     .then(
                       (columnEnd: any) => {
-                        let logWithNameOfColumn = [];
-                        logWithNameOfColumn = log.data;
-                        logWithNameOfColumn._columnIdStart = columnStart.data.title;
-                        logWithNameOfColumn._columnIdEnd = columnEnd.data.title;
-                        this.logTaskDrag.push(logWithNameOfColumn);
-                        if (i == this.taskDrag._logs.length - 1) {
-                          this.refreshLogService.refreshLog(this.logTaskDrag).then(
-                            () => {
-                              console.log(this.refreshLogService.getUsers(), "voila les users qu'on charge dans single sprint");
-                              console.log(this.logTaskDrag.length, "taille du tableau sans couilles cette fois");
+                        this.userService.getUserById(log.data._userId)
+                          .then(
+                            (userData: any) => {
+                              let logWithNameOfColumn = [];
+                              logWithNameOfColumn = log.data;
+                              logWithNameOfColumn._columnIdStart = columnStart.data.title;
+                              logWithNameOfColumn._columnIdEnd = columnEnd.data.title;
+                              const obj = { "log": logWithNameOfColumn, "username": userData.data.username }
+                              this.logTaskDrag.push(obj);
                             }
                           );
-                        }
-                        // console.log(this.logTaskDrag.length, "taille du tableau sans couilles cette fois");
+                        // let logWithNameOfColumn = [];
+                        // logWithNameOfColumn = log.data;
+                        // logWithNameOfColumn._columnIdStart = columnStart.data.title;
+                        // logWithNameOfColumn._columnIdEnd = columnEnd.data.title;
+                        // this.logTaskDrag.push(logWithNameOfColumn);
                       });
                 });
           });
     }
-
-    // this.refreshLogService.refreshLog(this.logTaskDrag);
-    // .then(
-    //   (log) => {
-    //     console.log();
-
-    //     this.userLog = this.refreshLogService.getUsers();
-    //     console.log("on a bien chargé les users ", this.userLog);
-
-    //   }
-    // );
   }
 
   onSubmit() {
@@ -337,33 +320,16 @@ export class SingleSprintComponent implements OnInit {
     });
   }
 
-  // async loadUserLog() {
-  //   this.userLog = [];
-  //   await Promise.all(this.logTaskDragSort.map(
-  //     (log: any) => {
-  //       this.userService.getUserById(log._userId).then(
-  //         (user: any) => {
-  //           this.userLog.push(user);
-  //         }
-  //       );
-  //     }
-  //   ));
+  //   get sortLog() {
+  //   return this.logTaskDrag.sort((a, b) => {
+  //     return <any>new Date(b.updated_at) - <any>new Date(a.updated_at);
+  //   });
   // }
 
   get sortLog() {
-    this.logTaskDragSort = this.logTaskDrag.sort((a, b) => {
-      return <any>new Date(b.updated_at) - <any>new Date(a.updated_at);
+    return this.logTaskDrag.sort((a, b) => {
+      return <any>new Date(b.log.updated_at) - <any>new Date(a.log.updated_at);
     });
-    // await Promise.all(this.logTaskDragSort.map(
-    //   async (log: any) => {
-    //     await this.userService.getUserById(log._userId)
-    //     .then(
-    //       (user: any) => {
-    //         this.userLogTask.push(user.data);
-    //       }
-    //     );
-    //   }
-    // ));
-    return this.logTaskDragSort;
+
   }
 }

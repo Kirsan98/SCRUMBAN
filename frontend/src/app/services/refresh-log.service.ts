@@ -24,14 +24,14 @@ export class RefreshLogService {
     console.log(logs, "regardez le beau tableau qu'on a recupéré");
     await Promise.all(logs.map(
       async (log: any) => {
+        console.log(log, "le log dans refreshLog");
         if (log._userId != undefined) {
-          console.log("eh oh, on parcours le tableau de log");
 
           this.userService.getUserById(log._userId)
             .then(
               (user: any) => {
                 this.users.push(user.data);
-                console.log(this.users, "on met a jour les users de refresh log service");
+                // console.log(this.users, "on met a jour les users de refresh log service");
               }
             );
         }
