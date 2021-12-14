@@ -58,7 +58,7 @@ module.exports.addSprint = async function (body) {
       sprintAdded.planningDaily = body.planningDaily;
     if (body.sprintRetrospective != null)
       sprintAdded.sprintRetrospective = body.sprintRetrospective;
-
+    sprintAdded.isTerminado = false;
     try {
       await sprintAdded.save();
       return {
@@ -94,7 +94,8 @@ module.exports.updateSprint = async function (idSprint, body) {
       sprintUpdated.planningDaily = body.planningDaily;
     if (body.sprintRetrospective != null)
       sprintUpdated.sprintRetrospective = body.sprintRetrospective;
-
+    if (body.isTerminado != null)
+      sprintUpdated.isTerminado = body.isTerminado;
     try {
       await sprintUpdated.save();
       return {

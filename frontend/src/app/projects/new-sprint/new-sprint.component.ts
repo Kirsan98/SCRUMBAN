@@ -55,7 +55,8 @@ export class NewSprintComponent implements OnInit {
       start_at: [null, Validators.required],
       end_at: [null, Validators.required],
       planningDaily: [null, Validators.required],
-      sprintRetrospective: [null, Validators.required]
+      sprintRetrospective: [null, Validators.required],
+      isTerminado: [false]
     });
     this.route.parent!.params.subscribe(
       (params: Params) => {
@@ -88,6 +89,7 @@ export class NewSprintComponent implements OnInit {
     sprint.end_at = this.sprintForm.get('end_at')?.value;
     sprint.planningDaily = this.sprintForm.get('planningDaily')?.value;
     sprint.sprintRetrospective = this.sprintForm.get('sprintRetrospective')?.value;
+    sprint.isTerminado = false;
     this.sprintForm.reset()
     return sprint;
   }

@@ -10,7 +10,8 @@ const sprintSchema = new Schema({
   _user: [{ type: mongoose.Schema.Types.ObjectId, ref:'User'}],
   columns:[{type: mongoose.Schema.Types.ObjectId, ref:'Column'}],
   planningDaily: {type: String},
-  sprintRetrospective: {type: String}
+  sprintRetrospective: {type: String},
+  isTerminado: {type: Boolean}
 });
 
 const Sprint = mongoose.model('Sprint', sprintSchema);

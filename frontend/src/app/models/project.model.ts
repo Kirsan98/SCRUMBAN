@@ -8,4 +8,5 @@ export class Project{
     sprints !: Sprint[];
     tasks !: Task[];
     _members!: String[];
+   
 }
