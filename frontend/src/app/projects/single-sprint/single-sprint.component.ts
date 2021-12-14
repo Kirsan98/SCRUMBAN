@@ -129,21 +129,20 @@ export class SingleSprintComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-      console.log("Avant update",this.columnsObject);
       this.columnsObject.forEach((column: any) => {
         if (column._id == idStartColumn) {
           let task = event.container.data[event.currentIndex] as unknown as Task;
-          this.sprintService.moveTaskToColumn(idStartColumn, idEndColumn, task._id);
-          this.columnService.getColumnById(idEndColumn).then((column: any) => {
-            this.taskService.getTaskById(task._id).then((taskObj: any) => {
-              taskObj.data.state = column.data.title;
-              this.taskService.updateTask(task._id, taskObj.data);
-              event.container.data[event.currentIndex] = taskObj.data;
-              console.log("Apres update",this.columnsObject);
-              //TODO Modifier columnsObject --> Supprimer l'id de lâ tache columnsObject(idStartColumn) et ajouter l'id de la tâche columnsObject(idEndColumn)
+          this.sprintService.moveTaskToColumn(idStartColumn, idEndColumn, task._id).then(
+            ()=>{
+              this.columnService.getColumnById(idEndColumn).then((column: any) => {
+                this.taskService.getTaskById(task._id).then((taskObj: any) => {
+                  taskObj.data.state = column.data.title;
+                  this.taskService.updateTask(task._id, taskObj.data);
+                  event.container.data[event.currentIndex] = taskObj.data;
+                });
+              });
             });
-          });
-        }
+          }
       });
     }
   }
@@ -171,8 +170,7 @@ export class SingleSprintComponent implements OnInit {
     newColumn.title = "Default name";
     //a changer 
     if (this.columns.length >= 10) {
-      console.log("Max column");
-
+      alert('Le nombre maximum de colonne est 10')
     }
     else {
       newColumn.index = this.columns.length;
@@ -210,7 +208,6 @@ export class SingleSprintComponent implements OnInit {
     columnUpdated.title = this.updateColumnName.get('title')?.value;
     this.sprintService.updateColumn(idColumn, columnUpdated).then(
       (column: any) => {
-        console.log(column);
         column.data._tasks.forEach((taskId:any)=>{
           this.taskService.getTaskById(taskId).then((taskObj:any)=>{
             taskObj.data.state = column.data.title;
@@ -237,20 +234,22 @@ export class SingleSprintComponent implements OnInit {
     )
   }
 
-  openModal(targetModal: any, task: any) {
+  openModal(targetModal: any, task: Task) {
     this.modalService.open(targetModal, {
       centered: true,
       backdrop: true
     });
     this.taskDrag = task;
-    for(let i=0; i<this.taskDrag._logs.length;i++){
+    this.logTaskDrag = [];
+    for(let i=0; i<this.taskDrag._logs.length;i++){      
       this.logService.getLogById(this.taskDrag._logs[i]).then(
         (log: any) => {
           this.columnService.getColumnById(log.data._columnIdStart).then(
             (columnStart: any) =>{
               this.columnService.getColumnById(log.data._columnIdEnd).then(
                 (columnEnd: any) =>{
-                  let logWithNameOfColumn = log.data;
+                  let logWithNameOfColumn = [];
+                  logWithNameOfColumn = log.data;
                   logWithNameOfColumn._columnIdStart = columnStart.data.title
                   logWithNameOfColumn._columnIdEnd = columnEnd.data.title
                   this.logTaskDrag.push(logWithNameOfColumn)

@@ -78,6 +78,8 @@ export class SprintService{
         return new Promise((resolve, reject) => {
             this.http.post('http://localhost:5000/api/move-task/'+ idColumnStart + '/' + idColumnEnd + '/' + idTask, null).subscribe(
                 (response) => {
+                    console.log(response);
+                    
                     resolve(response);
                   },
                   (error) => {

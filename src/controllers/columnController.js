@@ -127,6 +127,7 @@ module.exports.moveTaskToColumn = async function (idColumnStart, idColumnEnd, id
     log.updated_at = Date.now();
     log.save();
 
+    console.log(columnEnd.data);
     const task = await Task.findByIdAndUpdate(idTask, { $push: { _logs: log } });
     return {
       success: true,
