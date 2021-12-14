@@ -2,6 +2,8 @@ const Project = require('../models/projectModel');
 const sprintController = require('../controllers/sprintController');
 const taskController = require('../controllers/taskController');
 const columnController = require('../controllers/columnController');
+const userController = require('../controllers/userController');
+const User = require('../models/userModel');
 const Sprint = require('../models/sprintModel');
 
 //get all projects
@@ -17,6 +19,30 @@ module.exports.getAllProjects = async function () {
 		}
 	} catch (err) {
 		return { success: false, message: "Project not found " + err };
+	}
+}
+
+//get all projects from user
+module.exports.getAllProjectsFromUser = async function (idUser) {
+	try {
+		const user = await User.findById(idUser);
+		if (user != null) {
+			let projects = [];
+			await Promise.all(user.projects.map(
+				async (projectId) => {
+					const project = await this.getProjectById(projectId);
+					if (project != undefined && project.success)
+						projects.push(project.data);
+				}
+			));
+			return {
+				success: true,
+				data: projects
+			};
+		}
+
+	} catch (error) {
+		return { success: false, message: "User not found " + error };
 	}
 }
 
@@ -41,17 +67,33 @@ module.exports.addProject = async function (body) {
 		return { success: false, message: "Project not added " };
 	if (body.title != null)
 		projectAdded.title = body.title;
+	if (body._members != null)
+		projectAdded._members = body._members;
 	projectAdded.created_at = Date.now();
 	projectAdded.updated_at = null;
 	if (body.password != null)
 		projectAdded.password = body.password;
-	// if (body._members != null)
-	// projectAdded._members = body._members;
 	try {
 		await projectAdded.save();
 		return {
 			success: true,
 			data: projectAdded,
+			message: "Add successfully",
+		}
+	} catch (error) {
+		return { success: false, message: "Fail to add" + error };
+	}
+}
+
+// add a user to project
+module.exports.addUserToProject = async function (idProject, idUser) {
+	try {
+		const project = await Project.findByIdAndUpdate(idProject,
+			{ $push: { _members: idUser } }
+		);
+		return {
+			success: true,
+			data: project,
 			message: "Add successfully",
 		}
 	} catch (error) {
@@ -96,6 +138,11 @@ module.exports.removeProject = async function (id) {
 		if (sprints != null)
 			sprints.forEach(async element => {
 				sprintController.deleteSprint(element);
+			});
+		const members = project._members;
+		if (members != null)
+			members.forEach(async idUser => {
+				userController.removeProjetToUser(idUser, project._id);
 			});
 		project.remove();
 		return {

@@ -16,7 +16,7 @@
       <div class="col"><b>Planning daily:</b> {{ sprint.planningDaily }}</div>
       <div class="col">
         <b>Sprint Retro:</b> {{ sprint.sprintRetrospective }}
-        <button type="button" class="btn btn-primary btn-lg" (click)="endSprint()">
+        <button *ngIf="!isTerminated" type="button" class="btn btn-primary btn-lg" (click)="endSprint()">
           Terminer le sprint
         </button>
       </div>

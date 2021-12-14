@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
+import { User } from 'src/app/models/user.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RefreshProjectService } from 'src/app/services/refresh-project.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-settings-project',

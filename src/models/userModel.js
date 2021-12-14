@@ -8,28 +8,29 @@ const { Schema } = mongoose;
 const SALT_WORK_FACTOR = 10;
 
 const userSchema = new Schema({
-    first_name: {
-      type: String,
-      required: true,
-    },
-    last_name: {
-      type: String,
-      required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        validate: [isEmail, 'invalid email'],
-        createIndexes: { unique: true },
-    },
-    username: {
-      type: String,
-      required: true,
-    },
-    password: { 
-        type: String, 
-        required: true 
-    } 
+  first_name: {
+    type: String,
+    required: true,
+  },
+  last_name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    validate: [isEmail, 'invalid email'],
+    createIndexes: { unique: true },
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }]
 });
 
 userSchema.pre('save', async function save(next) {

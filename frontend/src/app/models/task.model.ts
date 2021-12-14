@@ -7,7 +7,7 @@ export class Task{
     color!: String;
     description !: String;
     state !: String;
-    _owner !: User[];
+    _owner !: String;
     created_at !: Date;
     estimated_duration !: String;
     _logs !: Log[];

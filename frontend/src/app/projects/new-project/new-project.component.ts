@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-new-project',
@@ -16,22 +18,30 @@ export class NewProjectComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private projectService: ProjectService,
-    private router: Router
-    ) { }
+    private router: Router,
+    private authService: AuthService,
+    private userService: UserService
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.projectForm = this.formBuilder.group({
-      title: [null,Validators.required]
+      title: [null, Validators.required]
     });
   }
 
-  onSubmit(){
+  onSubmit() {
+    const userId = this.authService.getUserId;
     const project = new Project();
     project.title = this.projectForm.get('title')?.value;
+    project._members = [userId];
+
     this.projectService.addProject(project).then(
-      (project: any)=>{
-        this.projectForm.reset();        
-        this.router.navigate(['project/'+project['data']._id+'/detail']);
+      (project: any) => {
+        console.log(userId);
+        
+        this.userService.addProjectToUser(userId, project.data._id);
+        this.projectForm.reset();
+        this.router.navigate(['project/' + project['data']._id + '/detail']);
       }
     ).catch(
       (error) => {

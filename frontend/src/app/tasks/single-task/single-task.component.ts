@@ -28,7 +28,7 @@ export class SingleTaskComponent implements OnInit {
             if (this.task._owner != undefined)
               this.userService.getUserById(this.task._owner).then(
                 (user: any) => {
-                  this.owner = user.username;
+                  this.owner = user.data.username;
                 }
               );
             else {

@@ -24,7 +24,6 @@ import { DeletesprintComponent } from './projects/deleteSprint/deletesprint.comp
 import { JoinProjectComponent } from './projects/join-project/join-project.component';
 
 import { SprintsComponent } from './projects/sprints/sprints.component';
-
 import { ColumnsComponent } from './columns/columns.component';
 
 import { TasksComponent } from './tasks/tasks.component';
@@ -38,6 +37,8 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { LogsComponent } from './logs/logs.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LogService } from './services/log.service';
+import { RefreshProjectListService } from './services/refresh-project-list.service';
+import { DetailComponent } from './projects/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { LogService } from './services/log.service';
     UpdateTaskComponent,
     LoginComponent,
     SignupComponent,
-    LogsComponent
+    LogsComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +81,8 @@ import { LogService } from './services/log.service';
     UserService, 
     TaskService,
     RefreshProjectService,
-    LogService
+    LogService,
+    RefreshProjectListService
   ],
   bootstrap: [AppComponent]
 })

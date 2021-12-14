@@ -54,11 +54,11 @@ export class SignupComponent implements OnInit {
     return this.signupForm.controls;
   }
 
-  onSubmit(){
+  onSubmit() {
     this.submitted = true;
     if (this.signupForm.invalid) {
       console.log("form is invalid");
-      
+
       return;
     }
 
@@ -69,11 +69,17 @@ export class SignupComponent implements OnInit {
     user.email = this.signupForm.get('email')?.value;
     user.password = this.signupForm.get('password')?.value;
     const confirmPassword = this.signupForm.get('confirmPassword')?.value;
-    
+
     this.authService.createNewUser(user).then(
-      () => {
-        this.signupForm.reset();
-        this.router.navigate(['/connexion']);
+      (response: any) => {
+        console.log(response);
+        if (response.message != "email deja existant") {
+          this.signupForm.reset();
+          this.router.navigate(['/connexion']);
+        }
+        else{
+          
+        }
       }
     ).catch(
       (error: string) => {

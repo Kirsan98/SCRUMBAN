@@ -50,7 +50,7 @@ export class SingleSprintComponent implements OnInit {
     private sprintService: SprintService,
     private columnService: ColumnService,
     private taskService: TaskService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     let idProject!: string;
@@ -193,6 +193,7 @@ export class SingleSprintComponent implements OnInit {
             .then((columns: any) => {
               this.columnsObject = columns.data;
               this.loadColumns(this.columnsObject);
+
               this.connectedTo = [];
               this.columnsObject.forEach((column: any) => {
                 this.connectedTo.push(column._id);
@@ -280,8 +281,7 @@ export class SingleSprintComponent implements OnInit {
         column._tasks.forEach((taskId: any) => {
           this.taskService.getTaskById(taskId).then((task: any) => {
             task.data.state = 'UNDEFINED';
-            this.taskService
-              .updateTask(taskId, task.data)
+            this.taskService.updateTask(taskId, task.data)
               .then((success) => {
                 console.log('Dans endSprint', success);
                 // TODO : Afficher un message de succès comme quoi le sprint à bien était terminé
@@ -292,9 +292,10 @@ export class SingleSprintComponent implements OnInit {
           });
         });
       }
+      this.router.navigate(['/project/' + this.project._id + '/sprints/']);
     });
-    this.router.navigate(['/project/' + this.project._id + '/sprints/']);
   }
+
 
   get sortLog() {
     return this.logTaskDrag.sort((a, b) => {

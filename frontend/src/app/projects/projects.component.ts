@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Project } from '../models/project.model';
 import { ProjectService } from '../services/project.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { RefreshProjectListService } from '../services/refresh-project-list.service';
 
 @Component({
   selector: 'app-projects',
@@ -11,34 +13,49 @@ import { Subscription } from 'rxjs';
 })
 export class ProjectsComponent implements OnInit {
 
-   projects!:Project[];
+  projects!: Project[];
 
   constructor(
     private router: Router,
-    public projectService: ProjectService) { }
+    public projectService: ProjectService,
+    private authService: AuthService,
+    private refreshList: RefreshProjectListService
+  ) { }
 
-   ngOnInit():void{
+  ngOnInit(): void {
+    this.refreshList.currentProjectList.subscribe(
+      (state) => {
+        if(state != "init")
+          this.listProject();
+      }
+    );
     this.listProject();
-   }
+  }
 
-   listProject(): void{
-       this.projectService.getAllProjects().subscribe(
-       data => {
-        this.projects = data['data'];
-      });
-   }
+  listProject(): void {
+    const userId = this.authService.getUserId;
+    this.projectService.getAllProjectsFromUser(userId).then(
+      (response: any) => {
+        this.projects = response.data;
+      }
+    );
+    // this.projectService.getAllProjects().subscribe(
+    //   data => {
+    //     this.projects = data['data'];
+    //   });
+  }
 
-   onProjectClicked(idProject :string){
-     this.router.navigate(['/project/' + idProject+'/detail']);
-   }
+  onProjectClicked(idProject: string) {
+    this.router.navigate(['/project/' + idProject + '/detail']);
+  }
 
-   onDelete(idProject: string){
-    this.router.navigate(['/project/' + idProject+'/delete']);
-   }
+  onDelete(idProject: string) {
+    this.router.navigate(['/project/' + idProject + '/delete']);
+  }
 
-   onUpdate(idProject: string){
-    this.router.navigate(['/project/' + idProject+'/settings']); 
-   }
+  onUpdate(idProject: string) {
+    this.router.navigate(['/project/' + idProject + '/settings']);
+  }
 
-   
+
 }

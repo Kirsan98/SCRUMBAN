@@ -29,10 +29,9 @@
       <input type="number" class="form-control" id="estimated_duration" formControlName="estimated_duration"
         placeholder="Entrer nouvelle durée estimé" name="estimated_duration">
 
-      <label for="owner">Utilisateur réalisant la tâche</label>
-      <select class="select" formControlName="owner">
-        <option value="blank">Pas encore attribuée</option>
-        <option *ngFor="let user of users; let i = index" value="{{user._id}}">{{user.username}}</option>
+      <label for="owner">Utilisateur réalisant la tâche </label>
+      <select class="form-select" formControlName="owner">
+        <option *ngFor="let user of users; let i = index" value="{{user.username}}">{{user.username}}</option>
       </select>
 
     </div>
