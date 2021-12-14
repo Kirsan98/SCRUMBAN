@@ -1,21 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" routerLink="/accueil">SCRUMBAN</a>
-  <a class="navbar-brand" routerLink="/projects">Projets</a>
+  <a *ngIf="isLogged" class="navbar-brand" routerLink="/projects">Projets</a>
 
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarText"
-    aria-controls="navbarText"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto"></ul>
-    <button type="button" routerLink="/connexion" class="btn btn-light">Connexion</button>
-    <button type="button" routerLink="/inscription"class="btn btn-light">Inscription</button>
+    <button *ngIf="!isLogged" type="button" routerLink="/connexion" class="btn btn-light" >Connexion</button>
+    <button *ngIf="!isLogged" type="button" routerLink="/inscription" class="btn btn-light" >Inscription</button>
   </div>
 </nav>

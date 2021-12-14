@@ -51,7 +51,6 @@ export class LoginComponent implements OnInit {
         }
         else {
           if (response != "email inconnu") {
-            
             this.userService.getUserByEmail(userDataLogin.email).then(
               (response: any) => {
                 this.authService.logUser(response.data._id);

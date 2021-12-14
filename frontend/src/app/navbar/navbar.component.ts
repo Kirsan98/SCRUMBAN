@@ -13,12 +13,16 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+    this.authService.isLogged.subscribe(
+      (isLogged: boolean) => {
+        this.isLogged = isLogged;
+      }
+    );
+    // this.isLog();
   }
 
-  isLog(){
-    if (this.authService.isLoggedIn() == true)
-      this.isLogged = true;
-  }
-
+  // isLog() {    
+  //   if (this.authService.isLoggedIn() == true)
+  //     this.isLogged = true;
+  // }
 }

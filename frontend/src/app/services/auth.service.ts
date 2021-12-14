@@ -1,14 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-
-  
-  private isLogged: boolean = false;
+  private isLoggedSrc: BehaviorSubject<boolean>;
+  public isLogged;
   private user: String = "";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.isLoggedSrc = new BehaviorSubject<boolean> (false);
+    this.isLogged = this.isLoggedSrc.asObservable();
+  }
 
   createNewUser(user: any) {
     return new Promise(
@@ -25,13 +28,13 @@ export class AuthService {
   }
 
   public logUser(idUser: String){
-    this.isLogged = true;
+    this.isLoggedSrc.next(true);
     this.user = idUser;
   }
 
-  public isLoggedIn(): boolean{
-    return this.isLogged;
-  }
+  // public isLoggedIn(): boolean{
+  //   return this.isLogged;
+  // }
   public get getUserId(){
     return this.user;
   }
@@ -51,6 +54,11 @@ export class AuthService {
           }
         );
       });
+  }
+
+  logOut():void{
+    this.isLoggedSrc.next(false);
+    this.user = "";
   }
 
   // signOutUser(user: any) {
