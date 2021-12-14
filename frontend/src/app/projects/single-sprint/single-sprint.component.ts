@@ -17,6 +17,7 @@ import { ColumnService } from 'src/app/services/column.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LogService } from 'src/app/services/log.service';
 import { Log } from 'src/app/models/log.model';
+import { RefreshProjectService } from 'src/app/services/refresh-project.service';
 
 @Component({
   selector: 'app-single-sprint',
@@ -37,11 +38,11 @@ export class SingleSprintComponent implements OnInit {
   columns: any[] = [];
   taskDrag!: Task;
   logTaskDrag: Log[] = [];
-  isTerminated = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private fb: FormBuilder,
+    private refreshProjectService: RefreshProjectService,
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
@@ -279,7 +280,6 @@ export class SingleSprintComponent implements OnInit {
   }
 
   endSprint() {
-    this.isTerminated = true;
     this.columnsObject.forEach((column: any) => {
       if (column.title != 'Terminado') {
         column._tasks.forEach((taskId: any) => {
@@ -287,8 +287,12 @@ export class SingleSprintComponent implements OnInit {
             task.data.state = 'UNDEFINED';
             this.taskService.updateTask(taskId, task.data)
               .then((success) => {
-                console.log('Dans endSprint', success);
-                //update sprint.isTerminado a true
+                this.sprint.isTerminado = true;
+                this.sprintService.updateSprint(this.sprint._id,this.sprint)
+                .then(()=>{
+                  
+                });
+                
               })
               .catch((error) => {
                 this.errorMessage = error.message;

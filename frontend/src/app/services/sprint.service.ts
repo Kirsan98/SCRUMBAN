@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Column } from '../models/column.model';
+import { Sprint } from '../models/sprint.model';
 
 @Injectable({  providedIn: 'root'})
 export class SprintService{
@@ -88,4 +89,19 @@ export class SprintService{
             );
         });        
     }
+
+    updateSprint(id: string, sprint: Sprint){
+        return new Promise((resolve, reject) => {
+          this.http.put('http://localhost:5000/api/update-sprint/' + id, sprint).subscribe(
+            (response) => {
+              resolve(response);  
+            },
+            (error) => {
+              reject(error);
+            }
+          );
+        });
+      }
 }
+
+

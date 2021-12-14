@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const projectController = require('../controllers/projectsController');
 const userController = require('../controllers/userController');
+const sprintController = require('../controllers/sprintController')
 
 // get all projects
 router.route('/projects').get(async (req, res) => {
@@ -125,6 +126,16 @@ router.route('/project/:idProject/delete-sprint/:idSprint').delete(async (req, r
   }
 });
 
+// update a sprint
+router.route('/update-sprint/:id').put(async (req, res) => {
+  let response = await sprintController.updateSprint(req.params.id, req.body);
+  if (response!=null && response.success == true) {
+    res.status(200).json(response);
+  } else {
+    res.status(404).json(response);
+  }
+});
+
 //TASK
 
 // add task to project
@@ -168,7 +179,7 @@ router.route('/project/:idProject/delete-task/:idTask').delete(
 );
 
 
-//
+
 
 
 module.exports = router;

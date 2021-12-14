@@ -76,4 +76,6 @@ export class SprintsComponent implements OnInit {
       return <any>new Date(b.start_at) - <any> new Date(a.start_at);
     });
   }
+
+  
 }

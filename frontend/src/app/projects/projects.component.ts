@@ -39,10 +39,6 @@ export class ProjectsComponent implements OnInit {
         this.projects = response.data;
       }
     );
-    // this.projectService.getAllProjects().subscribe(
-    //   data => {
-    //     this.projects = data['data'];
-    //   });
   }
 
   onProjectClicked(idProject: string) {
@@ -57,5 +53,9 @@ export class ProjectsComponent implements OnInit {
     this.router.navigate(['/project/' + idProject + '/settings']);
   }
 
-
+  get sortProject() {
+    return this.projects.sort((a, b) => {
+      return <any>new Date(b.created_at) - <any>new Date(a.created_at);
+    });
+  }
 }

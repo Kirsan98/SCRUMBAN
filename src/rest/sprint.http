@@ -37,3 +37,10 @@ GET http://localhost:5000/api/project/61a549f275a713f1150e7188/sprint/61a54aebb8
 ### delete a column from sprint
 DELETE http://localhost:5000/api/project/61a549f275a713f1150e7188/sprint/61a54aebb85185bd68d6c588/delete-column/61a55d01eb1fdb0bea68c0c1
 
+###Update sprint
+PUT http://localhost:5000/api/update-sprint/61b8c9043b0fab43749088a9
+content-type: application/json
+
+{	
+	"isTerminado": "true"
+}

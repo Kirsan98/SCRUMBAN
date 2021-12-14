@@ -80,20 +80,6 @@ module.exports.updateSprint = async function (idSprint, body) {
   if (sprintUpdated == null)
     return { success: false, message: "Sprint not updated" };
   if (body != null) {
-    if (body.title != null)
-      sprintUpdated.title = body.title;
-    if (body.start_at != null)
-      sprintUpdated.start_at = body.start_at;
-    if (body.end_at != null)
-      sprintUpdated.end_at = body.end_at;
-    if (body._user != null)
-      sprintUpdated._user = body._user;
-    if (body.columns != null)
-      sprintUpdated.columns = body.columns;
-    if (body.planningDaily != null)
-      sprintUpdated.planningDaily = body.planningDaily;
-    if (body.sprintRetrospective != null)
-      sprintUpdated.sprintRetrospective = body.sprintRetrospective;
     if (body.isTerminado != null)
       sprintUpdated.isTerminado = body.isTerminado;
     try {
