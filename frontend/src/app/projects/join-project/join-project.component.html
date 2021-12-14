@@ -3,20 +3,14 @@
     <div class="card-body">
       <h3 class="title">Joindre un projet</h3>
 
-      <form>
+      <form [formGroup]="joinProjectForm">
         <div class="form-group">
           <label for="idProjet">Id</label>
-          <input
-            type="text"
-            class="form-control"
-            id="idProjet"
-            formControlName="idProjet"
-            placeholder="Enter l'id du projet à rejoindre"
-            name="idProjet"
-          />
+          <input type="text" class="form-control" id="idProjet" formControlName="idProjet"
+            placeholder="Enter l'id du projet à rejoindre" name="idProjet" />
         </div>
 
-      
+
       </form>
       <button type="button" class="btn btn-primary btn-lg" (click)="onSubmit()">
         + Joindre projet

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
+import { RefreshProjectListService } from 'src/app/services/refresh-project-list.service';
 
 
 //TODO 
@@ -25,7 +26,8 @@ export class DeleteProjectComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private refreshList: RefreshProjectListService
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +46,7 @@ export class DeleteProjectComponent implements OnInit {
   onDelete(){
     this.projectService.deleteProject(this.project._id).then(
       () => {
+        this.refreshList.refreshList("delete");
         this.router.navigate(['projects']);
       }
     )

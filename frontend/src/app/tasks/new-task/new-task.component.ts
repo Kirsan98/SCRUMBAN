@@ -29,9 +29,13 @@ export class NewTaskComponent implements OnInit {
   public loadUsers() {
     this.userService.getAllUsersFromProject(this.project._id).then(
       (usersIdResp: any) => {
+        console.log(usersIdResp, "liste d'id des users from new-task comp");
+
         usersIdResp.data.forEach((userId: any) => {
           this.userService.getUserById(userId).then(
             (userResp: any) => {
+              console.log(userResp);
+
               this.users.push(userResp.data);
             }
           );
@@ -66,8 +70,10 @@ export class NewTaskComponent implements OnInit {
     task.description = this.taskForm.get('description')?.value;
     task.state = "UNDEFINED";
     task.estimated_duration = this.taskForm.get('estimated_duration')?.value;
-    if ( (this.taskForm.get('owner')?.value != "null") && (this.taskForm.get('owner')?.value !="blank"))
+
+    if ((this.taskForm.get('owner')?.value != "null") && (this.taskForm.get('owner')?.value != "blank"))
       task._owner = this.taskForm.get('owner')?.value;
+    console.log(task, "from load task | new-task comp");
     return task;
   }
 

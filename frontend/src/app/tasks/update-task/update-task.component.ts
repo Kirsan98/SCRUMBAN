@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup} from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Task } from 'src/app/models/task.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
@@ -30,6 +30,7 @@ export class UpdateTaskComponent implements OnInit {
   ) { }
 
   public loadUsers() {
+    this.users = [];
     this.userService.getAllUsersFromProject(this.project._id).then(
       (usersIdResp: any) => {
         usersIdResp.data.forEach((userId: any) => {
@@ -57,6 +58,7 @@ export class UpdateTaskComponent implements OnInit {
         this.projectService.getProjectById(params.idProject).then(
           (project: any) => {
             this.project = project.data;
+            this.loadUsers();
           }
         );
         this.projectService.getSingleTaskFromProject(params.idProject, params.idTask).then(
@@ -67,28 +69,48 @@ export class UpdateTaskComponent implements OnInit {
             this.updateTaskForm.get('description')?.setValue(this.task.description);
             this.updateTaskForm.get('state')?.setValue(this.task.state);
             this.updateTaskForm.get('estimated_duration')?.setValue(this.task.estimated_duration);
+            const userId = this.task._owner;
+            
+            this.userService.getUserById(userId).then(
+              (userData: any) => {
+                this.updateTaskForm.get('owner')?.setValue(userData.data.username);
+              }
+            );
           }
         );
       }
     );
   }
 
-  onSubmit(){
+  onSubmit() {
     const taskUpdated = new Task();
     taskUpdated.title = this.updateTaskForm.get('title')?.value;
     taskUpdated.color = this.updateTaskForm.get('color')?.value;
     taskUpdated.description = this.updateTaskForm.get('description')?.value;
     taskUpdated.state = this.updateTaskForm.get('state')?.value;
     taskUpdated.estimated_duration = this.updateTaskForm.get('estimated_duration')?.value;
-    this.taskService.updateTask(this.task._id, taskUpdated).then(
-      () => {
-        this.updateTaskForm.reset();
-        this.router.navigate(['project/'+ this.project._id + '/tasks']);
+    const username = this.updateTaskForm.get('owner')?.value;
+    console.log(username, "username from update-task");
+    
+    this.userService.getUserByUsername(username).then(
+      (user: any) => {
+        console.log(user, "user from update-task");
+        
+        taskUpdated._owner = user.data._id;
+        console.log(taskUpdated);
+        
+        this.taskService.updateTask(this.task._id, taskUpdated).then(
+          () => {
+            this.loadUsers;
+            this.updateTaskForm.reset();
+            this.router.navigate(['project/' + this.project._id + '/tasks']);
+          }
+        ).catch(
+          (error) => {
+            this.errorMessage = error.message;
+          }
+        )
       }
-    ).catch(
-      (error) => {
-        this.errorMessage = error.message;
-      }
-    )
+    );
   }
 }

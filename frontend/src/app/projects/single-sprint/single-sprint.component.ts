@@ -23,37 +23,37 @@ export class SingleSprintComponent implements OnInit {
   public errorMessage!: string;
   public sprints!: Sprint[];
   indexColumn: Number = 0;
-  editMode: boolean=false;
+  editMode: boolean = false;
   columnHelp!: any;
   updateColumnName !: FormGroup;
-  connectedTo : any[] = [];
+  connectedTo: any[] = [];
   columnsObject: Column[] = [];
   columns: any[] = [];
   title = 'modal2';
   taskForm!: FormGroup;
-  isTerminated = false;
+  isTerminated = true;
 
   constructor(
     private formBuilder: FormBuilder,
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private sprintService: SprintService,
-    private columnService : ColumnService,
+    private columnService: ColumnService,
     private taskService: TaskService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.taskForm = this.fb.group({
       _id: [''],
-      title:  [''],
-      color:  [''],
-      description:  [''],
-      state:  [''],
-      created_at:  [''],
-      estimated_duration:  [''],
+      title: [''],
+      color: [''],
+      description: [''],
+      state: [''],
+      created_at: [''],
+      estimated_duration: [''],
       _logs: ['']
 
     })
@@ -77,80 +77,81 @@ export class SingleSprintComponent implements OnInit {
           this.sprint = sprint['data'];
         }
       );
-      
+
     this.sprintService.getAllColumnFromSprint(idProject, idSprint)
-    .then(
-      (columns: any) => {
-        this.columnsObject = columns.data;
+      .then(
+        (columns: any) => {
+          this.columnsObject = columns.data;
 
-        this.loadColumns(columns.data);
-        this.columnsObject.forEach((column: any) => { 
-          this.connectedTo.push(column._id)
-          
-        });
+          this.loadColumns(columns.data);
+          this.columnsObject.forEach((column: any) => {
+            this.connectedTo.push(column._id)
+
+          });
 
 
-      }
-    );
+        }
+      );
     this.updateColumnName = this.formBuilder.group({
-      title: [null,Validators.required]
+      title: [null, Validators.required]
     })
-   
-    
+
+
   }
 
-  public loadTask(column: any): any[]{
-    const tasks: any[] = [];    
+  public loadTask(column: any): any[] {
+    const tasks: any[] = [];
     column._tasks.forEach((element: any) => {
       this.taskService.getTaskById(element)
-      .then((task:any) => {
-        tasks.push(task.data);
-        
-      });
+        .then((task: any) => {
+          tasks.push(task.data);
+
+        });
     });
     return tasks;
   }
 
-  public loadColumns(columns: any[]){
+  public loadColumns(columns: any[]) {
     let finalColumns: any[] = [];
-    columns.sort(function(a,b){
-      return a.index-b.index;
+    columns.sort(function (a, b) {
+      return a.index - b.index;
     });
 
-    columns.forEach((column: any) => { 
+    columns.forEach((column: any) => {
       let tasks = this.loadTask(column);
       finalColumns.push(tasks);
     });
-    this.columns = finalColumns; 
-       
+    this.columns = finalColumns;
+
   }
-  
 
-  drop(event: CdkDragDrop<String[]>) {     
-       
-    if (event.previousContainer === event.container) {     
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);      
-    } else {
-      const idStartColumn = event.previousContainer.id;
-      const idEndColumn = event.container.id;
 
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
+  drop(event: CdkDragDrop<String[]>) {
+    if (!this.isTerminated) {
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      } else {
+        const idStartColumn = event.previousContainer.id;
+        const idEndColumn = event.container.id;
 
-      this.columnsObject.forEach((column:any) =>{
-        if(column._id==idStartColumn){
-          const task = event.container.data[event.currentIndex] as unknown as Task
-          console.log(task);
-          this.sprintService.moveTaskToColumn(idStartColumn, idEndColumn, task._id);
-          this.columnService.getColumnById(idEndColumn).then((column:any)=>{
-            console.log(column);
-            task.state = column.title;
-            this.taskService.updateTask(task._id, task);
-          });
-        }
-      });
+        transferArrayItem(event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex);
+
+        this.columnsObject.forEach((column: any) => {
+          if (column._id == idStartColumn) {
+            const task = event.container.data[event.currentIndex] as unknown as Task
+            console.log(task);
+            this.sprintService.moveTaskToColumn(idStartColumn, idEndColumn, task._id);
+            this.columnService.getColumnById(idEndColumn).then((column: any) => {
+              console.log(column);
+              task.state = column.title;
+              this.taskService.updateTask(task._id, task);
+            });
+          }
+        });
+      }
     }
   }
 
@@ -169,80 +170,84 @@ export class SingleSprintComponent implements OnInit {
       );
   }
 
-  
 
 
-  addColumnToSprint(){
-    const newColumn = new Column();
-    newColumn.title = "Default name";
-    //a changer 
-    if (this.columns.length >=10){
-      console.log("Max column");
-      
+
+  addColumnToSprint() {
+    if (!this.isTerminated) {
+      const newColumn = new Column();
+      newColumn.title = "Default name";
+      //a changer 
+      if (this.columns.length >= 10) {
+        console.log("Max column");
+
+      }
+      else {
+        newColumn.index = this.columns.length;
+        this.sprintService.addColumn(this.project._id, this.sprint._id, newColumn).then(
+          (response: any) => {
+
+            this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
+              (columns: any) => {
+
+                this.columnsObject = columns.data;
+                this.loadColumns(this.columnsObject);
+                this.connectedTo = [];
+                this.columnsObject.forEach((column: any) => {
+                  this.connectedTo.push(column._id)
+                });
+
+              }
+            )
+            this.router.navigate(['project/' + this.project._id + '/sprint/' + this.sprint._id]);
+          }
+        ).catch((error) => {
+          this.errorMessage = error.message;
+        });
+      }
     }
-    else{
-      newColumn.index = this.columns.length;
-      this.sprintService.addColumn(this.project._id, this.sprint._id, newColumn).then(
-        (response: any) => {          
+  }
 
+  get sortColumns() {
+    return this.columnsObject.sort((a: { index: any; }, b: { index: any; }) => {
+      return <any>new Number(a.index) - <any>new Number(b.index);
+    });
+  }
+
+  onUpdate(idColumn: any) {
+    if (!this.isTerminated) {
+      const columnUpdated = new Column();
+      columnUpdated.title = this.updateColumnName.get('title')?.value;
+      this.sprintService.updateColumn(idColumn, columnUpdated).then(
+        (column: any) => {
           this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
-            (columns:any) => {
-              
+            (columns: any) => {
+
               this.columnsObject = columns.data;
               this.loadColumns(this.columnsObject);
+
               this.connectedTo = [];
-              this.columnsObject.forEach((column: any) => { 
-                this.connectedTo.push(column._id)
+              this.columnsObject.forEach((column: any) => {
+                this.connectedTo.push(column._id);
               });
 
             }
           )
-          this.router.navigate(['project/' + this.project._id + '/sprint/' + this.sprint._id]);
         }
-      ).catch((error) => {
-        this.errorMessage = error.message;
-      });
+      ).catch(
+        (error) => {
+          this.errorMessage = error.message;
+        }
+      )
     }
   }
 
-  get sortColumns(){
-    return this.columnsObject.sort((a: { index: any; },b: { index: any; }) => {
-      return <any> new Number(a.index) - <any> new Number(b.index);
-    });
-  }
-
-  onUpdate(idColumn: any){
-    const columnUpdated = new Column();
-    columnUpdated.title = this.updateColumnName.get('title')?.value;
-    this.sprintService.updateColumn(idColumn,columnUpdated).then(
-      (column: any) => {
-        this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id).then(
-          (columns:any) => {
-            
-            this.columnsObject = columns.data;
-            this.loadColumns(this.columnsObject);
-             
-            this.connectedTo = [];
-            this.columnsObject.forEach((column: any) => { 
-              this.connectedTo.push(column._id);
-            });
-
-          }
-        )
-      }
-    ).catch(
-      (error) => {
-        this.errorMessage = error.message;
-      }
-    )
-  }
-
-  openModal(targetModal: any , task: any) {
+  openModal(targetModal: any, task: any) {
     this.modalService.open(targetModal, {
-     centered: true,
-     backdrop: true
+      centered: true,
+      backdrop: true
     });
-   
+
     this.taskForm.patchValue({
       _id: task._id,
       title: task.title,
@@ -254,23 +259,25 @@ export class SingleSprintComponent implements OnInit {
       _logs: task._logs,
     });
   }
-  
-   onSubmit() {
+
+  onSubmit() {
     this.modalService.dismissAll();
   }
 
-  endSprint(){
-    this.isTerminated = true;
-    this.columnsObject.forEach((column:any)=>{
-      if(column.title!="Terminado"){
-        column._tasks.forEach((taskId:any)=> {
-          this.taskService.getTaskById(taskId).then((task:any) => {
-            task.state = "UNDEFINED";
-            this.taskService.updateTask(taskId,task);
+  endSprint() {
+    if (!this.isTerminated) {
+      this.isTerminated = true;
+      this.columnsObject.forEach((column: any) => {
+        if (column.title != "Terminado") {
+          column._tasks.forEach((taskId: any) => {
+            this.taskService.getTaskById(taskId).then((task: any) => {
+              task.state = "UNDEFINED";
+              this.taskService.updateTask(taskId, task);
+            });
           });
-        });
-      }
-    });
-    this.router.navigate(['/project/' + this.project._id + '/sprints/']);
+        }
+      });
+      this.router.navigate(['/project/' + this.project._id + '/sprints/']);
+    }
   }
 }

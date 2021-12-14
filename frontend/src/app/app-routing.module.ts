@@ -27,43 +27,44 @@ import { DetailComponent } from './projects/detail/detail.component';
 import { ColumnsComponent } from './columns/columns.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { LoginGuardGuard } from './login-guard.guard';
 
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
   { path: 'connexion', component: LoginComponent},
   { path: 'inscription', component: SignupComponent},
-  { path: 'projects', component: ProjectsComponent },
+  { path: 'projects', component: ProjectsComponent, canActivate:[LoginGuardGuard] },
   {
     path: 'project/:idProject',
-    component: SingleProjectComponent,
+    component: SingleProjectComponent, canActivate:[LoginGuardGuard],
     children: [
-      { path: 'detail', component: DetailComponent },
-      { path: 'tasks', component: TasksComponent },
+      { path: 'detail', component: DetailComponent, canActivate:[LoginGuardGuard] },
+      { path: 'tasks', component: TasksComponent, canActivate:[LoginGuardGuard] },
       {
         path: 'sprints',
-        component: SprintsComponent,
+        component: SprintsComponent, canActivate:[LoginGuardGuard],
         children: [
-          { path: 'add-sprint', component: NewSprintComponent },
+          { path: 'add-sprint', component: NewSprintComponent, canActivate:[LoginGuardGuard] },
         ]
       },
       { 
       path: 'sprint/:idSprint', 
-      component: SingleSprintComponent,
+      component: SingleSprintComponent, canActivate:[LoginGuardGuard],
       children: [
-        { path: 'columns', component: ColumnsComponent}
+        { path: 'columns', component: ColumnsComponent, canActivate:[LoginGuardGuard]}
       ]
       },
-      { path: 'settings', component: SettingsProjectComponent },
-      { path: 'delete-sprint/:idSprint', component: DeletesprintComponent },
-      { path: 'add-task', component: NewTaskComponent },
-      { path: 'delete-task/:idTask', component: DeleteTaskComponent },
-      { path: 'task/:idTask', component: SingleTaskComponent},
-      { path: 'update-task/:idTask', component: UpdateTaskComponent},
-      { path: 'delete', component: DeleteProjectComponent },
+      { path: 'settings', component: SettingsProjectComponent, canActivate:[LoginGuardGuard] },
+      { path: 'delete-sprint/:idSprint', component: DeletesprintComponent, canActivate:[LoginGuardGuard] },
+      { path: 'add-task', component: NewTaskComponent, canActivate:[LoginGuardGuard] },
+      { path: 'delete-task/:idTask', component: DeleteTaskComponent, canActivate:[LoginGuardGuard] },
+      { path: 'task/:idTask', component: SingleTaskComponent, canActivate:[LoginGuardGuard]},
+      { path: 'update-task/:idTask', component: UpdateTaskComponent, canActivate:[LoginGuardGuard]},
+      { path: 'delete', component: DeleteProjectComponent, canActivate:[LoginGuardGuard] },
     ]
   },
-  { path: 'new-project', component: NewProjectComponent },
-  { path: 'join-project', component: JoinProjectComponent },
+  { path: 'new-project', component: NewProjectComponent, canActivate:[LoginGuardGuard] },
+  { path: 'join-project', component: JoinProjectComponent, canActivate:[LoginGuardGuard] },
 
 
   { path: '', pathMatch: 'full', redirectTo: 'accueil' }

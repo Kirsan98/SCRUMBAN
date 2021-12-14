@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const projectController = require('../controllers/projectsController');
+const userController = require('../controllers/userController');
 
 // get all projects
 router.route('/projects').get(async (req, res) => {
@@ -12,9 +13,29 @@ router.route('/projects').get(async (req, res) => {
   }
 });
 
+// get all projects from a user
+router.route('/get-projects/').post( async (req, res) =>{
+  let response = await projectController.getAllProjectsFromUser(req.body._id);
+  if (response != null && response.success == true) {
+    res.status(200).json(response);
+  } else {
+    res.status(404).json(response);
+  }
+});
+
 // get a project by id
 router.route('/project/:id').get(async (req, res) => {
   let response = await projectController.getProjectById(req.params.id);
+  if (response!=null && response.success == true) {
+    res.status(200).json(response);
+  } else {
+    res.status(404).json(response);
+  }
+});
+
+// add a user to a project
+router.route('/project/:idProject/add-user').post(async (req, res) => {
+  let response = await projectController.addUserToProject(req.params.idProject, req.body._id);
   if (response!=null && response.success == true) {
     res.status(200).json(response);
   } else {
