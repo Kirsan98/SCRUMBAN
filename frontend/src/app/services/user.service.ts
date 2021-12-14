@@ -23,7 +23,7 @@ export class UserService {
     });
   }
 
-  getUserById(idUser: any) {
+  getUserById(idUser: any): Promise<any>{
     return new Promise((resolve, reject) => {
       this.http.get('http://localhost:5000/api/user/' + idUser)
         .subscribe(

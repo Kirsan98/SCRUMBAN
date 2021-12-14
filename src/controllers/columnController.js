@@ -116,22 +116,22 @@ module.exports.addTaskToColumn = async function (idColumn, idTask) {
 }
 
 // // Add a task to an existing column
-module.exports.moveTaskToColumn = async function (idColumnStart, idColumnEnd, idTask) {
+module.exports.moveTaskToColumn = async function (idColumnStart, idColumnEnd, idTask, idUser) {
   try {
     await Column.findByIdAndUpdate(idColumnStart, { $pull: { _tasks: idTask } });
     const columnEnd = await Column.findByIdAndUpdate(idColumnEnd, { $push: { _tasks: idTask } });
 
     const log = new Log();
+    log._userId = idUser;
     log._columnIdStart = idColumnStart;
     log._columnIdEnd = idColumnEnd;
     log.updated_at = Date.now();
     log.save();
-
-    console.log(columnEnd.data);
+    
     const task = await Task.findByIdAndUpdate(idTask, { $push: { _logs: log } });
     return {
       success: true,
-      data: [columnEnd, task]
+      data: [columnEnd, task, log]
     };
   } catch (error) {
     return { success: false, message: "task not added to the column " + error };

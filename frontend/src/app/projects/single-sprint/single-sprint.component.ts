@@ -18,6 +18,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LogService } from 'src/app/services/log.service';
 import { Log } from 'src/app/models/log.model';
 import { RefreshProjectService } from 'src/app/services/refresh-project.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-single-sprint',
@@ -29,6 +32,7 @@ export class SingleSprintComponent implements OnInit {
   public sprint!: Sprint;
   public errorMessage!: string;
   public sprints!: Sprint[];
+  private userId!: String;
   indexColumn: Number = 0;
   editMode: boolean = false;
   columnHelp!: any;
@@ -37,7 +41,11 @@ export class SingleSprintComponent implements OnInit {
   columnsObject: Column[] = [];
   columns: any[] = [];
   taskDrag!: Task;
-  logTaskDrag: Log[] = [];
+  // logTaskDrag: Log[] = [];
+  logTaskDrag: any[] = [];
+  logTaskDragSort: Log[] = [];
+  userLog: User[] = [];
+  isTerminated = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,23 +58,27 @@ export class SingleSprintComponent implements OnInit {
     private projectService: ProjectService,
     private sprintService: SprintService,
     private columnService: ColumnService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private authService: AuthService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
+    this.userId = this.authService.getUserId;
     let idProject!: string;
     let idSprint!: string;
     this.route.params.subscribe((params: Params) => {
       idSprint = params['idSprint'];
       idProject = params['idProject'];
     });
-    this.projectService.getProjectById(idProject).then((project: any) => {
-      this.project = project['data'];
-    });
+    this.projectService.getProjectById(idProject)
+      .then((project: any) => {
+        this.project = project['data'];
+      });
     this.projectService
       .getSingleSprintByProject(idProject, idSprint)
       .then((sprint: any) => {
-        this.sprint = sprint['data'];        
+        this.sprint = sprint['data'];
       });
     this.sprintService
       .getAllColumnFromSprint(idProject, idSprint)
@@ -121,7 +133,7 @@ export class SingleSprintComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<String[]>) {
-    if (!this.sprint.isTerminado){
+    if (!this.sprint.isTerminado) {
       if (event.previousContainer === event.container) {
         moveItemInArray(
           event.container.data,
@@ -142,14 +154,12 @@ export class SingleSprintComponent implements OnInit {
           let task = event.container.data[event.currentIndex] as unknown as Task;
           if (column._id == idStartColumn) {
             this.removeTaskIdFromColumnsObject(task, idStartColumn);
-            this.sprintService
-              .moveTaskToColumn(idStartColumn, idEndColumn, task._id)
-              .then(() => {
-                this.columnService
-                  .getColumnById(idEndColumn)
+
+            this.sprintService.moveTaskToColumn(idStartColumn, idEndColumn, task._id, this.userId)
+              .then((data: any) => {
+                this.columnService.getColumnById(idEndColumn)
                   .then((column: any) => {
-                    this.taskService
-                      .getTaskById(task._id)
+                    this.taskService.getTaskById(task._id)
                       .then((taskObj: any) => {
                         taskObj.data.state = column.data.title;
                         this.taskService.updateTask(task._id, taskObj.data);
@@ -182,7 +192,7 @@ export class SingleSprintComponent implements OnInit {
   }
 
   addColumnToSprint() {
-    if (!this.sprint.isTerminado){
+    if (!this.sprint.isTerminado) {
       const newColumn = new Column();
       newColumn.title = 'Default name';
       if (this.columns.length >= 10) {
@@ -223,8 +233,7 @@ export class SingleSprintComponent implements OnInit {
   onUpdate(idColumn: any) {
     const columnUpdated = new Column();
     columnUpdated.title = this.updateColumnName.get('title')?.value;
-    this.sprintService
-      .updateColumn(idColumn, columnUpdated)
+    this.sprintService.updateColumn(idColumn, columnUpdated)
       .then((column: any) => {
         column.data._tasks.forEach((taskId: any) => {
           this.taskService.getTaskById(taskId).then((taskObj: any) => {
@@ -232,8 +241,7 @@ export class SingleSprintComponent implements OnInit {
             this.taskService.updateTask(taskObj.data._id, taskObj.data);
           });
         });
-        this.sprintService
-          .getAllColumnFromSprint(this.project._id, this.sprint._id)
+        this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id)
           .then((columns: any) => {
             this.columnsObject = columns.data;
             this.loadColumns(this.columnsObject);
@@ -257,21 +265,34 @@ export class SingleSprintComponent implements OnInit {
     this.taskDrag = task;
     this.logTaskDrag = [];
     for (let i = 0; i < this.taskDrag._logs.length; i++) {
-      this.logService.getLogById(this.taskDrag._logs[i]).then((log: any) => {
-        this.columnService
-          .getColumnById(log.data._columnIdStart)
-          .then((columnStart: any) => {
-            this.columnService
-              .getColumnById(log.data._columnIdEnd)
-              .then((columnEnd: any) => {
-                let logWithNameOfColumn = [];
-                logWithNameOfColumn = log.data;
-                logWithNameOfColumn._columnIdStart = columnStart.data.title;
-                logWithNameOfColumn._columnIdEnd = columnEnd.data.title;
-                this.logTaskDrag.push(logWithNameOfColumn);
-              });
+      this.logService.getLogById(this.taskDrag._logs[i])
+        .then(
+          (log: any) => {
+            this.columnService.getColumnById(log.data._columnIdStart)
+              .then(
+                (columnStart: any) => {
+                  this.columnService.getColumnById(log.data._columnIdEnd)
+                    .then(
+                      (columnEnd: any) => {
+                        this.userService.getUserById(log.data._userId)
+                          .then(
+                            (userData: any) => {
+                              let logWithNameOfColumn = [];
+                              logWithNameOfColumn = log.data;
+                              logWithNameOfColumn._columnIdStart = columnStart.data.title;
+                              logWithNameOfColumn._columnIdEnd = columnEnd.data.title;
+                              const obj = { "log": logWithNameOfColumn, "username": userData.data.username }
+                              this.logTaskDrag.push(obj);
+                            }
+                          );
+                        // let logWithNameOfColumn = [];
+                        // logWithNameOfColumn = log.data;
+                        // logWithNameOfColumn._columnIdStart = columnStart.data.title;
+                        // logWithNameOfColumn._columnIdEnd = columnEnd.data.title;
+                        // this.logTaskDrag.push(logWithNameOfColumn);
+                      });
+                });
           });
-      });
     }
   }
 
@@ -304,10 +325,16 @@ export class SingleSprintComponent implements OnInit {
     });
   }
 
+  //   get sortLog() {
+  //   return this.logTaskDrag.sort((a, b) => {
+  //     return <any>new Date(b.updated_at) - <any>new Date(a.updated_at);
+  //   });
+  // }
 
   get sortLog() {
     return this.logTaskDrag.sort((a, b) => {
-      return <any>new Date(b.updated_at) - <any>new Date(a.updated_at);
+      return <any>new Date(b.log.updated_at) - <any>new Date(a.log.updated_at);
     });
+
   }
 }
