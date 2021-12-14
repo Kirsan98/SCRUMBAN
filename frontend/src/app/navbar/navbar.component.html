@@ -11,5 +11,6 @@
     <ul class="navbar-nav mr-auto"></ul>
     <button *ngIf="!isLogged" type="button" routerLink="/connexion" class="btn btn-light" >Connexion</button>
     <button *ngIf="!isLogged" type="button" routerLink="/inscription" class="btn btn-light" >Inscription</button>
+    <button *ngIf="isLogged" type="button" routerLink="/accueil" class="btn btn-light" (click)="logOut()">Déconnexion</button>
   </div>
 </nav>

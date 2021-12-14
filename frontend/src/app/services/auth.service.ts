@@ -31,10 +31,7 @@ export class AuthService {
     this.isLoggedSrc.next(true);
     this.user = idUser;
   }
-
-  // public isLoggedIn(): boolean{
-  //   return this.isLogged;
-  // }
+  
   public get getUserId(){
     return this.user;
   }

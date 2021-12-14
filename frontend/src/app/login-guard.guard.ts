@@ -21,16 +21,15 @@ export class LoginGuardGuard implements CanActivate {
     this.authService.isLogged.subscribe(
       (isLogged: boolean) => {
         if (isLogged) {
-          console.log("on est connecté");
           res = true;
         }
         else {
-          this.router.navigate(['/connexion']);
+          // alert("Impossible d'acceder à cette page, vous n'êtes pas connectés");
+          this.router.navigate(['/accueil']);
           res = false;
         }
       }
     );
-    console.log(res, "on affiche le resultat de can activate");
     
     return res;
   }
