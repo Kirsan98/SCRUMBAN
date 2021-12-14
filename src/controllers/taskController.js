@@ -70,6 +70,7 @@ module.exports.addTask = async function (body) {
 
 // Update an existing task
 module.exports.updateTask = async function (idTask, body) {
+  try {
   const taskUpdated = await Task.findById(idTask);
   if (taskUpdated == null)
     return { success: false, message: "task not updated" };
@@ -91,8 +92,7 @@ module.exports.updateTask = async function (idTask, body) {
     if (body._logs != null)
       taskUpdated._logs = body._logs;
   }
-  try {
-    await taskUpdated.save();
+  taskUpdated.save();
     return {
       success: true,
       data: taskUpdated,

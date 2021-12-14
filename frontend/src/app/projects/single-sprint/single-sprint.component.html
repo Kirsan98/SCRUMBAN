@@ -46,11 +46,20 @@
                 <span *ngIf="editMode && columnHelp == column._id">
                   <form [formGroup]="updateColumnName">
                     <div class="form-group">
-                      <input ngModel="{{ column.title }}" type="text" id="title" formControlName="title"
-                        class="form-control" />
+                      <input
+                        ngModel="{{ column.title }}"
+                        type="text"
+                        id="title"
+                        formControlName="title"
+                        class="form-control"
+                      />
                     </div>
                   </form>
-                  <button type="button" class="btn btn-primary" (click)="onUpdate(column._id); editMode = false">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="onUpdate(column._id); editMode = false"
+                  >
                     Save
                   </button>
                 </span>
@@ -77,13 +86,29 @@
           </div>
         </div>
 
-        <div cdkDropList *ngIf="columns[i] != undefined" id="{{ column._id }}" [cdkDropListData]="columns[i]"
-          [cdkDropListConnectedTo]="connectedTo" class="item-list" (cdkDropListDropped)="drop($event)">
-          <div (click)="openModal(editProfileModal, task)" class="item-box"
-            style="box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px" *ngFor="let task of columns[i]" cdkDrag>
+        <div
+          cdkDropList
+          *ngIf="columns[i] != undefined"
+          id="{{ column._id }}"
+          [cdkDropListData]="columns[i]"
+          [cdkDropListConnectedTo]="connectedTo"
+          class="item-list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div
+            (click)="openModal(editProfileModal, task)"
+            class="item-box"
+            style="box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px"
+            *ngFor="let task of columns[i]" 
+            cdkDrag
+          >
             {{ task.title }}
             <div>
-              <td type="color" class="colorTask" style="background-color:{{ task.color }};"></td>
+              <td
+                type="color"
+                class="colorTask"
+                style="background-color:{{ task.color }};"
+              ></td>
             </div>
           </div>
         </div>
@@ -101,41 +126,67 @@
 </section>
 
 <!-- MODAL -->
-<ng-template #editProfileModal let-modal>
-  <div class="modal-header">
-    <h5 class="modal-title" id="editProfileLabel">d</h5>
-    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+<ng-template #editProfileModal let-modal class="md">
+  <div class="modal-dialog" >
+    <div class="modal-content" >
+    <div class="modal-header">
+      <h5 class="modal-title" id="editProfileLabel">
+        {{ taskDrag.title }}
+        <td
+          type="color"
+          class="colorTask"
+          style="background-color:{{ taskDrag.color }};"
+        ></td>
+      </h5>
 
-  <div class="modal-body">
-    <form [formGroup]="taskForm">
-      <div class="form-group row">
-        <label for="_id" class="col-sm-4 col-form-label">Id</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" formControlName="_id" id="_id">
-        </div>
+      <button
+        type="button"
+        class="close"
+        (click)="modal.dismiss()"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div>
+        <strong>Description:</strong> {{ taskDrag.description }}
       </div>
-      <div class="form-group row">
-        <label for="title" class="col-sm-4 col-form-label">Titre</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" formControlName="title" id="title">
-        </div>
+      
+      <div>
+        <strong>Date de création:</strong> {{ taskDrag.created_at | date }}
       </div>
-      <div class="form-group row">
-        <label for="color" class="col-sm-4 col-form-label">Couleur</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" formControlName="color" id="color">
-        </div>
+
+      <div>
+        <strong>Temps estimé:</strong> {{ taskDrag.estimated_duration}} H
       </div>
-      <div class="form-group row">
-        <label for="description" class="col-sm-4 col-form-label">Description</label>
-        <div class="col-sm-8">
-          <input type="text" class="form-control" formControlName="description" id="description">
-        </div>
+
+      <div>
+        <strong>Etat de la tâche:</strong> {{taskDrag.state}}
       </div>
-      ...
-    </form>
+
+
+      <table class="table" style="margin-top:2%">
+        <thead>
+          <tr>
+            <th scope="col">Colonne départ </th>
+            <th scope="col">Colonne arrivée</th>
+            <th scope="col">Date modification</th>
+            <th scope="col">Personne</th>
+
+          </tr>
+        </thead>
+        <tbody *ngFor="let log of sortLog">
+          <tr  class="ligne">
+            <td class="logColStart">{{ log._columnIdStart}}</td>
+            <td class= "logColEnd">{{log._columnIdEnd}}</td>
+            <td class= "logDate">{{log.updated_at | date: 'M/d/yy, h:mm a '}}</td> 
+            <td class= "logUser">XXX</td>         
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
   </div>
 </ng-template>
