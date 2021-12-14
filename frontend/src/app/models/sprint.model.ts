@@ -8,4 +8,5 @@ export class Sprint {
     columns!: Column[];
     planningDaily!: string;
     sprintRetrospective!: string;
+    isTerminado!: Boolean;
   }

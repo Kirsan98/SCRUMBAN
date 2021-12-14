@@ -65,7 +65,7 @@ export class SingleSprintComponent implements OnInit {
     this.projectService
       .getSingleSprintByProject(idProject, idSprint)
       .then((sprint: any) => {
-        this.sprint = sprint['data'];
+        this.sprint = sprint['data'];        
       });
     this.sprintService
       .getAllColumnFromSprint(idProject, idSprint)
@@ -120,46 +120,48 @@ export class SingleSprintComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<String[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      const idStartColumn = event.previousContainer.id;
-      const idEndColumn = event.container.id;
+    if (!this.sprint.isTerminado){
+      if (event.previousContainer === event.container) {
+        moveItemInArray(
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex
+        );
+      } else {
+        const idStartColumn = event.previousContainer.id;
+        const idEndColumn = event.container.id;
 
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-      this.columnsObject.forEach((column: any, index) => {
-        let task = event.container.data[event.currentIndex] as unknown as Task;
-        if (column._id == idStartColumn) {
-          this.removeTaskIdFromColumnsObject(task, idStartColumn);
-          this.sprintService
-            .moveTaskToColumn(idStartColumn, idEndColumn, task._id)
-            .then(() => {
-              this.columnService
-                .getColumnById(idEndColumn)
-                .then((column: any) => {
-                  this.taskService
-                    .getTaskById(task._id)
-                    .then((taskObj: any) => {
-                      taskObj.data.state = column.data.title;
-                      this.taskService.updateTask(task._id, taskObj.data);
-                      event.container.data[event.currentIndex] = taskObj.data;
-                    });
-                });
-            });
-        }
-        if (column._id == idEndColumn) {
-          column._tasks.push(task._id);
-        }
-      });
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex
+        );
+        this.columnsObject.forEach((column: any, index) => {
+          let task = event.container.data[event.currentIndex] as unknown as Task;
+          if (column._id == idStartColumn) {
+            this.removeTaskIdFromColumnsObject(task, idStartColumn);
+            this.sprintService
+              .moveTaskToColumn(idStartColumn, idEndColumn, task._id)
+              .then(() => {
+                this.columnService
+                  .getColumnById(idEndColumn)
+                  .then((column: any) => {
+                    this.taskService
+                      .getTaskById(task._id)
+                      .then((taskObj: any) => {
+                        taskObj.data.state = column.data.title;
+                        this.taskService.updateTask(task._id, taskObj.data);
+                        event.container.data[event.currentIndex] = taskObj.data;
+                      });
+                  });
+              });
+          }
+          if (column._id == idEndColumn) {
+            column._tasks.push(task._id);
+          }
+        });
+      }
     }
   }
 
@@ -179,33 +181,35 @@ export class SingleSprintComponent implements OnInit {
   }
 
   addColumnToSprint() {
-    const newColumn = new Column();
-    newColumn.title = 'Default name';
-    if (this.columns.length >= 10) {
-      alert('Le nombre maximum de colonne est 10');
-    } else {
-      newColumn.index = this.columns.length;
-      this.sprintService
-        .addColumn(this.project._id, this.sprint._id, newColumn)
-        .then((response: any) => {
-          this.sprintService
-            .getAllColumnFromSprint(this.project._id, this.sprint._id)
-            .then((columns: any) => {
-              this.columnsObject = columns.data;
-              this.loadColumns(this.columnsObject);
+    if (!this.sprint.isTerminado){
+      const newColumn = new Column();
+      newColumn.title = 'Default name';
+      if (this.columns.length >= 10) {
+        alert('Le nombre maximum de colonne est 10');
+      } else {
+        newColumn.index = this.columns.length;
+        this.sprintService
+          .addColumn(this.project._id, this.sprint._id, newColumn)
+          .then((response: any) => {
+            this.sprintService
+              .getAllColumnFromSprint(this.project._id, this.sprint._id)
+              .then((columns: any) => {
+                this.columnsObject = columns.data;
+                this.loadColumns(this.columnsObject);
 
-              this.connectedTo = [];
-              this.columnsObject.forEach((column: any) => {
-                this.connectedTo.push(column._id);
+                this.connectedTo = [];
+                this.columnsObject.forEach((column: any) => {
+                  this.connectedTo.push(column._id);
+                });
               });
-            });
-          this.router.navigate([
-            'project/' + this.project._id + '/sprint/' + this.sprint._id,
-          ]);
-        })
-        .catch((error) => {
-          this.errorMessage = error.message;
-        });
+            this.router.navigate([
+              'project/' + this.project._id + '/sprint/' + this.sprint._id,
+            ]);
+          })
+          .catch((error) => {
+            this.errorMessage = error.message;
+          });
+      }
     }
   }
 

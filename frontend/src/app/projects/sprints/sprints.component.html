@@ -17,7 +17,11 @@
             <div *ngIf="sprints!=undefined">
               <tbody *ngFor="let sprint of sortSprint">
                 <tr class="ligne" (click)="onSprintClicked(project._id, sprint._id)">
-                  <td class="name-sprint">{{ sprint.title }}</td>
+                  <td class="name-sprint">{{ sprint.title }}
+                  <div *ngIf="sprint.isTerminado"> Terminé</div>
+                  <div *ngIf="!sprint.isTerminado"> En cours</div>
+
+                  </td>
                 </tr>
               </tbody>
             </div>
