@@ -20,6 +20,7 @@ export class RefreshLogService {
   }
 
   public async refreshLog(logs: any[]): Promise<void> {
+    this.users = [];
     console.log(logs, "regardez le beau tableau qu'on a recupéré");
     await Promise.all(logs.map(
       async (log: any) => {
