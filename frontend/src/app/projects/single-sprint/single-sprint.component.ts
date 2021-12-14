@@ -288,7 +288,7 @@ export class SingleSprintComponent implements OnInit {
             this.taskService.updateTask(taskId, task.data)
               .then((success) => {
                 console.log('Dans endSprint', success);
-                // TODO : Afficher un message de succès comme quoi le sprint à bien était terminé
+                //update sprint.isTerminado a true
               })
               .catch((error) => {
                 this.errorMessage = error.message;
