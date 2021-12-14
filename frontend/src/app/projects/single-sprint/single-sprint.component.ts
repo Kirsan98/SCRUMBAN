@@ -17,6 +17,10 @@ import { ColumnService } from 'src/app/services/column.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LogService } from 'src/app/services/log.service';
 import { Log } from 'src/app/models/log.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
+import { RefreshLogService } from 'src/app/services/refresh-log.service';
 
 @Component({
   selector: 'app-single-sprint',
@@ -28,6 +32,7 @@ export class SingleSprintComponent implements OnInit {
   public sprint!: Sprint;
   public errorMessage!: string;
   public sprints!: Sprint[];
+  private userId!: String;
   indexColumn: Number = 0;
   editMode: boolean = false;
   columnHelp!: any;
@@ -37,6 +42,8 @@ export class SingleSprintComponent implements OnInit {
   columns: any[] = [];
   taskDrag!: Task;
   logTaskDrag: Log[] = [];
+  logTaskDragSort: Log[] = [];
+  userLog: User[] = [];
   isTerminated = false;
 
   constructor(
@@ -49,19 +56,24 @@ export class SingleSprintComponent implements OnInit {
     private projectService: ProjectService,
     private sprintService: SprintService,
     private columnService: ColumnService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private authService: AuthService,
+    private userService: UserService,
+    private refreshLogService: RefreshLogService
   ) { }
 
   ngOnInit(): void {
+    this.userId = this.authService.getUserId;
     let idProject!: string;
     let idSprint!: string;
     this.route.params.subscribe((params: Params) => {
       idSprint = params['idSprint'];
       idProject = params['idProject'];
     });
-    this.projectService.getProjectById(idProject).then((project: any) => {
-      this.project = project['data'];
-    });
+    this.projectService.getProjectById(idProject)
+      .then((project: any) => {
+        this.project = project['data'];
+      });
     this.projectService
       .getSingleSprintByProject(idProject, idSprint)
       .then((sprint: any) => {
@@ -79,6 +91,13 @@ export class SingleSprintComponent implements OnInit {
     this.updateColumnName = this.formBuilder.group({
       title: [null, Validators.required],
     });
+    this.refreshLogService.currentLogList.subscribe(
+      () => {
+        this.userLog = this.refreshLogService.getUsers();
+        console.log(this.userLog, "on vient de charger le log from single sprint");
+
+      }
+    );
   }
 
   public loadTask(column: any): any[] {
@@ -140,14 +159,12 @@ export class SingleSprintComponent implements OnInit {
         let task = event.container.data[event.currentIndex] as unknown as Task;
         if (column._id == idStartColumn) {
           this.removeTaskIdFromColumnsObject(task, idStartColumn);
-          this.sprintService
-            .moveTaskToColumn(idStartColumn, idEndColumn, task._id)
-            .then(() => {
-              this.columnService
-                .getColumnById(idEndColumn)
+
+          this.sprintService.moveTaskToColumn(idStartColumn, idEndColumn, task._id, this.userId)
+            .then((data: any) => {
+              this.columnService.getColumnById(idEndColumn)
                 .then((column: any) => {
-                  this.taskService
-                    .getTaskById(task._id)
+                  this.taskService.getTaskById(task._id)
                     .then((taskObj: any) => {
                       taskObj.data.state = column.data.title;
                       this.taskService.updateTask(task._id, taskObj.data);
@@ -218,8 +235,7 @@ export class SingleSprintComponent implements OnInit {
   onUpdate(idColumn: any) {
     const columnUpdated = new Column();
     columnUpdated.title = this.updateColumnName.get('title')?.value;
-    this.sprintService
-      .updateColumn(idColumn, columnUpdated)
+    this.sprintService.updateColumn(idColumn, columnUpdated)
       .then((column: any) => {
         column.data._tasks.forEach((taskId: any) => {
           this.taskService.getTaskById(taskId).then((taskObj: any) => {
@@ -227,8 +243,7 @@ export class SingleSprintComponent implements OnInit {
             this.taskService.updateTask(taskObj.data._id, taskObj.data);
           });
         });
-        this.sprintService
-          .getAllColumnFromSprint(this.project._id, this.sprint._id)
+        this.sprintService.getAllColumnFromSprint(this.project._id, this.sprint._id)
           .then((columns: any) => {
             this.columnsObject = columns.data;
             this.loadColumns(this.columnsObject);
@@ -252,22 +267,44 @@ export class SingleSprintComponent implements OnInit {
     this.taskDrag = task;
     this.logTaskDrag = [];
     for (let i = 0; i < this.taskDrag._logs.length; i++) {
-      this.logService.getLogById(this.taskDrag._logs[i]).then((log: any) => {
-        this.columnService
-          .getColumnById(log.data._columnIdStart)
-          .then((columnStart: any) => {
-            this.columnService
-              .getColumnById(log.data._columnIdEnd)
-              .then((columnEnd: any) => {
-                let logWithNameOfColumn = [];
-                logWithNameOfColumn = log.data;
-                logWithNameOfColumn._columnIdStart = columnStart.data.title;
-                logWithNameOfColumn._columnIdEnd = columnEnd.data.title;
-                this.logTaskDrag.push(logWithNameOfColumn);
-              });
+      this.logService.getLogById(this.taskDrag._logs[i])
+        .then(
+          (log: any) => {
+            this.columnService.getColumnById(log.data._columnIdStart)
+              .then(
+                (columnStart: any) => {
+                  this.columnService.getColumnById(log.data._columnIdEnd)
+                    .then(
+                      (columnEnd: any) => {
+                        let logWithNameOfColumn = [];
+                        logWithNameOfColumn = log.data;
+                        logWithNameOfColumn._columnIdStart = columnStart.data.title;
+                        logWithNameOfColumn._columnIdEnd = columnEnd.data.title;
+                        this.logTaskDrag.push(logWithNameOfColumn);
+                        if (i == this.taskDrag._logs.length - 1) {
+                          this.refreshLogService.refreshLog(this.logTaskDrag).then(
+                            () => {
+                              console.log(this.refreshLogService.getUsers(), "voila les users qu'on charge dans single sprint");
+                              console.log(this.logTaskDrag.length, "taille du tableau sans couilles cette fois");
+                            }
+                          );
+                        }
+                        // console.log(this.logTaskDrag.length, "taille du tableau sans couilles cette fois");
+                      });
+                });
           });
-      });
     }
+
+    // this.refreshLogService.refreshLog(this.logTaskDrag);
+    // .then(
+    //   (log) => {
+    //     console.log();
+
+    //     this.userLog = this.refreshLogService.getUsers();
+    //     console.log("on a bien chargé les users ", this.userLog);
+
+    //   }
+    // );
   }
 
   onSubmit() {
@@ -296,10 +333,33 @@ export class SingleSprintComponent implements OnInit {
     });
   }
 
+  // async loadUserLog() {
+  //   this.userLog = [];
+  //   await Promise.all(this.logTaskDragSort.map(
+  //     (log: any) => {
+  //       this.userService.getUserById(log._userId).then(
+  //         (user: any) => {
+  //           this.userLog.push(user);
+  //         }
+  //       );
+  //     }
+  //   ));
+  // }
 
   get sortLog() {
-    return this.logTaskDrag.sort((a, b) => {
+    this.logTaskDragSort = this.logTaskDrag.sort((a, b) => {
       return <any>new Date(b.updated_at) - <any>new Date(a.updated_at);
     });
+    // await Promise.all(this.logTaskDragSort.map(
+    //   async (log: any) => {
+    //     await this.userService.getUserById(log._userId)
+    //     .then(
+    //       (user: any) => {
+    //         this.userLogTask.push(user.data);
+    //       }
+    //     );
+    //   }
+    // ));
+    return this.logTaskDragSort;
   }
 }

@@ -39,6 +39,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LogService } from './services/log.service';
 import { RefreshProjectListService } from './services/refresh-project-list.service';
 import { DetailComponent } from './projects/detail/detail.component';
+import { GetUsernamePipe } from './services/get-username-pipe.pipe';
+import { RefreshLogService } from './services/refresh-log.service';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,8 @@ import { DetailComponent } from './projects/detail/detail.component';
     TaskService,
     RefreshProjectService,
     LogService,
-    RefreshProjectListService
+    RefreshProjectListService,
+    RefreshLogService
   ],
   bootstrap: [AppComponent]
 })

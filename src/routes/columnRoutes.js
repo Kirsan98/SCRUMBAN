@@ -56,8 +56,8 @@ router.route('/column/:idColumn/addTask/:idTask').post(async (req, res) => {
 	}
 });
 
-router.route('/move-task/:idColumnStart/:idColumnEnd/:idTask').post(async (req, res) => {
-	let response = await columnController.moveTaskToColumn(req.params.idColumnStart, req.params.idColumnEnd, req.params.idTask);
+router.route('/move-task').post(async (req, res) => {
+	let response = await columnController.moveTaskToColumn(req.body.idColumnStart, req.body.idColumnEnd, req.body.idTask, req.body.idUser);
 	if (response.success == true) {
 		res.status(200).json(response);
 	} else {
