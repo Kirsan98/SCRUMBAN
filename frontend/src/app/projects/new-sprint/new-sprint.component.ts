@@ -66,14 +66,15 @@ export class NewSprintComponent implements OnInit {
             this.projectService.getAllTaskFromProject(this.project._id)
               .then(
                 (taskListData: any) => {
-                  let tasksUndefined :any = [];
-                  taskListData.data.forEach((task:any) => {
-                    if (task.state=="UNDEFINED"){
-                      tasksUndefined.push(task);
-                    }
-                    this.tasksProject = tasksUndefined;
-                    this.addCheckboxesToForm();
-                  });
+                  let tasksUndefined: any = [];
+                  taskListData.data.forEach(
+                    (task: any) => {
+                      if (task.state == "UNDEFINED") {
+                        tasksUndefined.push(task);
+                      }
+                    });
+                  this.tasksProject = tasksUndefined;
+                  this.addCheckboxesToForm();
                 }
               );
           }
@@ -97,6 +98,7 @@ export class NewSprintComponent implements OnInit {
   public loadAllTask(): Task[] {
     const tasks: Task[] = [];
     const elements = this.form.value['orders'];
+    console.log(elements, "les elements quand on fait loadAllTask");
     for (let i = 0; i < this.tasksProject.length; i++) {
       if (elements[i] == true) {
         tasks.push(this.tasksProject[i]);
@@ -114,14 +116,14 @@ export class NewSprintComponent implements OnInit {
         sprintBacklogCol.title = "Sprint Backlog";
         sprintBacklogCol.index = 0;
         sprintBacklogCol._tasks = this.loadAllTask();
-        sprintBacklogCol._tasks.forEach((task:any)=>{
+        sprintBacklogCol._tasks.forEach((task: any) => {
           // task.state = sprintBacklogCol.title;
           // this.taskService.updateTask(task._id, task);
-          console.log("dans new-sprint",task);
-          this.taskService.getTaskById(task._id).then((taskObj:any)=>{
+          console.log("dans new-sprint", task);
+          this.taskService.getTaskById(task._id).then((taskObj: any) => {
             taskObj.data.state = sprintBacklogCol.title;
             this.taskService.updateTask(taskObj.data._id, taskObj.data);
-            console.log("",taskObj.data);
+            console.log("", taskObj.data);
           });
         });
         this.sprintService.addColumn(this.project._id, response.data.sprint._id, sprintBacklogCol).then(
@@ -143,7 +145,7 @@ export class NewSprintComponent implements OnInit {
         ).catch((error) => {
           this.errorMessage = error.message;
         });
-        
+
       }
     ).catch(
       (error) => {
