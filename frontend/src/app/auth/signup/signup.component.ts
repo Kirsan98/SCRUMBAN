@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
           '',
           [
             Validators.required,
-            Validators.minLength(6),
+            Validators.minLength(2),
             Validators.maxLength(20)
           ]
         ],
