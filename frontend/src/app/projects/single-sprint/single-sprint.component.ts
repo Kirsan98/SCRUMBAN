@@ -19,8 +19,8 @@ import { LogService } from 'src/app/services/log.service';
 import { Log } from 'src/app/models/log.model';
 import { RefreshProjectService } from 'src/app/services/refresh-project.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-single-sprint',
