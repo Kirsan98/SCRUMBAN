@@ -1,30 +1,42 @@
 N°;Action;Attendu;Résultat
-1;Aller sur le site scrumban et afficher la page d’accueil;Ouverture de la page d’accueil.;
-2;Cliquer sur le lien Nouveaux Projet ;Affiche un formulaire permettant de créer un nouveaux projet (associé à un ou plusieurs utilisateur);
-3;Cliquer sur le lien Projet ;Afficher la liste de tous les projets existants associé à l’utilisateur courant;
-4;Cliquer sur le lien Nouveaux Sprint ;Afficher un formulaire permettant de créer un nouveaux sprint associé à un projet existant;
-;Cliquer sur le bouton Créer Sprint;Crée un nouveau sprint au sein d’un projet existant.;
-5;Cliquer sur le lien Nouvelle tâche;Affiche un formulaire permettant de créer une nouvelle tâche associé à un projet et/ou un sprint existants.;
-6;Cliquer sur le lien Connexion;Afficher un formulaire contenant un nom d’utilisateur et un mot de passe avec un bouton connexion permettant de se connecter;
-;Cliquer sur le lien Déconnexion;Déconnecte l’utilisateur et retourne sur la page d’accueil du site. ;
-7;Cliquer sur le bouton Inscription;Afficher la page qui contient un formulaire contenant (le prénom, le nom, l’adresse email, le nom d’utilisateur et le mot de passe).;
-;Une ou des informations sont invalides et je clique sur le bouton Valider;Message d'erreur « Veuillez insérer tout les champs requis »;
-8;Rentrer une adresse email invalide (sans @) ; Message d’erreur « Adresse email invalide. »;
-9;Rentrer une adresse email valide sans compte actif ;Message d’erreur « Désolé, adresse email inconnue. »;
-10;Rentrer une adresse email valide avec compte actif sans mot de passe ;Message d'erreur «  Merci de saisir votre mot de passe »;
-11;Rentrer une adresse email valide avec compte actif avec mot de passe;Connexion au tableau de bord de l’utilisateur ;
-12;Cliquer sur le boutton Settings;Afficher la page des paramètres contenant un formulaire capable de modifier les paramètres d’un profil ou d’un projet existant.;
-13;Cliquer sur le bouton Update ;Modifie les paramètres d’un profil ou d’un projet existant.;
-14;Cliquer sur le bouton pour  supprimer un projet;Afficher une pop-up demandant d’entrer le nom du projet à supprimer ;
-15;Cliquer sur le boutton Supprimer;Supprime le projet associé et retourne sur la page des projets;
-12;Cliquer sur le lien Rejoindre Projet;Affiche un formulaire contenant un id (de projet);
-13;Cliquer sur le bouton Rejoindre Projet;"Ajoute l’utilisateur courant au projet associé
-Ajoute le projet à l’utilisateur courant";
-14;;;
-15;Déplacer les tâches d’une colonne à une autre via un système de  « Drag&Drop » ;Déplace la tâche de la colonne de départ à la colonne d’arrivé. ;
-16;Modifier le nombre maximum de tâche dans une colonne;Affiche une pop-up contenant le nombre de tâche maximum que l’on veut associé à une ou plusieurs colonnes. ;
-17;;;
-18;;;
-19;;;
-20;;;
-21;;;
+1;Aller sur le site scrumban et afficher la page d’accueil;Ouverture de la page d’accueil.;OK
+2;Cliquer sur le lien Connexion;Afficher un formulaire contenant un nom d’utilisateur et un mot de passe avec un bouton connexion permettant de se connecter;OK
+3;Cliquer sur le bouton « Connexion »;Afficher la page contenant la liste des projets;OK
+4;Cliquer sur le lien Déconnexion;Déconnecte l’utilisateur et affiche la page d’accueil du site SCRUMBAN. ;OK
+5;Cliquer sur le bouton Inscription;Afficher la page qui contient un formulaire contenant (le prénom, le nom, l’adresse email, le nom d’utilisateur et le mot de passe).;OK
+6;Une ou des informations sont invalides et je clique sur le bouton Valider;Message d'erreur « Veuillez insérer tout les champs requis »;OK
+7;Cliquer sur le bouton « S’inscrire »;Affiche la page de de connexion ;OK
+8;Cliquer sur le lien Nouveaux Projet ;Affiche un formulaire contenant un champ « titre » permettant de créer un nouveaux projet (associé à mon compte);OK
+9;Cliquer sur le bouton Joindre Projet;Affiche un formulaire contenant un champ « ID » permettant de rejoindre un projet déjà existant ;OK
+10;Cliquer sur le bouton Joindre Projet;"Ajoute l’utilisateur courant au projet associé
+Ajoute le projet à l’utilisateur courant";OK
+11;Cliquer sur les « … » dans la colonne paramètre d’un projet ;Affiche une liste d’action qu’on peut effectuer sur le projet associé;OK
+12;Cliquer sur l’action « Paramètres du projet »;Affiche la page « Settings » du projet associé;OK
+13;Cliquer sur l'action « Déplacer dans la corbeille »;Affiche une pop-up contenant un input permettant de supprimer le projet.  ;OK
+14;Cliquer sur le bouton « Supprimer » pour supprimer un projet ;Supprime le projet si dans l’input le texte écrit est identique au nom du projet, sinon le bouton n’est pas cliquable et retourne sur la page des projets.;OK
+15;Cliquer sur un projet existant;Affiche la page détail contant les informations du projet (date de création, ID du projet, nombre de tâches/sprint associés, les membres du projet) ;OK
+16;Cliquer sur le lien « Product Backlog »;"Affiche la liste des tâches qui ont un état ‘UNDEFINED’ (associé à aucun sprint en cours) Affiche des informations (Titre, Description, Couleur, Durée estimé en heures, Paramètres) liés aux tâches associés au projet ";OK
+17;Cliquer sur les « … » dans la colonne paramètre de « Product backlog » ;Affiche une liste d’action qu’on peut effectuer sur la tâche associé;OK
+18;Cliquer sur l’action « Paramètres de la tâche »;"Affiche la page « Paramètres de la tâche » contenant un formulaire permettant de modifier (le titre, la couleur, la description,  l’état, la durée de la tâche et l’utilisateur réalisant la tâche) la tâche associé";OK
+19;Cliquer sur l'action « Déplacer dans la corbeille »;Affiche une pop-up contenant un input permettant de supprimer le projet.  ;OK
+20;Cliquer sur le bouton « Supprimer » pour supprimer une tâche ;Supprime la tâche si dans l’input le texte écrit est identique au titre de la tâche, sinon le bouton n’est pas cliquable. ;OK
+21;Cliquer sur le bouton « Créer une tâche »;"Affiche un formulaire (titre de la tâche, couleur de la tâche, Description de la tâche, Durée estimé de la tâche en heure, Utilisateur réalisant la tâche) permettant de créer une nouvelle tâche associé à un projet.";OK
+22;Cliquer sur le bouton « Nouvelle tâche »;Sauvegarde la tâche créer et affiche la page « Product Backlog » contenant la nouvelle tâche créé. ;OK
+23;Cliquer sur une tâche existante;"Affiche la page « Détail de la tâche » contant les informations associé à la tâche (Titre, couleur, description, état, date de création, temps estimé,  utilisateur réalisant la tâche). ";OK
+24;Cliquer sur le lien « Sprints » ;Affiche une page contenant le titre du projet ainsi que ses sprints. ;OK
+25;Cliquer sur le bouton « Créer un sprint » ;"Affiche un formulaire (titre du sprint, date de début, date de fin, planning daily, sprint retrospective) et une checkbox (contenant que les tâches en état  « UNDEFINED » ) ainsi qu’un bouton « + Nouveau Sprint » ";OK
+26;Cliquer sur le bouton « + Nouveau Sprint » ;"Crée un sprint, ajoute le sprint dans la listbox, crée deux colonnes « Sprint Backlog , Terminado » qui sont respectivement les colonnes de début  et de fin. ";OK
+27;Cliquer sur un sprint dans la listbox ;"Affiche la page contenant :  - Les informations du sprint (date de début, date de fin, planning daily, sprint retro). - Un bouton « Terminer le sprint ». - Un bouton « + » - Les colonnes (associé au sprint) contenant le titre de la colonne et un bouton  « … ». - Les tâches associés au colonnes contenant le titre et la couleur de la tâche.";OK
+28;Cliquer sur le bouton « … » associé à une colonne ;Affiche un input permettant de modifier le titre de la colonne ainsi qu’un bouton « Save »;OK
+29;Cliquer sur le bouton « Save » associé au bouton « … » d’une colonne.;Modifie le titre de la colonne en fonction du texte écrit dans l’input.;OK
+30;Cliquer sur le bouton « + » dans un sprint ;Ajoute une colonne dans le sprint courant ayant comme titre « Default name »;OK
+31;Cliquer sur une tâche dans une colonne ;"Affiche une pop-up contenant : - La description, la date de création, le temps estimé et l’état de la tâche - Un tableau contenant les logs de la tâche:      - Colonne de départ colonne arrivée, Date de modification et utilisateur";OK
+32;"Déplacer une tâche d’une colonne de titre X à une colonne de titre Y via un  système de Drag & Drop ";"Modifie l’état de la tâche en Y  Ajoute le log dans le tableau contenant les logs (lorsqu’on clique sur la tâche).";OK
+33;Cliquer sur le bouton « Terminer le sprint » ;"Modifie l’état des tâches qui ne sont pas dans la colonne « Terminado » à ‘UNDEFINED’. Affiche la page « Product Backlog » et ajoute les tâche qui sont en état ‘UNDEFINED’";OK
+34;Cliquer sur le boutton Settings;Afficher la page des paramètres contenant un formulaire capable de modifier les paramètres d’un profil ou d’un projet existant.;OK
+35;Rentrer une adresse email invalide (sans @) ;Message d’erreur « Adresse email invalide. »;OK
+36;Rentrer une adresse email valide sans compte actif ;Message d’erreur « Désolé, adresse email inconnue. »;OK
+37;Rentrer une adresse email valide avec compte actif sans mot de passe ;Message d'erreur «  Merci de saisir votre mot de passe »;OK
+38;Rentrer une adresse email valide avec compte actif avec mot de passe;Connexion au tableau de bord de l’utilisateur ;OK
+39;Accéder aux pages via les ULR sans être connecté ;Affiche la page d’accueil;OK
+40;Appuyer sur le bouton « Inscription » avec un formulaire valide;Hash le mot de passe dans la base de donnée via « bcrypt »;OK
