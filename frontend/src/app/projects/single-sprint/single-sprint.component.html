@@ -181,14 +181,7 @@
 
           </tr>
         </thead>
-        <!-- <tbody *ngFor="let log of sortLog; let i = index">
-          <tr class="ligne">
-            <td class="logColStart">{{ log._columnIdStart}}</td>
-            <td class= "logColEnd">{{log._columnIdEnd}}</td>
-            <td class= "logDate">{{log.updated_at | date: 'dd/MM/yy HH:mm'}}</td> 
-            <td *ngIf="userLog[i]!=undefined" class= "logUser">{{userLog[i].username}}</td>         
-          </tr>
-        </tbody> -->
+        
         <tbody *ngFor="let logdata of sortLog">
           <tr class="ligne">
             <td class="logColStart">{{ logdata.log._columnIdStart}}</td>
