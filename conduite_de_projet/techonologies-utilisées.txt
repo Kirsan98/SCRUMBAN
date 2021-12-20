@@ -1,0 +1,13 @@
+• Type d'application :  
+     -Single Page Application (SPA)
+
+• Technologie utilisées :  
+     - MongoDB : Base de donnée
+     - Express : Framework pour application web 
+     - Angular : Frontend 
+     - Nodejs : logiciel d'initialisation du projet et installe les librairies nécessaires         au développement du projet 
+     - API: interne via mongoDB 
+     -Gestion de projet: Jira pour la gestion des taches, sprints, attribution des taches etc 
+     - Mind Map: Miro 
+     - Plateforme de communication: Discord 
+     - Outil de gestion des versions: Git
